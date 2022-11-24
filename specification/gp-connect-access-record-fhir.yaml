@@ -8,7 +8,7 @@ info:
     ## Overview
 
     Use this API to access structured and coded information from a person’s GP practice record to consume in a person facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model. 
-    An account must be set up by the person with NHS Login P9 to gain access to their GP practice record.
+    An account must be set up by the person with NHS Login P9 identity verification level to gain access to their GP practice record.
 
     A person or consumer system can retrieve data from GP practice records for the following areas:
 
@@ -96,7 +96,7 @@ info:
     The end user must be:
 
     - a patient
-    - authenticated with NHS login to P9
+    - authenticated with NHS login to P9 identity verification level
     - Fully registered with their GP practice
 
     The API uses Open ID Connect to authenticate the end user and OAuth 2.0 to authorise the calling system. It supports the following security pattern using NHS loginShape
