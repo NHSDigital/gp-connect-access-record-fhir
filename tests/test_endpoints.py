@@ -4,6 +4,7 @@ https://github.com/NHSDigital/pytest-nhsd-apim/blob/main/tests/test_examples.py
 for more ideas on how to test the authorization of your API.
 """
 import requests
+import logging
 import pytest
 from os import getenv
 
@@ -26,6 +27,7 @@ def test_wait_for_ping(nhsd_apim_proxy_url):
         resp = requests.get(f"{nhsd_apim_proxy_url}/_ping")
         deployed_commitId = resp.json().get("commitId")
         retries += 1
+        logging.warning(f"Expected commit id {getenv('SOURCE_COMMIT_ID')} but was {deployed_commitId}, retrying")
 
     if resp.status_code != 200:
         pytest.fail(f"Status code {resp.status_code}, expecting 200")
@@ -57,6 +59,7 @@ def test_wait_for_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):
         resp = requests.get(f"{nhsd_apim_proxy_url}/_status", headers=status_endpoint_auth_headers)
         deployed_commitId = resp.json().get("commitId")
         retries += 1
+        logging.warning(f"Expected commit id {getenv('SOURCE_COMMIT_ID')} but was {deployed_commitId}, retrying")
 
     if resp.status_code != 200:
         pytest.fail(f"Status code {resp.status_code}, expecting 200")
