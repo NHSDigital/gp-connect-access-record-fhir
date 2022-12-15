@@ -87,5 +87,5 @@ apigee:
         requireCallbackUrl: false
         title: {{ TITLE }}
         visibility: {{ ENV.portal_visibility | default(true) }}
-        specId: {{ NAME }}
+        specId: {{ NAME }} 
 {% endfor %}
