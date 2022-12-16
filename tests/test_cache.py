@@ -1,6 +1,5 @@
-import requests
 import pytest
-from os import getenv
+import requests
 
 
 @pytest.mark.debug
