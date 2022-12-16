@@ -7,6 +7,10 @@
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
+      <Step>
+        <Name>ServiceCallout.GetTargetEndpoint</Name>
+<!--        <Condition>targets = null or idNotFound = true</Condition>-->
+      </Step>
     </Request>
   </PreFlow>
   <FaultRules>
