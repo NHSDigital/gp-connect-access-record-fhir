@@ -11,6 +11,9 @@
         <Name>ServiceCallout.GetTargetEndpoint</Name>
 <!--        <Condition>targets = null or idNotFound = true</Condition>-->
       </Step>
+      <Step>
+        <Name>JavaScript.GetEndpoint</Name>
+      </Step>
     </Request>
   </PreFlow>
   <FaultRules>
