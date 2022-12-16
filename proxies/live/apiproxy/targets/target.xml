@@ -8,8 +8,17 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
+        <Name>JavaScript.CreateCacheKey</Name>
+      </Step>
+      <Step>
+        <Name>LookupCache.Endpoint</Name>
+      </Step>
+      <Step>
         <Name>ServiceCallout.GetTargetEndpoint</Name>
-<!--        <Condition>targets = null or idNotFound = true</Condition>-->
+        <Condition>endpoint = null</Condition>
+      </Step>
+      <Step>
+        <Name>PopulateCache.Endpoint</Name>
       </Step>
       <Step>
         <Name>JavaScript.GetEndpoint</Name>

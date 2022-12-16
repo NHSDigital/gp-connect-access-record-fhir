@@ -1,8 +1,8 @@
 <PopulateCache name='PopulateCache.Endpoint'>
-  <Source>private.config_raw.content</Source>
+  <Source>{endpoint}</Source>
   <Scope>Application</Scope>
   <CacheKey>
-    <KeyFragment>cached_targets</KeyFragment>
+    <KeyFragment>{endpointKey}</KeyFragment>
   </CacheKey>
   <ExpirySettings>
     <TimeoutInSeconds>900</TimeoutInSeconds>

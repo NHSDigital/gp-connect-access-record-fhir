@@ -1,0 +1,7 @@
+<LookupCache name='LookupCache.Endpoint'>
+  <AssignTo>{endpoint}</AssignTo>
+  <Scope>Application</Scope>
+  <CacheKey>
+    <KeyFragment>{endpointKey}</KeyFragment>
+  </CacheKey>
+</LookupCache>
