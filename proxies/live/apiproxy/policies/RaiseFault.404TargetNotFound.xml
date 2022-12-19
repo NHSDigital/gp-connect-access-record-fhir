@@ -2,7 +2,7 @@
   <FaultResponse>
     <Set>
       <Payload contentType="text/plain"/>
-      <StatusCode>400</StatusCode>
+      <StatusCode>404</StatusCode>
       <ReasonPhrase>Not Found</ReasonPhrase>
     </Set>
   </FaultResponse>

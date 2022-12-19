@@ -3,7 +3,7 @@ import uuid
 import pytest
 import requests
 
-interaction_id = "IN150016UK05"
+from .config import interaction_id
 
 
 @pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level3"})
@@ -16,7 +16,6 @@ def test_cache(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     assert resp.status_code == 200
 
 
-@pytest.mark.debug
 @pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level3"})
 def test_cache_miss(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {"Interaction-ID": str(uuid.uuid4())}
