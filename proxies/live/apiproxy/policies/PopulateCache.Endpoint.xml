@@ -1,8 +1,9 @@
-<PopulateCache name='PopulateCache.Endpoint'>
-  <Source>{endpoint}</Source>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache name="PopulateCache.Endpoint">
+  <Source>foundEndpoint</Source>
   <Scope>Application</Scope>
   <CacheKey>
-    <KeyFragment>{endpointKey}</KeyFragment>
+    <KeyFragment ref="endpointKey"/>
   </CacheKey>
   <ExpirySettings>
     <TimeoutInSeconds>900</TimeoutInSeconds>

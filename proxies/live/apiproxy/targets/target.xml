@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TargetEndpoint name="gp-connect-access-record-fhir-target">
   <PreFlow>
     <Request>
@@ -15,13 +16,15 @@
       </Step>
       <Step>
         <Name>ServiceCallout.GetTargetEndpoint</Name>
-        <Condition>endpoint = null</Condition>
-      </Step>
-      <Step>
-        <Name>PopulateCache.Endpoint</Name>
+        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
       </Step>
       <Step>
         <Name>JavaScript.GetEndpoint</Name>
+        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
+      </Step>
+      <Step>
+        <Name>PopulateCache.Endpoint</Name>
+        <Condition>foundEndpoint != null</Condition>
       </Step>
     </Request>
   </PreFlow>
@@ -37,17 +40,17 @@
     </FaultRule>
   </FaultRules>
   <!--
-    To point to a named target server as this is how it SHOULD be implemented:
-    For example:
-    <HTTPTargetConnection>
-      <SSLInfo>
-        <Enabled>true</Enabled>
-      </SSLInfo>
-      <LoadBalancer>
-        <Server name="gp-connect-access-record-fhir" />
-      </LoadBalancer>
-    </HTTPTargetConnection>
-  -->
+  To point to a named target server as this is how it SHOULD be implemented:
+  For example:
+  <HTTPTargetConnection>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+    <LoadBalancer>
+      <Server name="gp-connect-access-record-fhir" />
+    </LoadBalancer>
+  </HTTPTargetConnection>
+-->
   <HTTPTargetConnection>
     <URL>http://mocktarget.apigee.net</URL>
     <Properties>

@@ -1,7 +1,8 @@
-<LookupCache name='LookupCache.Endpoint'>
-  <AssignTo>{endpoint}</AssignTo>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache name="LookupCache.Endpoint">
+  <AssignTo>endpoint</AssignTo>
   <Scope>Application</Scope>
   <CacheKey>
-    <KeyFragment>{endpointKey}</KeyFragment>
+    <KeyFragment ref="endpointKey"/>
   </CacheKey>
 </LookupCache>

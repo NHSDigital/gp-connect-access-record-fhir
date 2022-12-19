@@ -1,5 +1,5 @@
-var ods = "REPC"
-var interactionId = "IN150016UK05"
-var key = ods + "_" + interactionId
+var endpoints = JSON.parse(context.getVariable("endpoints").content)
+var endpointKey = context.getVariable("endpointKey")
 
-context.setVariable("endpointKey", key)
+var endpoint = endpoints[endpointKey]
+context.setVariable("foundEndpoint", endpoint)
