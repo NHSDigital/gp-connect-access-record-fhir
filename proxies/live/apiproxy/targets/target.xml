@@ -24,11 +24,10 @@
       </Step>
       <Step>
         <Name>PopulateCache.Endpoint</Name>
-        <Condition>foundEndpoint != null</Condition>
+        <Condition>fetchedEndpoint != null</Condition>
       </Step>
       <Step>
         <Name>JavaScript.SetEndpoint</Name>
-        <!--        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>-->
       </Step>
       <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
