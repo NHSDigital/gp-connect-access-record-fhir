@@ -1,5 +1,11 @@
 var queryString = context.getVariable("request.querystring")
 var pathSuffix = context.getVariable("proxy.pathsuffix")
-var endpoint = context.getVariable("foundEndpoint")
 
-context.setVariable("target.url", endpoint + pathSuffix + "?" + queryString);
+// First get the cache value, if null then, try foundEndpoint which is the ServiceCallout result
+const endpoint = context.getVariable("endpoint") || context.getVariable("foundEndpoint")
+
+if (endpoint) {
+  context.setVariable("target.url", endpointFromCache + pathSuffix + "?" + queryString);
+} else {
+  context.setVariable("endpointNotFound", true);
+}
