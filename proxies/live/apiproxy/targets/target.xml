@@ -28,7 +28,11 @@
       </Step>
       <Step>
         <Name>JavaScript.SetEndpoint</Name>
-<!--        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>-->
+        <!--        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>-->
+      </Step>
+      <Step>
+        <Name>RaiseFault.404TargetNotFound</Name>
+        <Condition>endpointNotFound == true</Condition>
       </Step>
     </Request>
   </PreFlow>

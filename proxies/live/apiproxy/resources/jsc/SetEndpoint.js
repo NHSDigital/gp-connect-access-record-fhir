@@ -5,7 +5,7 @@ var pathSuffix = context.getVariable("proxy.pathsuffix")
 const endpoint = context.getVariable("endpoint") || context.getVariable("foundEndpoint")
 
 if (endpoint) {
-  context.setVariable("target.url", endpointFromCache + pathSuffix + "?" + queryString);
+  context.setVariable("target.url", endpoint + pathSuffix + "?" + queryString)
 } else {
   context.setVariable("endpointNotFound", true);
 }
