@@ -26,6 +26,10 @@
         <Name>PopulateCache.Endpoint</Name>
         <Condition>foundEndpoint != null</Condition>
       </Step>
+      <Step>
+        <Name>JavaScript.SetEndpoint</Name>
+<!--        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>-->
+      </Step>
     </Request>
   </PreFlow>
   <FaultRules>
