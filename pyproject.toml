@@ -1,5 +1,5 @@
 [project]
-python = "^3.8"
+python = "^3.10"
 
 [tool.poetry]
 name = "gp-connect-access-record-fhir"
