@@ -12,8 +12,8 @@ docker_service:
           matcher: "200"
           path: "/_ping"
 
-    - name: sandbox
-      expose: true
+    - name: sandbox2
+      expose: false
       environment:
           - name: NODE_ENV
             value: production
