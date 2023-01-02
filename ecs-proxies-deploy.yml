@@ -13,7 +13,6 @@ docker_service:
           path: "/_ping"
 
     - name: sandbox2
-      expose: false
       environment:
           - name: NODE_ENV
             value: production
