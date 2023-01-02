@@ -1,4 +1,7 @@
 docker_containers:
-  - name: sandbox
-    dockerfile: "sandbox/Dockerfile"
-    path: "sandbox"
+    -   name: sandbox
+        dockerfile: "sandbox/Dockerfile"
+        path: "sandbox"
+    -   name: sandbox2
+        dockerfile: "sandbox/Dockerfile"
+        path: "sandbox"
