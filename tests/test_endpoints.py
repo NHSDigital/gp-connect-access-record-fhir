@@ -9,7 +9,7 @@ from os import getenv
 import pytest
 import requests
 
-from config import interaction_id
+from .config import interaction_id
 
 
 @pytest.mark.smoketest
