@@ -4,7 +4,7 @@
   <Request>
     <Set>
       <Verb>GET</Verb>
-      <Path>NHSDigital/gp-connect-access-record-fhir/AMB-1359_add_endpoint_cache/endpoints/internal-dev/endpoints.json</Path>
+      <Path>NHSDigital/gp-connect-access-record-fhir/master/endpoints/internal-dev/endpoints.json</Path>
     </Set>
     <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   </Request>
