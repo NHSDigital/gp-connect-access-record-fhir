@@ -5,3 +5,6 @@ docker_containers:
     - name: sandbox2
       dockerfile: "sandbox/Dockerfile2"
       path: "sandbox"
+    - name: nginx
+      dockerfile: "nginx/Dockerfile"
+      path: "nginx"

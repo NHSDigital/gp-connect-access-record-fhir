@@ -1,6 +1,10 @@
 docker_service:
-    - name: sandbox
+    - name: nginx
       expose: true
+
+    - name: sandbox
+      expose: false
+      port: 9001
       environment:
           - name: NODE_ENV
             value: production
@@ -14,7 +18,7 @@ docker_service:
 
     - name: sandbox2
       expose: false
-      port: 9001
+      port: 9002
       environment:
           - name: NODE_ENV
             value: production
