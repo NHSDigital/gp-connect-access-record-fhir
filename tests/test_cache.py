@@ -7,7 +7,6 @@ from .config import interaction_id
 
 
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9"})
-@pytest.mark.debug
 def test_cache(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {"Interaction-ID": interaction_id}
     headers.update(nhsd_apim_auth_headers)
