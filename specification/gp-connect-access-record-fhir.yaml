@@ -5,7 +5,7 @@ x-spec-publication:
   operation-order:
     - operations:
       - method: GET
-        path: /FHIR/STU3/StructuredRecord
+        path: /FHIR/STU3/
 info:
   title: 'gp-connect-access-record-fhir'
   version: 'Computed and injected at build time by `scripts/set_version.py`'
@@ -261,7 +261,7 @@ servers:
   - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir'
     description: Production environment.
 paths: 
-  /FHIR/STU3/StructuredRecord:
+  /FHIR/STU3/:
     get:
       operationId: get-structured-record
       summary: Access a structured record relating to a patient.
