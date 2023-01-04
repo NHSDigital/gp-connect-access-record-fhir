@@ -78,18 +78,12 @@ def test_wait_for_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):
 @pytest.mark.integration
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level0"})
-def test_app_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
-    resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
-    assert resp.status_code == 401  # unauthorized
-
-
-@pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level3"})
-def test_app_level3(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
+def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {"Interaction-ID": interaction_id}
     headers.update(nhsd_apim_auth_headers)
 
     resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
-    assert resp.status_code == 200
+    assert resp.status_code == 401
 
 
 @pytest.mark.auth
@@ -97,5 +91,8 @@ def test_app_level3(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9"})
 def test_auth_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
+    headers = {"Interaction-ID": interaction_id}
+    headers.update(nhsd_apim_auth_headers)
+
     resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
     assert resp.status_code == 200
