@@ -142,9 +142,9 @@ info:
 
     We have 2 testing streams:
 
-    clinical testing
+     - clinical testing
 
-    technical testing
+     - technical testing
 
     Each stream is complicated in its own right and we've designed them to run in parallel to help you to work with us more easily and to consider your system design in a holistic way, rather than having to complete one stream before the other.
 
