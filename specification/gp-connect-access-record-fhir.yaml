@@ -100,8 +100,6 @@ info:
     For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
 
     ## Technology
-
-    ## Technology
     This API is a FHIR API.
 
     It receives a FHIR STU3 payload.
