@@ -30,7 +30,7 @@ info:
 
     Common use cases include:
 
-    - access your digital medical record for better self- management of care
+    - access your digital medical record for better self-management of care
 
     - understand your GP record in completeness to support making informed decisions with health professionals about your health.
 
@@ -72,6 +72,8 @@ info:
 
     ## Related APIs
     
+    The following APIs are related to this API:
+    
     * [GP Connect Access Document - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-document-fhir) - use this API to retrieve documents from a patient’s registered GP practice, after you've found the relevant document references within Access Record returns, use GP Connect Access Document to retrieve the documents. All documents can be requested separately.
 
     * [GP Connect (Patient Facing) User Permissions API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-user-permissions) - use this API to manage a patient's permissions as held by the GP practice systems.
@@ -82,17 +84,6 @@ info:
 
     * [GP Connect Access Record: Structured - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-record-structured-fhir) - use this API for clinical access to the record, including structured medications linked to other elements of the patient record.
 
-    * [GP connect Access Record structured API 1.5.0](https://developer.nhs.uk/apis/gpconnect-1-5-1/accessrecord_structured.html) - use this API to retrieve structured data from a patient’s GP practice record
-
-    ## Related APIs
-
-    The following APIs are related to this API:
-
-    - GP Connect appointments management API – view, book and cancel a patient’s appointments.
-
-    - GP Connect prescriptions management API - manage a patient's prescriptions as held by the GP practice systems
-
-    - GP Connect User Permissions API - manage a patient's permissions to access the medical record and services they can access at their GP practice.
 
     ## API status and roadmap
     
