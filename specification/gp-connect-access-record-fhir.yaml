@@ -284,7 +284,7 @@ paths:
             schema:
               type: object
               description: >
-                Parameters resource with every area included.
+                 Request all information that has been recorded for the patient in the last three months.
             example:
               resourceType: Parameters
               parameter:
