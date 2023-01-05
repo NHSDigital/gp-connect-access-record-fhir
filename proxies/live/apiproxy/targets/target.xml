@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TargetEndpoint name="gp-connect-access-record-fhir-target">
   <PreFlow>
     <Request>
@@ -6,6 +7,31 @@
       </Step>
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
+      </Step>
+      <Step>
+        <Name>JavaScript.CreateCacheKey</Name>
+      </Step>
+      <Step>
+        <Name>LookupCache.Endpoint</Name>
+      </Step>
+      <Step>
+        <Name>ServiceCallout.GetTargetEndpoint</Name>
+        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
+      </Step>
+      <Step>
+        <Name>JavaScript.GetEndpoint</Name>
+        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
+      </Step>
+      <Step>
+        <Name>PopulateCache.Endpoint</Name>
+        <Condition>fetchedEndpoint != null</Condition>
+      </Step>
+      <Step>
+        <Name>JavaScript.SetEndpoint</Name>
+      </Step>
+      <Step>
+        <Name>RaiseFault.404TargetNotFound</Name>
+        <Condition>endpointNotFound == true</Condition>
       </Step>
     </Request>
   </PreFlow>
@@ -21,17 +47,17 @@
     </FaultRule>
   </FaultRules>
   <!--
-    To point to a named target server as this is how it SHOULD be implemented:
-    For example:
-    <HTTPTargetConnection>
-      <SSLInfo>
-        <Enabled>true</Enabled>
-      </SSLInfo>
-      <LoadBalancer>
-        <Server name="gp-connect-access-record-fhir" />
-      </LoadBalancer>
-    </HTTPTargetConnection>
-  -->
+  To point to a named target server as this is how it SHOULD be implemented:
+  For example:
+  <HTTPTargetConnection>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+    <LoadBalancer>
+      <Server name="gp-connect-access-record-fhir" />
+    </LoadBalancer>
+  </HTTPTargetConnection>
+-->
   <HTTPTargetConnection>
     <URL>http://mocktarget.apigee.net</URL>
     <Properties>

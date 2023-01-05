@@ -3,10 +3,13 @@ See
 https://github.com/NHSDigital/pytest-nhsd-apim/blob/main/tests/test_examples.py
 for more ideas on how to test the authorization of your API.
 """
-import requests
 import logging
-import pytest
 from os import getenv
+
+import pytest
+import requests
+
+from .config import interaction_id
 
 
 @pytest.mark.smoketest
@@ -22,8 +25,8 @@ def test_wait_for_ping(nhsd_apim_proxy_url):
     deployed_commitId = resp.json().get("commitId")
 
     while (deployed_commitId != getenv('SOURCE_COMMIT_ID')
-            and retries <= 30
-            and resp.status_code == 200):
+           and retries <= 30
+           and resp.status_code == 200):
         resp = requests.get(f"{nhsd_apim_proxy_url}/_ping")
         deployed_commitId = resp.json().get("commitId")
         retries += 1
@@ -53,9 +56,9 @@ def test_wait_for_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):
     deployed_commitId = resp.json().get("commitId")
 
     while (deployed_commitId != getenv('SOURCE_COMMIT_ID')
-            and retries <= 30
-            and resp.status_code == 200
-            and resp.json().get("version")):
+           and retries <= 30
+           and resp.status_code == 200
+           and resp.json().get("version")):
         resp = requests.get(f"{nhsd_apim_proxy_url}/_status", headers=status_endpoint_auth_headers)
         deployed_commitId = resp.json().get("commitId")
         retries += 1
@@ -76,14 +79,21 @@ def test_wait_for_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level0"})
 def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
-    resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
+    headers = {"Interaction-ID": interaction_id}
+    headers.update(nhsd_apim_auth_headers)
+
+    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
     assert resp.status_code == 401
 
 
 @pytest.mark.auth
+@pytest.mark.debug
 @pytest.mark.integration
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9"})
 def test_auth_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
-    resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
+    headers = {"Interaction-ID": interaction_id}
+    headers.update(nhsd_apim_auth_headers)
+
+    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
     assert resp.status_code == 200
