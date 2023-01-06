@@ -5,7 +5,7 @@ x-spec-publication:
   operation-order:
     - operations:
       - method: POST
-        path: /FHIR/STU3/$access-record-structured
+        path: /FHIR/STU3/Patient/$access-record-structured
 info:
   title: 'gp-connect-access-record-fhir'
   version: 'Computed and injected at build time by `scripts/set_version.py`'
