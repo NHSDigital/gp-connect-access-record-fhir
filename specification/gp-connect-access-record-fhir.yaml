@@ -42,7 +42,7 @@ info:
 
     ## Who can use this API
 
-    This API can be used by developers of clinical systems that support clinicans delivering direct care. It is a patient-facing API.
+    This API can be used by developers of person facing systems that support citizens gaining access to their GP practice medical record.    
     
     This API:
 
@@ -275,7 +275,7 @@ paths:
             schema:
               type: object
               description: >
-                 Request all information that has been recorded for the patient in the last three months.
+                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide?version=current).
             example:
               resourceType: Parameters
               parameter:
@@ -311,7 +311,7 @@ paths:
                 - name: includeMedication
       responses: 
         '201':
-          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/FHIR-Assets/Profiles.page.md?version=current)
+          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide?version=current)
 
 components:
   parameters:
@@ -326,18 +326,6 @@ components:
         type: string
         format: '^Bearer\ [[:ascii:]]+$'
         example: 'Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM'
-    RoleId:
-      in: header
-      name: NHSD-Session-URID
-      description: |
-        The user role ID (URID) for the current session. Also known as a user role profile ID (URPID).
-        If you are using User-restricted RESTful APIs - NHS login separate authentication and authorisation, see [determine the user's role](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-cis2-separate-authentication-and-authorisation#step-9-determine-the-user-s-role) for guidance.
-        This field is optional.
-      required: false
-      schema:
-        type: string
-        pattern: '^[0-9]+$'
-        example: '555254240100'
     CorrelationID:
       in: header
       name: X-Correlation-ID
