@@ -74,8 +74,6 @@ info:
     
     The following APIs are related to this API:
     
-    * [GP Connect Access Document - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-document-fhir) - use this API to retrieve documents from a patient’s registered GP practice, after you've found the relevant document references within Access Record returns, use GP Connect Access Document to retrieve the documents. All documents can be requested separately.
-
     * [GP Connect (Patient Facing) User Permissions API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-user-permissions) - use this API to manage a patient's permissions as held by the GP practice systems.
 
     * [GP Connect (Patient Facing) Appointment Management - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-appointment-management-fhir) - use this API to manage GP practice appointments.
@@ -140,25 +138,9 @@ info:
     | Integration test | Not yet available                                     |
     | Production       | Not yet available
 
-    We have 2 testing streams:
-
-     - clinical testing
+    We have 1 testing stream:
 
      - technical testing
-
-    Each stream is complicated in its own right and we've designed them to run in parallel to help you to work with us more easily and to consider your system design in a holistic way, rather than having to complete one stream before the other.
-
-    ### Clinical testing
-
-    The aim of clinical testing is to ensure the safe interoperability of information exported from GP systems and then processed or displayed in a consuming system. 
-
-    To help you test that your consuming system is clinically safe, we have created the following resources:
-
-    a patient record or, for some more complex areas, 2 records that can be requested from the GP Connect demonstrator
-
-    a description of each of the data items, what it is intending to test and the hazards that it is intended to mitigate
-
-    notes and guidance about each clinical area that describe how to process and display the data that it contains in a safe way
 
     ### Technical testing
 
@@ -188,42 +170,6 @@ info:
     On approval of a use case, we will support you through the assurance process through to go live. We will discuss the assurance process and artefacts with you to help you understand the requirements.
 
     Start your development work within 6 months of use case approval. If you miss this date, a review or new submission of the use case will be required. Changes or additional development will also require a review or new use case submission. For full details of the technical conformance process, see GP Connect Consumer Supplier Test Assurance for achieving Technical Conformance (PDF).
-
-    ### Clinical assurance process
-
-    We are here to support you to develop clinically safe systems in line with your responsibility to achieve the relevant [DCB0129](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems)or[DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems)clinical safety standards. 
-
-    The three stages of the clinical assurance process for GP Connect Access Record: Structured consumers
-
-    We host a series of meetings to help you develop clinically safe systems:
-
-    - initial meeting
-    - clinical safety process readiness review meeting
-    - clinical evaluation of readiness for deployment meeting
-
-    For more information, see Clinical assurance process details.
-
-    Additional guidance: Clinical safety and hazard log
-
-    ### Clinical safety approach
-
-    Your organisation must have a clinical safety officer. Information standards underpin national healthcare initiatives from the Department of Health, NHS England, the Care Quality Commission, and other national health organisations. They provide the mechanism for introducing requirements to which the NHS, those with whom it commissions services and its IT system suppliers, must conform.
-
-    The following two standards relating to clinical safety are accepted for publication under section 250 of the Health and Social Care Act 2012 by the Data Coordination Board (DCB). In line with current DCB practice, each standard comprises:
-
-    a specification, which defines the requirements and conformance criteria to be met by the user of the standard - how these requirements are met is the responsibility of the user
-
-    implementation guidance, which provides an interpretation of the requirements and, where appropriate, defines possible approaches to achieving them
-
-    Compliance with[DCB0129]((https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems))and [DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems) is mandatory under the Health and Social Care Act 2012 ([Clinical risk management standards - NHS Digital](https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards)).
-
-    [Consumer Implementation Guidance](https://simplifier.net/guide/pfs-implementation-guide/Home/FHIR-Assets/Profiles.page.md?version=current)
-
-    ### Clinical safety guidance
-
-    The [Guide for Access Record: Structured](https://github.com/nhsconnect/gpc-consumer-support/blob/master/Clinical%20Safety%20Officer%20Guidance%20for%20GP%20Connect%20V0.6%20Structured.pdf) helps clinical safety officers assure GP Connect consumer systems into their own organisations. It includes details of the clinical safety standards that consumer suppliers and their commissioning organisations must be compliant with ([DCB0129]((https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems))and [DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems)).
-
-    [Clinical safety principles](https://github.com/nhsconnect/gpc-consumer-support/wiki/Clinical-Safety-Principles) shows you who is responsible for the clinical safety of GP Connect specifications and consumer systems.
 
     ### Hazard log
 
