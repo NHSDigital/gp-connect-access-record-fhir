@@ -252,7 +252,7 @@ servers:
   - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir'
     description: Production environment.
 paths: 
-  /FHIR/STU3/$access-record-structured:
+  /FHIR/STU3/Patient/$access-record-structured:
     post:
       operationId: get-structured-record
       summary: Access a structured record relating to a patient.
