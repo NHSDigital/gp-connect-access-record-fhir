@@ -221,7 +221,7 @@ paths:
             schema:
               type: object
               description: >
-                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide?version=current).
+                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current).
             example:
               resourceType: Parameters
               parameter:
@@ -257,7 +257,7 @@ paths:
                 - name: includeMedication
       responses: 
         '201':
-          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide?version=current)
+          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
 
 components:
   parameters:
