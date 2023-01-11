@@ -1,13 +1,20 @@
 # This is an OpenAPI Specification (https://swagger.io/specification/)
 # for gp-connect-access-record-fhir owned by NHS Digital (https://digital.nhs.uk/)
 openapi: '3.0.0'
+x-spec-publication:
+  operation-order:
+    - operations:
+      - method: POST
+        path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
 info:
   title: 'gp-connect-access-record-fhir'
   version: 'Computed and injected at build time by `scripts/set_version.py`'
   description: |
     ## Overview
 
-    Use this API to access structured and coded information from a person’s GP practice record to consume in a person facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model. 
+    ![GP Connect Patient Facing Access Record FHIR Overview](https://raw.githubusercontent.com/NHSDigital/gp-connect-access-record-fhir/master/specification/images/overview_diagram.svg)
+
+    Use this API to access structured and coded information from a person’s GP practice record to consume in a person facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
     An account must be set up by the person with NHS Login P9 identity verification level to gain access to their GP practice record.
 
     A person or consumer system can retrieve data from GP practice records for the following areas:
@@ -23,7 +30,7 @@ info:
 
     Common use cases include:
 
-    - access your digital medical record for better self- management of care
+    - access your digital medical record for better self-management of care
 
     - understand your GP record in completeness to support making informed decisions with health professionals about your health.
 
@@ -33,184 +40,264 @@ info:
 
     - write back to the GP record
 
-    ## Retrieving documents
-
-    To retrieve documents from a patient’s registered GP practice, use [GP Connect Access Document - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-document-fhir). After you've found the relevant document references within Access Record returns, use GP Connect Access Document to retrieve the documents. All documents can be requested separately.
-
     ## Who can use this API
 
-    This API can be used by developers of person facing systems that support citizens gaining access to their GP practice medical record.
+    This API can be used by developers of person facing systems that support citizens gaining access to their GP practice medical record.    
+    
+    This API:
 
-    Before you start development, read the [Person facing services Implementation guidance 0.1 current](https://simplifier.net/guide/pfs-implementation-guide/home/fhir-assets/profiles.page.md?version=current) and the prerequisites listed below.
+    * is intended only for use by patient-facing applications
 
-    # Prerequisites
+    * is intended only for non-clinical use
 
-    # Technical
+    * can only be used where there is a legal basis to do so
 
-    The technical prerequisites are as follows:
+    Make sure you have a valid use case before you go too far with development. To do this, contact us. 
 
-    you must have access to the [Health and Social Care Network](https://digital.nhs.uk/services/health-and-social-care-network) (HSCN)
+    You must do this before you can go live (see Onboarding below).
 
-    you must be [Personal Demographics Service](https://digital.nhs.uk/services/demographics) (PDS)-compliant or capable of performing a PDS search via NHS Digital or a third-party provider
+    ### Prerequisites 
 
-    # Information governance (IG)
+    #### Information governance (IG)
+    
+    You must:
 
-    The IG prerequisites are as follows:
+    * be compliant with the GP Connect Direct Care API Information Governance Model
 
-    your organisation must be compliant with the [GP Connect Direct Care API Information Governance Model](https://github.com/nhsconnect/gpc-consumer-support/wiki/Information-Governance-(IG))
+    #### Clinical safety 
 
-    # Clinical safety
+    You must:
 
-    The clinical safety prerequisites are as follows:
-
-    you must have a clinical safety officer (CSO) who is responsible for[DCB0129](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems)and, if necessary,[DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems)(for more on clinical risk management, visit [Clinical risk management standards](https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards))
-
-    If you are confident that you can meet the prerequisites, please express an interest with the GP Connect team (see 'Onboarding' below).
+    * have a clinical safety officer (CSO) who is responsible for DCB0129 and, if necessary, DCB0160. For more on clinical risk management, visit Clinical risk management standards
 
     ## Related APIs
-
+    
     The following APIs are related to this API:
+    
+    * [GP Connect (Patient Facing) User Permissions API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-user-permissions) - use this API to manage a patient's permissions as held by the GP practice systems.
 
-    - GP Connect appointments management API – view, book and cancel a patient’s appointments.
+    * [GP Connect (Patient Facing) Appointment Management - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-appointment-management-fhir) - use this API to manage GP practice appointments.
 
-    - GP Connect prescriptions management API - manage a patient's prescriptions as held by the GP practice systems
+    * [GP Connect (Patient Facing) Access Record - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-access-record-fhir) - use this API to manage a patient's medical record from the GP practice systems.
 
-    - GP Connect User Permissions API - manage a patient's permissions to access the medical record and services they can access at their GP practice.
+    * [GP Connect Access Record: Structured - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-record-structured-fhir) - use this API for clinical access to the record, including structured medications linked to other elements of the patient record.
 
-    - GP connect Access Record structured API 1.5.0 - use this API to retrieve structured data from a patient’s GP practice record
 
     ## API status and roadmap
+    
+    This API is in [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
 
-    This API (v1.0) is in development, alpha.Shape
+    To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/341619/gp-connect-prescriptions-management-fhir)
+
+    If you have any other queries, [contact us](https://digital.nhs.uk/developer/help-and-support)
 
     ## Service level
 
-    This API is a silver service.
+    This API is a silver service, meaning it is operational 24 x 7 x 365 but only supported during business hours (8am to 6pm), Monday to Friday excluding bank holidays.
+    
+    For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
 
-    For more details, see service levels
+    ## Technology
+    This API is a FHIR API.
 
+    It receives a FHIR STU3 payload.
+
+    For more details, see [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#fhir).
+    
+    ### Resources
+
+    Use the [GP Connect Patient Facing Access Record Implementation Guide](https://simplifier.net/guide/pfs-implementation-guide/Home?version=current) to assist with your integration.
+
+    This is the FHIR specification for GP Connect Access Record - FHIR API.
+
+    ## Network access
+
+    This API is available on the internet and, indirectly, on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
+
+    For more details, see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
+    
     ## Security and authorisation
 
-    This API is user-restricted, meaning an end user must be present and authenticated to use it.
+    This API is [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis), meaning an end user must be present and authenticated to use it. 
 
     The end user must be:
 
-    - a patient
-    - authenticated with NHS login to P9 identity verification level
-    - Fully registered with their GP practice
+    * a patient
 
-    The API uses Open ID Connect to authenticate the end user and OAuth 2.0 to authorise the calling system. It supports the following security pattern using NHS loginShape
+    * authenticated with NHS login to P9 identity verification level
 
-      ## Environments and testing
+    The API uses Open ID Connect to authenticate the end user and OAuth 2.0 to authorise the calling system. It supports the following security pattern using NHS login: 
+    
+    * [User-restricted RESTful APIs - NHS login separate authentication and authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation)
+
+    ## Environments and testing
 
     | Purpose          | URL                                                   |
     | -------          | ---                                                   |
-    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect-get-structured-record-fhir](https://sandbox.api.service.nhs.uk/gp-connect-get-structured-record-fhir) |
+    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record/](https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record) |
     | Integration test | Not yet available                                     |
     | Production       | Not yet available
 
-    We have 2 testing streams:
+    We have 1 testing stream:
 
-    clinical testing
+     - technical testing
 
-    technical testing
+    ### Technical testing
 
-    Each stream is complicated in its own right and we've designed them to run in parallel to help you to work with us more easily and to consider your system design in a holistic way, rather than having to complete one stream before the other.
-
-    # Clinical testing
-
-    The aim of clinical testing is to ensure the safe interoperability of information exported from GP systems and then processed or displayed in a consuming system. 
-
-    To help you test that your consuming system is clinically safe, we have created the following resources:
-
-    a patient record or, for some more complex areas, 2 records that can be requested from the GP Connect demonstrator
-
-    a description of each of the data items, what it is intending to test and the hazards that it is intended to mitigate
-
-    notes and guidance about each clinical area that describe how to process and display the data that it contains in a safe way
-
-    # Technical testing
-
-    The purpose of technical testing is to help you assure the messaging capability of your system via the Spine with GP Connect provider FHIR endpoints. It ensures the consumer requests conform to FHIR standards as per the specification. In addition, it maintains the integrity of the data displayed to the user and assures pertinent functional requirements. It does not assure the message payload, which is covered in clinical assurance.
+    The purpose of technical testing is to help you assure the messaging capability of your system via the Spine with GP Connect provider FHIR endpoints. It ensures the consumer requests conform to FHIR standards as per the specification. In addition, it maintains the integrity of the data displayed to the user and assures pertinent functional requirements. It does not assure the message payload, which is covered in clinical assurance.
 
     See[Consumer Supplier Test Assurance for achieving Technical Conformance](https://github.com/nhsconnect/gpc-consumer-support/wiki/Document-library#consumer-supplier-test-assurance-for-achieving-technical-conformance) (PDF) for full details of the technical conformance process and relevant artefacts.
 
     ## Onboarding
 
-    # Expressing an interest
+    ### Expressing an interest
 
     If you meet the prerequisites and have a product that can integrate with GP Connect person facing services, you should express an interest with us by submitting a use case.
 
-    The main purpose of the use case is to help us understand how you plan to use GP Connect person facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
+    The main purpose of the use case is to help us understand how you plan to use GP Connect person facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
 
     Your use case should include the following information as a minimum:
     - the business problem you are intending to solve using GP Connect
     - how GP Connect will be used to benefit patients and staff
     - which of the GP Connect products you will use to benefit patients and staff
     - any end-user organisations you are currently working with
-    - who your clinical safety officer is and, where available, your clinical risk management process documentation
+    - who your clinical safety officer is and, where available, your clinical risk management process documentation
 
     Once we receive your use case, we'll respond within 14 days.
 
+    ### Consumer assurance process
 
+    On approval of a use case, we will support you through the assurance process through to go live. We will discuss the assurance process and artefacts with you to help you understand the requirements.
 
-    ## Consumer assurance process
+    Start your development work within 6 months of use case approval. If you miss this date, a review or new submission of the use case will be required. Changes or additional development will also require a review or new use case submission. For full details of the technical conformance process, see GP Connect Consumer Supplier Test Assurance for achieving Technical Conformance (PDF).
 
-    On approval of a use case, we will support you through the assurance process through to go live. We will discuss the assurance process and artefacts with you to help you understand the requirements.
+    ### Hazard log
 
-    Start your development work within 6 months of use case approval. If you miss this date, a review or new submission of the use case will be required. Changes or additional development will also require a review or new use case submission. For full details of the technical conformance process, see GP Connect Consumer Supplier Test Assurance for achieving Technical Conformance (PDF).
+    The GP Connect Access Record: Structured generic hazard log shows you the clinical risks of using GP Connect functionality through a consumer system. Use it to identify the clinical risks of consuming clinical data and presenting it in your system, and record these in your own system-specific hazard log. If necessary, take mitigating action to ensure clinical safety.
 
-    ## Clinical assurance process
+    ## Errors
 
-    We are here to support you to develop clinically safe systems in line with your responsibility to achieve the relevant [DCB0129](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems)or[DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems)clinical safety standards. 
+    We use standard HTTP status codes to show whether an API request succeeded or not. They are usually in the range:
 
-    The three stages of the clinical assurance process for GP Connect Access Record: Structured consumers
+    - 200 to 299 if it succeeded, including code 202 if it was accepted by an API that needs to wait for further action
 
-    We host a series of meetings to help you develop clinically safe systems:
+    - 400 to 499 if it failed because of a client error by your application
 
-    - initial meeting
-    - clinical safety process readiness review meeting
-    - clinical evaluation of readiness for deployment meeting
+    - 500 to 599 if it failed because of an error on our server
 
-    For more information, see Clinical assurance process details.
-
-    Additional guidance: Clinical safety and hazard log
-
-    ## Clinical safety approach
-
-    Your organisation must have a clinical safety officer. Information standards underpin national healthcare initiatives from the Department of Health, NHS England, the Care Quality Commission, and other national health organisations. They provide the mechanism for introducing requirements to which the NHS, those with whom it commissions services and its IT system suppliers, must conform.
-
-    The following two standards relating to clinical safety are accepted for publication under section 250 of the Health and Social Care Act 2012 by the Data Coordination Board (DCB). In line with current DCB practice, each standard comprises:
-
-    a specification, which defines the requirements and conformance criteria to be met by the user of the standard - how these requirements are met is the responsibility of the user
-
-    implementation guidance, which provides an interpretation of the requirements and, where appropriate, defines possible approaches to achieving them
-
-    Compliance with[DCB0129]((https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems))and [DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems) is mandatory under the Health and Social Care Act 2012 ([Clinical risk management standards - NHS Digital](https://digital.nhs.uk/services/clinical-safety/clinical-risk-management-standards)).
-
-    [Consumer Implementation Guidance](https://simplifier.net/guide/pfs-implementation-guide/Home/FHIR-Assets/Profiles.page.md?version=current)
-
-    ## Clinical safety guidance 
-
-    The [Guide for Access Record: Structured](https://github.com/nhsconnect/gpc-consumer-support/blob/master/Clinical%20Safety%20Officer%20Guidance%20for%20GP%20Connect%20V0.6%20Structured.pdf) helps clinical safety officers assure GP Connect consumer systems into their own organisations. It includes details of the clinical safety standards that consumer suppliers and their commissioning organisations must be compliant with ([DCB0129]((https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems))and [DCB0160](https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems)).
-
-    [Clinical safety principles](https://github.com/nhsconnect/gpc-consumer-support/wiki/Clinical-Safety-Principles) shows you who is responsible for the clinical safety of GP Connect specifications and consumer systems.
-
-
-
-    ## Hazard log
-
-    The GP Connect Access Record: Structured generic hazard log shows you the clinical risks of using GP Connect functionality through a consumer system. Use it to identify the clinical risks of consuming clinical data and presenting it in your system, and record these in your own system-specific hazard log. If necessary, take mitigating action to ensure clinical safety.
-
+    Errors specific to each API are shown in the Endpoints section, under Response. See our [reference guide](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#http-status-codes) for more on errors.
   contact:
     name: 'gp-connect-access-record-fhir API Support'
     url: 'https://digital.nhs.uk/developer/help-and-support'
     email: api.management@nhs.net
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/gp-connect-access-record-fhir'
+  - url: 'https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record'
     description: Sandbox environment.
-  - url: 'https://int.api.service.nhs.uk/gp-connect-access-record-fhir'
+  - url: 'https://int.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record'
     description: Integration test environment.
-  - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir'
+  - url: 'https://api.service.nhs.uk/gp-connect/patient-facing/get-structured-record'
     description: Production environment.
-paths: {}
+paths: 
+  /FHIR/STU3/Patient/$gpc.getstructuredrecord:
+    post:
+      operationId: get-structured-record
+      summary: Access a structured record relating to a patient.
+      description: >
+        ## Overview 
+        This end point returns a patient's record in structured format using FHIR Operations. It returns a Bundle.
+
+        
+        The request body must be a Parameters resource.
+
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+      requestBody:
+        required: true
+        description: Valid request for the entire record.
+        content: 
+          application/fhir+json:
+            schema:
+              type: object
+              description: >
+                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current).
+            example:
+              resourceType: Parameters
+              parameter:
+                - name: patientNHSNumber
+                  valueIdentifier:
+                    system: https://fhir.nhs.uk/Id/nhs-number
+                    value: '9000000009'
+                - name: includeAllergies
+                  part:
+                    - name: includeResolvedAllergies
+                      valueBoolean: true
+                - name: includeConsultations
+                  part:
+                    - name: consultationSearchPeriod
+                      valuePeriod:
+                        start: '2019-12-21'
+                        end: '2020-02-21'
+                - name: includeProblems
+                  part:
+                    - name: includeStatus
+                      valueCode: active
+                    - name: includeSignificance
+                      valueCode: major
+                - name: includeImmunisations
+                  part:
+                    - name: includeNotGiven
+                      valueBoolean: true
+                    - name: includeStatus
+                      valueBoolean: true
+                - name: includeUncategorisedData
+                - name: includeInvestigations
+                - name: includeReferrals
+                - name: includeMedication
+      responses: 
+        '201':
+          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+
+components:
+  parameters:
+    BearerAuthorization:
+      in: header
+      name: Authorization
+      description: |
+        An [OAuth 2.0 bearer token](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis).
+        Required in all environments except sandbox.
+      required: true
+      schema:
+        type: string
+        format: '^Bearer\ [[:ascii:]]+$'
+        example: 'Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM'
+    CorrelationID:
+      in: header
+      name: X-Correlation-ID
+      required: false
+      description: |
+        An optional ID which you can use to track transactions across multiple systems. It can have any value, but we recommend avoiding `.` characters.
+        Mirrored back in a response header.
+      schema:
+        type: string
+        example: 11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA
+    RequestID:
+      in: header
+      name: X-Request-ID
+      required: true
+      description: |
+        A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.
+        Must be a universally unique identifier (UUID) (ideally version 4).
+        
+        Mirrored back in a response header.
+        
+        If you re-send a failed request, use the same value in this header.
+        
+        Required in all environments except sandbox.
+      schema:
+        type: string
+        pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+        example: 60E0B220-8136-4CA5-AE46-1D97EF59D068
+     
+                    
