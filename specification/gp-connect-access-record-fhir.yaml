@@ -198,7 +198,7 @@ servers:
   - url: 'https://api.service.nhs.uk/gp-connect/patient-facing/get-structured-record'
     description: Production environment.
 paths: 
-  /FHIR/STU3/Patient/$gpc.getstructuredrecord
+  /FHIR/STU3/Patient/$gpc.getstructuredrecord:
     post:
       operationId: get-structured-record
       summary: Access a structured record relating to a patient.
