@@ -20,7 +20,6 @@ steps:
 
       else
        poetry run pytest -v --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
-       docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
       fi
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests"
     displayName: Run full test suite
