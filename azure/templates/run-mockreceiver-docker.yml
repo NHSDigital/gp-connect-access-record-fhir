@@ -5,4 +5,3 @@ steps:
       docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
       fi
     displayName: Run MockReceiver Docker
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
