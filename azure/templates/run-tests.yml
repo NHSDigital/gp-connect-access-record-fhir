@@ -17,6 +17,7 @@ steps:
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
        poetry run pytest -v -m "not nhsd_apim_authorization" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
+
       else
        poetry run pytest -v --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
       fi
