@@ -4,4 +4,6 @@ steps:
       then
         docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
       fi
+      echo '$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)'
+      dir 
     displayName: Run MockReceiver Docker
