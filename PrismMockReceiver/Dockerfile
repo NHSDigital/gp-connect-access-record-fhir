@@ -1,8 +1,14 @@
+#First Stage
+FROM alpine:latest  
+RUN apk add jq
+COPY "gp-connect-access-record-fhir.json" ./
+COPY "HealthStatusEndpoint.json" ./
+RUN jq ".paths+=$(cat HealthStatusEndpoint.json)" gp-connect-access-record-fhir.json > updated-spec.json
+
+
+#Second stage
 FROM stoplight/prism:latest 
-
-#Copying Specification folder to docker container
-COPY ./specification /usr/src/prism/packages/cli/gp-connect-access-record-fhir/specification
-
+COPY --from=0  /updated-spec.json  /usr/src/prism/packages/cli/gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.json
 
 #Running command of mock with OAS file
-CMD ["mock" , "-h", "0.0.0.0", "-p" ,"9000" ,"gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.yaml"]
+CMD ["mock" , "-h", "0.0.0.0", "-p" ,"9000" ,"gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.json"]
