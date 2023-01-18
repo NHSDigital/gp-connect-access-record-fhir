@@ -1,5 +1,6 @@
 steps:
   - bash: |
+      yq -i '.paths./_status={"get":{"operationId": "healthcheck","summary": "healthcheck endpoint","responses":{"200":{"description": "successful operation","content":{"application/text":{"schema":{"type": "string"},"example": "OK"}}}}}}' specification/gp-connect-access-record-fhir.yaml
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
         docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
