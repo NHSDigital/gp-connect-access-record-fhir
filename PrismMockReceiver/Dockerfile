@@ -1,7 +1,7 @@
 #First Stage
 FROM alpine:latest  
 RUN apk add jq
-COPY "gp-connect-access-record-fhir.json" ./
+COPY "build/gp-connect-access-record-fhir.json" ./
 COPY "HealthStatusEndpoint.json" ./
 RUN jq ".paths+=$(cat HealthStatusEndpoint.json)" gp-connect-access-record-fhir.json > updated-spec.json
 
