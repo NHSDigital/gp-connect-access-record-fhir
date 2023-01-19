@@ -6,6 +6,5 @@ run: build
 
 spec:
 	make -C .. publish
-	cp ../build/gp-connect-access-record-fhir.json .
 
 .PHONY: build run
