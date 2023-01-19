@@ -1,9 +1,9 @@
 steps:
   - bash: |
-      cp build/gp-connect-access-record-fhir.json PrismMockReceiver/
+      cp ../build/gp-connect-access-record-fhir.json ./
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
         docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
       fi 
     displayName: Run MockReceiver Docker
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
