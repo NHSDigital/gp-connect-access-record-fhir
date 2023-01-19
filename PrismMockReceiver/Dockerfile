@@ -2,7 +2,7 @@
 FROM alpine:latest  
 RUN apk add jq
 COPY "build/gp-connect-access-record-fhir.json" ./
-COPY "HealthStatusEndpoint.json" ./
+COPY "PrismMockReceiver/HealthStatusEndpoint.json" ./
 RUN jq ".paths+=$(cat HealthStatusEndpoint.json)" gp-connect-access-record-fhir.json > updated-spec.json
 
 
