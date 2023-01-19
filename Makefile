@@ -7,7 +7,6 @@ install-python:
 #Installs dependencies using npm.
 install-node:
 	npm install --legacy-peer-deps
-	cd sandbox && npm install --legacy-peer-deps
 
 #Configures Git Hooks, which are scipts that run given a specified event.
 .git/hooks/pre-commit:
@@ -30,13 +29,14 @@ clean:
 publish: clean
 	mkdir -p build
 	npm run publish 2> /dev/null
+	cp build/gp-connect-access-record-fhir.json PrismMockReceiver/
 
 #Runs build proxy script
 build-proxy:
 	scripts/build_proxy.sh
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests PrismMockReceiver specification"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
