@@ -2,7 +2,7 @@ steps:
   - bash: |
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-        docker build -t prismmockreceiver -f PrismMockReceiver/Dockerfile .
+        docker build -t prismmockreceiver -f Dockerfile .
       fi 
     displayName: Run MockReceiver Docker
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
