@@ -204,6 +204,8 @@ paths:
       summary: Access a structured record relating to a patient.
       description: >
         ## Overview 
+
+        
         This end point returns a patient's record in structured format using FHIR Operations. It returns a Bundle.
 
         
