@@ -201,11 +201,11 @@ paths:
   /FHIR/STU3/Patient/$gpc.getstructuredrecord:
     post:
       operationId: get-structured-record
-      summary: Access a structured record relating to a patient.
+      summary: Access a structured record relating to a patient
       description: >
         ## Overview 
 
-        
+
         This end point returns a patient's record in structured format using FHIR Operations. It returns a Bundle.
 
         
@@ -215,6 +215,14 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
+        - in: query
+          name: _count
+          description: >
+            The number of results requested per page. Including this parameter will include a link to the next page under the "link" element with relation "next".
+          required: false
+          schema:
+            type: string
+            example: 10
       requestBody:
         required: true
         description: Valid request for the entire record.
