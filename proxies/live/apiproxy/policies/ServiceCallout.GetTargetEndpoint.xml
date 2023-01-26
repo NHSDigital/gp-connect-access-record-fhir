@@ -1,0 +1,18 @@
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCallout.GetTargetEndpoint">
+  <!-- This is the default (55 seconds). Including it to make explicit. -->
+  <Timeout>55000</Timeout>
+  <Request>
+    <Set>
+      <Verb>GET</Verb>
+      <Path>NHSDigital/gp-connect-access-record-fhir/master/endpoints/internal-dev/endpoints.json</Path>
+    </Set>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+  </Request>
+  <Response>endpoints</Response>
+  <HTTPTargetConnection>
+    <SSLInfo>
+      <Enabled>true</Enabled>
+    </SSLInfo>
+    <URL>https://raw.githubusercontent.com</URL>
+  </HTTPTargetConnection>
+</ServiceCallout>

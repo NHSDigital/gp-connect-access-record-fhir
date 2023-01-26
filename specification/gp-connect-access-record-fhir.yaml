@@ -287,7 +287,6 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Multiple-combined?version=current)
-
 components:
   parameters:
     BearerAuthorization:
