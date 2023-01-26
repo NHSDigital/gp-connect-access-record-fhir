@@ -78,7 +78,7 @@ info:
 
     * [GP Connect (Patient Facing) Appointment Management - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-appointment-management-fhir) - use this API to manage GP practice appointments.
 
-    * [GP Connect (Patient Facing) Access Record - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-access-record-fhir) - use this API to manage a patient's medical record from the GP practice systems.
+    * [GP Connect (Patient Facing) Prescriptions - FHIR API ](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-prescriptions-fhir) - use this API to manage a patient's prescriptions.
 
     * [GP Connect Access Record: Structured - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-access-record-structured-fhir) - use this API for clinical access to the record, including structured medications linked to other elements of the patient record.
 
@@ -87,7 +87,7 @@ info:
     
     This API is in [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
 
-    To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/341619/gp-connect-prescriptions-management-fhir)
+    To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/342393/gp-connect-get-structured-record)
 
     If you have any other queries, [contact us](https://digital.nhs.uk/developer/help-and-support)
 
@@ -255,7 +255,7 @@ paths:
                       valueCode: active
                     - name: includeSignificance
                       valueCode: major
-                - name: includeImmunisations
+                - name: includeImmunizations
                   part:
                     - name: includeNotGiven
                       valueBoolean: true
@@ -266,8 +266,27 @@ paths:
                 - name: includeReferrals
                 - name: includeMedication
       responses: 
-        '201':
-          description: Information surrounding how the responses are returned can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+        '200':
+          description: > 
+            Information surrounding how a patients structured is retrieved can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+
+            Examples of the payload requests and responses can be found here:
+
+            * [Allergies FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Allergies?version=current)
+
+            * [Medications FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Medications?version=current)
+
+            * [Immunizations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Immunizations?version=current)
+
+            * [Uncategorised Data FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Uncategorised-Data?version=current)
+
+            * [Consultations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Consultations?version=current)
+
+            * [Investigations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Investigations?version=current)
+
+            * [Referrals FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Referrals?version=current)
+
+            * [Combined FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Multiple-combined?version=current)
 
 components:
   parameters:
