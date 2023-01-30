@@ -2,7 +2,7 @@ steps:
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-      role: "auto-ops"
+      role: "devOps"
       profile: "devOps"
 
   - bash: |
