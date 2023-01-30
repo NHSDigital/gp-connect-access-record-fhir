@@ -1,6 +1,9 @@
 steps:
   - bash: |
-        docker build -t prismmockreceiver:$(Build.BuildId) -f Dockerfile .
+
+        dockerImageName=prismmockreceiver:$(Build.BuildId)
+        echo dockerImageName
+        docker build -t dockerImageName -f Dockerfile .
         cd ../infra
         echo "configure list"
         aws configure list
@@ -8,6 +11,10 @@ steps:
         aws configure list-profiles
         echo "get caller id"
         aws sts get-caller-identity
+
+        account_id="$(aws sts get-caller-identity --query Account --output text)"
+
+        docker login --username AWS --password-stdin ${account_id}.dkr.ecr.eu-west-2.amazonaws.com
 
     displayName: Build MockReceiver Docker
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
