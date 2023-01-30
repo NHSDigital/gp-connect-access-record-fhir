@@ -1,6 +1,9 @@
 steps:
   - bash: |
         docker build -t prismmockreceiver:$(Build.BuildId) -f Dockerfile .
-        echo $(Build.BuildId)
+        cd ../infra
+        make init
+        make plan
+
     displayName: Build MockReceiver Docker
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
