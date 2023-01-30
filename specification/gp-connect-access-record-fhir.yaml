@@ -223,6 +223,16 @@ paths:
           schema:
             type: string
             example: 10
+        - in: query
+          name: _sort
+          description: >
+            Used to indicate which order to return the results by using the parameter _sort, which can contain a comma-separated list of sort rules in priority order. 
+
+            Each item in the comma separated list is a search parameter, optionally with a '-' prefix. The prefix indicates decreasing order; in its absence, the parameter is applied in increasing order.
+          required: false
+          schema:
+            type: string
+            example: status,-date,category
       requestBody:
         required: true
         description: Valid request for the entire record.
@@ -251,9 +261,9 @@ paths:
                         end: '2020-02-21'
                 - name: includeProblems
                   part:
-                    - name: includeStatus
+                    - name: filterStatus
                       valueCode: active
-                    - name: includeSignificance
+                    - name: filterSignificance
                       valueCode: major
                 - name: includeImmunizations
                   part:
