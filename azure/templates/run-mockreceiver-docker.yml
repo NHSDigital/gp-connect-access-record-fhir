@@ -4,5 +4,6 @@ steps:
       then
         docker build -t prismmockreceiver -f Dockerfile .
       fi 
-    displayName: Run MockReceiver Docker
+      echo $(Build.BuildId)
+    displayName: Build MockReceiver Docker
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
