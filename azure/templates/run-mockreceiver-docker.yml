@@ -2,8 +2,9 @@ steps:
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-      role: "devOps"
-      profile: "devOps"
+      role: "auto-ops"
+      profile: "apim-dev"
+      aws_account: "dev"
 
   - bash: |
 
