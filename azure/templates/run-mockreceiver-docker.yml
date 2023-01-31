@@ -16,11 +16,13 @@ steps:
         aws configure list
         echo "get caller id"
         aws sts get-caller-identity
+        aws s3 ls
 
         account_id="$(aws sts get-caller-identity --query Account --output text)"
         mock_receiver_repository_url= ${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
 
         docker login --username AWS --password-stdin ${account_id}.dkr.ecr.eu-west-2.amazonaws.com
+        echo "docker login succeeded"
         docker push ${mock_receiver_repository_url}:$(Build.BuildId)
 
     displayName: Build MockReceiver Docker
