@@ -15,15 +15,17 @@ steps:
         echo "configure list"
         aws configure list
         echo "get caller id"
-        aws sts get-caller-identity
-        aws s3 ls
+        aws --profile=apim-dev sts get-caller-identity
+        aws --profile=apim-dev s3 ls 
 
         account_id="$(aws sts get-caller-identity --query Account --output text)"
-        mock_receiver_repository_url= ${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
+        
 
-        docker login --username AWS --password-stdin ${account_id}.dkr.ecr.eu-west-2.amazonaws.com
+        aws ecr get-login-password --profile apim-dev --region eu-west-2 | docker login --username AWS --password-stdin 790083933819.dkr.ecr.eu-west-2.amazonaws.com
         echo "docker login succeeded"
-        #docker push ${mock_receiver_repository_url}:$(Build.BuildId)
+
+        mock_receiver_repository_url=790083933819.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
+        docker push ${mock_receiver_repository_url}:$(Build.BuildId)
 
     displayName: Build MockReceiver Docker
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
