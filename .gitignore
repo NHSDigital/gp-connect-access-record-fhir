@@ -21,3 +21,4 @@ smoketest-report.xml
 env
 .dir-locals.el
 *.pyc
+**/.terraform/

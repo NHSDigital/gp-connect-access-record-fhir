@@ -12,6 +12,7 @@ tf_cmd = AWS_PROFILE=$(aws_profile) terraform
 dockerFilePath=../PrismMockReceiver/Dockerfile
 dockerContext=../PrismMockReceiver
 
+
 init:
 	$(tf_cmd) init $(tf_state) $(tf_vars)
 
@@ -34,3 +35,4 @@ docker-build:
 
 docker-deploy: docker-login docker-build
 	 docker push $(dockerImageName)
+
