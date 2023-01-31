@@ -33,6 +33,6 @@ docker-build:
 	docker build -t $(dockerImageName) -f $(dockerFilePath) $(dockerContext)
 
 
-docker-deploy: docker-login docker-build
+docker-deploy: docker-login 
 	 docker push $(dockerImageName)
 
