@@ -18,7 +18,7 @@ steps:
         make docker-deploy dockerImageName=${dockerImageName} aws_profile=apim-dev aws_account_no=${account_id}
         
 
-    displayName: Build MockReceiver Docker
+    displayName: Build and Push MockReceiver Docker to ECR
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
 
 
