@@ -13,12 +13,12 @@ steps:
         mock_receiver_repository_url=${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
         dockerImageName=${mock_receiver_repository_url}:$(Build.BuildId)
         echo ${dockerImageName}
-        cd ../infra
-        make docker-deploy dockerImageName=${dockerImageName} dockerFilePath=Dockerfile dockerContext=. aws_profile=apim-dev aws_account_no=${account_id}
+        cd infra
+        make docker-deploy dockerImageName=${dockerImageName} aws_profile=apim-dev aws_account_no=${account_id}
         
 
     displayName: Build MockReceiver Docker
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockReceiver"
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
 
 
 
