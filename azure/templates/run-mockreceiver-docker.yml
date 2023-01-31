@@ -13,7 +13,7 @@ steps:
         mock_receiver_repository_url=${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
         dockerImageName=${mock_receiver_repository_url}:$(Build.BuildId)
         echo ${dockerImageName}
-        docker build -t ${dockerImageName} Dockerfile .
+        docker build -t ${dockerImageName} -f Dockerfile .
         cd ../infra
         make docker-deploy dockerImageName=${dockerImageName} aws_profile=apim-dev aws_account_no=${account_id}
         
