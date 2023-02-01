@@ -7,7 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-bebop-gpconnect-access-record-infra"
+    bucket = "terraform-nhsd-apim-bebop-infra"
+
     region = "eu-west-2"
   }
 }
@@ -23,9 +24,4 @@ provider "aws" {
       tier        = "infrastructure"
     }
   }
-}
-
-provider "aws" {
-  alias  = "acm_provider"
-  region = "eu-west-2"
 }
