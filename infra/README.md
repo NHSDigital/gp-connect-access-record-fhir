@@ -59,6 +59,7 @@ This step is also integrated with azure pipeline; with each new build, mock rece
 This folder contains all the configuration related to the networking and infrastructure. You probably don't need to either change
 or redeploy contents of this directory.
 - This will create ECR repo for you in AWS. In development there will be single ECR and different images will be pushed to the same repo
+- This will create private and public subnets and VPC
 
 ### per-user and per-pr environment
 
