@@ -393,7 +393,31 @@ paths:
                             type: token
                           - name: description
                             type: string
-                        
+  /FHIR/STU3/documents/Patient/{id}:
+    get:
+      operationId: get-document-patient
+      summary: Find a patient by NHS number on the Access Document FHIR server
+      description: >
+        Use this endpoint to find a Patient.
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/InteractionID"
+        - in: path
+          name: id
+          description: The NHS Number of the patient you are searching for.
+          schema:
+            type: string
+            example: 9000000009
+          required: true
+      responses:
+        '200':
+          
+
 components:
   parameters:
     BearerAuthorization:
