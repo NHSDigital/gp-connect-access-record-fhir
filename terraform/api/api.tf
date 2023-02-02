@@ -18,3 +18,7 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
     Name = "${var.name_prefix}-api-domain-name"
   }
 }
+
+locals {
+  api_stage_name = var.environment
+}
