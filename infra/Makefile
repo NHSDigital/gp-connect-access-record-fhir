@@ -3,7 +3,7 @@ environment = dev
 aws_profile = apim-dev
 tf_opt=
 tf_state=-backend-config="key=gpconnectInfra"
-tf_vars=
+tf_vars=-var="environment=$(environment)"
 mock_receiver_repository_name = gpconnect-infra-dev
 mock_receiver_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_receiver_repository_name)
 build_version=latest

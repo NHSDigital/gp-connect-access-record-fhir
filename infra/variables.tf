@@ -2,12 +2,8 @@ locals {
     name_prefix = "${var.project}-${var.environment}"
 }
 
-
-    vpc_cidr = data.aws_vpc.bebop_vpc.cidr_block
-}
-
 locals {
-    name_prefix = "${var.project}-${var.environment}"
+    vpc_cidr = data.aws_vpc.bebop_vpc.cidr_block
 }
 
 locals {
@@ -74,3 +70,26 @@ variable "registries" {
     default = ["mock-receiver"]
 }
 
+variable "vpc_id" {
+    default = "vpc-0f91c7ddfc1af661a"
+}
+
+variable "nlb_ports" {
+    type    = map(number)
+    default = {
+        http  = 80
+        https = 443
+    }
+}
+
+variable "autoscaling_group_name" {
+    default = "target-autoscaling-group"
+}
+
+variable "container_port" {
+    default = 9000
+}
+
+variable "listener_port" {
+    default = 80
+}
