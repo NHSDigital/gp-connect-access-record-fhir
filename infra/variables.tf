@@ -1,9 +1,9 @@
 locals {
-    vpc_cidr = data.aws_vpc.bebop_vpc.cidr_block
+    name_prefix = "${var.project}-${var.environment}"
 }
 
 locals {
-    name_prefix = "${var.project}-${var.environment}"
+    vpc_cidr = data.aws_vpc.bebop_vpc.cidr_block
 }
 
 locals {
@@ -44,12 +44,13 @@ locals {
     ]
 }
 
+
 variable "region" {
     default = "eu-west-2"
 }
 
 variable "project" {
-    default = "gpc-pfs-access-record"
+    default = "gpconnect-infra"
 }
 
 variable "domain_name" {
@@ -70,16 +71,9 @@ variable "registries" {
 }
 
 variable "vpc_id" {
-    default = "vpc-0f91c7ddfc1af661a"
+    default = "vpc-013e5e3a3aa2566e5"
 }
 
-variable "nlb_ports" {
-    type    = map(number)
-    default = {
-        http  = 80
-        https = 443
-    }
-}
 
 variable "autoscaling_group_name" {
     default = "target-autoscaling-group"
@@ -92,4 +86,3 @@ variable "container_port" {
 variable "listener_port" {
     default = 80
 }
-

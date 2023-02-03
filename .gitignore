@@ -1,4 +1,6 @@
 
+**/.terraform.*
+**/.terraform
 .direnv
 node_modules/
 bin/
