@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-bebop-infra"
-
+    bucket = "terraform-nhsd-apim-bebop-gpconnect-accessrecord-infra"
+    key = "infra"
     region = "eu-west-2"
   }
 }

@@ -71,16 +71,9 @@ variable "registries" {
 }
 
 variable "vpc_id" {
-    default = "vpc-0f91c7ddfc1af661a"
+    default = "vpc-013e5e3a3aa2566e5"
 }
 
-variable "nlb_ports" {
-    type    = map(number)
-    default = {
-        http  = 80
-        https = 443
-    }
-}
 
 variable "autoscaling_group_name" {
     default = "target-autoscaling-group"
