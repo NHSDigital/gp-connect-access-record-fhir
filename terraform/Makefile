@@ -1,11 +1,10 @@
 .SILENT:
 
-environment = ryth1
+-include .env
+
 aws_profile = apim-dev
 tr_vars=
 tr_cmd = AWS_PROFILE=$(aws_profile) terraform
-
--include .env
 
 workspace:
 	$(tr_cmd) workspace new $(environment) || $(tr_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
