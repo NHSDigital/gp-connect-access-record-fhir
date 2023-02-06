@@ -53,7 +53,7 @@ variable "project" {
     default = "gpconnect-infra"
 }
 
-variable "domain_name" {
+variable "root_domain_name" {
     default = "dev.api.platform.nhs.uk"
 }
 
