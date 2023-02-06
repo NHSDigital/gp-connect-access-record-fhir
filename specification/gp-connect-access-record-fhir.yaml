@@ -14,10 +14,9 @@ info:
 
     ![GP Connect Patient Facing Access Record FHIR Overview](https://raw.githubusercontent.com/NHSDigital/gp-connect-access-record-fhir/master/specification/images/overview_diagram.svg)
 
-    Use this API to access structured and coded information from a person’s GP practice record to consume in a person facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
-    An account must be set up by the person with NHS Login P9 identity verification level to gain access to their GP practice record.
-
-    A person or consumer system can retrieve data from GP practice records for the following areas:
+    Use this API to access structured and coded information from a patient's GP practice record to consume in a patient facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
+    
+    You can retrieve patient record data for the following:
 
     - medications
     - allergies
@@ -28,21 +27,13 @@ info:
     - attachments
     - uncategorised data (other clinically coded items that are present in the record)
 
-    Common use cases include:
-
-    - access your digital medical record for better self-management of care
-
-    - understand your GP record in completeness to support making informed decisions with health professionals about your health.
-
-    - view links between parts of the record e.g. for a given problem, understand what consultations took place, medications are prescribed, and letters recorded.
-
     You cannot currently use this API to:
 
     - write back to the GP record
 
     ## Who can use this API
 
-    This API can be used by developers of person facing systems that support citizens gaining access to their GP practice medical record.    
+    This API can be used by developers of patient facing systems that support patients gaining access to their GP practice medical record.    
     
     This API:
 
@@ -85,7 +76,7 @@ info:
 
     ## API status and roadmap
     
-    This API is in [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
+    This API is [in development.](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
 
     To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/342393/gp-connect-get-structured-record)
 
@@ -134,42 +125,39 @@ info:
 
     | Purpose          | URL                                                   |
     | -------          | ---                                                   |
-    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record/](https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record) |
+    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/access-structured-record/](https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/access-structured-record) |
     | Integration test | Not yet available                                     |
     | Production       | Not yet available
 
-    We have 1 testing stream:
+    ### Sandbox testing
 
-     - technical testing
+    Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
 
-    ### Technical testing
+    * is for early developer testing
+ 
+    * only covers a limited set of scenarios
+ 
+    * is stateless, so it does not store data
+ 
+    * is open access, so does not allow you to test authorisation
 
-    The purpose of technical testing is to help you assure the messaging capability of your system via the Spine with GP Connect provider FHIR endpoints. It ensures the consumer requests conform to FHIR standards as per the specification. In addition, it maintains the integrity of the data displayed to the user and assures pertinent functional requirements. It does not assure the message payload, which is covered in clinical assurance.
+    For more details on sandbox testing, or to try out the sandbox using our "Try this API" feature, see the documentation for each endpoint.
+    
+    ### Integration testing (not yet available)
 
-    See[Consumer Supplier Test Assurance for achieving Technical Conformance](https://github.com/nhsconnect/gpc-consumer-support/wiki/Document-library#consumer-supplier-test-assurance-for-achieving-technical-conformance) (PDF) for full details of the technical conformance process and relevant artefacts.
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
+
+    * is for formal integration testing
+ 
+    * is stateful, so it does persist data
+ 
+    * includes authorisation
+
+    For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Onboarding
 
-    ### Expressing an interest
-
-    If you meet the prerequisites and have a product that can integrate with GP Connect person facing services, you should express an interest with us by submitting a use case.
-
-    The main purpose of the use case is to help us understand how you plan to use GP Connect person facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
-
-    Your use case should include the following information as a minimum:
-    - the business problem you are intending to solve using GP Connect
-    - how GP Connect will be used to benefit patients and staff
-    - which of the GP Connect products you will use to benefit patients and staff
-    - any end-user organisations you are currently working with
-    - who your clinical safety officer is and, where available, your clinical risk management process documentation
-
-    Once we receive your use case, we'll respond within 14 days.
-
-    ### Consumer assurance process
-
-    On approval of a use case, we will support you through the assurance process through to go live. We will discuss the assurance process and artefacts with you to help you understand the requirements.
-
-    Start your development work within 6 months of use case approval. If you miss this date, a review or new submission of the use case will be required. Changes or additional development will also require a review or new use case submission. For full details of the technical conformance process, see GP Connect Consumer Supplier Test Assurance for achieving Technical Conformance (PDF).
+    This API is not yet available for onboarding.
 
     ### Hazard log
 
@@ -215,6 +203,10 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/ARInteration"
         - in: query
           name: _count
           description: >
@@ -297,6 +289,487 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Multiple-combined?version=current)
+  /FHIR/STU3/documents/metadata:
+    get: 
+      operationId: get-document-metadata
+      summary: Access a structured record relating to a patient
+      description: >
+        Use this endpoint to get the Access Document FHIR capability statement.
+
+        This endpoint does not require a request body.
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/MetaInteration"
+      responses:
+        '200':
+          description: >
+            An example Access Document capability statement is shown below ready for customisation and embedding into assured provider systems. 
+            
+            
+            Providers should use this capability statement as a base for their own Access Document capability statement, replacing the element in square brackets ([ & ]) with specific information of their implementation. 
+            
+            
+            The main version at the top of the CapabilityStatement should represent the GP Connect API specification version that the Access Document FHIR server implements.
+          content: 
+            application/fhir+json:
+              schema: 
+                type: object
+                description: The response will be a populated CapabilityStatement resource.
+              example:
+                resourceType: CapabilityStatement
+                version: 1.5.0
+                name: GP Connect API - Access Document
+                status: active
+                date: '2020-02-10'
+                publisher: '[Provider Software Vendor Name]'
+                contact:
+                  - name: '[Provider Software Vendor Contact Name]'
+                description: This server implements the GP Connect API - Access Document version 1.5.0
+                copyright: Copyright NHS Digital 2016-20
+                kind: capability
+                software:
+                  name: '[Provider Software Name]'
+                  version: '[Provider Software Version]'
+                  releaseDate: '[Provider Software Release Date]'
+                fhirVersion: 3.0.1
+                acceptUnknown: both
+                format:
+                  - application/fhir+json
+                  - application/fhir+xml
+                profile:
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1/_history/1.8
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1/_history/1.4
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1/_history/1.2
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1/_history/1.2
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1/_history/1.2
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1/_history/1.3
+                  - reference: https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1/_history/1.3
+                rest:
+                  - mode: server
+                    security:
+                      cors: true
+                    resource:
+                      - type: Patient
+                        interaction:
+                          - code: search-type
+                        searchParam:
+                          - name: identifier
+                            type: token
+                            documentation: NHS Number (i.e. https://fhir.nhs.uk/Id/nhs-number|123456789)
+                      - type: Binary
+                        interaction:
+                          - code: read
+                      - type: DocumentReference
+                        interaction:
+                          - code: search-type
+                        searchInclude:
+                          - DocumentReference:subject:Patient
+                          - DocumentReference:custodian:Organization
+                          - DocumentReference:author:Organization
+                          - DocumentReference:author:Practitioner
+                        searchRevInclude:
+                          - PractitionerRole:practitioner
+                        searchParam:
+                          - name: created
+                            type: date
+                          - name: author
+                            type: token
+                          - name: description
+                            type: string
+  /FHIR/STU3/documents/Patient/{id}:
+    get:
+      operationId: get-document-patient
+      summary: Find a patient by NHS number on the Access Document FHIR server
+      description: >
+        Use this endpoint to find a Patient.
+
+        
+        No request body is required for this endpoint.
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/PatientInteration"
+        - in: path
+          name: id
+          description: The NHS Number of the patient you are searching for.
+          schema:
+            type: string
+            example: 9000000009
+          required: true
+      responses:
+        '200':
+          description: >
+            This endpoint returns a Patient resource.
+          content: 
+            application/fhir+json:
+              schema: 
+                type: object
+                description: The response will be a populated Patient resource.
+              example:
+                resource:
+                  resourceType: Patient
+                  id: '2'
+                  meta:
+                    versionId: '1469448000000'
+                    profile:
+                      - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1
+                  extension:
+                    - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1
+                      extension:
+                        - url: preferredBranchSurgery
+                          valueReference:
+                            reference: Location/785b4ff5-aced-4bdf-b7ed-34f92131ce97
+                    - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1
+                      extension:
+                        - url: language
+                          valueCodeableConcept:
+                            coding:
+                              - system: https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1
+                                code: bn
+                                display: Bengali
+                        - url: interpreterRequired
+                          valueBoolean: false
+                  identifier:
+                    - extension:
+                        - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1
+                          valueCodeableConcept:
+                            coding:
+                              - system: https://fhir.nhs.uk/CareConnect-NHSNumberVerificationStatus-1
+                                code: '01'
+                                display: Number present and verified
+                      system: https://fhir.nhs.uk/Id/nhs-number
+                      value: '900000009'
+                  active: true
+                  name:
+                    - use: official
+                      text: JACKSON Jane (Miss)
+                      family: Jackson
+                      given:
+                        - Jane
+                      prefix:
+                        - Miss
+                  telecom:
+                    - system: phone
+                      value: '01454587554'
+                      use: home
+                  gender: female
+                  birthDate: '1952-05-31'
+                  address:
+                    - use: home
+                      type: physical
+                      line:
+                        - Trevelyan Square
+                        - Boar Ln
+                      city: Leeds
+                      district: West Yorkshire
+                      postalCode: LS1 6AE
+                  managingOrganization:
+                    reference: Organization/14
+  /FHIR/STU3/documents/Binary/{id}:
+    get:
+      operationId: get-document
+      summary: Get a specific document from a GP practice.
+      description: >
+        Use this endpoint to retrieve a specific document using the id. 
+
+
+        No request body is required for this endpoint.
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/DocInteration"
+        - in: path
+          name: id
+          description: The id of the document you are searching for.
+          schema:
+            type: string
+            example: 07a6483f-732b-461e-86b6-edb665c45510
+          required: true
+      responses:
+        '200':
+          description: >
+            A successful response to retrieve a document. This will return a document in encoded base 64.
+          content: 
+            application/fhir+json:
+              schema: 
+                type: object
+                description: The response will be a populated Binary resource.
+              example:
+                resourceType: Binary
+                id: 07a6483f-732b-461e-86b6-edb665c45510
+                contentType: application/msword
+                content: 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
+  /FHIR/STU3/Patient/{id}/DocumentReference?{_include=DocumentReference:subject:Patient}&{_include=DocumentReference:custodian:Organization}&{_include=DocumentReference:author:Organization}&{_include=DocumentReference:author:Practitioner}&{_revinclude:recurse=PractitionerRole:practitioner}:
+    get:
+      operationId: search-document
+      summary: Search for a patients documents
+      description: > 
+        Use this endpoint to search for a patients documents from a GP Practice.
+
+        Details on the included parameters can be found below. These parameters must be used to reduce the number of API calls.
+      parameters:
+        - $ref: "#/components/parameters/BearerAuthorization"
+        - $ref: "#/components/parameters/CorrelationID"
+        - $ref: "#/components/parameters/RequestID"
+        - $ref: "#/components/parameters/TraceID"
+        - $ref: "#/components/parameters/ConsumerASID"
+        - $ref: "#/components/parameters/ProviderASID"
+        - $ref: "#/components/parameters/DocInteration"
+        - in: path
+          name: id
+          description: The NHS Number of the patient you are searching for.
+          schema:
+            type: string
+            example: 9000000009
+          required: true
+        - in: path
+          name: _include=DocumentReference:subject:Patient
+          description: Include Patient resources referenced within the returned DocumentReference resources
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: _include=DocumentReference:custodian:Organization
+          description: Details of organisations that are custodians for the documents that are returned in DocumentReference resources
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: _include=DocumentReference:author:Organization
+          description: Details of organisations that authored the documents that are returned in DocumentReference resources
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: _include=DocumentReference:author:Practitioner
+          description: Details of who/what authored the documents that are returned in DocumentReference resources
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: _revinclude:recurse=PractitionerRole:practitioner
+          description: PractitionerRole:practitioner Include PractitionerRole resources referenced from matching Practitioner resources
+          schema:
+            type: string
+          required: true      
+        - in: query
+          name: created
+          description: >
+            The created date <eq|ge|le>yyyy-mm-dd. To use a range use authored-on=geyyyy-mm-dd&authored-on=leyyyy-mm-dd
+          required: false
+          schema:
+            type: string
+          examples:
+            exact date:
+              value:
+                - eq2010-10-22
+              description: Exact match date
+            greater than or equals:
+              value:
+                - g2022-01-15
+              description: Greater than or equals which matches 2022-01-15 or 2022-01-16
+            less than or equals:
+              value: 
+                -  le2022-01-15
+              description: Less than or equals which matches 2022-01-15 or 2022-01-14    
+        - in: query
+          name: author
+          description: >
+            Who/what authored the documents that are returned
+          required: false
+          schema: 
+            type: string 
+            example: https://fhir.nhs.uk/Id/sds-user-id|G13579135
+        - in: query
+          name: description
+          description: >
+            The description of the document that is returned
+          required: false
+          schema:
+            type: string
+            example: Discharge Summary
+      responses:
+        '200':
+          description: >
+            This endpoint returns a bundle containing relevant documents.
+          content: 
+            application/fhir+json:
+              schema: 
+                type: object
+                description: The response will be a populated Binary resource.
+              example:
+                resourceType: Bundle
+                meta:
+                  profile:
+                    - https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1
+                type: searchset
+                entry:
+                  - fullUrl: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/Patient/04603d77-1a4e-4d63-b246-d7504f8bd833
+                    resource:
+                      resourceType: Patient
+                      id: 04603d77-1a4e-4d63-b246-d7504f8bd833
+                      meta:
+                        versionId: '1469448000000'
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1
+                      extension:
+                        - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1
+                          extension:
+                            - url: registrationPeriod
+                              valuePeriod:
+                                start: '1962-07-13T00:00:00+00:00'
+                      identifier:
+                        - extension:
+                            - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1
+                              valueCodeableConcept:
+                                coding:
+                                  - system: https://fhir.nhs.uk/CareConnect-NHSNumberVerificationStatus-1
+                                    code: '01'
+                                    display: Number present and verified
+                          system: https://fhir.nhs.uk/Id/nhs-number
+                          value: '9999999999'
+                      active: true
+                      name:
+                        - use: official
+                          text: JACKSON Jane (Miss)
+                          family: Jackson
+                          given:
+                            - Jane
+                          prefix:
+                            - Miss
+                      telecom:
+                        - system: phone
+                          value: '01454587554'
+                          use: home
+                      gender: female
+                      birthDate: '1952-05-31'
+                      address:
+                        - use: home
+                          type: physical
+                          line:
+                            - Cable Place
+                            - Roundhay
+                          city: Leeds
+                          district: West Yorkshire
+                          postalCode: LS1 5HT
+                      generalPractitioner:
+                        - reference: Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7
+                      managingOrganization:
+                        reference: Organization/db67f447-b30d-442a-8e31-6918d1367eeb
+                  - fullUrl: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/DocumentReference/27863182736
+                    resource:
+                      resourceType: DocumentReference
+                      id: '27863182736'
+                      meta:
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1
+                      masterIdentifier:
+                        system: LocalSystem/1
+                        value: bb2374e2-dde2-11e9-9d36-2a2ae2dbcce4
+                      identifier:
+                        - system: https://fhir.nhs.uk/Id/cross-care-setting-identifier
+                          value: bb237762-dde2-11e9-9d36-2a2ae2dbcce4
+                      status: current
+                      type:
+                        coding:
+                          - system: http://snomed.info/sct
+                            code: '824331000000106'
+                            display: Inpatient final discharge letter
+                      subject:
+                        reference: Patient/04603d77-1a4e-4d63-b246-d7504f8bd833
+                      created: '2019-06-24T09:35:00+11:00'
+                      indexed: '2019-07-02T09:43:41+11:00'
+                      author:
+                        - reference: Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7
+                      description: Discharge Summary
+                      content:
+                        - attachment:
+                            contentType: application/msword
+                            url: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/Binary/07a6483f-732b-461e-86b6-edb665c45510
+                            size: 3654
+                      context:
+                        practiceSetting:
+                          coding:
+                            - system: http://snomed.info/sct
+                              code: '1060971000000108'
+                              display: General practice service
+                        encounter:
+                          reference: Encounter/4
+                  - fullUrl: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/Organization/db67f447-b30d-442a-8e31-6918d1367eeb
+                    resource:
+                      resourceType: Organization
+                      id: db67f447-b30d-442a-8e31-6918d1367eeb
+                      meta:
+                        versionId: '636064088098730113'
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1
+                      identifier:
+                        - system: https://fhir.nhs.uk/Id/ods-organization-code
+                          value: O001
+                      name: The Trevelyan Practice
+                      address:
+                        - line:
+                            - Trevelyan Square
+                            - Boar Ln
+                          city: Leeds
+                          district: West Yorkshire
+                          postalCode: LS1 6AE
+                      telecom:
+                        - system: phone
+                          value: '03003035678'
+                          use: work
+                  - fullUrl: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7
+                    resource:
+                      resourceType: Practitioner
+                      id: 6c41ebfd-57c3-4162-9d7b-208c171a2fd7
+                      meta:
+                        versionId: '1469448000000'
+                        lastUpdated: '2016-07-25T12:00:00.000+00:00'
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1
+                      identifier:
+                        - system: https://fhir.nhs.uk/Id/sds-user-id
+                          value: G13579135
+                      name:
+                        - use: usual
+                          family: Gilbert
+                          given:
+                            - Nichole
+                          prefix:
+                            - Miss
+                      gender: female
+                  - fullUrl: http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect-documents/PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21
+                    resource:
+                      resourceType: PractitionerRole
+                      id: e0244de8-07ef-4274-9f7a-d7067bcc8d21
+                      meta:
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1
+                      practitioner:
+                        reference: Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7
+                      organization:
+                        reference: Organization/db67f447-b30d-442a-8e31-6918d1367eeb
+                      code:
+                        - coding:
+                            - system: https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1
+                              code: R0260
+                              display: General Medical Practitioner
+                
+            
+          
 components:
   parameters:
     BearerAuthorization:
@@ -337,5 +810,75 @@ components:
         type: string
         pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
         example: 60E0B220-8136-4CA5-AE46-1D97EF59D068
-     
-                    
+    TraceID:
+      in: header
+      name: Ssp-TraceID
+      description: |
+        	Consumer's Trace ID (a GUID or UUID), generated per request
+      required: true
+      schema:
+        type: string
+        example: '09a01679-2564-0fb4-5129-aecc81ea2706'
+    ConsumerASID:
+      in: header
+      name: Ssp-From
+      description: |
+        	Consumer's ASID - that of the requesting organisation
+      required: true
+      schema:
+        type: string
+        example: '200000000359'
+    ProviderASID:
+      in: header
+      name: Ssp-To
+      description: |
+        	Provider's ASID - identified by use of SDS
+      required: true
+      schema:
+        type: string
+        example: '918999198738'
+    ARInteration:
+      in: header
+      name: Ssp-ARInteration
+      description: |
+        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1
+      required: true
+      schema:
+        type: string
+        example: 'urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1'
+    SearchDocInteration:
+      in: header
+      name: Ssp-SearchDocInteration
+      description: |
+        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1
+      required: true
+      schema:
+        type: string
+        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1'     
+    MetaInteration:
+      in: header
+      name: Ssp-MetaInteration
+      description: |
+        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1
+      required: true
+      schema:
+        type: string
+        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1'       
+    PatientInteration:
+      in: header
+      name: Ssp-PatientInteration
+      description: |
+        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1
+      required: true
+      schema:
+        type: string
+        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1'
+    DocInteration:
+      in: header
+      name: Ssp-DocInteration
+      description: |
+        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1
+      required: true
+      schema:
+        type: string
+        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'                            
