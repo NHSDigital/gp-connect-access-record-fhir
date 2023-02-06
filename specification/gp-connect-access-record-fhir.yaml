@@ -14,10 +14,9 @@ info:
 
     ![GP Connect Patient Facing Access Record FHIR Overview](https://raw.githubusercontent.com/NHSDigital/gp-connect-access-record-fhir/master/specification/images/overview_diagram.svg)
 
-    Use this API to access structured and coded information from a person’s GP practice record to consume in a person facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
-    An account must be set up by the person with NHS Login P9 identity verification level to gain access to their GP practice record.
-
-    A person or consumer system can retrieve data from GP practice records for the following areas:
+    Use this API to access structured and coded information from a patient's GP practice record to consume in a patient facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
+    
+    You can retrieve patient record data for the following:
 
     - medications
     - allergies
@@ -28,21 +27,13 @@ info:
     - attachments
     - uncategorised data (other clinically coded items that are present in the record)
 
-    Common use cases include:
-
-    - access your digital medical record for better self-management of care
-
-    - understand your GP record in completeness to support making informed decisions with health professionals about your health.
-
-    - view links between parts of the record e.g. for a given problem, understand what consultations took place, medications are prescribed, and letters recorded.
-
     You cannot currently use this API to:
 
     - write back to the GP record
 
     ## Who can use this API
 
-    This API can be used by developers of person facing systems that support citizens gaining access to their GP practice medical record.    
+    This API can be used by developers of patient facing systems that support patients gaining access to their GP practice medical record.    
     
     This API:
 
@@ -85,7 +76,7 @@ info:
 
     ## API status and roadmap
     
-    This API is in [development](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
+    This API is [in development.](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
 
     To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/342393/gp-connect-get-structured-record)
 
@@ -152,9 +143,9 @@ info:
 
     ### Expressing an interest
 
-    If you meet the prerequisites and have a product that can integrate with GP Connect person facing services, you should express an interest with us by submitting a use case.
+    If you meet the prerequisites and have a product that can integrate with GP Connect patient facing services, you should express an interest with us by submitting a use case.
 
-    The main purpose of the use case is to help us understand how you plan to use GP Connect person facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
+    The main purpose of the use case is to help us understand how you plan to use GP Connect patient facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
 
     Your use case should include the following information as a minimum:
     - the business problem you are intending to solve using GP Connect
