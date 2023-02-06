@@ -125,42 +125,39 @@ info:
 
     | Purpose          | URL                                                   |
     | -------          | ---                                                   |
-    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record/](https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record) |
+    | Sandbox          | [https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/access-structured-record/](https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/access-structured-record) |
     | Integration test | Not yet available                                     |
     | Production       | Not yet available
 
-    We have 1 testing stream:
+    ### Sandbox testing
 
-     - technical testing
+    Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
 
-    ### Technical testing
+    * is for early developer testing
+ 
+    * only covers a limited set of scenarios
+ 
+    * is stateless, so it does not store data
+ 
+    * is open access, so does not allow you to test authorisation
 
-    The purpose of technical testing is to help you assure the messaging capability of your system via the Spine with GP Connect provider FHIR endpoints. It ensures the consumer requests conform to FHIR standards as per the specification. In addition, it maintains the integrity of the data displayed to the user and assures pertinent functional requirements. It does not assure the message payload, which is covered in clinical assurance.
+    For more details on sandbox testing, or to try out the sandbox using our "Try this API" feature, see the documentation for each endpoint.
+    
+    ### Integration testing (not yet available)
 
-    See [Consumer Supplier Test Assurance for achieving Technical Conformance](https://github.com/nhsconnect/gpc-consumer-support/wiki/Document-library#consumer-supplier-test-assurance-for-achieving-technical-conformance) (PDF) for full details of the technical conformance process and relevant artefacts.
+    Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
+
+    * is for formal integration testing
+ 
+    * is stateful, so it does persist data
+ 
+    * includes authorisation
+
+    For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
 
     ## Onboarding
 
-    ### Expressing an interest
-
-    If you meet the prerequisites and have a product that can integrate with GP Connect patient facing services, you should express an interest with us by submitting a use case.
-
-    The main purpose of the use case is to help us understand how you plan to use GP Connect patient facing services APIs and the business issue you are looking to address. You should email your use case to the GP Connect team.
-
-    Your use case should include the following information as a minimum:
-    - the business problem you are intending to solve using GP Connect
-    - how GP Connect will be used to benefit patients and staff
-    - which of the GP Connect products you will use to benefit patients and staff
-    - any end-user organisations you are currently working with
-    - who your clinical safety officer is and, where available, your clinical risk management process documentation
-
-    Once we receive your use case, we'll respond within 14 days.
-
-    ### Consumer assurance process
-
-    On approval of a use case, we will support you through the assurance process through to go live. We will discuss the assurance process and artefacts with you to help you understand the requirements.
-
-    Start your development work within 6 months of use case approval. If you miss this date, a review or new submission of the use case will be required. Changes or additional development will also require a review or new use case submission. For full details of the technical conformance process, see GP Connect Consumer Supplier Test Assurance for achieving Technical Conformance (PDF).
+    This API is not yet available for onboarding.
 
     ### Hazard log
 
