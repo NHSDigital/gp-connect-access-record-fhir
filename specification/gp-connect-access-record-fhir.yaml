@@ -3,9 +3,18 @@
 openapi: '3.0.0'
 x-spec-publication:
   operation-order:
-    - operations:
+    - group: Access Record
+      operations:
       - method: POST
         path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
+    - group: Documents
+      operations:
+      - method: GET
+        path: /FHIR/STU3/documents/Patient/{id}
+      - method: GET        
+        path: /FHIR/STU3/Patient/{id}/DocumentReference
+      - method: GET
+        path: /FHIR/STU3/documents/Binary/{id}
 info:
   title: 'gp-connect-access-record-fhir'
   version: 'Computed and injected at build time by `scripts/set_version.py`'
