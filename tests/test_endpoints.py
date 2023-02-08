@@ -95,4 +95,4 @@ def test_auth_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers.update(nhsd_apim_auth_headers)
 
     resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
-    assert resp.status_code == 200
+    assert resp.status_code == 403
