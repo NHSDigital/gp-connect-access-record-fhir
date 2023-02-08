@@ -13,7 +13,7 @@ def test_cache(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
 
     resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
 
-    assert resp.status_code == 403
+    assert resp.status_code == 200
 
 
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9"})
