@@ -1,20 +1,6 @@
 # This is an OpenAPI Specification (https://swagger.io/specification/)
 # for gp-connect-access-record-fhir owned by NHS Digital (https://digital.nhs.uk/)
 openapi: '3.0.0'
-x-spec-publication:
-  operation-order:
-    - group: Access Record
-      operations:
-      - method: POST
-        path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
-    - group: Documents
-      operations:
-      - method: GET
-        path: /FHIR/STU3/documents/Patient/{id}
-      - method: GET        
-        path: /FHIR/STU3/Patient/{id}/DocumentReference
-      - method: GET
-        path: /FHIR/STU3/documents/Binary/{id}
 info:
   title: 'gp-connect-access-record-fhir'
   version: 'Computed and injected at build time by `scripts/set_version.py`'
@@ -187,6 +173,20 @@ info:
     name: 'gp-connect-access-record-fhir API Support'
     url: 'https://digital.nhs.uk/developer/help-and-support'
     email: api.management@nhs.net
+x-spec-publication:
+  operation-order:
+    - group: Access Record
+      operations:
+      - method: POST
+        path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
+    - group: Documents
+      operations:
+      - method: GET
+        path: /FHIR/STU3/documents/Patient/{id}
+      - method: GET        
+        path: /FHIR/STU3/Patient/{id}/DocumentReference
+      - method: GET
+        path: /FHIR/STU3/documents/Binary/{id}
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/gp-connect/patient-facing/get-structured-record'
     description: Sandbox environment.
