@@ -34,7 +34,7 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
-        pre_deploy:
+        post_template:
           - template: ./templates/create-kvm.yml
         post_deploy:
           - template: ./templates/run-tests.yml
