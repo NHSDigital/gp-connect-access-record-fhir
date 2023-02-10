@@ -4,5 +4,5 @@ steps:
       export APIGEE_ACCESS_TOKEN="$(APIGEE_ACCESS_TOKEN)"
       
       make create-kvm
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Update endpoints KVM
