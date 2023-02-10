@@ -3,7 +3,7 @@
     <DisplayName>KeyValueMapOperations.GetEndpoints</DisplayName>
     <Get assignTo="endpoint">
         <Key>
-            <Parameter>{{endpointKey}}</Parameter>
+            <Parameter ref="endpointKey"/>
         </Key>
     </Get>
 </KeyValueMapOperations>
