@@ -22,21 +22,5 @@ apply: workspace
 destroy:
 	$(tr_cmd) destroy
 
-mock_receiver_repository_name = gpconnect-infra-dev
-mock_receiver_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_receiver_repository_name)
-build_version=latest
-dockerImageName=$(mock_receiver_repository_url):$(build_version)
-dockerFilePath=../PrismMockReceiver/Dockerfile
-dockerContext=../PrismMockReceiver
 
-docker-login:
-	 aws ecr get-login-password --profile $(aws_profile) --region eu-west-2 | docker login --username AWS --password-stdin $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com
-
-docker-build:
-	make -C .. publish
-	docker build -t $(dockerImageName) -f $(dockerFilePath) $(dockerContext)
-
-
-docker-deploy: docker-login
-	 docker push $(dockerImageName)
 

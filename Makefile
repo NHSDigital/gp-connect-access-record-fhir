@@ -29,7 +29,7 @@ clean:
 publish: clean
 	mkdir -p build
 	npm run publish 2> /dev/null
-	cp build/gp-connect-access-record-fhir.json PrismMockReceiver/
+	cp build/gp-connect-access-record-fhir.json PrismMockProvider/
 
 #Runs build proxy script
 build-proxy:
