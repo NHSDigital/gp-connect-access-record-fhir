@@ -8,6 +8,7 @@ terraform {
   backend "s3" {
     bucket = "nhsd-apim-gp-connect-pfs-access-record-terraform"
     region = "eu-west-2"
+    key = "gpconnectpfs"
   }
 }
 
@@ -26,4 +27,5 @@ provider "aws" {
 provider "aws" {
   alias  = "acm_provider"
   region = "eu-west-2"
+  profile = "apim-dev"
 }

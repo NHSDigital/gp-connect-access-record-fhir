@@ -35,16 +35,16 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
       - environment: internal-qa
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-qa-sandbox
@@ -54,7 +54,7 @@ extends:
           - internal_qa
           - internal_qa_sandbox
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
       - environment: sandbox
         proxy_path: sandbox
       - environment: int
