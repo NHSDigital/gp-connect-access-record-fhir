@@ -35,6 +35,10 @@ publish: clean
 build-proxy:
 	scripts/build_proxy.sh
 
+#Runs create KVM script
+create-kvm:
+	scripts/create_kvm.sh
+
 #Files to loop over in release
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
 
