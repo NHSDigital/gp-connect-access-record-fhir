@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KeyValueMapOperations.GetEndpoints" mapIdentifier="gp-connect-access-record-endpoints">
+    <DisplayName>KeyValueMapOperations.GetEndpoints</DisplayName>
+    <Get assignTo="endpoint">
+        <Key>
+            <Parameter>{{endpointKey}}</Parameter>
+        </Key>
+    </Get>
+</KeyValueMapOperations>
