@@ -32,21 +32,17 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
       - environment: internal-qa
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-qa-sandbox
@@ -55,10 +51,8 @@ extends:
         depends_on:
           - internal_qa
           - internal_qa_sandbox
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
-          - template: ./templates/run-tests.yml
+          - template: ./templates/post-deploy.yml
       - environment: sandbox
         proxy_path: sandbox
       - environment: int

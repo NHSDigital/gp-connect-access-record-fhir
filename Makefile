@@ -26,10 +26,11 @@ clean:
 	rm -rf dist
 
 #Creates the fully expanded OAS spec in json
-publish: clean
+publish: 
+	rm -rf build
 	mkdir -p build
 	npm run publish 2> /dev/null
-	cp build/gp-connect-access-record-fhir.json PrismMockReceiver/
+	cp build/gp-connect-access-record-fhir.json PrismMockProvider/
 
 #Runs build proxy script
 build-proxy:
@@ -41,7 +42,7 @@ create-kvm:
 	scripts/create_kvm.sh
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
