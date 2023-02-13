@@ -5,7 +5,7 @@ aws_account_no = 790083933819
 build_version=alli5  #change to your short name
 dockerImageName=$(mock_provider_repository_url):$(build_version)
 
-build: #spec
+build: spec
 	docker build -t gp-connect-mock-provider -f Dockerfile .
 
 run: build
