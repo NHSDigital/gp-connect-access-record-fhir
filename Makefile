@@ -37,6 +37,7 @@ build-proxy:
 
 #Runs create KVM script
 create-kvm:
+	chmod +x scripts/create_kvm.sh
 	scripts/create_kvm.sh
 
 #Files to loop over in release
@@ -46,7 +47,6 @@ _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scr
 release: clean publish build-proxy
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
-	chmod +x dist/scripts/create_kvm.sh
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
