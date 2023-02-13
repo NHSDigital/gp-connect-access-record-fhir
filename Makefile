@@ -40,17 +40,15 @@ create-kvm:
 	scripts/create_kvm.sh
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
 	mkdir -p dist
-	mkdir -p dist/scripts
 	for f in $(_dist_include); do cp -r $$f dist; done
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
-	cp scripts/create_kvm.sh dist/scripts/create_kvm.sh
 
 #################
 # Test commands #
