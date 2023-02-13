@@ -55,6 +55,8 @@ extends:
         depends_on:
           - internal_qa
           - internal_qa_sandbox
+        post_template:
+          - template: ./templates/create-kvm.yml
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: sandbox
