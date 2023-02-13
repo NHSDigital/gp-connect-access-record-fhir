@@ -5,10 +5,6 @@
   },
   {
     "NAME": "TEST_NAME",
-    "VALUE": "TEST_VALUE_CHANGED"
-  },
-  {    
-  "NAME": "TEST_NAME_2",
-  "VALUE": "TEST_VALUE_2"    
+    "VALUE": "TEST_VALUE"
   }
 ]
