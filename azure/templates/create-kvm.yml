@@ -1,7 +1,7 @@
 steps:
   - bash: |
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
-      export APIGEE_ACCESS_TOKEN="$(APIGEE_ACCESS_TOKEN)"
+      export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
       
       make create-kvm
     workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
