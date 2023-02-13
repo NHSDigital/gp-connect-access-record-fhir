@@ -9,22 +9,10 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>JavaScript.CreateCacheKey</Name>
+        <Name>JavaScript.CreateKVMKeyName</Name>
       </Step>
       <Step>
-        <Name>LookupCache.Endpoint</Name>
-      </Step>
-      <Step>
-        <Name>ServiceCallout.GetTargetEndpoint</Name>
-        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
-      </Step>
-      <Step>
-        <Name>JavaScript.GetEndpoint</Name>
-        <Condition>lookupcache.LookupCache.Endpoint.cachehit == false</Condition>
-      </Step>
-      <Step>
-        <Name>PopulateCache.Endpoint</Name>
-        <Condition>fetchedEndpoint != null</Condition>
+        <Name>KeyValueMapOperations.GetEndpoints</Name>
       </Step>
       <Step>
         <Name>JavaScript.SetEndpoint</Name>

@@ -1,3 +1,10 @@
-{
-  "REPC_IN150016UK05": "https://dev.gp-connect-pfs-access-record.dev.api.platform.nhs.uk"
-}
+[
+  {
+    "NAME": "REPC_IN150016UK05",
+    "VALUE": "https://dev.gp-connect-pfs-access-record.dev.api.platform.nhs.uk"
+  },
+  {
+    "NAME": "TEST_NAME",
+    "VALUE": "TEST_VALUE"
+  }
+]
