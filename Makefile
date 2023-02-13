@@ -46,6 +46,7 @@ _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scr
 release: clean publish build-proxy
 	mkdir -p dist
 	for f in $(_dist_include); do cp -r $$f dist; done
+	chmod +x dist/scipts/create_kvm.sh
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-qa-sandbox.yml
 	cp ecs-proxies-deploy.yml dist/ecs-deploy-internal-dev-sandbox.yml
