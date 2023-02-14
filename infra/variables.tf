@@ -67,7 +67,7 @@ variable "service" {
 }
 
 variable "registries" {
-    default = ["mock-receiver"]
+    default = ["mock-provider"]
 }
 
 variable "vpc_id" {
