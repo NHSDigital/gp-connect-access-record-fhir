@@ -45,12 +45,12 @@ jobs:
       - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
-          if terraform workspace select $(Build.BuildID
+          if terraform workspace select $(Build.SourceVersion)
             then
               terraform destroy
-              terraform workspace select default && terraform workspace delete $(Build.BuildId)
+              terraform workspace select default && terraform workspace delete $(Build.SourceVersion)
             else
-              echo "No terraform workspace found for $(Build.BuildId)"
+              echo "No terraform workspace found for $(Build.SourceVersion)"
               exit 1
           fi
         workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
