@@ -46,7 +46,7 @@ remove-kvm-entry:
 	scripts/remove_kvm_entry.sh "$(BuildID)-TEST001"
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
