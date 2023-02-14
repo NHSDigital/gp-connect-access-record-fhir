@@ -1,0 +1,59 @@
+name: "$(SourceBranchName)+$(BuildID)"
+
+trigger: none
+pr: none
+
+resources:
+  repositories:
+    - repository: common
+      type: github
+      name: NHSDigital/api-management-utils
+      ref: refs/heads/edge
+      endpoint: NHSDigital
+
+jobs:
+  - job: teardown
+    displayName: PR teardown
+    timeoutInMinutes: 30
+    pool:
+      name: 'AWS-ECS'
+      vmImage: 'ubuntu-latest'
+    steps:
+      - checkout: none
+
+      - bash: |
+          PR_NUMBER=$(echo "$(Build.SourceBranch)" | grep -o "[0-9]\+")
+          if [ -z $PR_NUMBER ]
+            then
+              PR_NUMBER=$(echo "$BUILD_SOURCEVERSIONMESSAGE" | grep -o "#[0-9]\+" | grep -o "[0-9]\+")
+          fi
+          SERVICE_BASE_PATH="gp-connect-access-recotd-fhir-pr-$PR_NUMBER"
+          echo "$SERVICE_BASE_PATH"
+          echo "##vso[task.setvariable variable=SERVICE_BASE_PATH]$SERVICE_BASE_PATH"
+        displayName: Export Service Name
+
+      - template: "azure/components/aws-assume-role.yml@common"
+        parameters:
+            role: "auto-ops"
+            profile: "apim-dev"
+            aws_account: "dev"
+
+      - bash: |
+          echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
+        displayName: Set AWS default region
+
+      - bash: |
+          export AWS_PROFILE=apim-dev
+          account_id="$(aws sts get-caller-identity --query Account --output text)"
+          terraform workspace select $(Build.BuildId) && terraform destroy
+          terraform workspace select default && terraform workspace delete $(Build.BuildId)
+        workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform
+        displayName: Destroy terraform PR workspace and linked resources
+
+      - bash: |
+          export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
+          export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
+
+          make delete-kvm-entry
+        workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+        displayName: Delete the PR entry from the KVM

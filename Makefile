@@ -40,6 +40,11 @@ create-kvm:
 	chmod +x scripts/create_kvm.sh
 	scripts/create_kvm.sh
 
+# Runs remove KVM entry script
+remove-kvm-entry:
+	chmod +x scripts/remove_kvm_entry.sh
+	scripts/remove_kvm_entry.sh "$(BuildID)-TEST001"
+
 #Files to loop over in release
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints"
 
