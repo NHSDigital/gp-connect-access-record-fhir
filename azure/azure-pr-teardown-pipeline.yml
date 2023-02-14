@@ -56,7 +56,7 @@ jobs:
               echo "No terraform workspace found for $(Build.SourceVersion)"
               exit 1
           fi
-        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
