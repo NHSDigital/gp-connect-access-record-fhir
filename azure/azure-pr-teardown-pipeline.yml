@@ -11,6 +11,9 @@ resources:
       ref: refs/heads/edge
       endpoint: NHSDigital
 
+variables:
+  - template: project.yml
+
 jobs:
   - job: teardown
     displayName: PR teardown
