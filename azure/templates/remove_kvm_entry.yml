@@ -1,0 +1,30 @@
+steps:
+  - template: "azure/components/aws-assume-role.yml@common"
+    parameters:
+      role: "auto-ops"
+      profile: "apm_ptl"
+
+  - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
+    parameters:
+      secret_ids:
+        - ptl/azure-devops/apigee-nonprod/APIGEE_OTP_KEY
+        - ptl/azure-devops/apigee-nonprod/APIGEE_PASSWORD
+      config_ids:
+        - /ptl/azure-devops/apigee-nonprod/APIGEE_USERNAME
+
+  - template: "azure/components/get-mfa-code.yml@common"
+    parameters:
+      apigee_otp_key: $(APIGEE_OTP_KEY)
+
+  - template: "azure/components/get-access-token.yml@common"
+    parameters:
+      apigee_username: $(APIGEE_USERNAME)
+      apigee_password: $(APIGEE_PASSWORD)
+
+  - bash: |
+      export APIGEE_ENVIRONMENT="internal-dev"
+      export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
+      export TAG="$(Build.SourceVersion)"
+
+      make remove-kvm-entry
+    displayName: Update endpoints KVM

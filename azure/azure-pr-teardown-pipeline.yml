@@ -1,0 +1,62 @@
+name: "$(SourceBranchName)+$(BuildID)"
+
+trigger: none
+pr: none
+
+resources:
+  repositories:
+    - repository: common
+      type: github
+      name: NHSDigital/api-management-utils
+      ref: refs/heads/edge
+      endpoint: NHSDigital
+
+variables:
+  - template: project.yml
+
+jobs:
+  - job: teardown
+    displayName: PR Teardown
+    timeoutInMinutes: 30
+    pool:
+      name: 'AWS-ECS'
+      vmImage: 'ubuntu-latest'
+    steps:
+      - checkout: self
+
+      - bash: |
+          PR_NUMBER=$(echo "$(Build.SourceBranch)" | grep -o "[0-9]\+")
+          if [ -z $PR_NUMBER ]
+            then
+              PR_NUMBER=$(echo "$BUILD_SOURCEVERSIONMESSAGE" | grep -o "#[0-9]\+" | grep -o "[0-9]\+")
+          fi
+          SERVICE_BASE_PATH="gp-connect-access-record-fhir-pr-$PR_NUMBER"
+          echo "$SERVICE_BASE_PATH"
+          echo "##vso[task.setvariable variable=SERVICE_BASE_PATH]$SERVICE_BASE_PATH"
+        displayName: Export Service Name
+
+      - template: "azure/components/aws-assume-role.yml@common"
+        parameters:
+            role: "auto-ops"
+            profile: "apim-dev"
+            aws_account: "dev"
+
+      - bash: |
+          echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
+        displayName: Set AWS default region
+
+      - bash: |
+          export AWS_PROFILE=apim-dev
+          account_id="$(aws sts get-caller-identity --query Account --output text)"TAG="$(Build.SourceVersion)"
+          TAG="$(Build.SourceVersion)"
+          cd terraform
+          make init
+          terraform workspace select ${TAG:0:5} && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete ${TAG:0:5}
+        displayName: Destroy terraform PR workspace and linked resources
+
+      - template: ./templates/remove_kvm_entry.yml
+        parameters:
+          service_name: ${{ variables.service_name }}
+          aws_account: "dev"
+          apigee_organization: "nhsd-nonprod"
