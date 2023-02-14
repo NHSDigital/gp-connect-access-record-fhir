@@ -45,8 +45,14 @@ jobs:
       - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
-          terraform workspace select $(Build.BuildId) && terraform destroy
-          terraform workspace select default && terraform workspace delete $(Build.BuildId)
+          if terraform workspace select $(Build.BuildID
+            then
+              terraform destroy
+              terraform workspace select default && terraform workspace delete $(Build.BuildId)
+            else
+              echo "No terraform workspace found for $(Build.BuildId)"
+              exit 1
+          fi
         workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform
         displayName: Destroy terraform PR workspace and linked resources
 
