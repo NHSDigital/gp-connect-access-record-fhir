@@ -22,7 +22,7 @@ jobs:
       name: 'AWS-ECS'
       vmImage: 'ubuntu-latest'
     steps:
-      - checkout: none
+      - checkout: self
 
       - bash: |
           PR_NUMBER=$(echo "$(Build.SourceBranch)" | grep -o "[0-9]\+")
