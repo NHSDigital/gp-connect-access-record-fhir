@@ -15,11 +15,11 @@ jobs:
               --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&\
           client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&\
           assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" \
-          >> $AZURE_DEVOPS_ACCESS_TOKEN
+          >> $env:AZURE_DEVOPS_ACCESS_TOKEN
 
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1
         with:
           azure-devops-project-url: 'https://dev.azure.com/NHSD-APIM/API%20Platform'
           azure-pipeline-name: 'gp-connect-access-record-fhir-pr-teardown'
-          azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+          azure-devops-token: '${{ env.AZURE_DEVOPS_ACCESS_TOKEN }}'
