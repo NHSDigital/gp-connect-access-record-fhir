@@ -9,7 +9,7 @@ jobs:
     name: Call Azure Pipeline
     runs-on: ubuntu-latest
     steps:
-      - bash: |
+      - run: |
           # Get a new access token
           curl 'https://app.vssps.visualstudio.com/oauth2/token' \
               --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&\
