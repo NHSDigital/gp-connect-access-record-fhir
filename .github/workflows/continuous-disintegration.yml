@@ -9,6 +9,14 @@ jobs:
     name: Call Azure Pipeline
     runs-on: ubuntu-latest
     steps:
+      - bash: |
+          # Get a new access token
+          curl 'https://app.vssps.visualstudio.com/oauth2/token' \
+              --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&\
+          client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&\
+          assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" \
+          >> $AZURE_DEVOPS_ACCESS_TOKEN
+
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1
         with:
