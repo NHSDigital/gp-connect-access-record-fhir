@@ -51,14 +51,8 @@ jobs:
           tag="$(Build.SourceVersion)"
           cd terraform
           make init
-          if terraform workspace select ${tag:0:5}
-            then
-              terraform destroy
-              terraform workspace select default && terraform workspace delete ${tag:0:5}
-            else
-              echo "No terraform workspace found for ${tag:0:5}"
-              exit 1
-          fi
+          terraform workspace select ${tag:0:5} && terraform destroy
+          terraform workspace select default && terraform workspace delete ${tag:0:5}
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
