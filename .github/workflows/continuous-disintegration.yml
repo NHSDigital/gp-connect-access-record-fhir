@@ -11,11 +11,7 @@ jobs:
     steps:
       - name: Get Access Token
         run: |
-          curl 'https://app.vssps.visualstudio.com/oauth2/token' \
-              --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&\
-          client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&\
-          assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" \
-          | jq -r '.access_token'
+            echo "ACCESS_TOKEN"=$(curl 'https://app.vssps.visualstudio.com/oauth2/token' --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" | jq -r '.access_token')
 
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1
