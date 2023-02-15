@@ -48,15 +48,16 @@ jobs:
       - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
-          if terraform workspace select $(Build.SourceVersion)
+          tag="$(Build.SourceVersion)"
+          if terraform workspace select ${tag:0:5}
             then
               terraform destroy
-              terraform workspace select default && terraform workspace delete $(Build.SourceVersion)
+              terraform workspace select default && terraform workspace delete ${tag:0:5}
             else
-              echo "No terraform workspace found for $(Build.SourceVersion)"
+              echo "No terraform workspace found for ${tag:0:5}"
               exit 1
           fi
-        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/terraform"
+        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
@@ -64,5 +65,5 @@ jobs:
           export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
 
           make delete-kvm-entry
-        workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
         displayName: Delete the PR entry from the KVM

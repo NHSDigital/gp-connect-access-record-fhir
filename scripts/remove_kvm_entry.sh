@@ -2,7 +2,7 @@
 
 # Check the KVM and key exist
 KEYNAME=$1
-URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/$APIGEE_ENVIRONMENT/keyvaluemaps/gp-connect-access-record-endpoints/entries/$KEYNAME"
+URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/$APIGEE_ENVIRONMENT/keyvaluemaps/gp-connect-access-record-endpoints-PR/entries/$KEYNAME"
 RESPONSE_CODE=$(curl -XGET -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
 
 if [ $RESPONSE_CODE -eq "200" ]
