@@ -16,7 +16,7 @@ variables:
 
 jobs:
   - job: teardown
-    displayName: PR teardown
+    displayName: PR Teardown
     timeoutInMinutes: 30
     pool:
       name: 'AWS-ECS'
@@ -57,7 +57,7 @@ jobs:
               echo "No terraform workspace found for ${tag:0:5}"
               exit 1
           fi
-        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+        workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
