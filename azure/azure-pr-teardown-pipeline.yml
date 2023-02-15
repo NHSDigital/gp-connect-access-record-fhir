@@ -58,10 +58,11 @@ jobs:
 #              ${{ param.key }}: ${{ param.value }}
 
       - bash: |
-          cd terraform
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
           tag="$(Build.SourceVersion)"
+          cd terraform
+          terraform init
           if terraform workspace select ${tag:0:5}
             then
               terraform destroy
