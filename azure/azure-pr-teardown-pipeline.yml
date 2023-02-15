@@ -64,4 +64,4 @@ jobs:
         displayName: Delete the PR entry from the KVM
 
 
-# Testing PR close triggers Teardown Pipeline (10)
+# Testing PR close triggers Teardown Pipeline (11)
