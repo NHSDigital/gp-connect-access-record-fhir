@@ -16,7 +16,9 @@ jobs:
           client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&\
           assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" \
           | jq -r '.access_token' \
-          >> $env:AZURE_DEVOPS_ACCESS_TOKEN
+          >> $ACCESS_TOKEN
+          echo $ACCESS_TOKEN
+          echo $ACCESS_TOKEN >> $env:AZURE_DEVOPS_ACCESS_TOKEN
 
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1
