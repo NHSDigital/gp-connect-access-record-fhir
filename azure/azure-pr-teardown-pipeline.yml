@@ -45,6 +45,18 @@ jobs:
           echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
         displayName: Set AWS default region
 
+      - template: "azure/common/deploy-stage.yml@common"
+        parameters:
+          ${{ if eq(parameters.proxy_path, 'live')}}:
+            fully_qualified_service_name: ${{ parameters.service_name }}-${{ parameters.pr_label }}
+          ${{ if ne(parameters.proxy_path, 'live')}}:
+            fully_qualified_service_name: ${{ parameters.service_name }}-${{ parameters.pr_label }}-${{ parameters.proxy_path }}
+          service_base_path: ${{ parameters.service_base_path }}-${{ parameters.pr_label }}
+          notify: true
+          ${{ each param in parameters }}:
+            ${{ if notIn(param.key, 'deploy_review_sandbox', 'fully_qualified_service_name', 'service_base_path', 'manual_approval_env') }}:
+              ${{ param.key }}: ${{ param.value }}
+
       - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
