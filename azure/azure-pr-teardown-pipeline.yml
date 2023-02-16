@@ -51,8 +51,8 @@ jobs:
           tag="$(Build.SourceVersion)"
           cd terraform
           make init
-          terraform workspace select 0f2d5 && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete 0f2d5
+          terraform workspace select 1b81c && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete 1b81c
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
@@ -60,6 +60,5 @@ jobs:
           export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
 
           make delete-kvm-entry
+        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
         displayName: Delete the PR entry from the KVM
-
-# Trigger Comment (1)
