@@ -12,12 +12,12 @@ jobs:
       - name: Get Access Token
         id: get_access_token
         run: |
-            write-host "::set-output name=access_token::$(curl 'https://app.vssps.visualstudio.com/oauth2/token' --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" | jq -r '.access_token')"
+            echo "::set-output name=access_token::$(curl 'https://app.vssps.visualstudio.com/oauth2/token' --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" | jq -r '.access_token')"
 
       - name: Consume Output
         run: |
           $token = '${{ steps.get_access_token.outputs.access_token }}'
-          write-host $token
+          echo $token
 
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1
