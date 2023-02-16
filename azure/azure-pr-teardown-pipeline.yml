@@ -64,4 +64,3 @@ jobs:
             - environment: internal-dev
               post_template:
                 - template: ./templates/remove-kvm-entry.yml
-        displayName: Delete the PR entry from the KVM
