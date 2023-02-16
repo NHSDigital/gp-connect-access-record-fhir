@@ -62,6 +62,3 @@ jobs:
           make delete-kvm-entry
         workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)"
         displayName: Delete the PR entry from the KVM
-
-
-# Testing PR close triggers Teardown Pipeline (15)
