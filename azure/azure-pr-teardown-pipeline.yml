@@ -51,14 +51,17 @@ jobs:
           tag="$(Build.SourceVersion)"
           cd terraform
           make init
-          terraform workspace select 1b81c && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete 1b81c
+          terraform workspace select 3316c && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete 3316c
         displayName: Destroy terraform PR workspace and linked resources
 
-      - bash: |
-          export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
-          export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-
-          make delete-kvm-entry
-        workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)"
+      - template: "azure/common/apigee-deployment.yml@common"
+        parameters:
+          service_name: ${{ variables.service_name }}
+          short_service_name: ${{ variables.short_service_name }}
+          service_base_path: ${{ variables.service_base_path }}
+          apigee_deployments:
+            - environment: internal-dev
+              post_template:
+                - template: ./templates/remove-kvm-entry.yml
         displayName: Delete the PR entry from the KVM
