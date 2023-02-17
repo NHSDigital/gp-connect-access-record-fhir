@@ -51,8 +51,8 @@ jobs:
 #          tag="$(Build.SourceVersion)"
 #          cd terraform
 #          make init
-#          terraform workspace select bd87c && make init && terraform destroy -force && /
-#          terraform workspace select default && terraform workspace delete bd87c
+#          terraform workspace select 4aa9f && make init && terraform destroy -force && /
+#          terraform workspace select default && terraform workspace delete 4aa9f
 #        displayName: Destroy terraform PR workspace and linked resources
 
       - template: ./templates/remove_kvm_entry.yml
