@@ -2,6 +2,9 @@ steps:
   - template: "azure/components/set-facts.yml@common"
     parameters:
       service_name: ${{ parameters.service_name }}
+      secret_file_ids:
+        - ${{ each secret_file_id in parameters.secret_file_ids }}:
+            - ${{ secret_file_id }}
       secret_ids:
         - ${{ parameters.aws_account }}/azure-devops/apigee-${{ parameters.apigee_organization }}/APIGEE_OTP_KEY
         - ${{ parameters.aws_account }}/azure-devops/apigee-${{ parameters.apigee_organization }}/APIGEE_PASSWORD
