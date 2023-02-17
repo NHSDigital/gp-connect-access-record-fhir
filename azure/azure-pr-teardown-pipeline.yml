@@ -45,15 +45,15 @@ jobs:
           echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
         displayName: Set AWS default region
 
-      - bash: |
-          export AWS_PROFILE=apim-dev
-          account_id="$(aws sts get-caller-identity --query Account --output text)"
-          tag="$(Build.SourceVersion)"
-          cd terraform
-          make init
-          terraform workspace select bd87c && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete bd87c
-        displayName: Destroy terraform PR workspace and linked resources
+#      - bash: |
+#          export AWS_PROFILE=apim-dev
+#          account_id="$(aws sts get-caller-identity --query Account --output text)"
+#          tag="$(Build.SourceVersion)"
+#          cd terraform
+#          make init
+#          terraform workspace select bd87c && make init && terraform destroy -force && /
+#          terraform workspace select default && terraform workspace delete bd87c
+#        displayName: Destroy terraform PR workspace and linked resources
 
       - template: ./templates/remove_kvm_entry.yml
         parameters:
