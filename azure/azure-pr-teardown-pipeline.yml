@@ -51,8 +51,8 @@ jobs:
           tag="$(Build.SourceVersion)"
           cd terraform
           make init
-          terraform workspace select 3316c && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete 3316c
+          terraform workspace select ccdf7 && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete ccdf7
         displayName: Destroy terraform PR workspace and linked resources
 
       - bash: |
