@@ -44,7 +44,7 @@ create-kvm:
 remove-kvm-entry:
 	chmod +x scripts/remove_kvm_entry.sh
 	tag="$(Build.SourceVersion)"
-	scripts/remove_kvm_entry.sh "25f1d_TEST001"
+	scripts/remove_kvm_entry.sh "bd87c_TEST001"
 
 #Files to loop over in release
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
