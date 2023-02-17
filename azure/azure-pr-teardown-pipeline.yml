@@ -55,7 +55,7 @@ jobs:
           terraform workspace select default && terraform workspace delete 5168a
         displayName: Destroy terraform PR workspace and linked resources
 
-      - template: "./templates/remove_kvm_entry.yml"
+      - template: "templates/remove_kvm_entry.yml"
         parameters:
           service_name: ${{ variables.service_name }}
           aws_account: "dev"
