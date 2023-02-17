@@ -11,5 +11,6 @@ if [ $RESPONSE_CODE -eq "200" ]
       RESPONSE_CODE=$(curl -s -o response.txt -w "%{http_code}" -X DELETE -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
     else
       echo "The KVM or entry does not exist."
+      echo RESPONSE_CODE
       exit 1
 fi
