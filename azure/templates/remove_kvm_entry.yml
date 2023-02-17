@@ -8,5 +8,5 @@ steps:
       export APIGEE_ENVIRONMENT="internal-dev"
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
 
-      make delete-kvm-entry
+      make remove-kvm-entry
     displayName: Update endpoints KVM
