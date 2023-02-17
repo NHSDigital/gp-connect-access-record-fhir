@@ -1,8 +1,28 @@
 steps:
+  - template: "azure/components/set-facts.yml@common"
+    parameters:
+      service_name: ${{ parameters.service_name }}
+      secret_ids:
+        - ${{ parameters.aws_account }}/azure-devops/apigee-${{ parameters.apigee_organization }}/APIGEE_OTP_KEY
+        - ${{ parameters.aws_account }}/azure-devops/apigee-${{ parameters.apigee_organization }}/APIGEE_PASSWORD
+        - ${{ parameters.aws_account }}/azure-devops/MONITORING_API_KEY
+        - ${{ parameters.aws_account }}/access-tokens/github/repo-status-update/GITHUB_ACCESS_TOKEN
+        - ${{ parameters.aws_account }}/monitoring/status-endpoint-api-key
+        - ${{ each secret_id in parameters.secret_ids }}:
+            - ${{ secret_id }}
+      config_ids:
+        - /${{ parameters.aws_account }}/azure-devops/apigee-${{ parameters.apigee_organization }}/APIGEE_USERNAME
+        - /${{ parameters.aws_account }}/azure-devops/env-${{ parameters.environment }}/ENV_URL
+        - /${{ parameters.aws_account }}/azure-devops/env-${{ parameters.environment }}/IDENTITY_URL
+        - /${{ parameters.aws_account }}/azure-devops/GITHUB_USER
+        - ${{ each config_id in parameters.config_ids }}:
+            - ${{ config_id }}
+      aws_account: ${{ parameters.aws_account }}
+      apigee_organization: ${{ parameters.apigee_organization }}
+
   - bash: |
-      export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
+      export APIGEE_ENVIRONMENT="internal-dev"
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
 
       make delete-kvm-entry
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
     displayName: Update endpoints KVM
