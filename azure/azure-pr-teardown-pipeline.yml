@@ -46,6 +46,10 @@ jobs:
         displayName: Set AWS default region
 
       - bash: |
+          make test-setup-teardown
+        displayName: Create tagged infra and KVM entry to be destroyed for testing
+
+      - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
           tag="$(Build.SourceVersion)"

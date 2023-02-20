@@ -40,10 +40,24 @@ create-kvm:
 	chmod +x scripts/create_kvm.sh
 	scripts/create_kvm.sh
 
+# Spin up the infra and kvm entry to test the teardown
+test-setup-teardown:
+	cd terraform
+	tag="$(Build.SourceVersion)"
+	echo $tag
+	# Build the terraform infra
+	make init && make workspace tag && make plan && make apply
+	# Create the KVM entry
+	URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints/entries"
+	KEYNAME=tag
+	KEYVALUE="https://null"
+    RESPONSE_CODE=$(curl -XPOST -s -o response.txt -w "%{http_code}" -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" -d '{"name":"'$KEYNAME'","value":"'$KEYVALUE'"}' $URL)
+
 # Runs remove KVM entry script
 remove-kvm-entry:
 	chmod +x scripts/remove_kvm_entry.sh
 	tag="$(Build.SourceVersion)"
+	echo $tag
 	scripts/remove_kvm_entry.sh ${tag:0:5}_TEST001
 
 #Files to loop over in release
