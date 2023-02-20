@@ -48,6 +48,7 @@ jobs:
       - bash: |
           export TAG="$(Build.SourceVersion)"
           echo "$TAG"
+          echo "${TAG:0:5}"
         displayName: Set build tag
 
       - bash: |
