@@ -43,13 +43,13 @@ create-kvm:
 # Spin up the infra and kvm entry to test the teardown
 test-setup-teardown:
 	cd terraform
-	tag="$(Build.SourceVersion)"
-	echo $tag
+	TAG="$(Build.SourceVersion)"
+	echo $TAG
 	# Build the terraform infra
 	make init && make workspace tag && make plan && make apply
 	# Create the KVM entry
 	URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints/entries"
-	KEYNAME=tag
+	KEYNAME=$TAG
 	KEYVALUE="https://null"
     RESPONSE_CODE=$(curl -XPOST -s -o response.txt -w "%{http_code}" -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" -d '{"name":"'$KEYNAME'","value":"'$KEYVALUE'"}' $URL)
 
