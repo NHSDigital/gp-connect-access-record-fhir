@@ -56,8 +56,8 @@ jobs:
           account_id="$(aws sts get-caller-identity --query Account --output text)"
           cd terraform
           make init
-          terraform workspace select ${TAG:0:5} && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete ${TAG:0:5}
+          terraform workspace select "${TAG:0:5}" && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete "${TAG:0:5}"
         displayName: Destroy terraform PR workspace and linked resources
 
       - template: ./templates/remove_kvm_entry.yml
