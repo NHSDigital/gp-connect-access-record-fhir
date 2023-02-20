@@ -46,17 +46,21 @@ jobs:
         displayName: Set AWS default region
 
       - bash: |
+          export TAG="$(Build.SourceVersion)"
+          echo $TAG
+        displayName: Set build tag
+
+      - bash: |
           make test-setup-teardown
         displayName: Create tagged infra and KVM entry to be destroyed for testing
 
       - bash: |
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
-          tag="$(Build.SourceVersion)"
           cd terraform
           make init
-          terraform workspace select ${tag:0:5} && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete ${tag:0:5}
+          terraform workspace select ${TAG:0:5} && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete ${TAG:0:5}
         displayName: Destroy terraform PR workspace and linked resources
 
       - template: ./templates/remove_kvm_entry.yml
