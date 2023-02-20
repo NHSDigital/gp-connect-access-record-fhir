@@ -46,18 +46,19 @@ jobs:
         displayName: Set AWS default region
 
       - bash: |
-          export TAG="$(Build.SourceVersion)"
+          TAG="$(Build.SourceVersion)"
           echo "$TAG"
           echo "${TAG:0:5}"
         displayName: Set build tag
 
       - bash: |
           export AWS_PROFILE=apim-dev
-          account_id="$(aws sts get-caller-identity --query Account --output text)"
+          account_id="$(aws sts get-caller-identity --query Account --output text)"TAG="$(Build.SourceVersion)"
+          TAG="$(Build.SourceVersion)"
           cd terraform
           make init
-          terraform workspace select "${TAG:0:5}" && make init && terraform destroy -force && /
-          terraform workspace select default && terraform workspace delete "${TAG:0:5}"
+          terraform workspace select ${TAG:0:5} && make init && terraform destroy -force && /
+          terraform workspace select default && terraform workspace delete ${TAG:0:5}
         displayName: Destroy terraform PR workspace and linked resources
 
       - template: ./templates/remove_kvm_entry.yml

@@ -24,6 +24,7 @@ steps:
   - bash: |
       export APIGEE_ENVIRONMENT="internal-dev"
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
+      export TAG="$(Build.SourceVersion)"
 
       make remove-kvm-entry
     displayName: Update endpoints KVM

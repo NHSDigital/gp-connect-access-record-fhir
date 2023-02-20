@@ -44,6 +44,7 @@ create-kvm:
 remove-kvm-entry:
 	chmod +x scripts/remove_kvm_entry.sh
 	echo "$TAG"
+	echo "${TAG:0:5}"
 	scripts/remove_kvm_entry.sh ${TAG:0:5}_TEST001
 
 #Files to loop over in release
