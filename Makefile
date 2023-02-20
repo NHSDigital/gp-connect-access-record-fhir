@@ -45,7 +45,7 @@ remove-kvm-entry:
 	chmod +x scripts/remove_kvm_entry.sh
 	echo "$TAG"
 	echo "${TAG:0:5}"
-	scripts/remove_kvm_entry.sh ${TAG:0:5}_TEST001
+	scripts/remove_kvm_entry.sh
 
 #Files to loop over in release
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
