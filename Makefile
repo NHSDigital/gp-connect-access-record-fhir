@@ -43,7 +43,7 @@ create-kvm:
 # Spin up the infra and kvm entry to test the teardown
 test-setup-teardown:
 	cd terraform
-	echo $TAG
+	echo "$TAG"
 	# Build the terraform infra
 	make init && make workspace tag && make plan && make apply
 	# Create the KVM entry
@@ -55,7 +55,7 @@ test-setup-teardown:
 # Runs remove KVM entry script
 remove-kvm-entry:
 	chmod +x scripts/remove_kvm_entry.sh
-	echo $TAG
+	echo "$TAG"
 	scripts/remove_kvm_entry.sh ${TAG:0:5}_TEST001
 
 #Files to loop over in release
