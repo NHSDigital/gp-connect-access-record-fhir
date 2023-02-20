@@ -1,4 +1,9 @@
 steps:
+  - template: ./components/aws-assume-role.yml
+    parameters:
+      role: "auto-ops"
+      profile: "apm_ptl"
+
   - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
     parameters:
       secret_ids:
