@@ -22,7 +22,7 @@ steps:
       apigee_password: ptl/azure-devops/apigee-nonprod/APIGEE_PASSWORD
 
   - bash: |
-      echo $(curl -XGET -H "Authorization: Bearer $(secret.AccessToken)" "https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints-PR")
+      echo $(curl -X GET -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $(secret.AccessToken)" "https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints-PR")
     displayName: Test Access Token with GET request
 
   - bash: |
