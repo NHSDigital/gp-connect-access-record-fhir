@@ -1,3 +1,7 @@
+parameters:
+- name: workspace_tag
+  type: string
+
 steps:
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
@@ -24,7 +28,7 @@ steps:
   - bash: |
       export APIGEE_ENVIRONMENT="internal-dev"
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-      export TAG="$(Build.SourceVersion)"
+      export TAG=${{ parameters.workspace_tag }}
 
       make remove-kvm-entry
     displayName: Update endpoints KVM
