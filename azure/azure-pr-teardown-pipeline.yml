@@ -1,5 +1,9 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
+parameters:
+- name: pr-number
+  type: string
+
 trigger: none
 pr: none
 
@@ -30,10 +34,9 @@ jobs:
             then
               PR_NUMBER=$(echo "$BUILD_SOURCEVERSIONMESSAGE" | grep -o "#[0-9]\+" | grep -o "[0-9]\+")
           fi
-          SERVICE_BASE_PATH="gp-connect-access-record-fhir-pr-$PR_NUMBER"
-          echo "$SERVICE_BASE_PATH"
-          echo "##vso[task.setvariable variable=SERVICE_BASE_PATH]$SERVICE_BASE_PATH"
-        displayName: Export Service Name
+          WORKSPACE="pr-"$PR_NUMBER
+          echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
+        displayName: Set workspace tag
 
       - template: "azure/components/aws-assume-role.yml@common"
         parameters:
@@ -44,14 +47,6 @@ jobs:
       - bash: |
           echo "##vso[task.setvariable variable=AWS_DEFAULT_REGION]eu-west-2"
         displayName: Set AWS default region
-
-      - bash: |
-          # Use the PR number as a tag
-          echo $(System.PullRequest.PullRequestId)
-          WORKSPACE="pr-"$(System.PullRequest.PullRequestId)
-          echo $WORKSPACE
-          echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
-        displayName: Set workspace tag
 
       - bash: |
           export AWS_PROFILE=apim-dev
