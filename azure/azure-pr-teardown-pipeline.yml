@@ -1,7 +1,7 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
 parameters:
-- name: pr-number
+- name: pr_number
   type: string
 
 trigger: none
@@ -29,12 +29,8 @@ jobs:
       - checkout: self
 
       - bash: |
-          PR_NUMBER=$(echo "$(Build.SourceBranch)" | grep -o "[0-9]\+")
-          if [ -z $PR_NUMBER ]
-            then
-              PR_NUMBER=$(echo "$BUILD_SOURCEVERSIONMESSAGE" | grep -o "#[0-9]\+" | grep -o "[0-9]\+")
-          fi
-          WORKSPACE="pr-"$PR_NUMBER
+          WORKSPACE="pr-"${{ parameters.pr_number }}
+          echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
 
