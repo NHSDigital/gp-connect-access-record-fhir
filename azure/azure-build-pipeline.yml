@@ -31,4 +31,4 @@ extends:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     post_ecs_push:
-      - template: ./templates/run-mockreceiver-docker.yml
+      - template: ./templates/run-mockprovider-docker.yml

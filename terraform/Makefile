@@ -20,3 +20,24 @@ apply: workspace
 
 clean:
 	rm -rf build .terraform upload-key
+
+destroy:
+	$(tr_cmd) destroy
+
+mock_provider_repository_name = gpconnect-infra-dev
+mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
+build_version=$(environment)
+dockerImageName=$(mock_provider_repository_url):$(build_version)
+dockerFilePath=../PrismMockProvider/Dockerfile
+dockerContext=../PrismMockProvider
+
+docker-login:
+	 aws ecr get-login-password --profile $(aws_profile) --region eu-west-2 | docker login --username AWS --password-stdin $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com
+
+docker-build:
+	make -C .. publish
+	docker build -t $(dockerImageName) -f $(dockerFilePath) $(dockerContext)
+
+
+docker-deploy: docker-login
+	 docker push $(dockerImageName)
