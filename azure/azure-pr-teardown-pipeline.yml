@@ -47,9 +47,7 @@ jobs:
 
       - bash: |
           # Use the PR number as a tag
-          name=$(FULLY_QUALIFIED_SERVICE_NAME)
-          workspace_tag=$(echo $name | grep -oE '[0-9]+$'))
-          WORKSPACE=pr-$workspace_tag
+          WORKSPACE=pr-$(UTILS_PR_NUMBER)
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
 
