@@ -47,7 +47,7 @@ jobs:
 
       - bash: |
           # Use the PR number as a tag
-          WORKSPACE="pr-$(System.PullRequest.PullRequestNumber)"
+          WORKSPACE="pr-$(System.PullRequest.PullRequestId)"
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
