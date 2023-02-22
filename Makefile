@@ -41,8 +41,13 @@ create-kvm:
 	chmod +x scripts/create_kvm.sh
 	scripts/create_kvm.sh
 
+# Runs remove KVM entry script
+remove-kvm-entry:
+	chmod +x scripts/remove_kvm_entry.sh
+	scripts/remove_kvm_entry.sh
+
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
