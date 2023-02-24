@@ -1,0 +1,11 @@
+<AssignMessage name="ExtractIdToken">
+  <DisplayName>Extract ID Token</DisplayName>
+  <AssignTo createNew="false">request</AssignTo>
+  <Set>
+    <Payload contentType="application/json">
+      {
+        "id_token": "{OAuthV2.AccessTokenResponse.id_token}"
+      }
+    </Payload>
+  </Set>
+</AssignMessage>
