@@ -30,7 +30,8 @@ jobs:
       - checkout: self
 
       - bash: |
-          WORKSPACE="pr-"${{ parameters.pr_number }}
+          name=$(FULLY_QUALIFIED_SERVICE_NAME)
+          WORKSPACE=$(echo $name | grep -oE 'pr-[0-9]+$')
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
