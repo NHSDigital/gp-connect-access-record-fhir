@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "lb_logs" {
   bucket = "${var.name_prefix}-alb-logs"
+  force_destroy = true
 }
 
 data "aws_elb_service_account" "main" {}
