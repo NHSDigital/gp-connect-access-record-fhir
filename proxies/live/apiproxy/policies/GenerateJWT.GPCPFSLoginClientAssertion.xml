@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT async="false" continueOnError="false" enabled="true" name="GenerateJWT.GPCPFSLoginClientAssertion">
+    <DisplayName>GenerateJWT.GPCPFSLoginClientAssertion</DisplayName>
+    <Algorithm>RS512</Algorithm>
+    <PrivateKey>
+        <Value ref="private.jwt"/>
+        <Id ref= "test-1"/>
+    </PrivateKey>
+    <Subject ref="gpconnect-pfs-access-record"/>
+    <Issuer ref="gpconnect-pfs-access-record"/>
+    <Audience ref="gpconnect-pfs-access-record"/>
+    <ExpiresIn>1h</ExpiresIn>
+    <OutputVariable>client_assertion</OutputVariable>
+</GenerateJWT>
