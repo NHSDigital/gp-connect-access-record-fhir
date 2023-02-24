@@ -29,10 +29,6 @@ jobs:
     steps:
       - checkout: self
 
-      - ${{ if eq(length(parameters.pr_number), 0) }}:
-        - bash: echo "No PR number given"; exit 1
-        displayName: Check that a PR number was provided
-
       - bash: |
           WORKSPACE="pr-"${{ parameters.pr_number }}
           echo $WORKSPACE
@@ -62,5 +58,3 @@ jobs:
       - template: ./templates/remove_kvm_entry.yml
         parameters:
           workspace_tag: $(WORKSPACE)
-
-# Test Comment 1
