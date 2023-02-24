@@ -12,8 +12,10 @@ resources:
       endpoint: NHSDigital
 
 variables:
-  variable1:
-  variable2:
+  - name: variable1
+    value:
+  - name: variable2
+    value:
   - template: project.yml
 
 jobs:
