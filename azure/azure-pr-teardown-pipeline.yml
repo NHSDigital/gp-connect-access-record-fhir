@@ -25,6 +25,10 @@ jobs:
       - checkout: self
 
       - bash: |
+          env | sort
+        displayName: Display environment variables
+
+      - bash: |
           name=$(FULLY_QUALIFIED_SERVICE_NAME)
           WORKSPACE=$(echo $name | grep -oE 'pr-[0-9]+$')
           echo $WORKSPACE
