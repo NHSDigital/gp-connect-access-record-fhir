@@ -31,12 +31,8 @@ jobs:
         displayName: Display environment variables
 
       - bash: |
-          echo pr-${{ replace(replace(replace(variables['Build.SourceBranch'], '/merge', ''), 'refs/pull/', ''), '/', '_') }}
-        displayName: Pull PR number from source branch
-
-      - bash: |
-          name=$(FULLY_QUALIFIED_SERVICE_NAME)
-          WORKSPACE=$(echo $name | grep -oE 'pr-[0-9]+$')
+          name=$(Build.SourceVersionMessage)
+          WORKSPACE=$(echo $name | grep -oE '(?<=#)[0-9]+')
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
