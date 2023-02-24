@@ -18,6 +18,9 @@
         <Name>JavaScript.SetEndpoint</Name>
       </Step>
       <Step>
+        <Name>ServiceCallout.AuthenticateAgainstGPCPFSKeycloak</Name>
+      </Step>
+      <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>
       </Step>

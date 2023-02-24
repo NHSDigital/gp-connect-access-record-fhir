@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="ServiceCallout.AuthenticateAgainstGPCPFSKeycloak">
+    <DisplayName>ServiceCallout.AuthenticateAgainstGPCPFSKeycloak</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="GPCPFSKeycloakRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        <Set>
+            <Verb>POST</Verb>
+            <FormParams>
+                <FormParam name="subject_token"> {accesstoken.id_token} </FormParam>
+                <FormParam name="client_id">gpconnect-pfs-access-record</FormParam>
+                <FormParam name="client_assertion"> </FormParam>
+                <FormParam name="subject_token_type"> urn:ietf:params:oauth:token-type:id_token </FormParam>
+                <FormParam name="client_assertion_type"> urn:ietf:params:oauth:client-assertion-type:jwt-bearer </FormParam>
+                <FormParam name="grant_type"> urn:ietf:params:oauth:grant-type:token-exchange </FormParam>
+                <FormParam name="subject_issuer"> nhs-login-mock-internal-dev </FormParam>
+                <FormParam name="audience"> gpconnect-pfs-access-record </FormParam>
+            </FormParams>
+        </Set>
+    </Request>
+    <Response>GPCPFSKeycloakResponse</Response>
+    <HTTPTargetConnection>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+        </SSLInfo>
+        <TrustStore>ref://identity-service-truststore</TrustStore>
+        <URL>https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token</URL>
+    </HTTPTargetConnection>
+    <Timeout>20000</Timeout>
+</ServiceCallout>

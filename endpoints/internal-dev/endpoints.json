@@ -1,5 +1,9 @@
 [
   {
+    "NAME": "REPC_urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthroizationservice",
+    "VALUE": "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+  },
+  {
     "NAME": "REPC_IN150016UK05",
     "VALUE": "https://dev.gp-connect-pfs-access-record.dev.api.platform.nhs.uk"
   },
