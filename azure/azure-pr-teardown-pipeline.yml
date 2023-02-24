@@ -27,7 +27,7 @@ jobs:
       - checkout: self
 
       - bash: |
-          WORKSPACE="pr-"${{ variables.pr_number }}
+          WORKSPACE="pr-"$(pr_number)
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
