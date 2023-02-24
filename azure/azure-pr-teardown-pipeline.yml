@@ -13,7 +13,7 @@ resources:
 
 variables:
   - name: pr_number
-    value:
+    value: ''
   - template: project.yml
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
       - checkout: self
 
       - bash: |
-          WORKSPACE="pr-"${{ parameters.pr_number }}
+          WORKSPACE="pr-"${{ variables.pr_number }}
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
