@@ -48,12 +48,12 @@ This may ask you for confirmation before execution.
 ```
 $ make docker-build
 ```
-This will build PrismMock receiver docker
+This will build PrismMockProvider docker
 ```
 $ make docker-deploy
 ```
-This will deploy PrismMock receiver docker image to ECR repo from your local machine.
-This step is also integrated with azure pipeline; with each new build, mock receiver will be tagged with build number and pushed on ECR
+This will deploy PrismMock provider docker image to ECR repo from your local machine.
+This step is also integrated with azure pipeline; with each new build, mock provider will be tagged with build number and pushed on ECR
 
 ## Implementation
 This folder contains all the configuration related to the networking and infrastructure. You probably don't need to either change
@@ -69,7 +69,7 @@ or redeploy contents of this directory.
 Create a `.env` file and set `environment=dev` and `aws_account_no=790083933819`. When you run `terraform apply` you should see all services
 are prefixed with `dev`.We dont want these services to get deployed per user per env.
 In AWS we only have one development environment,called `dev`. All apigee internal environments will use this `dev` environment as their 
-backend i.e. mock-receiver. You need to deploy ECR to `dev` environment manually, since we currently don't have pipeline integration.*
+backend i.e. mock-provider. You need to deploy ECR to `dev` environment manually, since we currently don't have pipeline integration.*
 
  
 

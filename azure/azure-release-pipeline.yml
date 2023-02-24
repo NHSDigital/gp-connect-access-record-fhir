@@ -30,10 +30,10 @@ extends:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     service_base_path: ${{ variables.service_base_path }}
+    jinja_templates:
+      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
     apigee_deployments:
       - environment: internal-dev
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
           - template: ./templates/run-tests.yml
             parameters:
@@ -43,8 +43,6 @@ extends:
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: internal-qa
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
           - template: ./templates/run-tests.yml
             parameters:
@@ -55,8 +53,6 @@ extends:
         depends_on:
           - internal_qa
           - internal_qa_sandbox
-        post_template:
-          - template: ./templates/create-kvm.yml
         post_deploy:
           - template: ./templates/run-tests.yml
       - environment: sandbox
