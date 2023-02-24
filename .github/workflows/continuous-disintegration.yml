@@ -16,7 +16,7 @@ jobs:
 
       - name: Get PR Number
         run : |
-            echo "PR Number = ${{ github.event.pull_request_number }}"
+            echo PR-${{ github.event.number }}
 
       - name: Azure Pipelines Action
         uses: Azure/pipelines@v1.2
