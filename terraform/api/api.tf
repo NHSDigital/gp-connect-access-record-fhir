@@ -25,7 +25,6 @@ resource "aws_apigatewayv2_api_mapping" "api_mapping" {
   stage       = aws_apigatewayv2_stage.default.id
 }
 
-
 locals {
   api_stage_name = var.environment
 }
