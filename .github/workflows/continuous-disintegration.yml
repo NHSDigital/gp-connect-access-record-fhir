@@ -20,4 +20,4 @@ jobs:
           azure-devops-project-url: 'https://dev.azure.com/NHSD-APIM/API%20Platform'
           azure-pipeline-name: 'gp-connect-access-record-fhir-pr-teardown'
           azure-devops-token: ${{ steps.get-access-token.outputs.ACCESS_TOKEN }}
-#          azure-pipeline-variables: '{ "pr_number": "${{ github.event.number }}" }'
+          azure-pipeline-variables: '{"variable1": "value1", "variable2": "value2"}'
