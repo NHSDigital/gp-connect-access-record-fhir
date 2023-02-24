@@ -29,6 +29,10 @@ jobs:
     steps:
       - checkout: self
 
+      - ${{ if eq(length(parameters.pr_number), 0) }}:
+        - bash: echo "No PR number given"; exit 1
+        displayName: Check that a PR number was provided
+
       - bash: |
           WORKSPACE="pr-"${{ parameters.pr_number }}
           echo $WORKSPACE
