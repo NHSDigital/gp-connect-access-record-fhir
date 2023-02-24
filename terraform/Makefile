@@ -34,7 +34,6 @@ add-endpoint: outputs
 outputs:
 	$(tr_cmd) output -json > ./outputs.json
 	
-
 mock_provider_repository_name = gpconnect-infra-dev
 mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
 build_version=$(environment)

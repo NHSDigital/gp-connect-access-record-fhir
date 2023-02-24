@@ -25,6 +25,4 @@ steps:
 
     displayName: Build and Push PrismMockProvider Docker to ECR
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockProvider"
-
-
-
+    
