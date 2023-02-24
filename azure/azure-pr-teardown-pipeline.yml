@@ -1,9 +1,5 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
-parameters:
-- name: pr_number
-  type: string
-
 trigger: none
 pr: none
 
