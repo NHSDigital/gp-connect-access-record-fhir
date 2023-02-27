@@ -6,7 +6,7 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
-        <Name>AssignMessage.GetIDToken.xml</Name>
+        <Name>AssignMessage.GetIDToken</Name>
       </Step>
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
