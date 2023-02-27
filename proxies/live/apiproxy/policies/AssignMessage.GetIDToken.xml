@@ -1,10 +1,10 @@
 <AssignMessage name="AssignMessage.GetIDToken">
-  <DisplayName>Extract ID Token</DisplayName>
+  <DisplayName>Get ID Token</DisplayName>
   <AssignTo createNew="false">request</AssignTo>
   <Set>
     <Payload contentType="application/json">
       {
-        "id_token": "{OAuthV2.accesstoken.id_token}"
+        "id_token": "{OAuthV2.VerifyAccessToken.accesstoken.id_token}"
       }
     </Payload>
   </Set>
