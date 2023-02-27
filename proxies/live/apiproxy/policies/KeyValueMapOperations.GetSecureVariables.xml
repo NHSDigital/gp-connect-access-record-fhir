@@ -1,0 +1,13 @@
+ <KeyValueMapOperations
+    async="false"
+    continueOnError="false"
+    enabled="true"
+    name="KeyValueMapOperations.GetSecureVariables"
+    mapIdentifier="{{ ENCRYPTED_VARIABLES_KVM  }}"
+    >
+  <Get assignTo="private.jwt" index="1">
+        <Key>
+            <Parameter>{{ ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY | default('nhs_login_private_key') }}</Parameter>
+        </Key>
+    </Get>
+</KeyValueMapOperations> 
