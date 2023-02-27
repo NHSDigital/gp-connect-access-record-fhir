@@ -1,4 +1,4 @@
-<KeyValueMapOperations
+<!-- <KeyValueMapOperations
     async="false"
     continueOnError="false"
     enabled="true"
@@ -10,4 +10,4 @@
             <Parameter>{{ ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY | default('nhs_login_private_key') }}</Parameter>
         </Key>
     </Get>
-</KeyValueMapOperations>
+</KeyValueMapOperations> -->
