@@ -4,7 +4,7 @@
   <Set>
     <Payload contentType="application/json">
       {
-        "id_token": "{OAuthV2.AccessTokenResponse.id_token}"
+        "id_token": "{OAuthV2.accesstoken.id_token}"
       }
     </Payload>
   </Set>
