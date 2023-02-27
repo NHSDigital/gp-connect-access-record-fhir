@@ -12,8 +12,6 @@ resources:
       endpoint: NHSDigital
 
 variables:
-  - name: pr_number
-    value: 0
   - template: project.yml
 
 jobs:
@@ -29,8 +27,6 @@ jobs:
       - bash: |
           echo $(PR_NUMBER)
           echo $(pr_number)
-          echo ${{ variables.pr_number }}
-          echo $[variables.pr_number]
           WORKSPACE="pr-"$(PR_NUMBER)
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
