@@ -34,7 +34,7 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     jinja_templates:
       ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
-      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
+      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
