@@ -1,4 +1,4 @@
-<AssignMessage name="ExtractIdToken">
+<AssignMessage name="AssignMessage.GetIDToken">
   <DisplayName>Extract ID Token</DisplayName>
   <AssignTo createNew="false">request</AssignTo>
   <Set>
