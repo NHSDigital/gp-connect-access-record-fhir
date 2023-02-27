@@ -12,8 +12,6 @@ resources:
       endpoint: NHSDigital
 
 variables:
-  - name: pr_number
-    value: 0
   - template: project.yml
 
 jobs:
