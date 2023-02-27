@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "api_access_log" {
-  name              = "${aws_apigatewayv2_api.service_api.id}/${local.api_stage_name}"
+  name              = "/aws/vendedlogs/${aws_apigatewayv2_api.service_api.id}/${local.api_stage_name}"
   retention_in_days = 7
 }
 
