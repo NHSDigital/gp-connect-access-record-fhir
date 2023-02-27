@@ -55,4 +55,3 @@ jobs:
       - template: ./templates/remove_kvm_entry.yml
         parameters:
           workspace_tag: $(WORKSPACE)
-# TEST COMMENT 1
