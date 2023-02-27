@@ -12,8 +12,6 @@ resources:
       endpoint: NHSDigital
 
 variables:
-  - name: pr_number
-    value: 0
   - template: project.yml
 
 jobs:
@@ -26,8 +24,15 @@ jobs:
     steps:
       - checkout: self
 
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: 'env | sort'
+        displayName: Display environment variables
+
       - bash: |
-          WORKSPACE="pr-"${{ variables.pr_number }}
+          name=$(Build.SourceVersionMessage)
+          WORKSPACE=$(echo $name | grep -oE '(?<=#)[0-9]+')
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
@@ -55,4 +60,3 @@ jobs:
       - template: ./templates/remove_kvm_entry.yml
         parameters:
           workspace_tag: $(WORKSPACE)
-# TEST COMMENT 1
