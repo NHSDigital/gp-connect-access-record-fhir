@@ -1,5 +1,7 @@
 locals {
+    project_short_name  = "gcarf"
     name_prefix = "${var.project}-${var.environment}"
+    short_name_prefix = "${local.project_short_name}-${var.environment}"
 }
 
 locals {

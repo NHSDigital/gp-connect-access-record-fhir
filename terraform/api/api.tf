@@ -44,7 +44,6 @@ resource "aws_apigatewayv2_route" "root_route" {
   target    = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
 }
 
-
 resource "aws_apigatewayv2_stage" "default" {
   depends_on  = [aws_cloudwatch_log_group.api_access_log]
   api_id      = aws_apigatewayv2_api.service_api.id
@@ -64,16 +63,6 @@ resource "aws_apigatewayv2_stage" "default" {
   # Bug in terraform-aws-provider with perpetual diff
   lifecycle {
     ignore_changes = [deployment_id]
-  }
-}
-
-
-resource "aws_apigatewayv2_deployment" "deployment" {
-  api_id      = aws_apigatewayv2_api.service_api.id
-  description = "GPConnect PFS Access Record api deployment"
-
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
