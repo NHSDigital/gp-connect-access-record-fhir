@@ -17,6 +17,12 @@
       <Step>
         <Name>JavaScript.SetEndpoint</Name>
       </Step>
+       <Step>
+        <Name>KeyValueMapOperations.GetSecureVariables</Name>
+      </Step>
+      <Step>
+        <Name>GenerateJWT.GPCPFSLoginClientAssertion</Name>
+      </Step>
       <Step>
         <Name>ServiceCallout.AuthenticateAgainstGPCPFSKeycloak</Name>
       </Step>
