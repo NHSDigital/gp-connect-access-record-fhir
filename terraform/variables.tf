@@ -11,9 +11,10 @@ locals {
 }
 
 locals {
+  short_name          = "gcarf"
   environment         = terraform.workspace
   name_prefix         = "${var.project}-${var.service}-${local.environment}"
-  short_name_prefix   = "gpc-accessrecord-mock-${local.environment}"
+  short_name_prefix   = "${local.short_name}-${local.environment}"
   service_domain_name = "${local.environment}.${local.project_domain_name}"
 
   tags = {
