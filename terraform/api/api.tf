@@ -76,3 +76,7 @@ resource "aws_apigatewayv2_deployment" "deployment" {
     create_before_destroy = true
   }
 }
+
+output "service_domain_zone" {
+  value = aws_apigatewayv2_api_mapping.api_mapping.domain_name
+}

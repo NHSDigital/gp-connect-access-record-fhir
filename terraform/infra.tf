@@ -30,3 +30,7 @@ data "aws_subnet" "private_subnets" {
   count = length(local.private_subnet_ids)
   id    = local.private_subnet_ids[count.index]
 }
+
+output "service_domain_zone" {
+  value = module.api.service_domain_zone
+}
