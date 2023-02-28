@@ -34,16 +34,19 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     jinja_templates:
         ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
-        GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
+          ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
           ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         jinja_templates:
+          ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted 
           ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
         post_deploy:
           - template: ./templates/post-deploy.yml
