@@ -1,5 +1,0 @@
-<LogMessage name="LogMessage.LogRequestContent">
-  <DisplayName>Log Request Content</DisplayName>
-  <Message>(request.content) = {request.content}</Message>
-  <Verbosity>Info</Verbosity>
-</LogMessage>
