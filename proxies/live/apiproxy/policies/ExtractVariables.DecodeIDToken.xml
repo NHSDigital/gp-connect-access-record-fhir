@@ -1,4 +1,4 @@
-<ExtractVariables name="ExtractVariables.DecodeIDToken">
+<!-- <ExtractVariables name="ExtractVariables.DecodeIDToken">
   <DisplayName>Decode ID Token</DisplayName>
   <Source>request</Source>
   <JSONPayload>
@@ -6,5 +6,5 @@
   </JSONPayload>
   <VariablePrefix>decoded_</VariablePrefix>
   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
-</ExtractVariables>
+</ExtractVariables> -->
 
