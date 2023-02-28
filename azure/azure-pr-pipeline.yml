@@ -35,6 +35,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
+          VARIABLES_KVM: identity_service_config
           ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
           ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
           GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
