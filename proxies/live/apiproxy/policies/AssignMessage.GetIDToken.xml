@@ -1,19 +1,11 @@
-<Policies>
-  <AssignMessage name="AssignMessage.GetIDToken">
-    <DisplayName>Get ID Token</DisplayName>
-    <AssignTo createNew="false">request</AssignTo>
-    <Set>
-      <Payload contentType="application/json">
-        {
-          "id_token": "{accesstoken.id_token}"
-        }
-      </Payload>
-    </Set>
-  </AssignMessage>
-
-  <LogMessage name="LogMessage.LogRequestContent">
-    <DisplayName>Log Request Content</DisplayName>
-    <Message>(request.content) = {request.content}</Message>
-    <Verbosity>Info</Verbosity>
-  </LogMessage>
-</Policies
+<AssignMessage name="AssignMessage.GetIDToken">
+  <DisplayName>Get ID Token</DisplayName>
+  <AssignTo createNew="false">request</AssignTo>
+  <Set>
+    <Payload contentType="application/json">
+      {
+        "id_token": "{accesstoken.id_token}"
+      }
+    </Payload>
+  </Set>
+</AssignMessage>
