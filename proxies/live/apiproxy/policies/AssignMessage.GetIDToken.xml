@@ -7,5 +7,6 @@
         "id_token": "{accesstoken.id_token}"
       }
     </Payload>
+    <Var name="request.content">request.content</Var>
   </Set>
 </AssignMessage>
