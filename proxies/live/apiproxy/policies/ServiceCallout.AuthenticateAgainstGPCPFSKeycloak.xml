@@ -15,14 +15,13 @@
                 <Header name="user-agent">APIM</Header>
             </Headers>
             <FormParams>
-                <FormParam name="subject_token"> {accesstoken.id_token} </FormParam>
+                <FormParam name="subject_token">{accesstoken.id_token}</FormParam>
                 <FormParam name="client_id">gpconnect-pfs-access-record</FormParam>
-                <FormParam name="client_assertion"> {client_assertion}</FormParam>
+                <FormParam name="client_assertion">{client_assertion}</FormParam>
                 <FormParam name="subject_token_type">urn:ietf:params:oauth:token-type:id_token</FormParam>
                 <FormParam name="client_assertion_type">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</FormParam>
                 <FormParam name="grant_type">urn:ietf:params:oauth:grant-type:token-exchange</FormParam>
                 <FormParam name="subject_issuer">nhs-login-mock-internal-dev</FormParam>
-                <FormParam name="audience">gpconnect-pfs-access-record</FormParam>
             </FormParams>
         </Set>
     </Request>
