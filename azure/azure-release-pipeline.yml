@@ -31,25 +31,45 @@ extends:
     short_service_name: ${{ variables.short_service_name }}
     service_base_path: ${{ variables.service_base_path }}
     jinja_templates:
-      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
+      ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
     apigee_deployments:
       - environment: internal-dev
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         post_deploy:
           - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-dev-sandbox
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         proxy_path: sandbox
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: internal-qa
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         post_deploy:
           - template: ./templates/post-deploy.yml
             parameters:
               full: true
       - environment: internal-qa-sandbox
         proxy_path: sandbox
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
       - environment: ref
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         depends_on:
           - internal_qa
           - internal_qa_sandbox
@@ -57,9 +77,17 @@ extends:
           - template: ./templates/post-deploy.yml
       - environment: sandbox
         proxy_path: sandbox
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
       - environment: int
         depends_on:
           - internal_qa
           - internal_qa_sandbox
+        jinja_templates:
+            ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
+            ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: keycloak_nhs_login_private_key
+            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         post_deploy:
           - template: ./templates/post-deploy.yml
