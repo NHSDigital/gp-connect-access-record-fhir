@@ -1,9 +1,10 @@
 <ExtractVariables name="ExtractVariables.DecodeIDToken">
   <DisplayName>Decode ID Token</DisplayName>
+  <Source>request</Source>
   <JSONPayload>
-    <Variable name="id_token">{request.content.id_token}</Variable>
+    <Variable name="id_token">$.id_token</Variable>
   </JSONPayload>
   <VariablePrefix>decoded_</VariablePrefix>
   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
-  <Source>request</Source>
 </ExtractVariables>
+

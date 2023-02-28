@@ -8,9 +8,9 @@
       <Step>
         <Name>AssignMessage.GetIDToken</Name>
       </Step>
-      <Step>
+      <!-- <Step>
         <Name>LogMessage.LogRequestContent</Name>
-      </Step>
+      </Step> -->
       <Step>
         <Name>ExtractVariables.DecodeIDToken</Name>
       </Step>
