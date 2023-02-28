@@ -7,6 +7,11 @@
         "id_token": "{accesstoken.id_token}"
       }
     </Payload>
-    <Var name="request.content">request.content</Var>
   </Set>
 </AssignMessage>
+
+<LogMessage name="LogMessage.LogRequestContent">
+  <DisplayName>Log Request Content</DisplayName>
+  <Message>(request.content) = {request.content}</Message>
+  <Verbosity>Info</Verbosity>
+</LogMessage>
