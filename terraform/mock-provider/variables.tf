@@ -1,6 +1,7 @@
 variable "region" {}
 
 variable "name_prefix" {}
+variable "short_name_prefix" {}
 
 variable "image_version" {}
 
