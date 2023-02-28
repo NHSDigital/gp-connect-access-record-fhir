@@ -16,13 +16,7 @@
       </Step>
       <Step>
         <Name>JavaScript.SetEndpoint</Name>
-      </Step>
-      <Step>
-        <Name>KeyValueMapOperations.GetIdentityServiceConfig</Name>
-      </Step>
-      <Step>
-        <Name>JavaScript.UnpackVars</Name>
-      </Step>
+      </Step> 
       <Step>
         <Name>KeyValueMapOperations.GetSecureVariables</Name>
       </Step> 
