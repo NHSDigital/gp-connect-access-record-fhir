@@ -55,7 +55,7 @@ steps:
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
           make init
-          make apply aws_account_no=${aws_account_no} environment=$(workspace)
+          make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
       fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
