@@ -1,11 +1,8 @@
 <AssignMessage name="AssignMessage.GetIDToken">
-  <DisplayName>Get ID Token</DisplayName>
-  <AssignTo createNew="false">request</AssignTo>
-  <Set>
-    <Payload contentType="application/json">
-      {
-        "id_token": "{accesstoken.id_token}"
-      }
-    </Payload>
-  </Set>
+    <DisplayName>Get ID Token</DisplayName>
+    <AssignTo createNew="false">request</AssignTo>
+    <AssignVariable>
+        <Name>mock.id_token</Name>
+        <Value>{accesstoken.id_token}</Value>
+    </AssignVariable>
 </AssignMessage>

@@ -6,14 +6,8 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
-        <Name>AssignMessage.GetIDToken</Name>
+        <Name>DecodeJWS.DecodeIDToken</Name>
       </Step>
-      <!-- <Step>
-        <Name>LogMessage.LogRequestContent</Name>
-      </Step> -->
-      <!-- <Step>
-        <Name>ExtractVariables.DecodeIDToken</Name>
-      </Step> -->
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
