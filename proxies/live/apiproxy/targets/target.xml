@@ -27,6 +27,12 @@
         <Name>ServiceCallout.AuthenticateAgainstGPCPFSKeycloak</Name>
       </Step>
       <Step>
+        <Name>JavaScript.GetGPCAuthCode</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.AddAuthorizationHeader</Name>
+      </Step>
+      <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>
       </Step>
@@ -41,6 +47,12 @@
         <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
       </Step>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+    <FaultRule name="gpc_access_token_expired">
+            <Step>
+                <Name>AssignMessage.AuthorizationErrorResponse</Name>
+            </Step>
+            <Condition>GPCPFSKeycloakResponse.status.code=="500"</Condition>
     </FaultRule>
   </FaultRules>
   <!--
