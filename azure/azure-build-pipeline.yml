@@ -25,11 +25,11 @@ resources:
 
 variables:
   - template: project.yml
-  
+
 extends:
   template: azure/common/apigee-build.yml@common
   parameters:
     service_name: ${{ variables.service_name }}
     short_service_name: ${{ variables.short_service_name }}
     post_ecs_push:
-      - template: ./templates/run-mockprovider-docker.yml
+      - template: ./templates/build-mock-receiver-image.yml
