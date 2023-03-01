@@ -6,7 +6,7 @@
         <Name>OauthV2.VerifyAccessToken</Name>
       </Step>
       <Step>
-        <Name>DecodeJWS.DecodeIDToken</Name>
+        <Name>DecodeJWT.DecodeIDToken</Name>
       </Step>
       <Step>
         <Name>FlowCallout.ApplyRateLimiting</Name>
