@@ -6,6 +6,7 @@ from .config import interaction_id
 
 @pytest.mark.smoketest
 @pytest.mark.auth
+@pytest.mark.debug
 @pytest.mark.integration
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9"})
