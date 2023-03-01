@@ -1,5 +1,5 @@
 steps:
   - bash: |
       docker build -t mock-reciever .
-    displayName: Build and Push PrismMockProvider Docker to ECR
+    displayName: Build mock-reciever image
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockProvider"

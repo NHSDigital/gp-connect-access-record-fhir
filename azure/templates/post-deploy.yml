@@ -45,6 +45,7 @@ steps:
       docker tag ${image_tag} ${mock_provider_repository_url}:$(Build.BuildId)
       docker push -a ${mock_provider_repository_url}
     displayName: Build and push mock-receiver image
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/PrismMockProvider"
 
   - bash: |
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
