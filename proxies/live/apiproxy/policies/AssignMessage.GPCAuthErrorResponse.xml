@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.AuthorizationErrorResponse">
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.GPCAuthErrorResponse">
     <Set>
         <StatusCode>401</StatusCode>
         <Payload contentType="application/json">
@@ -15,7 +15,7 @@
                   "system": "https://fhir.nhs.uk/R4/CodeSystem/Spine-ErrorOrWarningCode",
                   "version": "1",
                   "code": "ACCESS_DENIED",
-                  "display": "Access Token for GPC Keycloak Expired"
+                  "display": "Access Token for GPC Expired"
                 }
               ]
             }

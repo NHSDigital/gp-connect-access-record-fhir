@@ -50,7 +50,7 @@
     </FaultRule>
     <FaultRule name="gpc_access_token_expired">
             <Step>
-                <Name>AssignMessage.AuthorizationErrorResponse</Name>
+                <Name>GPCAuthErrorResponse</Name>
             </Step>
             <Condition>GPCPFSKeycloakResponse.status.code=="500"</Condition>
     </FaultRule>
