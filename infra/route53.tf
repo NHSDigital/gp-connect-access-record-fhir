@@ -1,5 +1,5 @@
 locals {
-  zone_subdomain = "gp-connect-pfs-access-record"
+  zone_subdomain = local.project_short_name
 }
 
 data "aws_route53_zone" "root_zone" {

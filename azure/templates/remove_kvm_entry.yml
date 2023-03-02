@@ -30,5 +30,6 @@ steps:
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
       export TAG=${{ parameters.workspace_tag }}
 
-      make remove-kvm-entry
+      chmod +x scripts/remove_kvm_entry.sh
+      scripts/remove_kvm_entry.sh
     displayName: Update endpoints KVM

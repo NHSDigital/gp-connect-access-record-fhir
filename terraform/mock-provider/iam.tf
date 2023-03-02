@@ -1,5 +1,5 @@
 resource "aws_iam_role" "task_role" {
-  name               = "${var.name_prefix}-task-role"
+  name               = "${var.short_name_prefix}-task-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -18,7 +18,7 @@ EOF
 }
 
 resource "aws_iam_role" "task_execution_role" {
-  name               = "${var.name_prefix}-execution-role"
+  name               = "${var.short_name_prefix}-execution-role"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
