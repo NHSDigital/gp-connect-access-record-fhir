@@ -303,35 +303,35 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code   | Description
-            |-------------|--------------------|------------
-            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the end date
-            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the current date
-            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the end date
-            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the current date
-            | 404         | PATIENT_NOT_FOUND  | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)
-            | 404         | PATIENT_NOT_FOUND  | The request is for the record of an inactive or deceased patient
-            | 404         | PATIENT_NOT_FOUND  | The request is for a sensitive patient
-            | 422         | INVALID_PARAMETER  | The referralSearchPeriod part parameter is greater than the current date
-            | 422         | INVALID_RESOURCE   | The provider could not parse the Parameters resource
-            | 404         | PATIENT_NOT_FOUND  | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'
-            | 400         | INVALID_NHS_NUMBER | The patientNHSNumber parameter value is invalid, for example it fails format or check digit tests
-            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided
-            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter is greater than the current date
-            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter contains a partial date, or has a value containing a time or offset component
-            | 422         | INVALID_PARAMETER  | The investigationSearchPeriod parameter value contains a partial date, or has a value containing a time or offset component
-            | 422         | INVALID_PARAMETER  | The includeAllergies parameter is passed without the corresponding includeResolvedAllergies part parameter
-            | 422         | INVALID_PARAMETER  | The filterStatus part parameter contains a value other than active or inactive
-            | 422         | INVALID_PARAMETER  | The filterSignificance part parameter contains a value other than major or minor
-            | 422         | INVALID_PARAMETER  | The end date of the uncategorisedDataSearchPeriod part parameter is greater than the current date
-            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter is less than the current date
-            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter contains a partial date, or has a value containing a time or offset component
-            | 422         | INVALID_RESOURCE   | The consultationSearchPeriod and includeNumberOfMostRecent part parameters are both populated
-            | 422         | INVALID_RESOURCE   | The Parameters resource passed does not conform to that specified in the GPConnect-GetStructuredRecord-Operation-1 OperationDefinition
-            | 422         | INVALID_PARAMETER  | No recognised parameters are provided
-            | 404         | PATIENT_NOT_FOUND  | A patient could not be found matching the patientNHSNumber provided
-            | 404         | INVALID_PARAMETER  | A part parameter is passed without a value
-            | 404         | INVALID_PARAMETER  | A combination of parameters is included that isn't permitted
+            | HTTP Status | Spine error code   | Description                                                                                                                                 |
+            | ----------- | ------------------ | -----------                                                                                                                                 |
+            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the end date                                             |
+            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the current date                                         |
+            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the end date                                                  |
+            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the current date                                              |
+            | 404         | PATIENT_NOT_FOUND  | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)                       |
+            | 404         | PATIENT_NOT_FOUND  | The request is for the record of an inactive or deceased patient                                                                            |
+            | 404         | PATIENT_NOT_FOUND  | The request is for a sensitive patient                                                                                                      |
+            | 422         | INVALID_PARAMETER  | The referralSearchPeriod part parameter is greater than the current date                                                                    |
+            | 422         | INVALID_RESOURCE   | The provider could not parse the Parameters resource                                                                                        |
+            | 404         | PATIENT_NOT_FOUND  | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'  |
+            | 400         | INVALID_NHS_NUMBER | The patientNHSNumber parameter value is invalid, for example it fails format or check digit tests                                           |
+            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided                                                                                              |
+            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter is greater than the current date                                                                |
+            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter contains a partial date, or has a value containing a time or offset component                   |
+            | 422         | INVALID_PARAMETER  | The investigationSearchPeriod parameter value contains a partial date, or has a value containing a time or offset component                 |
+            | 422         | INVALID_PARAMETER  | The includeAllergies parameter is passed without the corresponding includeResolvedAllergies part parameter                                  |
+            | 422         | INVALID_PARAMETER  | The filterStatus part parameter contains a value other than active or inactive                                                              |
+            | 422         | INVALID_PARAMETER  | The filterSignificance part parameter contains a value other than major or minor                                                            |
+            | 422         | INVALID_PARAMETER  | The end date of the uncategorisedDataSearchPeriod part parameter is greater than the current date                                           |
+            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter is less than the current date                                                                     |
+            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter contains a partial date, or has a value containing a time or offset component                     |
+            | 422         | INVALID_RESOURCE   | The consultationSearchPeriod and includeNumberOfMostRecent part parameters are both populated                                               |
+            | 422         | INVALID_RESOURCE   | The Parameters resource passed does not conform to that specified in the GPConnect-GetStructuredRecord-Operation-1 OperationDefinition      |
+            | 422         | INVALID_PARAMETER  | No recognised parameters are provided                                                                                                       |
+            | 404         | PATIENT_NOT_FOUND  | A patient could not be found matching the patientNHSNumber provided                                                                         |
+            | 404         | INVALID_PARAMETER  | A part parameter is passed without a value                                                                                                  |
+            | 404         | INVALID_PARAMETER  | A combination of parameters is included that isn't permitted                                                                                |
 
           content:
             application/fhir+json:
@@ -452,11 +452,11 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code   | Description
-            |-------------|--------------------|------------
-            | 422         | INVALID_PARAMETER  | The identifier parameter is not provided
-            | 422         | INVALID_PARAMETER  | The identifier parameter contains a missing or unrecognised system
-            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests
+            | HTTP Status | Spine error code   | Description                                                                             |
+            | ----------- | ----------------   | -----------                                                                             |
+            | 422         | INVALID_PARAMETER  | The identifier parameter is not provided                                                |
+            | 422         | INVALID_PARAMETER  | The identifier parameter contains a missing or unrecognised system                      |
+            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests    |
           content:
             application/fhir+json:
               schema:
@@ -522,10 +522,10 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code  | Description
-            |-------------|-------------------|------------
-            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided
-            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit
+            | HTTP Status | Spine error code  | Description                                                                 |
+            | ----------- | ----------------  | -----------                                                                 |
+            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided                 |
+            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit |
           content:
             application/fhir+json:
               schema:
@@ -806,15 +806,15 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code  | Description
-            |-------------|-------------------|------------
-            | 404         | PATIENT_NOT_FOUND | A patient could not be found with the patient id provided
-            | 404         | PATIENT_NOT_FOUND | The request is for the record of an inactive or deceased patient
-            | 404         | PATIENT_NOT_FOUND | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)
-            | 404         | PATIENT_NOT_FOUND | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'
-            | 404         | PATIENT_NOT_FOUND | The request is for a sensitive Patient
-            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code
-            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters
+            | HTTP Status | Spine error code  | Description                                                                                                                                 |
+            | ----------- | ----------------  | -----------                                                                                                                                 |
+            | 404         | PATIENT_NOT_FOUND | A patient could not be found with the patient id provided                                                                                   |
+            | 404         | PATIENT_NOT_FOUND | The request is for the record of an inactive or deceased patient                                                                            |
+            | 404         | PATIENT_NOT_FOUND | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)                       |
+            | 404         | PATIENT_NOT_FOUND | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'  |
+            | 404         | PATIENT_NOT_FOUND | The request is for a sensitive Patient                                                                                                      |
+            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code                                                                    |
+            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters                                                                              |
           content:
             application/fhir+json:
               schema:
