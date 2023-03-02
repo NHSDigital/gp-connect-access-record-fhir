@@ -337,7 +337,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -461,7 +461,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -530,7 +530,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -819,7 +819,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
