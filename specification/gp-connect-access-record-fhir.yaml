@@ -10,7 +10,7 @@ info:
     ![GP Connect Patient Facing Access Record FHIR Overview](https://raw.githubusercontent.com/NHSDigital/gp-connect-access-record-fhir/master/specification/images/overview_diagram.svg)
 
     Use this API to access structured and coded information from a patient's GP practice record to consume in a patient facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
-    
+
     You can retrieve patient record data for the following:
 
     - medications
@@ -28,8 +28,8 @@ info:
 
     ## Who can use this API
 
-    This API can be used by developers of patient facing systems that support patients gaining access to their GP practice medical record.    
-    
+    This API can be used by developers of patient facing systems that support patients gaining access to their GP practice medical record.
+
     This API:
 
     * is intended only for use by patient-facing applications
@@ -38,28 +38,28 @@ info:
 
     * can only be used where there is a legal basis to do so
 
-    Make sure you have a valid use case before you go too far with development. To do this, contact us. 
+    Make sure you have a valid use case before you go too far with development. To do this, contact us.
 
     You must do this before you can go live (see Onboarding below).
 
-    ### Prerequisites 
+    ### Prerequisites
 
     #### Information governance (IG)
-    
+
     You must:
 
     * be compliant with the GP Connect Direct Care API Information Governance Model
 
-    #### Clinical safety 
+    #### Clinical safety
 
     You must:
 
     * have a clinical safety officer (CSO) who is responsible for DCB0129 and, if necessary, DCB0160. For more on clinical risk management, visit Clinical risk management standards
 
     ## Related APIs
-    
+
     The following APIs are related to this API:
-    
+
     * [GP Connect (Patient Facing) User Permissions API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-user-permissions) - use this API to manage a patient's permissions as held by the GP practice systems.
 
     * [GP Connect (Patient Facing) Appointment Management - FHIR API](https://digital.nhs.uk/developer/api-catalogue/gp-connect-patient-facing-appointment-management-fhir) - use this API to manage GP practice appointments.
@@ -70,7 +70,7 @@ info:
 
 
     ## API status and roadmap
-    
+
     This API is [in development.](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#statuses)
 
     To see our roadmap or to suggest, comment or vote on features for this API, see our [interactive product backlog.](https://nhs-digital-api-management.featureupvote.com/suggestions/342393/gp-connect-get-structured-record)
@@ -80,7 +80,7 @@ info:
     ## Service level
 
     This API is a silver service, meaning it is operational 24 x 7 x 365 but only supported during business hours (8am to 6pm), Monday to Friday excluding bank holidays.
-    
+
     For more details, see [service levels](https://digital.nhs.uk/developer/guides-and-documentation/reference-guide#service-levels).
 
     ## Technology
@@ -89,10 +89,10 @@ info:
     It receives a FHIR STU3 payload.
 
     For more details, see [FHIR](https://digital.nhs.uk/developer/guides-and-documentation/our-api-technologies#fhir).
-    
+
     ### Resources
 
-    Use the [GP Connect Patient Facing Access Record Implementation Guide](https://simplifier.net/guide/pfs-implementation-guide/Home?version=current) to assist with your integration.
+    Use the [GP Connect Patient Facing Access Record Implementation Guide](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home?version=current) to assist with your integration.
 
     This is the FHIR specification for GP Connect Access Record - FHIR API.
 
@@ -101,10 +101,10 @@ info:
     This API is available on the internet and, indirectly, on the [Health and Social Care Network (HSCN)](https://digital.nhs.uk/services/health-and-social-care-network).
 
     For more details, see [Network access for APIs](https://digital.nhs.uk/developer/guides-and-documentation/network-access-for-apis).
-    
+
     ## Security and authorisation
 
-    This API is [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis), meaning an end user must be present and authenticated to use it. 
+    This API is [user-restricted](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis), meaning an end user must be present and authenticated to use it.
 
     The end user must be:
 
@@ -112,8 +112,8 @@ info:
 
     * authenticated with NHS login to P9 identity verification level
 
-    The API uses Open ID Connect to authenticate the end user and OAuth 2.0 to authorise the calling system. It supports the following security pattern using NHS login: 
-    
+    The API uses Open ID Connect to authenticate the end user and OAuth 2.0 to authorise the calling system. It supports the following security pattern using NHS login:
+
     * [User-restricted RESTful APIs - NHS login separate authentication and authorisation](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/user-restricted-restful-apis-nhs-login-separate-authentication-and-authorisation)
 
     ## Environments and testing
@@ -129,23 +129,23 @@ info:
     Our [sandbox environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#sandbox-testing):
 
     * is for early developer testing
- 
+
     * only covers a limited set of scenarios
- 
+
     * is stateless, so it does not store data
- 
+
     * is open access, so does not allow you to test authorisation
 
     For more details on sandbox testing, or to try out the sandbox using our "Try this API" feature, see the documentation for each endpoint.
-    
+
     ### Integration testing (not yet available)
 
     Our [integration test environment](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing):
 
     * is for formal integration testing
- 
+
     * is stateful, so it does persist data
- 
+
     * includes authorisation
 
     For more details see [integration testing with our RESTful APIs](https://digital.nhs.uk/developer/guides-and-documentation/testing#integration-testing-with-our-restful-apis).
@@ -200,12 +200,12 @@ paths:
       operationId: get-structured-record
       summary: Access a structured record relating to a patient
       description: >
-        ## Overview 
+        ## Overview
 
 
         This end point returns a patient's record in structured format using FHIR Operations. It returns a Bundle.
 
-        
+
         The request body must be a Parameters resource.
 
       parameters:
@@ -227,7 +227,7 @@ paths:
         - in: query
           name: _sort
           description: >
-            Used to indicate which order to return the results by using the parameter _sort, which can contain a comma-separated list of sort rules in priority order. 
+            Used to indicate which order to return the results by using the parameter _sort, which can contain a comma-separated list of sort rules in priority order.
 
             Each item in the comma separated list is a search parameter, optionally with a '-' prefix. The prefix indicates decreasing order; in its absence, the parameter is applied in increasing order.
           required: false
@@ -242,7 +242,7 @@ paths:
             schema:
               type: object
               description: >
-                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
             example:
               resourceType: Parameters
               parameter:
@@ -278,66 +278,66 @@ paths:
                 - name: includeMedication
       responses:
         '200':
-          description: > 
-            Information surrounding how a patients structured is retrieved can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+          description: >
+            Information surrounding how a patients structured is retrieved can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
 
             Examples of the payload requests and responses can be found here:
 
-            * [Allergies FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Allergies?version=current)
+            * [Allergies FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Allergies?version=current)
 
-            * [Medications FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Medications?version=current)
+            * [Medications FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Medications?version=current)
 
-            * [Immunizations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Immunizations?version=current)
+            * [Immunizations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Immunizations?version=current)
 
-            * [Uncategorised Data FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Uncategorised-Data?version=current)
+            * [Uncategorised Data FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Uncategorised-Data?version=current)
 
-            * [Consultations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Consultations?version=current)
+            * [Consultations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Consultations?version=current)
 
-            * [Investigations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Investigations?version=current)
+            * [Investigations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Investigations?version=current)
 
-            * [Referrals FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Referrals?version=current)
+            * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
-            * [Combined FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Multiple-combined?version=current)
+            * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
         4XX:
           description: |
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code   | Description 
-            |-------------|--------------------|------------
-            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the end date	
-            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the current date
-            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the end date
-            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the current date
-            | 404         | PATIENT_NOT_FOUND  | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)
-            | 404         | PATIENT_NOT_FOUND  | The request is for the record of an inactive or deceased patient	
-            | 404         | PATIENT_NOT_FOUND  | The request is for a sensitive patient
-            | 422         | INVALID_PARAMETER  | The referralSearchPeriod part parameter is greater than the current date	
-            | 422         | INVALID_RESOURCE   | The provider could not parse the Parameters resource
-            | 404         | PATIENT_NOT_FOUND  | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'	
-            | 400         | INVALID_NHS_NUMBER | The patientNHSNumber parameter value is invalid, for example it fails format or check digit tests	
-            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided	
-            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter is greater than the current date	
-            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter contains a partial date, or has a value containing a time or offset component	
-            | 422         | INVALID_PARAMETER  | The investigationSearchPeriod parameter value contains a partial date, or has a value containing a time or offset component	
-            | 422         | INVALID_PARAMETER  | The includeAllergies parameter is passed without the corresponding includeResolvedAllergies part parameter	
-            | 422         | INVALID_PARAMETER  | The filterStatus part parameter contains a value other than active or inactive	
-            | 422         | INVALID_PARAMETER  | The filterSignificance part parameter contains a value other than major or minor	
-            | 422         | INVALID_PARAMETER  | The end date of the uncategorisedDataSearchPeriod part parameter is greater than the current date	
-            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter is less than the current date	
-            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter contains a partial date, or has a value containing a time or offset component	
-            | 422         | INVALID_RESOURCE   | The consultationSearchPeriod and includeNumberOfMostRecent part parameters are both populated	
-            | 422         | INVALID_RESOURCE   | The Parameters resource passed does not conform to that specified in the GPConnect-GetStructuredRecord-Operation-1 OperationDefinition	
-            | 422         | INVALID_PARAMETER  | No recognised parameters are provided	
-            | 404         | PATIENT_NOT_FOUND  | A patient could not be found matching the patientNHSNumber provided
-            | 404         | INVALID_PARAMETER  | A part parameter is passed without a value
-            | 404         | INVALID_PARAMETER  | A combination of parameters is included that isn't permitted	
+            | HTTP Status | Spine error code   | Description                                                                                                                                 |
+            | ----------- | ------------------ | -----------                                                                                                                                 |
+            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the end date                                             |
+            | 422         | INVALID_PARAMETER  | The start date of the uncategorisedDataSearchPeriod part parameter is greater than the current date                                         |
+            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the end date                                                  |
+            | 422         | INVALID_PARAMETER  | The start date of the consultationSearchPeriod part parameter is greater than the current date                                              |
+            | 404         | PATIENT_NOT_FOUND  | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)                       |
+            | 404         | PATIENT_NOT_FOUND  | The request is for the record of an inactive or deceased patient                                                                            |
+            | 404         | PATIENT_NOT_FOUND  | The request is for a sensitive patient                                                                                                      |
+            | 422         | INVALID_PARAMETER  | The referralSearchPeriod part parameter is greater than the current date                                                                    |
+            | 422         | INVALID_RESOURCE   | The provider could not parse the Parameters resource                                                                                        |
+            | 404         | PATIENT_NOT_FOUND  | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'  |
+            | 400         | INVALID_NHS_NUMBER | The patientNHSNumber parameter value is invalid, for example it fails format or check digit tests                                           |
+            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided                                                                                              |
+            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter is greater than the current date                                                                |
+            | 422         | INVALID_PARAMETER  | The medicationSearchFromDate part parameter contains a partial date, or has a value containing a time or offset component                   |
+            | 422         | INVALID_PARAMETER  | The investigationSearchPeriod parameter value contains a partial date, or has a value containing a time or offset component                 |
+            | 422         | INVALID_PARAMETER  | The includeAllergies parameter is passed without the corresponding includeResolvedAllergies part parameter                                  |
+            | 422         | INVALID_PARAMETER  | The filterStatus part parameter contains a value other than active or inactive                                                              |
+            | 422         | INVALID_PARAMETER  | The filterSignificance part parameter contains a value other than major or minor                                                            |
+            | 422         | INVALID_PARAMETER  | The end date of the uncategorisedDataSearchPeriod part parameter is greater than the current date                                           |
+            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter is less than the current date                                                                     |
+            | 422         | INVALID_PARAMETER  | The diaryEntriesSearchDate part parameter contains a partial date, or has a value containing a time or offset component                     |
+            | 422         | INVALID_RESOURCE   | The consultationSearchPeriod and includeNumberOfMostRecent part parameters are both populated                                               |
+            | 422         | INVALID_RESOURCE   | The Parameters resource passed does not conform to that specified in the GPConnect-GetStructuredRecord-Operation-1 OperationDefinition      |
+            | 422         | INVALID_PARAMETER  | No recognised parameters are provided                                                                                                       |
+            | 404         | PATIENT_NOT_FOUND  | A patient could not be found matching the patientNHSNumber provided                                                                         |
+            | 404         | INVALID_PARAMETER  | A part parameter is passed without a value                                                                                                  |
+            | 404         | INVALID_PARAMETER  | A combination of parameters is included that isn't permitted                                                                                |
 
           content:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -361,7 +361,7 @@ paths:
       description: >
         Use this endpoint to find a Patient.
 
-        
+
         No request body is required for this endpoint.
       parameters:
         - $ref: "#/components/parameters/BearerAuthorization"
@@ -452,16 +452,16 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code   | Description 
-            |-------------|--------------------|------------
-            | 422         | INVALID_PARAMETER  | The identifier parameter is not provided
-            | 422         | INVALID_PARAMETER  | The identifier parameter contains a missing or unrecognised system
-            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests
+            | HTTP Status | Spine error code   | Description                                                                             |
+            | ----------- | ----------------   | -----------                                                                             |
+            | 422         | INVALID_PARAMETER  | The identifier parameter is not provided                                                |
+            | 422         | INVALID_PARAMETER  | The identifier parameter contains a missing or unrecognised system                      |
+            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests    |
           content:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -484,7 +484,7 @@ paths:
       operationId: get-document
       summary: Get a specific document from a GP practice
       description: >
-        Use this endpoint to retrieve a specific document using the id. 
+        Use this endpoint to retrieve a specific document using the id.
 
 
         No request body is required for this endpoint.
@@ -522,15 +522,15 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code  | Description 
-            |-------------|-------------------|------------
-            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided
-            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit
+            | HTTP Status | Spine error code  | Description                                                                 |
+            | ----------- | ----------------  | -----------                                                                 |
+            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided                 |
+            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit |
           content:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -550,7 +550,7 @@ paths:
     get:
       operationId: search-document
       summary: Search for a patients documents
-      description: > 
+      description: >
         Use this endpoint to search for a patients documents from a GP Practice.
 
         Details on the included parameters can be found below. These parameters must be used to reduce the number of API calls.
@@ -806,20 +806,20 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code  | Description 
-            |-------------|-------------------|------------
-            | 404         | PATIENT_NOT_FOUND | A patient could not be found with the patient id provided
-            | 404         | PATIENT_NOT_FOUND | The request is for the record of an inactive or deceased patient
-            | 404         | PATIENT_NOT_FOUND | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)	
-            | 404         | PATIENT_NOT_FOUND | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'
-            | 404         | PATIENT_NOT_FOUND | The request is for a sensitive Patient
-            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code
-            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters
+            | HTTP Status | Spine error code  | Description                                                                                                                                 |
+            | ----------- | ----------------  | -----------                                                                                                                                 |
+            | 404         | PATIENT_NOT_FOUND | A patient could not be found with the patient id provided                                                                                   |
+            | 404         | PATIENT_NOT_FOUND | The request is for the record of an inactive or deceased patient                                                                            |
+            | 404         | PATIENT_NOT_FOUND | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)                       |
+            | 404         | PATIENT_NOT_FOUND | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'  |
+            | 404         | PATIENT_NOT_FOUND | The request is for a sensitive Patient                                                                                                      |
+            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code                                                                    |
+            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters                                                                              |
           content:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [Here.](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current)
+                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -865,11 +865,11 @@ components:
       description: |
         A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.
         Must be a universally unique identifier (UUID) (ideally version 4).
-        
+
         Mirrored back in a response header.
-        
+
         If you re-send a failed request, use the same value in this header.
-        
+
         Required in all environments except sandbox.
       schema:
         type: string
