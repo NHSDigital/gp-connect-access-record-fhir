@@ -49,9 +49,9 @@
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
     </FaultRule>
     <FaultRule name="gpc_access_token_expired">
-            <Step>
-                <Name>GPCAuthErrorResponse</Name>
-            </Step>
+     <Step>
+         <Name>AssignMessage.GPCAuthErrorResponse</Name>
+      </Step>
             <Condition>GPCPFSKeycloakResponse.status.code=="500"</Condition>
     </FaultRule>
   </FaultRules>
