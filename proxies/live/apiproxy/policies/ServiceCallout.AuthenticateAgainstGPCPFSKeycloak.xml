@@ -31,7 +31,7 @@
             <Enabled>true</Enabled>
         </SSLInfo>
         <TrustStore>ref://identity-service-truststore</TrustStore>
-        <URL>https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token</URL>
+        <URL>https://{GPCAuthHostname}{GPCAuthHostpath}</URL>
     </HTTPTargetConnection>
     <Timeout>20000</Timeout>
 </ServiceCallout>
