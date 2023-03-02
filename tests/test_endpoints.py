@@ -84,3 +84,15 @@ def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
 
     resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
     assert resp.status_code == 401
+
+@pytest.mark.auth
+@pytest.mark.nhsd_apim_authorization(
+    {
+        "access": "patient",
+        "level": "P9",
+        "login_form": {"username": "9912003071"},
+    }
+)
+def test_nhs_login_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
+    resp = requests.get(f"{nhsd_apim_proxy_url}", headers=nhsd_apim_auth_headers)
+    assert resp.status_code == 200

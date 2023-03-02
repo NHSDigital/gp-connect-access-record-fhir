@@ -23,6 +23,5 @@ steps:
         docker tag ${dockerImageName} ${mock_provider_repository_url}:${build_tag}
         docker push -a ${mock_provider_repository_url}
 
-    displayName: Build and Push PrismMockProvider Docker to ECR
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/PrismMockProvider"
-    
+    displayName: Build and Push prism_mock_provider Docker to ECR
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/prism_mock_provider"

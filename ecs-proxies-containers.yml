@@ -1,4 +1,4 @@
 docker_containers:
   - name: sandbox
-    dockerfile: "PrismMockProvider/Dockerfile"
-    path: "PrismMockProvider"
+    dockerfile: "prism_mock_provider/Dockerfile"
+    path: "prism_mock_provider"
