@@ -2,6 +2,7 @@ data "aws_vpc" "bebop_vpc" {
   id = var.vpc_id
 }
 variable "name_prefix" {}
+variable "short_name_prefix" {}
 variable "vpc_id" {}
 
 variable "private_subnet_ids" {

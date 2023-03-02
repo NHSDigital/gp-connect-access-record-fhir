@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "lb_logs" {
-  bucket = "${var.name_prefix}-alb-logs"
+  bucket = "${var.short_name_prefix}-alb-logs"
   force_destroy = true
 }
 

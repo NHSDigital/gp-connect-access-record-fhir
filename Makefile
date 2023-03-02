@@ -26,7 +26,7 @@ clean:
 	rm -rf dist
 
 #Creates the fully expanded OAS spec in json
-publish: 
+publish:
 	rm -rf build
 	mkdir -p build
 	npm run publish 2> /dev/null
@@ -41,13 +41,8 @@ create-kvm:
 	chmod +x scripts/create_kvm.sh
 	scripts/create_kvm.sh
 
-# Runs remove KVM entry script
-remove-kvm-entry:
-	chmod +x scripts/remove_kvm_entry.sh
-	scripts/remove_kvm_entry.sh
-
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform PrismMockProvider"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy

@@ -10,54 +10,65 @@ steps:
     displayName: Setup pytests
     condition: always()
 
+  - bash: |
+      name=$(FULLY_QUALIFIED_SERVICE_NAME)
+      workspace=$(echo $name | grep -oE '[0-9]+$')
+      
+      isItPR=0
+      if [ -z ${workspace} ]; then
+          workspace=$APIGEE_ENVIRONMENT
+      else
+          isItPR=1
+          workspace=pr-${workspace}
+      fi
+      
+      echo Workspace name is ${workspace}
+      echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
+      echo "##vso[task.setvariable variable=WORKSPACE]${workspace}"
+    displayName: Set workspace
+
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
-        role: "auto-ops"
-        profile: "apim-dev"
-        aws_account: "dev"
+      role: "auto-ops"
+      profile: "apim-dev"
+      aws_account: "dev"
 
   - bash: |
-        echo "We run terraform when it's not a PR release. We also don't run it for any sandbox environment"
+      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
+        export AWS_PROFILE=apim-dev
+        account_id="$(aws sts get-caller-identity --query Account --output text)"
+        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.eu-west-2.amazonaws.com
+      
+        mock_provider_repository_url=${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gpconnect-infra-dev
+        image_tag=${mock_provider_repository_url}:$(WORKSPACE)
+      
+        docker build -t ${image_tag} .
+        docker tag ${image_tag} ${mock_provider_repository_url}:$(Build.BuildId)
+        docker push -a ${mock_provider_repository_url}
+      fi
+    displayName: Build and push mock-receiver image
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/PrismMockProvider"
 
-        isItPR=0
-        if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-            export AWS_PROFILE=apim-dev
-            name=$(FULLY_QUALIFIED_SERVICE_NAME)
-            workspace=$(echo $name | grep -oE '[0-9]+$')
-            echo Workspace name is ${workspace}
-
-            if [ -z ${workspace} ]
-            then
-                workspace=$APIGEE_ENVIRONMENT
-            else
-                isItPR=1
-                workspace=pr-${workspace}
-            fi
-
-            echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
-            echo "##vso[task.setvariable variable=WORKSPACE]${workspace}"
-            aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
-            make init
-            echo "Init successful"         
-            make apply aws_account_no=${aws_account_no} environment=${workspace}
-            
-        fi
+  - bash: |
+      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
+          export AWS_PROFILE=apim-dev
+          aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
+      
+          make init
+          make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
+      fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
     retryCountOnTaskFailure: 2
 
   - bash: |
-
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-          echo "Its not sandbox"
-          if [ $(IS_IT_PR) -eq 1 ]
-          then
-              echo "Its PR"
-              #if its not sandbox and it should be PR  
+          if [ $(IS_IT_PR) -eq 1 ]; then
+              #if its not sandbox and it should be PR
               make add-endpoint environment=$(WORKSPACE)
               cd ..
               export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
-              export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"  
+              export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
               make create-kvm
           fi
       fi
@@ -72,8 +83,8 @@ steps:
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
       export PROXY_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
-      
-      
+
+
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
        poetry run pytest -v -m "not nhsd_apim_authorization" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml

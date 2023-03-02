@@ -40,8 +40,6 @@ extends:
             GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         post_deploy:
           - template: ./templates/post-deploy.yml
-            parameters:
-              full: true
       - environment: internal-dev-sandbox
         jinja_templates:
             ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
@@ -57,8 +55,6 @@ extends:
             GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
         post_deploy:
           - template: ./templates/post-deploy.yml
-            parameters:
-              full: true
       - environment: internal-qa-sandbox
         proxy_path: sandbox
         jinja_templates:
