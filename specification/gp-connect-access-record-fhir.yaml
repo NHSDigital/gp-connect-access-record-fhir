@@ -92,7 +92,7 @@ info:
 
     ### Resources
 
-    Use the [GP Connect Patient Facing Access Record Implementation Guide](https://simplifier.net/guide/pfs-implementation-guide/Home?version=current) to assist with your integration.
+    Use the [GP Connect Patient Facing Access Record Implementation Guide](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home?version=current) to assist with your integration.
 
     This is the FHIR specification for GP Connect Access Record - FHIR API.
 
@@ -242,7 +242,7 @@ paths:
             schema:
               type: object
               description: >
-                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
             example:
               resourceType: Parameters
               parameter:
@@ -279,25 +279,25 @@ paths:
       responses:
         '200':
           description: >
-            Information surrounding how a patients structured is retrieved can be found [here.](https://simplifier.net/guide/pfs-implementation-guide/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+            Information surrounding how a patients structured is retrieved can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
 
             Examples of the payload requests and responses can be found here:
 
-            * [Allergies FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Allergies?version=current)
+            * [Allergies FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Allergies?version=current)
 
-            * [Medications FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Medications?version=current)
+            * [Medications FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Medications?version=current)
 
-            * [Immunizations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Immunizations?version=current)
+            * [Immunizations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Immunizations?version=current)
 
-            * [Uncategorised Data FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Uncategorised-Data?version=current)
+            * [Uncategorised Data FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Uncategorised-Data?version=current)
 
-            * [Consultations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Consultations?version=current)
+            * [Consultations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Consultations?version=current)
 
-            * [Investigations FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Investigations?version=current)
+            * [Investigations FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Investigations?version=current)
 
-            * [Referrals FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Referrals?version=current)
+            * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
-            * [Combined FHIR examples](https://simplifier.net/guide/pfs-implementation-guide/Home/Examples/Multiple-combined?version=current)
+            * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
         4XX:
           description: |
             An error occured as follows:
