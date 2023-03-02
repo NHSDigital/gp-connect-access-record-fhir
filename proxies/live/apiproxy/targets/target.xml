@@ -9,14 +9,14 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>JavaScript.CreateKVMKeyName</Name>
+        <Name>JavaScript.CreateKVMforGPCAuth</Name>
       </Step>
       <Step>
-        <Name>KeyValueMapOperations.GetEndpoints</Name>
+         <Name>KeyValueMapOperations.GetEndpoints</Name>
       </Step>
       <Step>
-        <Name>JavaScript.SetEndpoint</Name>
-      </Step> 
+         <Name>JavaScript.SetEndpoint</Name>
+       </Step>
       <Step>
         <Name>KeyValueMapOperations.GetSecureVariables</Name>
       </Step> 
@@ -32,6 +32,15 @@
       <Step>
         <Name>AssignMessage.AddAuthorizationHeader</Name>
       </Step>
+      <Step>
+        <Name>JavaScript.CreateKVMKeyName</Name>
+      </Step>
+      <Step>
+        <Name>KeyValueMapOperations.GetEndpoints</Name>
+      </Step>
+      <Step>
+        <Name>JavaScript.SetEndpoint</Name>
+      </Step> 
       <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>

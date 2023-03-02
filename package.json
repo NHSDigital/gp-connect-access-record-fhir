@@ -11,7 +11,8 @@
   "license": "MIT",
   "homepage": "https://github.com/NHSDigital/gp-connect-access-record-fhir",
   "dependencies": {
-    "newman-reporter-htmlextra": "^1.20.1"
+    "newman-reporter-htmlextra": "^1.20.1",
+    "url-polyfill": "^3.0.0"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1",

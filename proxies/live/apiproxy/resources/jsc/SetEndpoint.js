@@ -1,3 +1,4 @@
+const { URL } = require('url-polyfill');
 const queryString = context.getVariable("request.querystring")
 const pathSuffix = context.getVariable("proxy.pathsuffix")
 
