@@ -188,14 +188,14 @@ x-spec-publication:
       - method: GET
         path: /FHIR/STU3/documents/Binary/{id}
 servers:
-  - url: 'https://sandbox.api.service.nhs.uk/gp-connect-access-record-fhir/'
+  - url: 'https://sandbox.api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Sandbox environment.
-  - url: 'https://int.api.service.nhs.uk/gp-connect-access-record-fhir/'
+  - url: 'https://int.api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Integration test environment.
-  - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir/'
+  - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Production environment.
 paths:
-  /FHIR/STU3/Patient/$gpc.getstructuredrecord:
+  /Patient/$gpc.getstructuredrecord:
     post:
       operationId: get-structured-record
       summary: Access a structured record relating to a patient
@@ -354,7 +354,7 @@ paths:
                               code: INVALID_NHS_NUMBER
                               display: Invalid NHS Number
 
-  /FHIR/STU3/documents/Patient/{id}:
+  /documents/Patient/{id}:
     get:
       operationId: get-document-patient
       summary: Find a patient by NHS number on the Access Document FHIR server
@@ -479,7 +479,7 @@ paths:
                               display: Invalid NHS Number
 
 
-  /FHIR/STU3/documents/Binary/{id}:
+  /documents/Binary/{id}:
     get:
       operationId: get-document
       summary: Get a specific document from a GP practice
@@ -546,7 +546,7 @@ paths:
                             - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
                               code: NO_RECORD_FOUND
                               display: No record found
-  /FHIR/STU3/Patient/{id}/DocumentReference:
+  /Patient/{id}/DocumentReference:
     get:
       operationId: search-document
       summary: Search for a patients documents
