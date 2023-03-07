@@ -1,0 +1,3 @@
+requests
+pytest
+pytest-nhsd-apim>=3.3.0

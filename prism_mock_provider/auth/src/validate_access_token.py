@@ -1,5 +1,6 @@
 import logging
 import requests
+import json
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -9,6 +10,10 @@ def validate_access_token(incoming_token: str) -> bool:
     """
     Get the introspection endpoint from the Keycloak realm's discovery document and validate an access token against it.
     """
+    # Strip the type away from the incoming token
+    # TODO - use regex to account for basic tokens, etc.
+    incoming_token = incoming_token.replace("Bearer ", "")
+
     discovery = requests.get(
         "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/.well-known/uma2-configuration",
     ).json()
@@ -32,11 +37,21 @@ def validate_access_token(incoming_token: str) -> bool:
     return is_valid
 
 
-def lambda_handler(event, _context):
-    access_token = event.get('Authorization')
+def handler(event, context):
+    body = json.loads(event)
+
+    access_token = body.get('Authorization')
+    print(f'Access token: {access_token}')
     is_valid = validate_access_token(access_token)
+    print(f'is_valid = {is_valid}')
 
     if not is_valid:
-        logger.error("Invalid access token")
+        return {
+          'statusCode': 401,
+          'body': json.dumps('Invalid access token')
+        }
 
-    return is_valid
+    return {
+      'statusCode': 200,
+      'body': json.dumps('Valid access token')
+    }

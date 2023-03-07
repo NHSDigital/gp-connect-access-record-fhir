@@ -1,4 +1,3 @@
-import logging
 import uuid
 from time import time
 from os import getenv
@@ -11,7 +10,7 @@ from pytest_nhsd_apim.identity_service import (
 )
 import requests
 
-from prism_mock_provider.auth.validate_access_token import validate_access_token
+from prism_mock_provider.auth.src.validate_access_token import validate_access_token
 
 
 # @pytest.mark.mock_provider
@@ -60,7 +59,6 @@ def test_happy_path(_test_app_credentials, apigee_environment, _jwt_keys, _keycl
     if resp.status_code != 200:
         raise RuntimeError(f"{resp.status_code}: {resp.text}")
     result = resp.json()
-
     access_token = result.get("access_token")
 
     assert validate_access_token(access_token)
