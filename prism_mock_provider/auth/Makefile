@@ -1,5 +1,5 @@
 docker-build:
-	docker build -t mock-provider-token-validation .
+	docker build -t token-validation_lambda:latest .
 
 docker-run: docker-build
-	docker run -it -e PORT=9000 -p 9000:9000 mock-provider-token-validation
+	docker run --rm -p 9000:8080 --name token_validation_lambda token_validation_lambda
