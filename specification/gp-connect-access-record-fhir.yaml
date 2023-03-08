@@ -177,16 +177,16 @@ x-spec-publication:
   operation-order:
     - group: Access Record
       operations:
-      - method: POST
-        path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
+        - method: POST
+          path: /FHIR/STU3/Patient/$gpc.getstructuredrecord
     - group: Documents
       operations:
-      - method: GET
-        path: /FHIR/STU3/documents/Patient/{id}
-      - method: GET
-        path: /FHIR/STU3/Patient/{id}/DocumentReference
-      - method: GET
-        path: /FHIR/STU3/documents/Binary/{id}
+        - method: GET
+          path: /FHIR/STU3/documents/Patient/{id}
+        - method: GET
+          path: /FHIR/STU3/Patient/{id}/DocumentReference
+        - method: GET
+          path: /FHIR/STU3/documents/Binary/{id}
 servers:
   - url: 'https://sandbox.api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Sandbox environment.
@@ -242,7 +242,7 @@ paths:
             schema:
               type: object
               description: >
-                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
+                Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
             example:
               resourceType: Parameters
               parameter:
@@ -337,7 +337,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
+                description: Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -346,9 +346,9 @@ paths:
                       profile:
                         - https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1
                     issue:
-                    - severity: error
-                      code: value
-                      details:
+                      - severity: error
+                        code: value
+                        details:
                           coding:
                             - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
                               code: INVALID_NHS_NUMBER
@@ -461,7 +461,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
+                description: Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -470,9 +470,9 @@ paths:
                       profile:
                         - https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1
                     issue:
-                    - severity: error
-                      code: value
-                      details:
+                      - severity: error
+                        code: value
+                        details:
                           coding:
                             - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
                               code: INVALID_NHS_NUMBER
@@ -530,7 +530,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
+                description: Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -539,9 +539,9 @@ paths:
                       profile:
                         - https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1
                     issue:
-                    - severity: error
-                      code: not-found
-                      details:
+                      - severity: error
+                        code: not-found
+                        details:
                           coding:
                             - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
                               code: NO_RECORD_FOUND
@@ -617,7 +617,7 @@ paths:
               description: Greater than or equals which matches 2022-01-15 or 2022-01-16
             less than or equals:
               value:
-                -  le2022-01-15
+                - le2022-01-15
               description: Less than or equals which matches 2022-01-15 or 2022-01-14
         - in: query
           name: author
@@ -819,7 +819,7 @@ paths:
             application/fhir+json:
               schema:
                 type: object
-                description:  Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
+                description: Link to GPConnect-OperationOutcome-1 resource population guidance [here](https://simplifier.net/guide/gpconnect-data-model/Home/FHIR-Assets/All-assets/Profiles/Profile--GPConnect-OperationOutcome-1?version=current).
               examples:
                 example:
                   value:
@@ -828,9 +828,9 @@ paths:
                       profile:
                         - https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1
                     issue:
-                    - severity: error
-                      code: not-found
-                      details:
+                      - severity: error
+                        code: not-found
+                        details:
                           coding:
                             - system: https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1
                               code: PATIENT_NOT_FOUND
@@ -879,7 +879,7 @@ components:
       in: header
       name: Ssp-TraceID
       description: |
-        	Consumer's Trace ID (a GUID or UUID), generated per request
+        Consumer's Trace ID (a GUID or UUID), generated per request
       required: true
       schema:
         type: string
@@ -888,7 +888,7 @@ components:
       in: header
       name: Ssp-From
       description: |
-        	Consumer's ASID - that of the requesting organisation
+        Consumer's ASID - that of the requesting organisation
       required: true
       schema:
         type: string
@@ -897,7 +897,7 @@ components:
       in: header
       name: Ssp-To
       description: |
-        	Provider's ASID - identified by use of SDS
+        Provider's ASID - identified by use of SDS
       required: true
       schema:
         type: string
@@ -906,7 +906,7 @@ components:
       in: header
       name: Ssp-ARInteration
       description: |
-        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1
+        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1
       required: true
       schema:
         type: string
@@ -915,7 +915,7 @@ components:
       in: header
       name: Ssp-SearchDocInteration
       description: |
-        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1
+        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1
       required: true
       schema:
         type: string
@@ -924,7 +924,7 @@ components:
       in: header
       name: Ssp-MetaInteration
       description: |
-        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1
+        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1
       required: true
       schema:
         type: string
@@ -933,7 +933,7 @@ components:
       in: header
       name: Ssp-PatientInteration
       description: |
-        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1
+        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1
       required: true
       schema:
         type: string
@@ -942,8 +942,9 @@ components:
       in: header
       name: Ssp-DocInteration
       description: |
-        	Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1
+        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1
       required: true
       schema:
         type: string
         example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'
+
