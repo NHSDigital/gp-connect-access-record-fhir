@@ -947,3 +947,4 @@ components:
       schema:
         type: string
         example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'
+
