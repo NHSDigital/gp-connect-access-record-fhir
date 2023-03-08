@@ -38,9 +38,9 @@ def validate_access_token(incoming_token: str) -> bool:
 
 
 def handler(event, context):
-    body = json.loads(event)
+    print(event)
 
-    access_token = body.get('Authorization')
+    access_token = event.get('Authorization')
     print(f'Access token: {access_token}')
     is_valid = validate_access_token(access_token)
     print(f'is_valid = {is_valid}')

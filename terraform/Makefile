@@ -36,8 +36,8 @@ mock_provider_repository_name = gpconnect-infra-dev
 mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
 build_version=$(environment)
 dockerImageName=$(mock_provider_repository_url):$(build_version)
-dockerFilePath=../PrismMockProvider/Dockerfile
-dockerContext=../PrismMockProvider
+dockerFilePath=../prism_mock_provider/Dockerfile
+dockerContext=../prism_mock_provider
 
 docker-login:
 	 aws ecr get-login-password --profile $(aws_profile) --region eu-west-2 | docker login --username AWS --password-stdin $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com
@@ -46,6 +46,19 @@ docker-build:
 	make -C .. publish
 	docker build -t $(dockerImageName) -f $(dockerFilePath) $(dockerContext)
 
-
 docker-deploy: docker-login
 	 docker push $(dockerImageName)
+
+# Token Validation Lambda
+lambda_repository_name = gpconnect-infra-dev-token-validation-lambda
+lambda_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(lambda_repository_name)
+build_version=$(environment)
+lambdaDockerImageName=$(lambda_repository_url):$(build_version)
+lambdaDockerFilePath=../prism_mock_provider/auth/Dockerfile
+lambdaDockerContext=../prism_mock_provider/auth
+
+docker-build-lambda:
+	docker build -t $(lambdaDockerImageName) -f $(lambdaDockerFilePath) $(lambdaDockerContext)
+
+docker-deploy-lambda: docker-build-lambda docker-login
+	docker push $(lambdaDockerImageName)
