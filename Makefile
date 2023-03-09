@@ -30,7 +30,7 @@ publish:
 	rm -rf build
 	mkdir -p build
 	npm run publish 2> /dev/null
-	cp build/gp-connect-access-record-fhir.json PrismMockProvider/
+	cp build/gp-connect-access-record-fhir.json prism_mock_provider/
 
 #Runs build proxy script
 build-proxy:
