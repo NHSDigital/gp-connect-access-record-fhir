@@ -4,7 +4,7 @@
     "VALUE": "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
   },
   {
-  "NAME": "REPC_internal-qa",
+  "NAME": "REPC_internal-dev-sandbox",
   "VALUE": "https://dev.gcarf.dev.api.platform.nhs.uk"
   }
 ]
