@@ -1,6 +1,6 @@
 const queryString = context.getVariable("request.querystring")
 const pathSuffix = context.getVariable("proxy.pathsuffix")
-var endpoint = context.getVariable("endpoint")
+const endpoint = context.getVariable("endpoint")
 function parseURL(href) {
     var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
     return match && {
@@ -14,7 +14,6 @@ context.setVariable("GPCAuthHostname",values["hostname"])
 context.setVariable("GPCAuthHostpath",values["pathname"])
 
 if (endpoint) {
-  endpoint=endpoint+"/FHIR/STU3"
   url = endpoint + pathSuffix
   if (queryString !== "") {
     url = url + queryString
