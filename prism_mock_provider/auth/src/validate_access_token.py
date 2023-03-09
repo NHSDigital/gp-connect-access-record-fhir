@@ -38,20 +38,21 @@ def validate_access_token(incoming_token: str) -> bool:
 
 
 def handler(event, context):
-    print(event)
+    print(f"Event: {event}")
 
     access_token = event.get('Authorization')
     print(f'Access token: {access_token}')
+
     is_valid = validate_access_token(access_token)
     print(f'is_valid = {is_valid}')
 
-    if not is_valid:
+    if is_valid:
+        return {
+          'statusCode': 200,
+          'body': json.dumps('Valid access token')
+        }
+    else:
         return {
           'statusCode': 401,
           'body': json.dumps('Invalid access token')
         }
-
-    return {
-      'statusCode': 200,
-      'body': json.dumps('Valid access token')
-    }

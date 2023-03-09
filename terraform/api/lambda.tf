@@ -38,7 +38,7 @@ resource aws_lambda_function validate-token-lambda-function {
   depends_on = [
     null_resource.ecr_image
   ]
-  function_name = "${var.short_name_prefix}-lambda"
+  function_name = "${var.short_name_prefix}-token-validation-lambda"
   role = aws_iam_role.lambda_role.arn
   timeout = 300
   image_uri = "${data.aws_ecr_repository.lambda_image_registry.repository_url}@${data.aws_ecr_image.lambda_image.id}"
