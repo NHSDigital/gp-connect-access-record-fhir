@@ -72,8 +72,6 @@ steps:
               cd ..
               export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
               export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-              echo "THIS IS WORKSAPCE"
-              echo $(WORKSPACE)
               make create-kvm
           fi
       fi
