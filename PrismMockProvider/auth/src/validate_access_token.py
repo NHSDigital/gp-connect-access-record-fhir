@@ -18,7 +18,8 @@ def validate_access_token(incoming_token: str) -> bool:
     print(f"Extracted token string = {token}")
 
     discovery = requests.get(
-        "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/.well-known/uma2-configuration",
+        "https://identity.ptl.api.platform.nhs.uk/"
+        "auth/realms/gpconnect-pfs-mock-internal-dev/.well-known/uma2-configuration",
     ).json()
     introspection_endpoint = discovery.get('introspection_endpoint')
 
@@ -44,8 +45,13 @@ def handler(event, _context):
     is_valid = False
 
     # The request data is base64 encoded, so we decode it here before we can parse it
+    print(event)
+    print(event.headers)
     encoded_body = event.get('body')
     body = str(base64.b64decode(encoded_body).decode('utf-8'))
+    encoded_auth_header = event.headers.get("authorization")
+    auth_header = str(base64.b64decode(encoded_auth_header).decode('utf-8'))
+    print(auth_header)
     data = json.loads(body)
 
     access_token = data.get("Authorization")
