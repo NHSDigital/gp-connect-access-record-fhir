@@ -24,6 +24,13 @@
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>
       </Step>
+      <Step>
+          <Name>ServiceCallout.ValidateAccessToken</Name>
+      </Step>
+      <Step>
+          <Condition>ServiceCallout.ValidateAccessToken.status.code != 200</Condition>
+          <Name>RaiseFault.401Unauthorized</Name>
+      </Step>
     </Request>
   </PreFlow>
   <FaultRules>

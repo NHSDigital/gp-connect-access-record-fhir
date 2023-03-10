@@ -53,7 +53,7 @@ resource "aws_apigatewayv2_integration" "token_validation_integration" {
 
 resource "aws_apigatewayv2_route" "post_token_validation" {
   api_id = aws_apigatewayv2_api.service_api.id
-  route_key = "ANY /validate"
+  route_key = "POST /validate"
   target    = "integrations/${aws_apigatewayv2_integration.token_validation_integration.id}"
 }
 
