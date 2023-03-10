@@ -10,7 +10,7 @@ from pytest_nhsd_apim.identity_service import (
 )
 import requests
 
-from prism_mock_provider.auth.src.validate_access_token import validate_access_token
+from PrismMockProvider.auth.src.validate_access_token import validate_access_token
 
 
 # @pytest.mark.mock_provider
