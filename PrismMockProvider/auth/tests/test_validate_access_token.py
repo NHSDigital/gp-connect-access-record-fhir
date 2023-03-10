@@ -35,7 +35,8 @@ def test_happy_path(_test_app_credentials, apigee_environment, _jwt_keys, _keycl
     id_token = authenticator.get_token()["access_token"]
 
     # Need to post the ID Token to GPC's /token endpoint with a signed JWT to get an Access Token
-    url = "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+    url = "https://identity.ptl.api.platform.nhs.uk/auth/"
+    "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
 
     with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
         private_key = key.read()
@@ -72,7 +73,9 @@ def test_happy_path(_test_app_credentials, apigee_environment, _jwt_keys, _keycl
         "login_form": {"username": "9912003071"},
     }
 )
-def test_invalid_token(nhsd_apim_proxy_url, _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials):
+def test_invalid_token(
+    nhsd_apim_proxy_url, _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
+):
     """Check that the token validation returns False to signify the access token is invalid when we try to validate
     a token that has been revoked."""
     # TODO - move token generation to a helper method
@@ -87,7 +90,8 @@ def test_invalid_token(nhsd_apim_proxy_url, _test_app_credentials, apigee_enviro
     id_token = authenticator.get_token()["access_token"]
 
     # Need to post the ID Token to GPC's /token endpoint with a signed JWT to get an Access Token
-    url = "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+    url = "https://identity.ptl.api.platform.nhs.uk/auth/"
+    "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
 
     with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
         private_key = key.read()
@@ -116,7 +120,8 @@ def test_invalid_token(nhsd_apim_proxy_url, _test_app_credentials, apigee_enviro
 
     # Call the revocation endpoint to invalidate the token/session
     requests.post(
-        "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/revoke",
+        "https://identity.ptl.api.platform.nhs.uk/auth/"
+        "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/revoke",
         data={
             "client_id": "gpconnect-pfs-access-record",
             "client_assertion": encode_jwt(
