@@ -42,7 +42,7 @@ create-kvm:
 	scripts/create_kvm.sh
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform PrismMockProvider"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
