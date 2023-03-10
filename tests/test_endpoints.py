@@ -85,6 +85,7 @@ def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
     assert resp.status_code == 401
 
+
 @pytest.mark.auth
 @pytest.mark.nhsd_apim_authorization(
     {
