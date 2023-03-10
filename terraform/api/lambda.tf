@@ -2,7 +2,7 @@ data aws_caller_identity current {}
 
 locals {
   ecr_repository_name = "gpconnect-infra-dev-token-validation-lambda"
-  ecr_image_tag       = "dev"
+  ecr_image_tag       = var.environment
 }
 
 data aws_ecr_repository lambda_image_registry {
@@ -43,6 +43,7 @@ resource aws_lambda_function validate-token-lambda-function {
   timeout = 300
   image_uri = "${data.aws_ecr_repository.lambda_image_registry.repository_url}@${data.aws_ecr_image.lambda_image.id}"
   package_type = "Image"
+  source_code_hash = data.aws_ecr_image.lambda_image.image_digest
 }
 
 output "lambda_name" {

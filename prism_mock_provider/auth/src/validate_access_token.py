@@ -1,6 +1,8 @@
 import logging
 import requests
 import json
+import re
+import base64
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -10,9 +12,10 @@ def validate_access_token(incoming_token: str) -> bool:
     """
     Get the introspection endpoint from the Keycloak realm's discovery document and validate an access token against it.
     """
-    # Strip the type away from the incoming token
-    # TODO - use regex to account for basic tokens, etc.
-    incoming_token = incoming_token.replace("Bearer ", "")
+    # Extract just the token value from the header
+    print(f"Token = {incoming_token}")
+    token = re.sub(r"Bearer\s|Basic\s", "", incoming_token)
+    print(f"Extracted token string = {token}")
 
     discovery = requests.get(
         "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/.well-known/uma2-configuration",
@@ -28,7 +31,7 @@ def validate_access_token(incoming_token: str) -> bool:
         auth=(client_id, client_secret),
         data={
             'token_type_hint': 'requesting_party_token',
-            'token': incoming_token
+            'token': token
         }
     ).json()
 
@@ -37,22 +40,29 @@ def validate_access_token(incoming_token: str) -> bool:
     return is_valid
 
 
-def handler(event, context):
-    print(f"Event: {event}")
+def handler(event, _context):
+    is_valid = False
 
-    access_token = event.get('Authorization')
-    print(f'Access token: {access_token}')
+    # The request data is base64 encoded, so we decode it here before we can parse it
+    encoded_body = event.get('body')
+    body = str(base64.b64decode(encoded_body).decode('utf-8'))
+    data = json.loads(body)
 
-    is_valid = validate_access_token(access_token)
-    print(f'is_valid = {is_valid}')
+    access_token = data.get("Authorization")
+    if access_token:
+        is_valid = validate_access_token(access_token)
 
     if is_valid:
         return {
-          'statusCode': 200,
-          'body': json.dumps('Valid access token')
+            "statusCode": 200,
+            "headers": {'Content-Type': 'application/json'},
+            "body": json.dumps('Valid access token'),
+            "isBase64Encoded": False
         }
     else:
         return {
-          'statusCode': 401,
-          'body': json.dumps('Invalid access token')
+            "statusCode": 401,
+            "headers": {'Content-Type': 'application/json'},
+            "body": json.dumps('Invalid access token'),
+            "isBase64Encoded": False
         }
