@@ -11,8 +11,8 @@ data aws_ecr_repository lambda_image_registry {
 
 resource null_resource ecr_image {
   triggers = {
-    python_file = md5(file("${path.module}/../../prism_mock_provider/auth/src/validate_access_token.py"))
-    docker_file = md5(file("${path.module}/../../prism_mock_provider/auth/Dockerfile"))
+    python_file = md5(file("${path.module}/../../PrismMockProvider/auth/src/validate_access_token.py"))
+    docker_file = md5(file("${path.module}/../../PrismMockProvider/auth/Dockerfile"))
   }
 
   # The local-exec provisioner invokes a local executable after a resource is created.
