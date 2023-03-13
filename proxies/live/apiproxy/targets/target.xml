@@ -28,7 +28,7 @@
           <Name>ServiceCallout.ValidateAccessToken</Name>
       </Step>
       <Step>
-          <Condition>ServiceCallout.ValidateAccessToken.status.code != 200</Condition>
+          <Condition>tokenValidationResponse.status.code != 200</Condition>
           <Name>RaiseFault.401Unauthorized</Name>
       </Step>
     </Request>
