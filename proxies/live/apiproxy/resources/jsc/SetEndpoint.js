@@ -1,6 +1,8 @@
 const queryString = context.getVariable("request.querystring")
 const pathSuffix = context.getVariable("proxy.pathsuffix")
 const endpoint = context.getVariable("endpoint")
+
+//Parsing hostname and pathname from given url
 function parseURL(href) {
     var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
     return match && {
