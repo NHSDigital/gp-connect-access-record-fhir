@@ -2,7 +2,6 @@ import logging
 import requests
 import json
 import re
-import base64
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
