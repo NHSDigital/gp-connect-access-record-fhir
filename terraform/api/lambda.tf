@@ -44,6 +44,14 @@ resource aws_lambda_function validate-token-lambda-function {
   image_uri = "${data.aws_ecr_repository.lambda_image_registry.repository_url}@${data.aws_ecr_image.lambda_image.id}"
   package_type = "Image"
   source_code_hash = data.aws_ecr_image.lambda_image.image_digest
+
+  environment {
+      variables = {
+          "keycloak_environment": var.keycloak_environment,
+          "client_id": var.client_id,
+          "client_secret": var.client_secret
+      }
+  }
 }
 
 output "lambda_name" {

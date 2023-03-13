@@ -26,7 +26,7 @@ def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keyc
     """Check that the token validation returns True to signify the access token is valid when we pass a valid token."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
 
-    assert validate_access_token(access_token)
+    assert validate_access_token(apigee_environment, getenv("client_id"), getenv("client_secret"), access_token)
 
 
 # @pytest.mark.mock_provider
@@ -45,7 +45,7 @@ def test_invalid_token(
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
     invalidate_token(access_token)
 
-    assert not validate_access_token(access_token)
+    assert not validate_access_token(apigee_environment, getenv("client_id"), getenv("client_secret"), access_token)
 
 
 @pytest.mark.nhsd_apim_authorization(
@@ -70,7 +70,7 @@ def test_happy_path(
         "GPC-Authorization": access_token
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
 
     assert resp.status_code == 200
 
@@ -95,49 +95,9 @@ def test_401_invalid_token(
         "GPC-Authorization": "Junk token 3497g097dfsgfv3 b4rubvrdq3"
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
 
     assert resp.status_code == 401
-
-
-def invalidate_token(token):
-    # Call the revocation endpoint to invalidate the token/session
-    url = "https://identity.ptl.api.platform.nhs.uk/auth/" \
-          "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
-
-    with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
-        private_key = key.read()
-
-    requests.post(
-        "https://identity.ptl.api.platform.nhs.uk/auth/" +
-        "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/revoke",
-        data={
-            "client_id": "gpconnect-pfs-access-record",
-            "client_assertion": encode_jwt(
-                client_id="gpconnect-pfs-access-record",
-                audience=url,
-                jwt_kid="test-1",
-                jwt_private_key=private_key
-            ),
-            "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-            "token": token
-        }
-    )
-
-
-def encode_jwt(client_id, audience, jwt_kid, jwt_private_key):
-    claims = {
-        "sub": client_id,
-        "iss": client_id,
-        "jti": str(uuid.uuid4()),
-        "aud": audience,
-        "exp": int(time()) + 300,  # 5 minutes in the future
-    }
-    additional_headers = {"kid": jwt_kid}
-    client_assertion = jwt.encode(
-        claims, jwt_private_key, algorithm="RS512", headers=additional_headers
-    )
-    return client_assertion
 
 
 def get_access_token(environment, client_credentials):
@@ -179,3 +139,43 @@ def get_access_token(environment, client_credentials):
     result = resp.json()
 
     return result.get("access_token")
+
+
+def invalidate_token(token):
+    # Call the revocation endpoint to invalidate the token/session
+    url = "https://identity.ptl.api.platform.nhs.uk/auth/" \
+          "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+
+    with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
+        private_key = key.read()
+
+    requests.post(
+        "https://identity.ptl.api.platform.nhs.uk/auth/" +
+        "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/revoke",
+        data={
+            "client_id": "gpconnect-pfs-access-record",
+            "client_assertion": encode_jwt(
+                client_id="gpconnect-pfs-access-record",
+                audience=url,
+                jwt_kid="test-1",
+                jwt_private_key=private_key
+            ),
+            "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+            "token": token
+        }
+    )
+
+
+def encode_jwt(client_id, audience, jwt_kid, jwt_private_key):
+    claims = {
+        "sub": client_id,
+        "iss": client_id,
+        "jti": str(uuid.uuid4()),
+        "aud": audience,
+        "exp": int(time()) + 300,  # 5 minutes in the future
+    }
+    additional_headers = {"kid": jwt_kid}
+    client_assertion = jwt.encode(
+        claims, jwt_private_key, algorithm="RS512", headers=additional_headers
+    )
+    return client_assertion

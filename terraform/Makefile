@@ -17,7 +17,7 @@ plan: workspace
 	 $(tr_cmd) plan
 
 apply: workspace
-	$(tr_cmd) apply -auto-approve
+	$(tr_cmd) apply -auto-approve -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)"
 
 clean:
 	rm -rf build .terraform upload-key

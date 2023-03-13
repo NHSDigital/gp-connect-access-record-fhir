@@ -9,3 +9,6 @@ variable "lb" {
     listener_arn = string
   })
 }
+variable "client_id" {}
+variable "client_secret" {}
+variable "keycloak_environment" {}
