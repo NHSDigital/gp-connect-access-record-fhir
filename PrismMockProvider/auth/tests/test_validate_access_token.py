@@ -104,12 +104,6 @@ def test_401_invalid_token(
     assert resp.status_code == 401
 
 
-def test_401_revoked_token():
-    # TODO - use the Apigee Trace API to inject a revoke token call after the OAuth2 validation on the proxy but before
-    #   the request is sent to the mock provider.
-    pass
-
-
 def get_access_token(environment, client_credentials):
     # Generate an ID Token
     config = KeycloakUserConfig(
