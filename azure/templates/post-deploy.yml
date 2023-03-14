@@ -69,9 +69,6 @@ steps:
           export AWS_PROFILE=apim-dev
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
 
-          echo $(INTROSPECTION_CLIENT_ID)
-          echo $(INTROSPECTION_CLIENT_SECRET)
-
           make init
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE) client_id=$(INTROSPECTION_CLIENT_ID) \
             client_secret=$(INTROSPECTION_CLIENT_SECRET) keycloak_environment=$(APIGEE_ENVIRONMENT)
