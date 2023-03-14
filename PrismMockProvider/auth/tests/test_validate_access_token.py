@@ -26,7 +26,7 @@ def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keyc
     """Check that the token validation returns True to signify the access token is valid when we pass a valid token."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
 
-    assert validate_access_token(apigee_environment, getenv("client_id"), getenv("client_secret"), access_token)
+    assert validate_access_token(apigee_environment, getenv("INTROSPECTION_CLIENT_ID"), getenv("INTROSPECTION_CLIENT_SECRET"), access_token)
 
 
 # @pytest.mark.mock_provider
@@ -43,7 +43,7 @@ def test_invalid_token(
     """Check that the token validation returns False to signify the access token is invalid when we try to validate
     a token that has been revoked."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
-    invalidate_token(access_token)
+    invalidate_token(access_token, apigee_environment)
 
     assert not validate_access_token(apigee_environment, getenv("client_id"), getenv("client_secret"), access_token)
 
@@ -59,18 +59,22 @@ def test_happy_path(
     nhsd_apim_proxy_url, nhsd_apim_auth_headers,
     _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
 ):
-    """Check that the token validation returns True to signify the access token is valid when we pass a valid token."""
+    """"""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
 
     headers = {
-        "Interaction-ID": interaction_id, "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
-        "Ssp-TraceID": "09a01679-2564-0fb4-5129-aecc81ea2706", "Ssp-From": "200000000359",
+        "accept": "application/fhir+json",
+        "X-Correlation-ID": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
+        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
+        "Ssp-TraceID": "09a01679-2564-0fb4-5129-aecc81ea2706",
+        "Ssp-From": "200000000359",
         "Ssp-To": "918999198738",
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
+        "Interaction-ID": interaction_id,
         "GPC-Authorization": access_token
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
 
     assert resp.status_code == 200
 
@@ -100,6 +104,12 @@ def test_401_invalid_token(
     assert resp.status_code == 401
 
 
+def test_401_revoked_token():
+    # TODO - use the Apigee Trace API to inject a revoke token call after the OAuth2 validation on the proxy but before
+    #   the request is sent to the mock provider.
+    pass
+
+
 def get_access_token(environment, client_credentials):
     # Generate an ID Token
     config = KeycloakUserConfig(
@@ -112,8 +122,8 @@ def get_access_token(environment, client_credentials):
     id_token = authenticator.get_token()["access_token"]
 
     # Need to post the ID Token to GPC's /token endpoint with a signed JWT to get an Access Token
-    url = "https://identity.ptl.api.platform.nhs.uk/auth/" \
-          "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+    url = f"https://identity.ptl.api.platform.nhs.uk/auth/" \
+        f"realms/gpconnect-pfs-mock-{environment}/protocol/openid-connect/token"
 
     with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
         private_key = key.read()
@@ -141,17 +151,17 @@ def get_access_token(environment, client_credentials):
     return result.get("access_token")
 
 
-def invalidate_token(token):
+def invalidate_token(token, environment):
     # Call the revocation endpoint to invalidate the token/session
-    url = "https://identity.ptl.api.platform.nhs.uk/auth/" \
-          "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+    url = f"https://identity.ptl.api.platform.nhs.uk/auth/" \
+        f"realms/gpconnect-pfs-mock-{environment}/protocol/openid-connect/token"
 
     with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
         private_key = key.read()
 
     requests.post(
         "https://identity.ptl.api.platform.nhs.uk/auth/" +
-        "realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/revoke",
+        f"realms/gpconnect-pfs-mock-{environment}/protocol/openid-connect/revoke",
         data={
             "client_id": "gpconnect-pfs-access-record",
             "client_assertion": encode_jwt(

@@ -39,6 +39,7 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
 
 
 def handler(event, _context):
+    # TODO - replace this custom header with the standard Auth header when AMB-1438 is merged
     access_token = event.get("headers").get("GPC-Authorization")
     is_valid = validate_access_token(
         os.getenv("keycloak_environment"),
