@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KeyValueMapOperations.GetConfig" mapIdentifier="{{ GP_CONNECT_CONFIG }}">
-    <DisplayName>KeyValueMapOperations.GetEndpoints</DisplayName>
-    <Get assignTo="endpointConfig">
+    <DisplayName>KeyValueMapOperations.GetConfig</DisplayName>
+    <Get assignTo="private.config">
         <Key>
             <Parameter ref="endpointConfigKey"/>
         </Key>

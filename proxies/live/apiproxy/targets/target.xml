@@ -18,11 +18,11 @@
          <Name>KeyValueMapOperations.GetEndpoints</Name>
       </Step>
       <Step>
-         <Name>JavaScript.SetEndpoint</Name>
-       </Step>
-      <Step>
          <Name>KeyValueMapOperations.GetConfig</Name>
       </Step>
+      <Step>
+         <Name>JavaScript.SetEndpoint</Name>
+       </Step>
       <Step>
         <Name>KeyValueMapOperations.GetSecureVariables</Name>
       </Step> 
