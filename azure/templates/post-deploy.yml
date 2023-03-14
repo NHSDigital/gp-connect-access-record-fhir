@@ -3,6 +3,19 @@ parameters:
     default: aws --profile=apim-dev
 
 steps:
+  - template: "azure/components/aws-assume-role.yml@common"
+    parameters:
+        role: "auto-ops"
+        profile: "apm_ptl"
+
+  - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
+    parameters:
+        secret_file_ids:
+            - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
+        secret_ids:
+            - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID
+            - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
+
   - bash: |
       make install-python
 
@@ -49,19 +62,6 @@ steps:
       fi
     displayName: Build and push mock-receiver image
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/PrismMockProvider"
-
-  - template: "azure/components/aws-assume-role.yml@common"
-    parameters:
-      role: "auto-ops"
-      profile: "apm_ptl"
-
-  - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
-    parameters:
-      secret_file_ids:
-        - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
-      secret_ids:
-        - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID
-        - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
 
   - bash: |
       set -e
