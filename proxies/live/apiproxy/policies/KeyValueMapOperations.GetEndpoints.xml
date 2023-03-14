@@ -8,7 +8,7 @@
     </Get>
     <Get assignTo="EndpointforGPCAuth">
         <Key>
-            <Parameter ref="KeyforGPCAuth"/>
+            <Parameter ref="GPCAuthKey"/>
         </Key>
     </Get>
 </KeyValueMapOperations>

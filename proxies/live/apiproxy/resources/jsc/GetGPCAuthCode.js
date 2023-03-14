@@ -10,6 +10,3 @@ function json_tryparse(raw) {
 var respContent=context.getVariable('GPCPFSAuthResponse.content');
 const respObject=json_tryparse(respContent);
 context.setVariable("authorization_access_token",respObject["access_token"]);
-
-
-

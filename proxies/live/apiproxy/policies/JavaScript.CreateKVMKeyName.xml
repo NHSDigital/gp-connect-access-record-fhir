@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JavaScript.CreateKVMKeyName">
-    <DisplayName>JavaScript.CreateKVMKeyName</DisplayName>
-    <Properties>
-        <Property name="KeyforGPCAuth">urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthroizationservice</Property>
-    </Properties>
-    <ResourceURL>jsc://CreateKVMKeyName.js</ResourceURL>
-</Javascript>
