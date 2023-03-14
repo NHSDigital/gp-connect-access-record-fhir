@@ -74,7 +74,7 @@ def test_happy_path(
         "GPC-Authorization": access_token
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009", headers=headers)
 
     assert resp.status_code == 200
 
