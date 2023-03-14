@@ -26,7 +26,12 @@ def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keyc
     """Check that the token validation returns True to signify the access token is valid when we pass a valid token."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
 
-    assert validate_access_token(apigee_environment, getenv("INTROSPECTION_CLIENT_ID"), getenv("INTROSPECTION_CLIENT_SECRET"), access_token)
+    assert validate_access_token(
+        apigee_environment,
+        getenv("INTROSPECTION_CLIENT_ID"),
+        getenv("INTROSPECTION_CLIENT_SECRET"),
+        access_token
+    )
 
 
 # @pytest.mark.mock_provider
@@ -74,7 +79,10 @@ def test_happy_path(
         "GPC-Authorization": access_token
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(
+        f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+        headers=headers
+    )
 
     assert resp.status_code == 200
 
