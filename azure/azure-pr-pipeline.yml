@@ -35,8 +35,6 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          ENCRYPTED_VARIABLES_KVM: identity-service-variables-encrypted
-          ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: nhs_login_private_key
           GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
@@ -45,8 +43,6 @@ extends:
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         jinja_templates:
-          ENCRYPTED_VARIABLES_KVM: just-dummy-value-for-successful-build
-          ENCRYPTED_VARIABLES_KVM_KEY_NHS_LOGIN_KEY: just-dummy-value-for-successful-build
           GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
           GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
           GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
