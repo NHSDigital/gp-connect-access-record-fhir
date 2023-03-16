@@ -35,6 +35,7 @@ steps:
       aws_account: "dev"
 
   - bash: |
+      set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
         export AWS_PROFILE=apim-dev
         account_id="$(aws sts get-caller-identity --query Account --output text)"
@@ -51,6 +52,7 @@ steps:
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/PrismMockProvider"
 
   - bash: |
+      set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
           export AWS_PROFILE=apim-dev
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
@@ -63,6 +65,7 @@ steps:
     retryCountOnTaskFailure: 2
 
   - bash: |
+      set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
           if [ $(IS_IT_PR) -eq 1 ]; then
               #if its not sandbox and it should be PR
@@ -77,6 +80,7 @@ steps:
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
 
   - bash: |
+      set -e
       export RELEASE_RELEASEID=$(Build.BuildId)
       export SOURCE_COMMIT_ID=$(Build.SourceVersion)
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
