@@ -34,7 +34,7 @@ steps:
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
 
-    displayName: 'TEST ${{FULLY_QUALIFIED_SERVICE_NAME}} $(FULLY_QUALIFIED_SERVICE_NAME)'
+    displayName: 'TEST $(FULLY_QUALIFIED_SERVICE_NAME)'
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
