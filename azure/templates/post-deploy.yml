@@ -7,6 +7,7 @@ steps:
     parameters:
         role: "auto-ops"
         profile: "apm_ptl"
+    condition: ne(${{ containsValue(['prod', 'int', 'dev', 'sandbox'], $APIGEE_ENVIRONMENT) }}, 'true')
 
   - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
     parameters:
@@ -15,6 +16,7 @@ steps:
         secret_ids:
             - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID
             - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
+    condition: ne(${{ containsValue(['prod', 'int', 'dev', 'sandbox'], $APIGEE_ENVIRONMENT) }}, 'true')
 
   - bash: |
       make install-python
