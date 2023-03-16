@@ -26,7 +26,13 @@ steps:
       echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
       echo "##vso[task.setvariable variable=workspace;isoutput=true]${workspace}"
       echo "Liam"
-    displayName: Set workspace ${{ variables.WORKSPACE }} $($env.workspace) 
+    displayName: Set workspace ${{ variables.WORKSPACE }}
+
+  - bash: |
+      echo ${{ variables.WORKSPACE }}
+      echo ${{ WORKSPACE }}
+      echo ${{ workspace }}
+    displayName: TEST
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
