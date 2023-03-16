@@ -11,7 +11,7 @@ from pytest_nhsd_apim.identity_service import (
 import requests
 
 from PrismMockProvider.auth.src.validate_access_token import validate_access_token
-from tests.config import interaction_id
+from .config import interaction_id
 
 
 # @pytest.mark.mock_provider
