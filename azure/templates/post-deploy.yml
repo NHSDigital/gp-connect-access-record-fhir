@@ -24,13 +24,16 @@ steps:
       
       echo Workspace name is ${workspace}
       echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
-      echo "##vso[task.setvariable variable=workspace;isoutput=true]${workspace}"
+      echo "##vso[task.setvariable variable=WORKSPACE;isoutput=true]${workspace}"
+      myName = 'LiamF'
+      echo "##vso[task.setvariable variable=myName;isoutput=true]${workspace}"
       echo "Liam"
     displayName: Set workspace
 
   - bash: |
       echo ${{ variables.workspace }}
-      echo $(workspace)
+      echo $(WORKSPACE)
+      echo $(myName)
       echo ${{ variables.service_base_path }}
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
