@@ -26,7 +26,7 @@ steps:
       echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
       echo "##vso[task.setvariable variable=workspace;isoutput=true]${workspace}"
       echo "Liam"
-    displayName: Set workspace ${{ variables.WORKSPACE }}
+    displayName: Set workspace
 
   - bash: |
       echo ${{ variables.WORKSPACE }}
@@ -34,7 +34,7 @@ steps:
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
 
-    displayName: 'TEST $(FULLY_QUALIFIED_SERVICE_NAME)'
+    displayName: 'TEST $(service_base_path)'
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
