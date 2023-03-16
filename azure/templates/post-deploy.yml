@@ -42,7 +42,7 @@ steps:
 
       echo $(one)
 
-    displayName: 'TEST $(service_base_path)'
+    displayName: 'TEST $(WORKSPACE)'
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
