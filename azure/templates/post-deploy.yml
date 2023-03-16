@@ -30,7 +30,7 @@ steps:
 
   - bash: |
       echo ${{ variables.WORKSPACE }}
-      echo ${{ workspace }}
+      #echo ${{ workspace }}
       echo ${{ variables.service_base_path }}
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
 
