@@ -28,6 +28,8 @@ steps:
       myName = 'LiamF'
       echo "##vso[task.setvariable variable=myName;isoutput=true]${workspace}"
       echo "Liam"
+
+      echo "##vso[task.setvariable variable=one]secondValue"
     displayName: Set workspace
 
   - bash: |
@@ -37,6 +39,8 @@ steps:
       echo ${{ variables.service_base_path }}
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
+
+      echo $(one)
 
     displayName: 'TEST $(service_base_path)'
 
