@@ -31,9 +31,10 @@ steps:
   - bash: |
       echo ${{ variables.WORKSPACE }}
       echo ${{ variables.service_base_path }}
+      echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
 
-    displayName: TEST $(FULLY_QUALIFIED_SERVICE_NAME)
+    displayName: TEST ${{FULLY_QUALIFIED_SERVICE_NAME}}
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
