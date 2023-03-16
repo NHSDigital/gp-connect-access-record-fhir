@@ -31,7 +31,7 @@ steps:
     displayName: Set workspace
 
   - bash: |
-      echo ${{ variables.workspace }}
+      echo ${{ variables.WORKSPACE }}
       echo $(WORKSPACE)
       echo $(myName)
       echo ${{ variables.service_base_path }}
