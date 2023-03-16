@@ -1,12 +1,7 @@
 data aws_caller_identity current {}
 
 locals {
-  ecr_repository_name = "gpconnect-infra-dev-token-validation-lambda"
   ecr_image_tag       = var.environment
-}
-
-data aws_ecr_repository lambda_image_registry {
-  name = local.ecr_repository_name
 }
 
 resource null_resource ecr_image {
@@ -30,7 +25,7 @@ data aws_ecr_image lambda_image {
   depends_on = [
     null_resource.ecr_image
   ]
-  repository_name = local.ecr_repository_name
+  repository_name = var.validation_ecr_name
   image_tag       = local.ecr_image_tag
 }
 
@@ -41,7 +36,7 @@ resource aws_lambda_function validate-token-lambda-function {
   function_name = "${var.short_name_prefix}-token-validation-lambda"
   role = aws_iam_role.lambda_role.arn
   timeout = 300
-  image_uri = "${data.aws_ecr_repository.lambda_image_registry.repository_url}@${data.aws_ecr_image.lambda_image.id}"
+  image_uri = "${var.validation_ecr_url}@${data.aws_ecr_image.lambda_image.id}"
   package_type = "Image"
   source_code_hash = data.aws_ecr_image.lambda_image.image_digest
 
@@ -52,8 +47,4 @@ resource aws_lambda_function validate-token-lambda-function {
           "client_secret": var.client_secret
       }
   }
-}
-
-output "lambda_name" {
-  value = aws_lambda_function.validate-token-lambda-function.id
 }

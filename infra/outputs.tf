@@ -21,3 +21,11 @@ output "fargate_subnet_ids" {
 output "vpc_link_id" {
   value = aws_apigatewayv2_vpc_link.alb_vpc_link.id
 }
+
+output "validation_ecr_name" {
+    value = aws_ecr_repository.lambda_image_registry.name
+}
+
+output "validation_ecr_url" {
+    value = aws_ecr_repository.lambda_image_registry.repository_url
+}

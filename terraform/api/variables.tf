@@ -9,6 +9,8 @@ variable "lb" {
     listener_arn = string
   })
 }
+variable "validation_ecr_name" {}
+variable "validation_ecr_url" {}
 variable "client_id" {}
 variable "client_secret" {}
 variable "keycloak_environment" {}

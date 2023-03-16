@@ -19,6 +19,8 @@ locals {
   private_subnet_cidr = data.aws_subnet.private_subnets.*.cidr_block
   vpc_id = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.vpc_id
   vpc_link_id  = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.vpc_link_id
+  validation_ecr_name = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.validation_ecr_name
+  validation_ecr_url = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.validation_ecr_url
 }
 
 data "aws_subnet" "public_subnets" {
