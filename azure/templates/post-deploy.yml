@@ -29,7 +29,8 @@ steps:
     displayName: Set workspace
 
   - bash: |
-      echo ${{ variables.WORKSPACE }}
+      echo ${{ variables.workspace }}
+      echo $(workspace)
       echo ${{ variables.service_base_path }}
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
