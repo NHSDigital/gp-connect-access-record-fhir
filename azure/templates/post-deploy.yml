@@ -24,9 +24,9 @@ steps:
       
       echo Workspace name is ${workspace}
       echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
-      echo "##vso[task.setvariable variable=WORKSPACE;isoutput=true]${workspace}"
+      echo "##vso[task.setvariable variable=WORKSPACE]${workspace}"
       myName = 'LiamF'
-      echo "##vso[task.setvariable variable=myName;isoutput=true]${workspace}"
+      echo "##vso[task.setvariable variable=myName;isoutput=true]${myName}"
       echo "Liam"
 
       echo "##vso[task.setvariable variable=one]secondValue"
