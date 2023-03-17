@@ -33,35 +33,33 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
-            GP_CONNECT_CONFIG: gp-connect-access-record-config
-            GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
+          GP_CONNECT_CONFIG: gp-connect-access-record-config
+          GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         jinja_templates:
-            GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
+          GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
         post_deploy:
           - template: ./templates/post-deploy.yml
       - environment: sandbox
         depends_on:
-          - internal-dev
           - internal-dev-sandbox
         proxy_path: sandbox
         jinja_templates:
-            GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
+          GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
       - environment: int
         depends_on:
           - internal-dev
-          - internal-dev-sandbox
         jinja_templates:
-            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
-            GP_CONNECT_CONFIG: gp-connect-access-record-config
-            GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
+          GP_CONNECT_CONFIG: gp-connect-access-record-config
+          GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
           - template: ./templates/post-deploy.yml
