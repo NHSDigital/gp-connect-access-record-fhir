@@ -10,6 +10,7 @@ steps:
     displayName: Setup pytests
     condition: always()
 
+  - stage: A
   - bash: |
       name=$(FULLY_QUALIFIED_SERVICE_NAME)
       workspace=$(echo $name | grep -oE '[0-9]+$')
@@ -39,10 +40,9 @@ steps:
       echo ${{ variables.service_base_path }}
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
-
       echo $(one)
-
-    displayName: 'TEST $(WORKSPACE)'
+      echo $(System.PullRequest.PullRequestNumber)
+    displayName: 'TEST $(System.PullRequest.PullRequestNumber)'
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
