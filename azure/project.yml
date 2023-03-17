@@ -7,4 +7,4 @@ variables:
   #prnum3: ${{ env:System_PullRequest_PullRequestId }}
   #prnum4: ${{ env:System_PullRequest_PullRequestNumber }}
   prnum1: $(FULLY_QUALIFIED_SERVICE_NAME)
-  pr_number: $[ variables['Build.Reason'] == 'PullRequest' ? variables['System.PullRequest.PullRequestId'] : 'none' ]
+  pr_number1: $[ variables['Build.Reason'] == 'PullRequest' ? variables['System.PullRequest.PullRequestId'] : 'none' ]
