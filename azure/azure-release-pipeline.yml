@@ -48,7 +48,7 @@ extends:
           - template: ./templates/post-deploy.yml
       - environment: sandbox
         depends_on:
-          - internal-dev-sandbox
+          - internal_dev_sandbox
         proxy_path: sandbox
         jinja_templates:
           GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
@@ -56,7 +56,7 @@ extends:
           GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
       - environment: int
         depends_on:
-          - internal-dev
+          - internal_dev
         jinja_templates:
           GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
           GP_CONNECT_CONFIG: gp-connect-access-record-config
