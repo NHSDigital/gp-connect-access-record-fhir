@@ -40,8 +40,8 @@ steps:
       echo "hi"
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
       echo $(one)
-      echo $(System.PullRequest.PullRequestNumber)
-    displayName: 'TEST $(System.PullRequest.PullRequestNumber)'
+      echo $(System.PullRequest.PullRequestId)
+    displayName: 'TEST $(System.PullRequest.PullRequestId)'
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
