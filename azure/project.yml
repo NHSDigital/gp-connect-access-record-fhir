@@ -6,4 +6,4 @@ variables:
   #prnum2: ${{ System.PullRequest.PullRequestNumber }}
   #prnum3: ${{ env:System_PullRequest_PullRequestId }}
   #prnum4: ${{ env:System_PullRequest_PullRequestNumber }}
-  prnum1: ${{ FULLY_QUALIFIED_SERVICE_NAME }}
+  prnum1: $(FULLY_QUALIFIED_SERVICE_NAME)
