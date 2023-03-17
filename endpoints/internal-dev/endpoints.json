@@ -1,7 +1,11 @@
 [
   {
-    "NAME": "REPC_internal-dev",
-    "VALUE": "https://dev.gcarf.dev.api.platform.nhs.uk"
+    "NAME": "REPC_urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthroizationservice",
+    "VALUE": "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token"
+  },
+  {
+  "NAME": "REPC_internal-dev",
+  "VALUE": "https://dev.gcarf.dev.api.platform.nhs.uk"
   },
   {
     "NAME": "TEST_NAME",
