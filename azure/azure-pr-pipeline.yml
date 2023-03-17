@@ -24,7 +24,7 @@ pool:
   name: 'AWS-ECS'
 
 variables:
-  - template: project.yml
+  template: project.yml
   pr_number: $[ if eq(variables['Build.Reason'], 'PullRequest') then variables['System.PullRequest.PullRequestId'] else 'none' ]
 
 extends:
