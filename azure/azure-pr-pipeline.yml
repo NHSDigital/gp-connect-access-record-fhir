@@ -25,6 +25,7 @@ pool:
 
 variables:
   - template: project.yml
+  pr_number: $[ if eq(variables['Build.Reason'], 'PullRequest') then variables['System.PullRequest.PullRequestId'] else 'none' ]
 
 extends:
   template: azure/common/apigee-deployment.yml@common
@@ -33,7 +34,7 @@ extends:
     short_service_name: ${{ variables.short_service_name }}
     service_base_path: ${{ variables.service_base_path }}
     jinja_templates:
-      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-PR
+      GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ variables.pr_number }}
     apigee_deployments:
       - environment: internal-dev
         post_deploy:
