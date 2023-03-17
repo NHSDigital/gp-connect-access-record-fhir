@@ -2,3 +2,7 @@ variables:
   service_name: gp-connect-access-record-fhir
   short_service_name: gcarf
   service_base_path: gp-connect-access-record-fhir/FHIR/STU3
+  prnum1: $(System.PullRequest.PullRequestId)
+  prnum2: $(System.PullRequest.PullRequestNumber)
+  prnum3: $env:System_PullRequest_PullRequestId
+  prnum4: $env:System_PullRequest_PullRequestNumber
