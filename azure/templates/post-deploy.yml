@@ -48,7 +48,7 @@ steps:
       echo ${{ variables.prnum2 }}
       echo ${{ variables.prnum3 }}
       echo ${{ variables.prnum4 }}
-    displayName: TEST $(service_base_path) (System.PullRequest.PullRequestId) (System.PullRequest.PullRequestNumber)
+    displayName: TEST $(service_base_path) $(prnum1) $(prnum2) $(prnum3) $(prnum4)
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
