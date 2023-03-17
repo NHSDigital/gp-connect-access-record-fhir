@@ -10,7 +10,6 @@ steps:
     displayName: Setup pytests
     condition: always()
 
-  - stage: A
   - bash: |
       name=$(FULLY_QUALIFIED_SERVICE_NAME)
       workspace=$(echo $name | grep -oE '[0-9]+$')
