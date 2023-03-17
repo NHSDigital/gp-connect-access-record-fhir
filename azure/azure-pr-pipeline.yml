@@ -24,8 +24,8 @@ pool:
   name: 'AWS-ECS'
 
 variables:
-  template: project.yml
-  pr_number: $[ if eq(variables['Build.Reason'], 'PullRequest') then variables['System.PullRequest.PullRequestId'] else 'none' ]
+  - template: project.yml
+  - pr_number: $[ if eq(variables['Build.Reason'], 'PullRequest') then variables['System.PullRequest.PullRequestId'] else 'none' ]
 
 extends:
   template: azure/common/apigee-deployment.yml@common
