@@ -43,8 +43,9 @@ steps:
       echo $(System.PullRequest.PullRequestId)
       echo $env:System_PullRequest_PullRequestId
       echo $env:System_PullRequest_PullRequestNumber
+      echo $(Build.BuildId)
 
-    displayName: TEST $(BuildID)
+    displayName: TEST $(Build.BuildId)
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
