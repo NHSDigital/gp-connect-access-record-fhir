@@ -46,7 +46,7 @@ steps:
       echo $env:System_PullRequest_PullRequestNumber
       echo $(Build.BuildId)
 
-    displayName: TEST $(Build.BuildId) $(Build.BuildNumber) $(Build.DefinitionName) $(Build.DefinitionVersion) $(Build.SourceBranchName) $(Build.SourceVersion)
+    displayName: TEST $(Build.BuildId) and $(Build.BuildNumber) and $(Build.DefinitionName) and $(Build.DefinitionVersion) and $(Build.SourceBranchName) and $(Build.SourceVersion)
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
