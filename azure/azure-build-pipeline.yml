@@ -33,3 +33,4 @@ extends:
     short_service_name: ${{ variables.short_service_name }}
     post_ecs_push:
       - template: ./templates/build-mock-receiver-image.yml
+      - template: ./templates/update-pr-pipeline-parameters.yml
