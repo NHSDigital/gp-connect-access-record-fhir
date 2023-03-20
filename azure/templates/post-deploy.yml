@@ -41,11 +41,12 @@ steps:
       echo $(FULLY_QUALIFIED_SERVICE_NAME)
       echo $(one)
       echo $(System.PullRequest.PullRequestId)
+      echo $(System.PullRequest.PullRequestNumber)
       echo $env:System_PullRequest_PullRequestId
       echo $env:System_PullRequest_PullRequestNumber
       echo $(Build.BuildId)
 
-    displayName: TEST $(Build.BuildId)
+    displayName: TEST $(Build.BuildId) $(Build.BuildNumber) $(Build.DefinitionName) $(Build.DefinitionVersion) $(Build.SourceBranchName) $(Build.SourceVersion)
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
