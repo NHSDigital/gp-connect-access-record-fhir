@@ -2,5 +2,8 @@ steps:
   - script: 'env | sort'
     displayName: "echo Environment Variables"
   - bash: |
-      echo $(System.PullRequest.PullRequestNumber)
+      echo $BUILD_SOURCEBRANCH
+      source_branch = $BUILD_SOURCEBRANCH
+      pr_number=${$source_branch:9:5}
+      echo $pr_number
     displayName: Check PR Number
