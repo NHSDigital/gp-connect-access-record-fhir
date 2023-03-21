@@ -12,14 +12,32 @@
         <Name>FlowCallout.ApplyRateLimiting</Name>
       </Step>
       <Step>
-        <Name>JavaScript.CreateKVMKeyName</Name>
+        <Name>JavaScript.CreateKVMKeyNames</Name>
       </Step>
       <Step>
-        <Name>KeyValueMapOperations.GetEndpoints</Name>
+         <Name>KeyValueMapOperations.GetEndpoints</Name>
       </Step>
       <Step>
-        <Name>JavaScript.SetEndpoint</Name>
+         <Name>KeyValueMapOperations.GetConfig</Name>
       </Step>
+      <Step>
+         <Name>JavaScript.SetEndpoints</Name>
+       </Step>
+      <Step>
+        <Name>KeyValueMapOperations.GetSecureVariables</Name>
+      </Step> 
+      <Step>
+        <Name>GenerateJWT.GPCPFSLoginClientAssertion</Name>
+      </Step>
+      <Step>
+        <Name>ServiceCallout.AuthenticateAgainstGPCPFS</Name>
+      </Step>
+      <Step>
+        <Name>JavaScript.GetGPCAuthCode</Name>
+      </Step>
+      <Step>
+        <Name>AssignMessage.AddAuthorizationHeader</Name>
+      </Step> 
       <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>
@@ -42,6 +60,12 @@
         <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
       </Step>
       <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+    </FaultRule>
+    <FaultRule name="gpc_access_token_expired">
+     <Step>
+         <Name>AssignMessage.GPCAuthErrorResponse</Name>
+      </Step>
+            <Condition>GPCPFSAuthResponse.status.code=="500"</Condition>
     </FaultRule>
   </FaultRules>
   <!--

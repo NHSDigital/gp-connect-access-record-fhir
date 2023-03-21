@@ -8,7 +8,7 @@ protocol="https://"
 protocol+=$domain_name  
 echo $1   
 echo $protocol  
-jq --arg key $1 --arg value $protocol '.[ .[]|length ]  += { "NAME" :$key, "VALUE": $value}' ../endpoints/internal-dev/endpoints.json > justForthisUse.json
-cp -f justForthisUse.json ../endpoints/internal-dev/endpoints.json 
+jq --arg key $1 --arg value $protocol '.[ .[]|length ]  += { "NAME" :$key, "VALUE": $value}' ../endpoints/$APIGEE_ENVIRONMENT/endpoints.json > justForthisUse.json
+cp -f justForthisUse.json ../endpoints/$APIGEE_ENVIRONMENT/endpoints.json 
 rm justForthisUse.json
 
