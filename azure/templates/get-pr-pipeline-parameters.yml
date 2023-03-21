@@ -3,4 +3,4 @@ steps:
     displayName: "echo Environment Variables"
   - bash: |
       echo $(System.PullRequest.PullRequestNumber)
-    displayName: Set workspace
+    displayName: Check PR Number
