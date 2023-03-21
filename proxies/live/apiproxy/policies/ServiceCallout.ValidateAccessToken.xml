@@ -6,7 +6,7 @@
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
         <Set>
             <Headers>
-                <Header name="GPC-Authorization">{request.header.GPC-Authorization}</Header>
+                <Header name="Authorization">{request.header.Authorization}</Header>
             </Headers>
             <Verb>POST</Verb>
         </Set>
