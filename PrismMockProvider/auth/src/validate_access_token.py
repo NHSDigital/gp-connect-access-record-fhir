@@ -13,6 +13,7 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
     Get the introspection endpoint from the Keycloak realm's discovery document and validate an access token against it.
     """
     # Extract just the token value from the header
+    print(incoming_token)
     token = re.sub(r"Bearer\s|Basic\s", "", incoming_token)
     print(token)
 
@@ -40,7 +41,7 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
 
 def handler(event, _context):
     # TODO - replace this custom header with the standard Auth header when AMB-1438 is merged
-    access_token = event.get("headers").get("GPC-Authorization")
+    access_token = event.get("headers").get("Authorization")
     is_valid = validate_access_token(
         os.getenv("keycloak_environment"),
         os.getenv("client_id"),
