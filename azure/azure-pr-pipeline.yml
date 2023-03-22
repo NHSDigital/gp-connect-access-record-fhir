@@ -5,6 +5,7 @@ parameters:
   displayName: PR Number
   type: string
   #default: ${{ extract("/\d+/", $BUILD_SOURCEBRANCH) }}
+  default: ${{ $BUILD_SOURCEBRANCH) }}
 
 trigger: none
 pr: none
