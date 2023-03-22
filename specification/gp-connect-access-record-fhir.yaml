@@ -212,10 +212,6 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
-        - $ref: "#/components/parameters/TraceID"
-        - $ref: "#/components/parameters/ConsumerASID"
-        - $ref: "#/components/parameters/ProviderASID"
-        - $ref: "#/components/parameters/ARInteration"
         - in: query
           name: _count
           description: >
@@ -367,10 +363,6 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
-        - $ref: "#/components/parameters/TraceID"
-        - $ref: "#/components/parameters/ConsumerASID"
-        - $ref: "#/components/parameters/ProviderASID"
-        - $ref: "#/components/parameters/PatientInteration"
         - in: path
           name: id
           description: The NHS Number of the patient you are searching for.
@@ -492,10 +484,6 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
-        - $ref: "#/components/parameters/TraceID"
-        - $ref: "#/components/parameters/ConsumerASID"
-        - $ref: "#/components/parameters/ProviderASID"
-        - $ref: "#/components/parameters/DocInteration"
         - in: path
           name: id
           description: The id of the document you are searching for.
@@ -558,10 +546,6 @@ paths:
         - $ref: "#/components/parameters/BearerAuthorization"
         - $ref: "#/components/parameters/CorrelationID"
         - $ref: "#/components/parameters/RequestID"
-        - $ref: "#/components/parameters/TraceID"
-        - $ref: "#/components/parameters/ConsumerASID"
-        - $ref: "#/components/parameters/ProviderASID"
-        - $ref: "#/components/parameters/DocInteration"
         - in: path
           name: id
           description: The NHS Number of the patient you are searching for.
@@ -886,77 +870,4 @@ components:
       schema:
         type: string
         pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
-        example: 60E0B220-8136-4CA5-AE46-1D97EF59D068
-    TraceID:
-      in: header
-      name: Ssp-TraceID
-      description: |
-        Consumer's Trace ID (a GUID or UUID), generated per request
-      required: true
-      schema:
-        type: string
-        example: '09a01679-2564-0fb4-5129-aecc81ea2706'
-    ConsumerASID:
-      in: header
-      name: Ssp-From
-      description: |
-        Consumer's ASID - that of the requesting organisation
-      required: true
-      schema:
-        type: string
-        example: '200000000359'
-    ProviderASID:
-      in: header
-      name: Ssp-To
-      description: |
-        Provider's ASID - identified by use of SDS
-      required: true
-      schema:
-        type: string
-        example: '918999198738'
-    ARInteration:
-      in: header
-      name: Ssp-ARInteration
-      description: |
-        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1
-      required: true
-      schema:
-        type: string
-        example: 'urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1'
-    SearchDocInteration:
-      in: header
-      name: Ssp-SearchDocInteration
-      description: |
-        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1
-      required: true
-      schema:
-        type: string
-        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1'
-    MetaInteration:
-      in: header
-      name: Ssp-MetaInteration
-      description: |
-        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1
-      required: true
-      schema:
-        type: string
-        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:metadata-1'
-    PatientInteration:
-      in: header
-      name: Ssp-PatientInteration
-      description: |
-        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1
-      required: true
-      schema:
-        type: string
-        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1'
-    DocInteration:
-      in: header
-      name: Ssp-DocInteration
-      description: |
-        Spine Interaction ID, likely to be 	urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1
-      required: true
-      schema:
-        type: string
-        example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'
-
+        example: 60E0B220-8136-4CA5-AE46-1D97EF59D068'
