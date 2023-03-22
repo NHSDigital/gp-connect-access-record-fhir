@@ -3,13 +3,12 @@ parameters:
     default: aws --profile=apim-dev
 
 steps:
-  - ${{ if ne( containsValue(['prod', 'int', 'dev', 'sandbox'], $APIGEE_ENVIRONMENT), 'true') }}:
+  - ${{ if not(containsValue(['prod', 'int', 'dev', 'sandbox'], $APIGEE_ENVIRONMENT)) }}:
     - template: "azure/components/aws-assume-role.yml@common"
       parameters:
           role: "auto-ops"
           profile: "apm_ptl"
 
-  - ${{ if ne(containsValue(['prod', 'int', 'dev', 'sandbox'], $APIGEE_ENVIRONMENT), 'true') }}:
     - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
       parameters:
           secret_file_ids:
