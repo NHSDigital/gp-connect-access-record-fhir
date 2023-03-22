@@ -1,16 +1,10 @@
 parameters:
-  - name: aws_dev
-    default: aws --profile=apim-dev
-  - name: prod_environments
-    type: object
-    default:
-      - prod
-      - int
-      - dev
-      - sandbox
+  - name: environment
+    default: internal_dev
+    type: string
 
 steps:
-  - ${{ if not(containsValue(parameters.prod_environments, $(APIGEE_ENVIRONMENT))) }}:
+  - ${{ if not(or(eq(parameters.environment, 'prod')), (eq(parameters.environment, 'int')), (eq(parameters.environment, 'dev')), (eq(parameters.environment, 'sandbox'))) }}:
     - template: "azure/components/aws-assume-role.yml@common"
       parameters:
           role: "auto-ops"
