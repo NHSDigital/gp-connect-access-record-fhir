@@ -65,8 +65,6 @@ def test_happy_path(
     _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
 ):
     """"""
-    access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
-
     headers = {
         "accept": "application/fhir+json",
         "X-Correlation-ID": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
