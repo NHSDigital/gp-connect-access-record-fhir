@@ -9,6 +9,7 @@ steps:
 
       if [[ $source_branch =~ refs/pull/([0-9]+)/merge ]]; then
         pr_number="${BASH_REMATCH[1]}"
+        echo $pr_number
       else
         echo "Could not extract pull request number from BUILD_SOURCEBRANCH"
         exit 1
