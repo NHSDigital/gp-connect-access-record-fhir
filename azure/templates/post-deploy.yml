@@ -1,10 +1,10 @@
 parameters:
-  - name: environment
-    default: internal_dev
-    type: string
+  - name: is_ptl
+    type: boolean
+    value: true
 
 steps:
-  - ${{ if not(or(eq(parameters.environment, 'prod')), (eq(parameters.environment, 'int')), (eq(parameters.environment, 'dev')), (eq(parameters.environment, 'sandbox'))) }}:
+  - ${{ if parameters.is_ptl }}:
     - template: "azure/components/aws-assume-role.yml@common"
       parameters:
           role: "auto-ops"

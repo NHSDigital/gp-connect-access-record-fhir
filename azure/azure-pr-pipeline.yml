@@ -40,6 +40,8 @@ extends:
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
           - template: ./templates/post-deploy.yml
+            parameters:
+              is_ptl: true
       - environment: internal-dev-sandbox
         proxy_path: sandbox
         jinja_templates:
@@ -49,4 +51,4 @@ extends:
         post_deploy:
           - template: ./templates/post-deploy.yml
             parameters:
-              environment: $(APIGEE_ENVIRONMENT)
+              is_ptl: true
