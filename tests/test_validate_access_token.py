@@ -76,7 +76,6 @@ def test_happy_path(
         "Ssp-To": "918999198738",
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
         "Interaction-ID": interaction_id,
-        "GPC-Authorization": access_token
     }
     headers.update(nhsd_apim_auth_headers)
     resp = requests.get(
@@ -104,7 +103,6 @@ def test_401_invalid_token(
         "Ssp-TraceID": "09a01679-2564-0fb4-5129-aecc81ea2706", "Ssp-From": "200000000359",
         "Ssp-To": "918999198738",
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
-        "GPC-Authorization": "Junk token 3497g097dfsgfv3 b4rubvrdq3"
     }
     headers.update(nhsd_apim_auth_headers)
     resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
