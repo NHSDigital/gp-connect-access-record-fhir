@@ -1,7 +1,7 @@
 parameters:
   - name: is_ptl
     type: boolean
-    value: true
+    default: true
 
 steps:
   - ${{ if parameters.is_ptl }}:
