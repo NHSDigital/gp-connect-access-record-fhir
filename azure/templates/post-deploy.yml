@@ -25,7 +25,28 @@ steps:
       echo Workspace name is ${workspace}
       echo "##vso[task.setvariable variable=IS_IT_PR]${isItPR}"
       echo "##vso[task.setvariable variable=WORKSPACE]${workspace}"
+      myName = 'LiamF'
+      echo "##vso[task.setvariable variable=myName;isoutput=true]${myName}"
+      echo "Liam"
+
+      echo "##vso[task.setvariable variable=one]secondValue"
     displayName: Set workspace
+
+  - bash: |
+      echo ${{ variables.WORKSPACE }}
+      echo $(WORKSPACE)
+      echo $(variables.myName)
+      echo ${{ variables.service_base_path }}
+      echo "hi"
+      echo $(FULLY_QUALIFIED_SERVICE_NAME)
+      echo $(one)
+      echo $(System.PullRequest.PullRequestId)
+      echo $(System.PullRequest.PullRequestNumber)
+      echo $env:System_PullRequest_PullRequestId
+      echo $env:System_PullRequest_PullRequestNumber
+      echo $(Build.BuildId)
+
+    displayName: TEST $(Build.BuildId) and $(Build.BuildNumber) and $(Build.DefinitionName) and $(Build.DefinitionVersion) and $(Build.SourceBranchName) and $(Build.SourceVersion) and $(System.DefinitionId) and $(System.DefinitionVersion) and $(System.PullRequest.PullRequestId) and $(System.PullRequest.PullRequestNumber) and $env:System_PullRequest_PullRequestId
 
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:

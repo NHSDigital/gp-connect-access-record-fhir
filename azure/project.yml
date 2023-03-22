@@ -2,3 +2,5 @@ variables:
   service_name: gp-connect-access-record-fhir
   short_service_name: gcarf
   service_base_path: gp-connect-access-record-fhir/FHIR/STU3
+  prnum1: $(FULLY_QUALIFIED_SERVICE_NAME)
+  pr_number1: $(System.PullRequest.PullRequestId)
