@@ -1,7 +1,6 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
 parameters:
-parameters:
 - name: pr_number
   displayName: PR Number
   type: string
