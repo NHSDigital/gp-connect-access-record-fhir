@@ -9,19 +9,6 @@ parameters:
 trigger: none
 pr: none
 
-steps:
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      pr_branch=$(echo $BUILD_SOURCEBRANCH | sed 's#^refs/pull/\([0-9]\+\)/merge$#\1#g')
-      echo "##vso[task.setvariable variable=pr_number]$pr_branch"
-      echo "PR number is $pr_branch"
-
-- script: |
-    echo "PR number is $(pr_number)"
-  displayName: 'Print PR number'
-
 resources:
   repositories:
     - repository: common
@@ -46,6 +33,18 @@ variables:
   - template: project.yml
 
 steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      pr_branch=$(echo $BUILD_SOURCEBRANCH | sed 's#^refs/pull/\([0-9]\+\)/merge$#\1#g')
+      echo "##vso[task.setvariable variable=pr_number]$pr_branch"
+      echo "PR number is $pr_branch"
+
+- script: |
+    echo "PR number is $(pr_number)"
+  displayName: 'Print PR number'
+
 - template: azure/common/apigee-deployment.yml@common
   parameters:
     pre_template:
