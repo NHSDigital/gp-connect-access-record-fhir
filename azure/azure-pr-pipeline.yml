@@ -4,8 +4,7 @@ parameters:
 - name: pr_number
   displayName: PR Number
   type: string
-  #default: ${{ extract("/\d+/", $BUILD_SOURCEBRANCH) }}
-  default: ${{ $BUILD_SOURCEBRANCH }}
+  default: ${{ replace(regexp(variables['BUILD_SOURCEBRANCH'], 'refs/pull/([0-9]+)/merge'), '\\1') }}
 
 trigger: none
 pr: none
