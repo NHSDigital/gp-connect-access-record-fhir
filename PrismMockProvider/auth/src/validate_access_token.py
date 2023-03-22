@@ -22,6 +22,7 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
         f"auth/realms/gpconnect-pfs-mock-{keycloak_env}/.well-known/uma2-configuration"
     print(discovery_url)
     discovery = requests.get(discovery_url).json()
+    print(discovery)
     introspection_endpoint = discovery.get('introspection_endpoint')
     print(introspection_endpoint)
 
@@ -40,8 +41,7 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
 
 
 def handler(event, _context):
-    # TODO - replace this custom header with the standard Auth header when AMB-1438 is merged
-    access_token = event.get("headers").get("Authorization")
+    access_token = event.get("headers").get("authorization")
     is_valid = validate_access_token(
         os.getenv("keycloak_environment"),
         os.getenv("client_id"),
