@@ -4,6 +4,6 @@ steps:
   - bash: |
       echo $BUILD_SOURCEBRANCH
       source_branch=$BUILD_SOURCEBRANCH
-      pr_number=${source_branch:10:4}
+      pr_number=${source_branch:10:3}
       echo $pr_number
     displayName: Check PR Number
