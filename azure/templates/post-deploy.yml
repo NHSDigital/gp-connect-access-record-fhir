@@ -10,7 +10,7 @@ parameters:
       - sandbox
 
 steps:
-  - ${{ if not(containsValue(parameters.prod_environments, $APIGEE_ENVIRONMENT)) }}:
+  - ${{ if not(containsValue(parameters.prod_environments, $(APIGEE_ENVIRONMENT))) }}:
     - template: "azure/components/aws-assume-role.yml@common"
       parameters:
           role: "auto-ops"
