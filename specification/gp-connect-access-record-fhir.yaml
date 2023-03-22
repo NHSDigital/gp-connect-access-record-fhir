@@ -570,29 +570,41 @@ paths:
             example: 9000000009
           required: true
         - in: query
-          name: _include=DocumentReference:subject:Patient
-          description: Include Patient resources referenced within the returned DocumentReference resources
+          name: _include
+          required: false
           schema:
-            type: string
-          required: true
-        - in: query
-          name: _include=DocumentReference:custodian:Organization
-          description: Details of organisations that are custodians for the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
-        - in: query
-          name: _include=DocumentReference:author:Organization
-          description: Details of organisations that authored the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
-        - in: query
-          name: _include=DocumentReference:author:Practitioner
-          description: Details of who/what authored the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
+            type: array
+            items:
+              type: string
+              enum:
+                - DocumentReference:subject:Patient
+                - DocumentReference:custodian:Organization
+                - DocumentReference:author:Organization
+                - DocumentReference:author:Practitioner
+        # - in: query
+        #   name: _include=DocumentReference:subject:Patient
+        #   description: Include Patient resources referenced within the returned DocumentReference resources
+        #   schema:
+        #     type: string
+        #   required: true
+        # - in: query
+        #   name: _include=DocumentReference:custodian:Organization
+        #   description: Details of organisations that are custodians for the documents that are returned in DocumentReference resources
+        #   schema:
+        #     type: string
+        #   required: true
+        # - in: query
+        #   name: _include=DocumentReference:author:Organization
+        #   description: Details of organisations that authored the documents that are returned in DocumentReference resources
+        #   schema:
+        #     type: string
+        #   required: true
+        # - in: query
+        #   name: _include=DocumentReference:author:Practitioner
+        #   description: Details of who/what authored the documents that are returned in DocumentReference resources
+        #   schema:
+        #     type: string
+        #   required: true
         - in: query
           name: _revinclude:recurse=PractitionerRole:practitioner
           description: PractitionerRole:practitioner Include PractitionerRole resources referenced from matching Practitioner resources
