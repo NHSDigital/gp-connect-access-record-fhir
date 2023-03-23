@@ -23,17 +23,8 @@ resources:
 pool:
   name: 'AWS-ECS'
 
-#variables:
-#  - template: project.yml
 variables:
-  - name: pr_number
-    value: ${{ split(variables['Build.SourceBranch'], '/')[2] }}
-  - name: service_name
-    value: gp-connect-access-record-fhir
-  - name: short_service_name
-    value: gcarf
-  - name: service_base_path
-    value: gp-connect-access-record-fhir/FHIR/STU3
+  - template: project.yml
 
 extends:
   template: azure/common/apigee-deployment.yml@common
@@ -44,7 +35,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ variables.pr_number }}
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-pr-${{ variables.pr_number }}
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
