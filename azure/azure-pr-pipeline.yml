@@ -26,10 +26,14 @@ pool:
 #variables:
 #  - template: project.yml
 variables:
-  source_branch: -${{ variables['Build.SourceBranch'] }}
-  service_name: gp-connect-access-record-fhir
-  short_service_name: gcarf
-  service_base_path: gp-connect-access-record-fhir/FHIR/STU3
+  - name: pr_number
+    value: ${{ replace(variables['Build.SourceBranch'], 'refs/pull/') }}
+  - name: service_name
+    value: gp-connect-access-record-fhir
+  - name: short_service_name
+    value: gcarf
+  - name: service_base_path
+    value: gp-connect-access-record-fhir/FHIR/STU3
 
 extends:
   template: azure/common/apigee-deployment.yml@common
@@ -40,7 +44,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ variables.source_branch }}
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints${{ variables.pr_number }}
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
