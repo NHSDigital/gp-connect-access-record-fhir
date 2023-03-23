@@ -27,7 +27,7 @@ pool:
 #  - template: project.yml
 variables:
   - name: pr_number
-    value: ${{ replace(variables['Build.SourceBranch'], 'refs/pull/') }}
+    value: ${{ split(variables['Build.SourceBranch'], '/')[2] }}
   - name: service_name
     value: gp-connect-access-record-fhir
   - name: short_service_name
@@ -44,7 +44,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints$-{{ replace(variables.pr_number, "/merge", "") }}
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints$-{{ pr_number }}
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
