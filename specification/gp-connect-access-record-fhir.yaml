@@ -303,8 +303,8 @@ paths:
               schema: 
                 type: object
               examples:
-                fullRecord:  
-                  value: "#/examples/full_record"
+                fullRecord:
+                  $ref: "#examples/full_record.yaml"
         4XX:
           description: |
             An error occured as follows:
