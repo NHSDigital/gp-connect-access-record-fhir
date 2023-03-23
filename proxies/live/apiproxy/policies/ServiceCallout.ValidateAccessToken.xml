@@ -13,7 +13,7 @@
     </Request>
     <Response>tokenValidationResponse</Response>
     <HTTPTargetConnection>
-        <URL>https://{validation_endpoint}</URL>
+        <URL>https://{validation_endpoint}/validate</URL>
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
