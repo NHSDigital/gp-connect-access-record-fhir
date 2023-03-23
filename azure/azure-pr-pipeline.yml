@@ -1,11 +1,5 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
-parameters:
-- name: pr_number
-  displayName: PR Number
-  type: string
-  default: ${{ extract("/\d+/", $BUILD_SOURCEBRANCH) }}
-
 trigger: none
 pr: none
 
@@ -43,7 +37,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ parameters.pr_number }}
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ setPRNumber.pr_number }}
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
