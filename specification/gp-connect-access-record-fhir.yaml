@@ -570,34 +570,24 @@ paths:
             example: 9000000009
           required: true
         - in: query
-          name: _include=DocumentReference:subject:Patient
+          name: _include
           description: Include Patient resources referenced within the returned DocumentReference resources
           schema:
-            type: string
-          required: true
+            type: array
+            items:
+              type: string
+              enum:
+                - DocumentReference:subject:Patient
+                - DocumentReference:custodian:Organization
+                - DocumentReference:author:Organization
+                - DocumentReference:author:Practitioner
+
         - in: query
-          name: _include=DocumentReference:custodian:Organization
-          description: Details of organisations that are custodians for the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
-        - in: query
-          name: _include=DocumentReference:author:Organization
-          description: Details of organisations that authored the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
-        - in: query
-          name: _include=DocumentReference:author:Practitioner
-          description: Details of who/what authored the documents that are returned in DocumentReference resources
-          schema:
-            type: string
-          required: true
-        - in: query
-          name: _revinclude:recurse=PractitionerRole:practitioner
+          name: _revinclude:recurse
           description: PractitionerRole:practitioner Include PractitionerRole resources referenced from matching Practitioner resources
           schema:
             type: string
+            enum: PractitionerRole:practitioner
           required: true
         - in: query
           name: created
