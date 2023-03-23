@@ -58,7 +58,7 @@ steps:
       
           make init
           echo 'INIT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE'
-          make taint
+          make taint aws_account_no=${aws_account_no} environment=$(WORKSPACE)
           echo 'TAINT DONEEEEEEEEEEEEEEEEEEEEEEEEEEE'
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
       fi
