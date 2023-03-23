@@ -44,7 +44,7 @@ extends:
     apigee_deployments:
       - environment: internal-dev
         jinja_templates:
-          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints${{ variables.pr_number }}
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints$-{{ replace(variables.pr_number, "/merge", "") }}
           GP_CONNECT_CONFIG: gp-connect-access-record-config
           GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
         post_deploy:
