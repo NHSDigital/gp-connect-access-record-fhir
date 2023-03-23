@@ -27,7 +27,7 @@ pool:
 #  - template: project.yml
 variables:
   # Ew >:(
-  source_branch: -${{ replace(replace(variables['Build.SourceBranch'], "refs/pull/", ""), "/merge", "") }}
+  source_branch: ${{ replace(replace(variables['Build.SourceBranch'], "refs/pull/", ""), "/merge", "") }}
   service_name: gp-connect-access-record-fhir
   short_service_name: gcarf
   service_base_path: gp-connect-access-record-fhir/FHIR/STU3
