@@ -587,7 +587,8 @@ paths:
           description: PractitionerRole:practitioner Include PractitionerRole resources referenced from matching Practitioner resources
           schema:
             type: string
-            enum: PractitionerRole:practitioner
+            enum:
+              - PractitionerRole:practitioner
           required: true
         - in: query
           name: created
