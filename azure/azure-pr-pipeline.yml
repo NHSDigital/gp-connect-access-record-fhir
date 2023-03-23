@@ -27,36 +27,29 @@ pool:
 #  - template: project.yml
 variables:
   branchName: -${{ variables['Build.SourceBranchName'] }}
+  service_name: gp-connect-access-record-fhir
+  short_service_name: gcarf
+  service_base_path: gp-connect-access-record-fhir/FHIR/STU3
 
-steps:
-  - script: 'env | sort'
-    displayName: "echo Environment Variables"
-  - bash: |
-      echo $BUILD_SOURCEBRANCH
-      source_branch = $BUILD_SOURCEBRANCH
-      pr_number=${$source_branch:9:5}
-      echo $pr_number
-      echo "##vso[task.setvariable variable=pr_number]$pr_number"
-    name: setPRNumber
-    displayName: Check PR Number
-  - template: azure/common/apigee-deployment.yml@common
-    parameters:
-      service_name: ${{ variables.service_name }}
-      short_service_name: ${{ variables.short_service_name }}
-      service_base_path: ${{ variables.service_base_path }}
-      apigee_deployments:
-        - environment: internal-dev
-          jinja_templates:
-            GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ variables.branchName }}
-            GP_CONNECT_CONFIG: gp-connect-access-record-config
-            GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
-          post_deploy:
-            - template: ./templates/post-deploy.yml
-        - environment: internal-dev-sandbox
-          proxy_path: sandbox
-          jinja_templates:
-            GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
-            GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
-          post_deploy:
-            - template: ./templates/post-deploy.yml
+extends:
+  template: azure/common/apigee-deployment.yml@common
+  parameters:
+    service_name: ${{ variables.service_name }}
+    short_service_name: ${{ variables.short_service_name }}
+    service_base_path: ${{ variables.service_base_path }}
+    apigee_deployments:
+      - environment: internal-dev
+        jinja_templates:
+          GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints-${{ variables.branchName }}
+          GP_CONNECT_CONFIG: gp-connect-access-record-config
+          GP_CONNECT_CONFIG_ENCRYPTED: gp-connect-access-record-config-encrypted
+        post_deploy:
+          - template: ./templates/post-deploy.yml
+      - environment: internal-dev-sandbox
+        proxy_path: sandbox
+        jinja_templates:
+          GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG: just-dummy-value-for-successful-build
+          GP_CONNECT_CONFIG_ENCRYPTED: just-dummy-value-for-successful-build
+        post_deploy:
+          - template: ./templates/post-deploy.yml
