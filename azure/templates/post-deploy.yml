@@ -57,6 +57,8 @@ steps:
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
           make init
+          #Terraform should detect that the aws_ecs_task_definition resource is tainted and plan to destroy and recreate it with the latest image.
+          make taint
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
       fi
     displayName: Run Terraform

@@ -29,6 +29,9 @@ add-endpoint: outputs
 	chmod +x ./AddEndpoints.sh
 	./AddEndpoints.sh $(key4KVM)
 
+taint: workspace
+	$(tr_cmd) taint module.mock-provider.aws_ecs_task_definition.mock-provider
+
 outputs:
 	$(tr_cmd) output -json > ./outputs.json
 
