@@ -304,7 +304,7 @@ paths:
                 type: object
               examples:
                 fullRecord:
-                  $ref: "#examples/full_record.yaml"
+                  $ref: "#components/examples/FullRecord"
         4XX:
           description: |
             An error occured as follows:
@@ -954,4 +954,6 @@ components:
       schema:
         type: string
         example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'
-
+  examples:
+    FullRecord:
+      $ref: "components/examples/full_record.yaml"
