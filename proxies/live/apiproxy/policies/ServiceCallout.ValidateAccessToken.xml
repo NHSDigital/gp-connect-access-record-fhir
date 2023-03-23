@@ -3,21 +3,20 @@
     <DisplayName>ServiceCallout.ValidateAccessToken</DisplayName>
     <Properties/>
     <Request clearPayload="true" variable="tokenValidationRequest">
-        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
         <Set>
+            <Verb>POST</Verb>
             <Headers>
                 <Header name="Authorization">{authorization_access_token}</Header>
             </Headers>
-            <Verb>POST</Verb>
         </Set>
     </Request>
     <Response>tokenValidationResponse</Response>
     <HTTPTargetConnection>
         <URL>https://{validation_endpoint}</URL>
-        <Properties>
-            <Property name="supports.http10">true</Property>
-            <Property name="request.retain.headers">User-Agent,Referer,Accept-Language,Authorization</Property>
-        </Properties>
+        <SSLInfo>
+            <Enabled>true</Enabled>
+        </SSLInfo>
     </HTTPTargetConnection>
-    <Timeout>300</Timeout>
+    <Timeout>600</Timeout>
 </ServiceCallout>
