@@ -298,6 +298,13 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
+          content: 
+            application/fhir+json:
+              schema: 
+                type: object
+              examples:
+                fullRecord:
+                  $ref: "#components/examples/FullRecord"
         4XX:
           description: |
             An error occured as follows:
@@ -947,4 +954,6 @@ components:
       schema:
         type: string
         example: 'urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1'
-
+  examples:
+    FullRecord:
+      $ref: "components/examples/full_record.yaml"
