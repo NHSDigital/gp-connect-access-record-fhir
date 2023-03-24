@@ -105,7 +105,7 @@ steps:
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
       export PROXY_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
-      export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(ptl/app-credentials/jwt-testing/summary-care-record/non-prod/JWT_APP_RESTRICTED_PRIVATE_KEY)"
+      export JWT_PRIVATE_KEY="$(JWT_TESTING_PRIVATE_KEY)"
 
 
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
