@@ -23,7 +23,7 @@ if (endpoint) {
   context.setVariable("target.url", url)
 
   // Set the endpoint for validating the GPC access token.
-  var validation_url = context.getVariable("request.header.validation-url").replace("https://", "")
+  var validation_url = context.getVariable("request.header.validation-url")
   // A specific validation endpoint can be specified by passing a Validation-URL header in the request,
   // in our case this is a /validate endpoint on the mock receiver, which we fall back to when no header is passed.
   if (!validation_url) {
