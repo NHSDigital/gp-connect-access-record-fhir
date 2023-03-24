@@ -106,8 +106,8 @@ steps:
       export PROXY_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
       export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
-      export client_id="$(ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID)"
-      export client_secret="$(ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET)"
+      export client_id="$(INTROSPECTION_CLIENT_ID)"
+      export client_secret="$(INTROSPECTION_CLIENT_SECRET)"
 
 
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
