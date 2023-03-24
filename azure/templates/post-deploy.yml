@@ -57,9 +57,6 @@ steps:
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
           make init
-          echo 'INIT DONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE'
-          make taint aws_account_no=${aws_account_no} environment=$(WORKSPACE)
-          echo 'TAINT DONEEEEEEEEEEEEEEEEEEEEEEEEEEE'
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
       fi
     displayName: Run Terraform
