@@ -28,8 +28,8 @@ def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keyc
 
     assert validate_access_token(
         apigee_environment,
-        getenv("INTROSPECTION_CLIENT_ID"),
-        getenv("INTROSPECTION_CLIENT_SECRET"),
+        getenv("client_id"),
+        getenv("client_secret"),
         access_token
     )
 
@@ -103,7 +103,10 @@ def test_401_invalid_token(
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
     }
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
+    resp = requests.get(
+      f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+      headers=headers
+    )
 
     assert resp.status_code == 401
 
