@@ -58,6 +58,7 @@ steps:
       
           make init
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE)
+          aws ecs update-service --cluster gp-connect-pfs-access-record-mock-provider-pr-162 --service gp-connect-pfs-access-record-mock-provider-pr-162 --force-new-deployment --region eu-west-2
       fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"

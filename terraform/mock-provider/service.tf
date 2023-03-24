@@ -7,7 +7,7 @@ resource "aws_ecs_service" "mock-provider-service" {
   desired_count                      = 2
   launch_type                        = "FARGATE"
   force_new_deployment               = true
-  deployment_maximum_percent         = 100
+  deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 0
   network_configuration {
     security_groups  = [aws_security_group.service_security_group.id]
