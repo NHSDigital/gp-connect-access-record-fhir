@@ -537,6 +537,11 @@ paths:
           required: true
         - in: query
           name: _include
+          description: |
+            DocumentReference:subject:Patient - Include Patient resources referenced within the returned DocumentReference resources
+            DocumentReference:custodian:Organization - Details of organisations that are custodians for the documents that are returned in DocumentReference resources
+            DocumentReference:author:Organization - Details of organisations that authored the documents that are returned in DocumentReference resources
+            DocumentReference:author:Practitioner - Details of who/what authored the documents that are returned in DocumentReference resources
           required: false
           schema:
             type: array
@@ -551,8 +556,11 @@ paths:
           name: _revinclude:recurse
           description: PractitionerRole:practitioner Include PractitionerRole resources referenced from matching Practitioner resources
           schema:
-            type: string
-            example: PractitionerRole:practitioner
+            type: array
+            items:
+              type: string
+              enum:
+                - PractitionerRole:practitioner
           required: false
         - in: query
           name: created
