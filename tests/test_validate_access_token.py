@@ -126,7 +126,7 @@ def get_access_token(environment, client_credentials):
     url = f"https://identity.ptl.api.platform.nhs.uk/auth/" \
         f"realms/gpconnect-pfs-mock-{environment}/protocol/openid-connect/token"
 
-    with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
+    with open(getenv("JWT_TESTING_PRIVATE_KEY"), "r") as key:
         private_key = key.read()
 
     data = {
@@ -157,7 +157,7 @@ def invalidate_token(token, environment):
     url = f"https://identity.ptl.api.platform.nhs.uk/auth/" \
         f"realms/gpconnect-pfs-mock-{environment}/protocol/openid-connect/token"
 
-    with open(getenv("JWT_PRIVATE_KEY_ABSOLUTE_PATH"), "r") as key:
+    with open(getenv("JWT_TESTING_PRIVATE_KEY"), "r") as key:
         private_key = key.read()
 
     requests.post(
