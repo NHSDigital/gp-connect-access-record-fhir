@@ -1,26 +1,31 @@
--include .env
 environment = dev
 aws_profile = apim-dev
 tf_opt=
-tf_state=
-tf_vars=
-tr_cmd = AWS_PROFILE=$(aws_profile) terraform
+tf_cmd = AWS_PROFILE=$(aws_profile) terraform
+
+project_name = gp-connect-access-record-fhir
+state_bucket = $(project_name)-infra-terraform-state
+tf_state= -backend-config="bucket=$(state_bucket)"
+
+tf_vars= -var="project_name=$(project_name)"
 
 .SILENT:
 workspace:
-	$(tr_cmd) workspace new $(environment) || $(tr_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
+	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
 
 init:
-	$(tr_cmd) init $(tf_state) $(tf_vars)
+	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
-	$(tr_cmd) plan
+	$(tf_cmd) plan
 
 apply: workspace
-	 $(tr_cmd) apply -auto-approve
+	 $(tf_cmd) apply $(tf_vars) -auto-approve
 
 destroy:
-	$(tr_cmd) destroy
+	$(tf_cmd) destroy
 
-
-
+lock-provider:
+	# Run this only when you install a new terraform provider. This will generate sha code in lock file for all platform
+	echo "This may take some time. Be patient!"
+	$(tf_cmd) providers lock -platform=darwin_arm64 -platform=darwin_amd64 -platform=linux_amd64 -platform=windows_amd64

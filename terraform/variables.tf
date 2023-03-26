@@ -1,5 +1,4 @@
-variable "project" {
-  default = "gp-connect-pfs-access-record"
+variable "project_name" {
 }
 
 variable "service" {
@@ -13,12 +12,12 @@ locals {
 locals {
   short_name          = "gcarf"
   environment         = terraform.workspace
-  name_prefix         = "${var.project}-${var.service}-${local.environment}"
+  name_prefix         = "${var.project_name}-${var.service}-${local.environment}"
   short_name_prefix   = "${local.short_name}-${local.environment}"
   service_domain_name = "${local.environment}.${local.project_domain_name}"
 
   tags = {
-    Project     = var.project
+    Project     = var.project_name
     Environment = local.environment
     Service     = var.service
   }
