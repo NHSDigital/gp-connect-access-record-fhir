@@ -1,36 +1,42 @@
 -include .env
 
-aws_profile = apim-dev
-tr_vars=
-tr_cmd = AWS_PROFILE=$(aws_profile) terraform
 interactionId=$(environment)
 odsCode="REPC"
 key4KVM=$(odsCode)_$(interactionId)
 
+aws_profile = apim-dev
+tf_cmd = AWS_PROFILE=$(aws_profile) terraform
+
+project_name = gp-connect-access-record-fhir
+state_bucket = $(project_name)-terraform-state
+tf_state= -backend-config="bucket=$(state_bucket)"
+
+tf_vars= -var="project_name=$(project_name)"
+
 workspace:
-	$(tr_cmd) workspace new $(environment) || $(tr_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
+	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
 
 init:
-	$(tr_cmd) init -backend-config="key=gpconnectpfs" $(tr_vars)
+	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
-	 $(tr_cmd) plan
+	 $(tf_cmd) plan $(tf_vars)
 
 apply: workspace
-	$(tr_cmd) apply -auto-approve
+	$(tf_cmd) apply $(tf_vars) -auto-approve
 
 clean:
 	rm -rf build .terraform upload-key
 
-destroy:
-	$(tr_cmd) destroy
+destroy: workspace
+	$(tf_cmd) destroy -auto-approve
 
 add-endpoint: outputs
 	chmod +x ./AddEndpoints.sh
 	./AddEndpoints.sh $(key4KVM)
 
 outputs:
-	$(tr_cmd) output -json > ./outputs.json
+	$(tf_cmd) output -json > ./outputs.json
 
 mock_provider_repository_name = gpconnect-infra-dev
 mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
@@ -49,3 +55,8 @@ docker-build:
 
 docker-deploy: docker-login
 	 docker push $(dockerImageName)
+
+lock-provider:
+	# Run this only when you install a new terraform provider. This will generate sha code in lock file for all platform
+	echo "This may take some time. Be patient!"
+	$(tf_cmd) providers lock -platform=darwin_arm64 -platform=darwin_amd64 -platform=linux_amd64 -platform=windows_amd64
