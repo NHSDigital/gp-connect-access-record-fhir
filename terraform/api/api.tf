@@ -44,19 +44,6 @@ resource "aws_apigatewayv2_route" "root_route" {
   target    = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
 }
 
-resource "aws_apigatewayv2_integration" "token_validation_integration" {
-  api_id = aws_apigatewayv2_api.service_api.id
-  integration_uri    = aws_lambda_function.validate-token-lambda-function.invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
-}
-
-resource "aws_apigatewayv2_route" "post_token_validation" {
-  api_id = aws_apigatewayv2_api.service_api.id
-  route_key = "POST /validate"
-  target    = "integrations/${aws_apigatewayv2_integration.token_validation_integration.id}"
-}
-
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
@@ -85,6 +72,18 @@ resource "aws_apigatewayv2_stage" "default" {
   lifecycle {
     ignore_changes = [deployment_id]
   }
+}
+
+resource "aws_apigatewayv2_authorizer" "token_validation" {
+  api_id                            = aws_apigatewayv2_api.service_api.id
+  authorizer_type                   = "REQUEST"
+  authorizer_uri                    = aws_lambda_function.validate-token-lambda-function.invoke_arn
+  authorizer_credentials_arn        = aws_iam_role.lambda_role.arn
+  authorizer_payload_format_version = "2.0"
+  authorizer_result_ttl_in_seconds  = 1
+  enable_simple_responses           = true
+  identity_sources                  = ["$request.header.Authorization"]
+  name                              = "token-validation-authorizer"
 }
 
 output "service_domain_zone" {

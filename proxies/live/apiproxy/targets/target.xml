@@ -25,7 +25,7 @@
        </Step>
       <Step>
         <Name>KeyValueMapOperations.GetSecureVariables</Name>
-      </Step> 
+      </Step>
       <Step>
         <Name>GenerateJWT.GPCPFSLoginClientAssertion</Name>
       </Step>
@@ -37,17 +37,10 @@
       </Step>
       <Step>
         <Name>AssignMessage.AddAuthorizationHeader</Name>
-      </Step> 
+      </Step>
       <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>
-      </Step>
-      <Step>
-          <Name>ServiceCallout.ValidateAccessToken</Name>
-      </Step>
-      <Step>
-          <Condition>tokenValidationResponse.status.code != 200</Condition>
-          <Name>RaiseFault.401Unauthorized</Name>
       </Step>
     </Request>
   </PreFlow>

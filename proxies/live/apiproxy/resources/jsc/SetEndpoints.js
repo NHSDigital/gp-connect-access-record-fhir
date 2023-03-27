@@ -22,18 +22,6 @@ if (endpoint) {
   }
   context.setVariable("target.url", url)
 
-  // Set the endpoint for validating the GPC access token.
-  var validation_url = context.getVariable("request.header.validation-url")
-  // A specific validation endpoint can be specified by passing a Validation-URL header in the request,
-  // in our case this is a /validate endpoint on the mock receiver, which we fall back to when no header is passed.
-  if (!validation_url) {
-    validation_url = url.replace("https://", "")
-  }
-  // We remove the protocol from the URL because we're using an Apigee ServiceCallout policy to validate the token
-  // against the validation endpoint, this policy requires us to explicitly state the protocol outside of any
-  // flow variables or templating.
-  context.setVariable("validation_endpoint", validation_url)
-
 } else {
   context.setVariable("endpointNotFound", true)
 }
