@@ -8,7 +8,7 @@ resource "aws_api_gateway_account" "api_account" {
 }
 
 resource "aws_iam_role" "api_cloudwatch" {
-  name = "${var.name_prefix}-api-logs"
+  name = "${var.short_name_prefix}-api-logs"
 
   assume_role_policy = <<EOF
 {
