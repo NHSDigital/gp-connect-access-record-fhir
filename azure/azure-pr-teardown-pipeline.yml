@@ -25,6 +25,7 @@ jobs:
       - checkout: self
 
       - bash: |
+          # 123
           echo $(System.PullRequest.PullRequestNumber)
           echo $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER
           echo $(PR_NUMBER)
