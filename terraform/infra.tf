@@ -5,8 +5,8 @@ We use the infra state file to read the outputs and then reassign them to local 
 data "terraform_remote_state" "gp-connect-pfs-access-record-infra" {
   backend = "s3"
   config  = {
-    bucket = "terraform-nhsd-apim-bebop-gpconnect-accessrecord-infra"
-    key    = "env://dev/infra"
+    bucket = "${var.project_name}-infra-terraform-state"
+    key    = "env://dev/state"
     region = "eu-west-2"
   }
 }

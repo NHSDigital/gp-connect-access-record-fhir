@@ -1,14 +1,13 @@
 locals {
     project_short_name  = "gcarf"
-    name_prefix = "${var.project}-${var.environment}"
+    name_prefix = "${var.project_name}-${var.environment}"
     short_name_prefix = "${local.project_short_name}-${var.environment}"
     validation_ecr_name = "gpconnect-${var.service}-${var.environment}-token-validation-lambda"
 }
 
 locals {
-    vpc_cidr = data.aws_vpc.bebop_vpc.cidr_block
+    vpc_cidr = "10.0.0.0/16"
 }
-
 locals {
     private_subnet_cidr = [for subnet in local.private_subnet : subnet.cidr]
     public_subnet_cidr  = [for subnet in local.public_subnet : subnet.cidr]
@@ -17,30 +16,30 @@ locals {
 locals {
     public_subnet = [
         {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 111)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 0)
             availability_zone = "eu-west-2a"
             is_public         = true
         }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 112)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 1)
             availability_zone = "eu-west-2b"
             is_public         = true
         }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 113)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 2)
             availability_zone = "eu-west-2c"
             is_public         = true
         }
     ]
     private_subnet = [
         {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 101)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 32)
             availability_zone = "eu-west-2a"
             is_public         = false
         }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 102)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 33)
             availability_zone = "eu-west-2b"
             is_public         = false
         }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 103)
+            cidr              = cidrsubnet(local.vpc_cidr, 8, 34)
             availability_zone = "eu-west-2c"
             is_public         = false
         }
@@ -52,9 +51,7 @@ variable "region" {
     default = "eu-west-2"
 }
 
-variable "project" {
-    default = "gpconnect-infra"
-}
+variable "project_name" {}
 
 variable "root_domain_name" {
     default = "dev.api.platform.nhs.uk"
@@ -71,10 +68,6 @@ variable "service" {
 
 variable "registries" {
     default = ["mock-provider"]
-}
-
-variable "vpc_id" {
-    default = "vpc-013e5e3a3aa2566e5"
 }
 
 

@@ -7,8 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-nhsd-apim-bebop-gpconnect-accessrecord-infra"
-    key = "infra"
+    key = "state"
     region = "eu-west-2"
   }
 }
@@ -19,7 +18,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = "${var.project}-infra"
+      project     = "${var.project_name}-infra"
       environment = var.environment
       tier        = "infrastructure"
     }

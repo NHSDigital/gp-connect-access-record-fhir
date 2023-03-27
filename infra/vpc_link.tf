@@ -6,7 +6,7 @@ resource "aws_apigatewayv2_vpc_link" "alb_vpc_link" {
 
 resource "aws_security_group" "vpc_link_security_group" {
     name   = "${local.name_prefix}-vpc-link"
-    vpc_id = var.vpc_id
+    vpc_id = local.vpc_id
 
     ingress {
         protocol    = "tcp"
