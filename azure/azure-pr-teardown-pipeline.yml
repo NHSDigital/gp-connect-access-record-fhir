@@ -25,7 +25,6 @@ jobs:
       - checkout: self
 
       - bash: |
-          echo $(System.PullRequest.PullRequestNumber)
           echo $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER
           echo $(PR_NUMBER)
           WORKSPACE="pr-"$(PR_NUMBER)
