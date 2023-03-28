@@ -1,10 +1,16 @@
 variable "project" {
-  default = "gp-connect-pfs-access-record"
+  default = "gp-connect-access-record-fhir"
+
+}
+variable "short-name" {
+  default = "gcarf"
 }
 
 variable "service" {
   default = "mock-provider"
 }
+
+
 
 locals {
   root_domain = "dev.api.platform.nhs.uk"
