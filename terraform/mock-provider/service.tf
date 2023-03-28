@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "mock-provider-service" {
-  name             = var.name_prefix
+  name             = var.prefix
   cluster          = var.cluster_id
   task_definition  = aws_ecs_task_definition.mock-provider.arn
   platform_version = "1.4.0"
@@ -23,7 +23,7 @@ resource "aws_ecs_service" "mock-provider-service" {
 }
 
 resource "aws_security_group" "service_security_group" {
-  name   = var.name_prefix
+  name   = var.prefix
   vpc_id = var.vpc_id
 
   egress {

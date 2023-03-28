@@ -8,7 +8,7 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
 
   tags = {
-    Name = "${var.name_prefix}-ecr-dkr"
+    Name = "${var.prefix}-ecr-dkr"
   }
 }
 
@@ -21,7 +21,7 @@ resource "aws_vpc_endpoint" "ecr_api" {
   security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
 
   tags = {
-    Name = "${var.name_prefix}-ecr-api"
+    Name = "${var.prefix}-ecr-api"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_vpc_endpoint" "cloudwatch" {
   security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
 
   tags = {
-    Name = "${var.name_prefix}-cloudwatch"
+    Name = "${var.prefix}-cloudwatch"
   }
 }
 
@@ -47,6 +47,6 @@ resource "aws_vpc_endpoint" "s3" {
   route_table_ids   = [aws_route_table.private_vpc_endpoint_rt.id]
 
   tags = {
-    Name = "${var.name_prefix}-s3"
+    Name = "${var.prefix}-s3"
   }
 }
