@@ -49,17 +49,6 @@ def handler(event, _context):
         access_token
     )
 
-    if is_valid:
-        return {
-            "statusCode": 200,
-            "headers": {'Content-Type': 'application/json'},
-            "body": json.dumps('Valid access token'),
-            "isBase64Encoded": False
-        }
-    else:
-        return {
-            "statusCode": 401,
-            "headers": {'Content-Type': 'application/json'},
-            "body": json.dumps('Invalid access token'),
-            "isBase64Encoded": False
-        }
+    return {
+        "isAuthorized": is_valid,
+    }
