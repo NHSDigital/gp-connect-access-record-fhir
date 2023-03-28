@@ -48,7 +48,13 @@ def handler(event, _context):
         os.getenv("client_secret"),
         access_token
     )
+    print(f"is_valid = {is_valid}")
 
     return {
         "isAuthorized": is_valid,
+        "context": {
+            "is_valid": is_valid,
+            "environment": os.getenv("keycloak_environment"),
+            "client_id": os.getenv("client_id"),
+        }
     }

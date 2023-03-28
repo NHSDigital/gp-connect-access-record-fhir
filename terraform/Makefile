@@ -23,7 +23,7 @@ plan: workspace
 	 $(tf_cmd) plan $(tf_vars)
 
 apply: workspace
-	$(tf_cmd) apply -auto-approve -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)"
+	$(tf_cmd) apply $(tf_vars) -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)" -auto-approve
 
 clean:
 	rm -rf build .terraform upload-key

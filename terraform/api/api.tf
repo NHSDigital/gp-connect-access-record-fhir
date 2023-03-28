@@ -67,7 +67,7 @@ resource "aws_apigatewayv2_stage" "default" {
   }
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api_access_log.arn
-    format          = "{ \"requestId\":\"$context.requestId\", \"extendedRequestId\":\"$context.extendedRequestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\", \"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\", \"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\", \"protocol\":\"$context.protocol\",  \"responseLength\":\"$context.responseLength\" }"
+    format          = "{ \"requestId\":\"$context.requestId\", \"extendedRequestId\":\"$context.extendedRequestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\", \"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\", \"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\", \"protocol\":\"$context.protocol\",  \"responseLength\":\"$context.responseLength\", \"authorizerError\":\"$context.authorizer.error\", \"authorizerStatus\":\"$context.authorizer.status\", \"requestIsValid\":\"$context.authorizer.is_valid\"\"environment\":\"$context.authorizer.environment\", \"clientID\":\"$context.authorizer.client_id\"}"
   }
 
   # Bug in terraform-aws-provider with perpetual diff
@@ -76,16 +76,18 @@ resource "aws_apigatewayv2_stage" "default" {
   }
 }
 
+
 resource "aws_apigatewayv2_authorizer" "token_validation" {
   api_id                            = aws_apigatewayv2_api.service_api.id
   authorizer_type                   = "REQUEST"
-  authorizer_uri                    = aws_lambda_function.validate-token-lambda-function.invoke_arn
-  authorizer_credentials_arn        = aws_iam_role.lambda_role.arn
-  authorizer_payload_format_version = "2.0"
-  enable_simple_responses           = true
-  authorizer_result_ttl_in_seconds  = 1
   identity_sources                  = ["$request.header.Authorization"]
   name                              = "token-validation-authorizer"
+  authorizer_uri                    = aws_lambda_function.validate-token-lambda-function.invoke_arn
+  authorizer_payload_format_version = "2.0"
+  authorizer_credentials_arn        = aws_iam_role.apig_lambda_role.arn
+  enable_simple_responses           = true
+  authorizer_result_ttl_in_seconds  = 1
+
 }
 
 output "service_domain_zone" {
