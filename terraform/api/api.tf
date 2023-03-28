@@ -35,7 +35,7 @@ resource "aws_apigatewayv2_integration" "route_integration" {
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
-  connection_id      = var.lb.vpc_link_id
+  connection_id      = var.lb.alb_vpc_link_id
 }
 
 resource "aws_apigatewayv2_route" "root_route" {
