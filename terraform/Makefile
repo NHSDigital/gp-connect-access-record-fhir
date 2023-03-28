@@ -17,13 +17,13 @@ workspace:
 	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
 
 init:
-	$(tr_cmd) init -backend-config="key=gpconnectpfs" $(tr_vars)
+	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
 	 $(tf_cmd) plan $(tf_vars)
 
 apply: workspace
-	$(tr_cmd) apply -auto-approve -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)"
+	$(tf_cmd) apply -auto-approve -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)"
 
 clean:
 	rm -rf build .terraform upload-key

@@ -39,9 +39,11 @@ resource "aws_apigatewayv2_integration" "route_integration" {
 }
 
 resource "aws_apigatewayv2_route" "root_route" {
-  api_id    = aws_apigatewayv2_api.service_api.id
-  route_key = "ANY /{proxy+}"
-  target    = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
+  api_id               = aws_apigatewayv2_api.service_api.id
+  route_key            = "ANY /{proxy+}"
+  target               = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
+  authorization_type   = "CUSTOM"
+  authorizer_id        = aws_apigatewayv2_authorizer.token_validation.id
 }
 
 resource "aws_lambda_permission" "api_gw" {
@@ -81,7 +83,6 @@ resource "aws_apigatewayv2_authorizer" "token_validation" {
   authorizer_credentials_arn        = aws_iam_role.lambda_role.arn
   authorizer_payload_format_version = "2.0"
   authorizer_result_ttl_in_seconds  = 1
-  enable_simple_responses           = true
   identity_sources                  = ["$request.header.Authorization"]
   name                              = "token-validation-authorizer"
 }
