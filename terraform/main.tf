@@ -6,9 +6,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "nhsd-apim-gp-connect-pfs-access-record-terraform"
     region = "eu-west-2"
-    key = "gpconnectpfs"
+    key = "state"
   }
 }
 
@@ -17,7 +16,7 @@ provider "aws" {
   profile = "apim-dev"
   default_tags {
     tags = {
-      Project     = var.project
+      Project     = var.project_name
       Environment = local.environment
       Service     = var.service
     }
