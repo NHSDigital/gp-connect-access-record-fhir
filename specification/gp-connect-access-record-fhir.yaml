@@ -571,16 +571,13 @@ paths:
             type: string
           examples:
             exact date:
-              value:
-                - eq2010-10-22
+              value: eq2010-10-22
               description: Exact match date
             greater than or equals:
-              value:
-                - g2022-01-15
+              value: g2022-01-15
               description: Greater than or equals which matches 2022-01-15 or 2022-01-16
             less than or equals:
-              value:
-                - le2022-01-15
+              value: le2022-01-15
               description: Less than or equals which matches 2022-01-15 or 2022-01-14
         - in: query
           name: author
