@@ -1,4 +1,9 @@
 variable "project_name" {
+  default = "gp-connect-access-record-fhir"
+}
+
+variable "short_name" {
+  default = "gcarf"
 }
 
 variable "service" {
