@@ -370,7 +370,7 @@ paths:
                 description: The response will be a populated Patient resource.
               example:
                 resource:
-                  resourceType: Patient
+                  resourceType: PatientTTTTTTTTTTTT TEST 1
                   id: '2'
                   meta:
                     versionId: '1469448000000'
