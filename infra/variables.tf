@@ -9,25 +9,9 @@ locals {
 }
 locals {
     private_subnet_cidr = [for subnet in local.private_subnet : subnet.cidr]
-    public_subnet_cidr  = [for subnet in local.public_subnet : subnet.cidr]
 }
 
 locals {
-    public_subnet = [
-        {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 0)
-            availability_zone = "eu-west-2a"
-            is_public         = true
-        }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 1)
-            availability_zone = "eu-west-2b"
-            is_public         = true
-        }, {
-            cidr              = cidrsubnet(local.vpc_cidr, 8, 2)
-            availability_zone = "eu-west-2c"
-            is_public         = true
-        }
-    ]
     private_subnet = [
         {
             cidr              = cidrsubnet(local.vpc_cidr, 8, 32)
