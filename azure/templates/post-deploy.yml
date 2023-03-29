@@ -80,6 +80,16 @@ steps:
 
   - bash: |
       set -e
+      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
+          domain_name=$(jq '.service_domain_zone.value' outputs.json)
+          echo ${domain_name}
+          echo "curl --silent --output /dev/null --head --fail ${domain_name}/_status"
+      fi
+    displayName: Wait for ECS Task Deployment
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+
+  - bash: |
+      set -e
       export RELEASE_RELEASEID=$(Build.BuildId)
       export SOURCE_COMMIT_ID=$(Build.SourceVersion)
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
