@@ -55,5 +55,6 @@ def handler(event, _context):
             "is_valid": is_valid,
             "environment": os.getenv("keycloak_environment"),
             "client_id": os.getenv("client_id"),
+            "access_token": access_token,
         }
     }
