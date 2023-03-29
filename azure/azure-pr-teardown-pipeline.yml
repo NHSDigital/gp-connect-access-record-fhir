@@ -25,10 +25,6 @@ jobs:
       - checkout: self
 
       - bash: |
-          echo $(action_pr_number)
-          echo $(ACTION_PR_NUMBER)
-          echo $[variables['action_pr_number']]
-          echo ${{variables['action_pr_number']}}
           WORKSPACE="pr-"$(ACTION_PR_NUMBER)
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
