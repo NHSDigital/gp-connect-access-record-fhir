@@ -56,5 +56,6 @@ def handler(event, _context):
             "environment": os.getenv("keycloak_environment"),
             "client_id": os.getenv("client_id"),
             "access_token": access_token,
+            "gpc": event.get("headers").get("gpc-authorization")
         }
     }
