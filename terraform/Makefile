@@ -17,7 +17,7 @@ workspace:
 	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
 
 init:
-	$(tf_cmd) init $(tf_state) $(tf_vars) -upgrade
+	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
 	 $(tf_cmd) plan $(tf_vars)
