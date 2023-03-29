@@ -1,10 +1,4 @@
-provider "aws" {
-  alias  = "acm_provider"
-  region = "eu-west-2"
-}
-
 resource "aws_acm_certificate" "service_certificate" {
-  provider                  = aws.acm_provider
   domain_name               = var.api_domain_name
   subject_alternative_names = []
   validation_method         = "DNS"
