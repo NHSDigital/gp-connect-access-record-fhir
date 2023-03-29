@@ -82,7 +82,7 @@ steps:
       set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
           domain_name=$(jq '.service_domain_zone.value' outputs.json)
-          endpoint="https://${domain_name}/_status"
+          endpoint=https://'${domain_name}'/_status
           echo ${endpoint}
           while ! curl --silent --output /dev/null --head --fail "$endpoint"; do
             echo "Waiting for $endpoint to return a 200 response..."
