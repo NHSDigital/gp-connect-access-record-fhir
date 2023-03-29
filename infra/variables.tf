@@ -1,7 +1,6 @@
 locals {
-    project_short_name  = "gcarf"
     prefix = "${var.project_name}-${var.environment}"
-    short_prefix = "${local.project_short_name}-${var.environment}"
+    short_prefix = "${var.short_name}-${var.environment}"
 }
 
 locals {
@@ -34,7 +33,13 @@ variable "region" {
     default = "eu-west-2"
 }
 
-variable "project_name" {}
+variable "project_name" {
+  default = "gp-connect-access-record-fhir"
+}
+
+variable "short_name" {
+  default = "gcarf"
+}
 
 variable "root_domain_name" {
     default = "dev.api.platform.nhs.uk"
