@@ -16,7 +16,7 @@ locals {
   private_subnet_ids  = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.private_subnet_ids
   private_subnet_cidr = data.aws_subnet.private_subnets.*.cidr_block
   vpc_id = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.vpc_id
-  vpc_link_id  = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.vpc_link_id
+  alb_vpc_link_id  = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.vpc_link_id
 }
 
 data "aws_subnet" "private_subnets" {
