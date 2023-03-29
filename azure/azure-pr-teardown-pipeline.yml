@@ -30,7 +30,7 @@ jobs:
           echo $(pr_number)
           echo $[variables['pr_number']]
           echo ${{variables['pr_number']}}
-          WORKSPACE="pr-"$(PR_NUMBER)
+          WORKSPACE="pr-"$(pr_number)
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
