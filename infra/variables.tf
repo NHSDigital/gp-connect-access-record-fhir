@@ -50,7 +50,9 @@ variable "region" {
     default = "eu-west-2"
 }
 
-variable "project_name" {}
+variable "project_name" {
+    
+}
 
 variable "root_domain_name" {
     default = "dev.api.platform.nhs.uk"

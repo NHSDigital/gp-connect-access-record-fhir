@@ -17,7 +17,7 @@ init:
 	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
-	$(tf_cmd) plan
+	$(tf_cmd) plan $(tf_vars)
 
 apply: workspace
 	 $(tf_cmd) apply $(tf_vars) -auto-approve
