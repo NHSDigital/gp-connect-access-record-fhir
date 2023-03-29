@@ -85,13 +85,21 @@ steps:
           domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
           endpoint="https://${domain_name}/_status"
           echo ${endpoint}
-          while ! curl --silent --output /dev/null --head --fail "$endpoint"; do
-            echo "Waiting for $endpoint to return a 200 response..."
-            sleep 10
+          
+          while true; do
+              CLOUD_DOMAIN_NAME=${endpoint} pytest -s -v --color=yes -m "clouddeploymenttest"
+              exit_code=$?
+              if [ $exit_code -eq 0 ]; then
+                  echo "ECS Task deployed Successfully!"
+                  break
+              else
+                  echo "Waiting for ${endpoint} to return a 200 response..."
+                  sleep 10
+              fi
           done
       fi
     displayName: Wait for ECS Task Deployment
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests"
 
   - bash: |
       set -e

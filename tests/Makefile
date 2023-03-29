@@ -10,3 +10,6 @@ run:
 #  run tests with certain marker e.g. make run-sandbox runs tests marked with sandbox
 run-%:
 	$(PYTEST_CMD) -m "$*"
+
+run-ecs-test:
+	 CLOUD_DOMAIN_NAME="https://pr-162.gcarf.dev.api.platform.nhs.uk/_status" pytest -s -v --color=yes -m "clouddeploymenttest"
