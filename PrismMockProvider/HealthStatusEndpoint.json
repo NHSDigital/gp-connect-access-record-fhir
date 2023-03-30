@@ -11,12 +11,11 @@
               "schema": {
                 "type": "string"
               },
-              "example": "OK"
+              "example": "OK1"
             }
           }
         }
       }
     }
 }
-
 }
