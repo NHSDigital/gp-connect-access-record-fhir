@@ -85,7 +85,7 @@ steps:
           domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
           endpoint="https://${domain_name}/_status"
           echo ${endpoint}
-          cd../tests
+          cd ../tests
           while true; do
               CLOUD_DOMAIN_NAME=${endpoint} pytest -s -v --color=yes -m "clouddeploymenttest"
               exit_code=$?
