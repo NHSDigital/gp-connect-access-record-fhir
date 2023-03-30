@@ -2,6 +2,7 @@ locals {
   mock_provider_path = "${path.cwd}/../PrismMockProvider"
   specification_path = "${path.cwd}/../specification"
 }
+
 data "archive_file" "specification_archive" {
   type        = "zip"
   source_dir  = local.specification_path
@@ -22,7 +23,6 @@ data "aws_ecr_repository" "mock_provider_repository" {
 
 resource "null_resource" "mock-provider_image_push" {
   triggers = {
-    always            = uuid()
     specification_src = data.archive_file.specification_archive.output_sha
     prism_src         = data.archive_file.prism_archive.output_sha
   }
