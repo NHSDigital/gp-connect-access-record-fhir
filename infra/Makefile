@@ -4,10 +4,11 @@ tf_opt=
 tf_cmd = AWS_PROFILE=$(aws_profile) terraform
 
 project_name = gp-connect-access-record-fhir
+project_short_name = gcarf
 state_bucket = $(project_name)-infra-terraform-state
 tf_state= -backend-config="bucket=$(state_bucket)"
 
-tf_vars= -var="project_name=$(project_name)"
+tf_vars= -var="project_name=$(project_name)" -var="project_short_name=$(project_short_name)"
 
 .SILENT:
 workspace:
@@ -17,15 +18,15 @@ init:
 	$(tf_cmd) init $(tf_state) $(tf_vars)
 
 plan: workspace
-	$(tf_cmd) plan
+	$(tf_cmd) plan $(tf_vars)
 
 apply: workspace
 	 $(tf_cmd) apply $(tf_vars) -auto-approve
 
 destroy:
-	$(tf_cmd) destroy
+	$(tf_cmd) destroy $(tf_vars)
 
 lock-provider:
 	# Run this only when you install a new terraform provider. This will generate sha code in lock file for all platform
-	echo "This may take some time. Be patient!"
+	echo "This may take a while. Be patient!"
 	$(tf_cmd) providers lock -platform=darwin_arm64 -platform=darwin_amd64 -platform=linux_amd64 -platform=windows_amd64
