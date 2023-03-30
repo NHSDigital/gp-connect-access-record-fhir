@@ -8,6 +8,6 @@ module "api" {
   environment       = local.environment
   lb = {
     listener_arn = module.alb.alb_listener_arn
-    vpc_link_id  = local.alb_vpc_link_id
+    alb_vpc_link_id  = local.alb_vpc_link_id
   }
 }
