@@ -56,7 +56,7 @@ docker-build:
 	docker build -t $(dockerImageName) -f $(dockerFilePath) $(dockerContext)
 
 
-docker-deploy: docker-login
+docker-deploy: docker-login docker-build
 	 docker push $(dockerImageName)
 
 lock-provider:
