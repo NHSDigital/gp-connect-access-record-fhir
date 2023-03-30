@@ -12,4 +12,3 @@ variable "private_subnet_ids" {
 variable "container_port" {}
 variable "listener_port" {}
 variable "infra_private_subnet" {}
-variable "infra_public_subnet" {}
