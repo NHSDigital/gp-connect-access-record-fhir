@@ -23,3 +23,5 @@ env
 .dir-locals.el
 *.pyc
 **/.terraform/
+
+.terraform.lock.hcl
