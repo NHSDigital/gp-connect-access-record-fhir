@@ -3,7 +3,7 @@ data "aws_ecr_repository" "mock_provider_registry" {
 } 
 
 resource "aws_ecs_task_definition" "mock-provider" {
-  family       = var.name_prefix
+  family       = var.prefix
   network_mode = "awsvpc"
   // ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
   task_role_arn = aws_iam_role.task_role.arn

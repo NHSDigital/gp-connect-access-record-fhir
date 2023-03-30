@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "http_mock_provider_tg" {
-  name        = var.short_name_prefix
+  name        = var.short_prefix
   port        = var.container_port
   protocol    = "HTTP"
   target_type = "ip"

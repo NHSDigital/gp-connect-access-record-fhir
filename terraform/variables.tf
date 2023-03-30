@@ -16,8 +16,8 @@ locals {
 
 locals {
   environment         = terraform.workspace
-  name_prefix         = "${var.project_name}-${var.service}-${local.environment}"
-  short_name_prefix   = "${var.short_name}-${local.environment}"
+  prefix         = "${var.project_name}-${var.service}-${local.environment}"
+  short_prefix   = "${var.short_name}-${local.environment}"
   service_domain_name = "${local.environment}.${local.project_domain_name}"
 
   tags = {

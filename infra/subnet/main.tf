@@ -1,4 +1,4 @@
-variable "name_prefix" {}
+variable "prefix" {}
 
 variable "vpc_id" {}
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "subnet" {
   map_public_ip_on_launch = var.subnet.is_public
 
   tags = {
-    Name = "${var.name_prefix}-${var.subnet.is_public ? "public" : "private"}-${var.subnet.availability_zone}"
+    Name = "${var.prefix}-${var.subnet.is_public ? "public" : "private"}-${var.subnet.availability_zone}"
   }
 }
 
