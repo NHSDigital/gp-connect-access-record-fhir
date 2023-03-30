@@ -26,14 +26,6 @@ output "mock_provider_registry_id" {
     value = aws_ecr_repository.mock_provider_registry.id
 }
 
-output "token_validator_registry_id" {
-    value = aws_ecr_repository.token_validator_registry.id
-}
-
 output "validation_ecr_name" {
     value = aws_ecr_repository.lambda_image_registry.name
-}
-
-output "validation_ecr_url" {
-    value = aws_ecr_repository.lambda_image_registry.repository_url
 }

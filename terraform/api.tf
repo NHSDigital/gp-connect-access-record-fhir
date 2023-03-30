@@ -11,7 +11,6 @@ module "api" {
     vpc_link_id  = local.alb_vpc_link_id
   }
   validation_ecr_name = local.validation_ecr_name
-  validation_ecr_url = local.validation_ecr_url
   client_id = var.client_id
   client_secret = var.client_secret
   keycloak_environment = var.keycloak_environment

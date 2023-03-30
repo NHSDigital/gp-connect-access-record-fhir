@@ -19,7 +19,7 @@ locals {
     mock_provider_subnet_ids  = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.mock_provider_subnet_ids
     mock_provider_registry_id = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.mock_provider_registry_id
 
-    token_validator_registry_id = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.token_validator_registry_id
+    validation_ecr_name = data.terraform_remote_state.gp-connect-pfs-access-record-infra.outputs.validation_ecr_name
 }
 
 

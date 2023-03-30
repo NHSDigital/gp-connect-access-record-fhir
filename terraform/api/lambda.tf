@@ -1,7 +1,12 @@
 data aws_caller_identity current {}
 
+resource aws_ecr_repository "token_validation" {
+    name = var.validation_ecr_name
+}
+
 locals {
-  ecr_image_tag       = var.environment
+    ecr_image_tag = var.environment
+    validation_ecr_url = aws_ecr_repository.token_validation.repository_url
 }
 
 resource null_resource ecr_image {
@@ -36,7 +41,7 @@ resource aws_lambda_function validate-token-lambda-function {
   function_name = "${var.short_name_prefix}-token-validation-lambda"
   role = aws_iam_role.lambda_role.arn
   timeout = 300
-  image_uri = "${var.validation_ecr_url}@${data.aws_ecr_image.lambda_image.id}"
+  image_uri = "${local.validation_ecr_url}@${data.aws_ecr_image.lambda_image.id}"
   package_type = "Image"
   source_code_hash = data.aws_ecr_image.lambda_image.image_digest
 
