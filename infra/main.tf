@@ -18,7 +18,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project     = "${var.project_name}-infra"
+      project     = local.project_name
       environment = var.environment
       tier        = "infrastructure"
     }

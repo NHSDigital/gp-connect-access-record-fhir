@@ -1,4 +1,4 @@
-mock_provider_repository_name = gpconnect-infra-dev
+mock_provider_repository_name = gp-connect-access-record-fhir-infra-dev-mock-provider
 mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
 aws_profile = apim-dev
 aws_account_no = 790083933819

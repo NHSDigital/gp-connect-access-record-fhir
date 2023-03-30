@@ -25,11 +25,8 @@ jobs:
       - checkout: self
 
       - bash: |
-          # 123
-          echo $(System.PullRequest.PullRequestNumber)
-          echo $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER
-          echo $(PR_NUMBER)
-          WORKSPACE="pr-"$(PR_NUMBER)
+          echo $(action_pr_number)
+          WORKSPACE="pr-"$(ACTION_PR_NUMBER)
           echo $WORKSPACE
           echo "##vso[task.setvariable variable=WORKSPACE]$WORKSPACE"
         displayName: Set workspace tag
