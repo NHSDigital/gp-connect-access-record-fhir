@@ -85,7 +85,7 @@ steps:
           domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
           endpoint="https://${domain_name}/_status"
           echo ${endpoint}
-          
+          cd../tests
           while true; do
               CLOUD_DOMAIN_NAME=${endpoint} pytest -s -v --color=yes -m "clouddeploymenttest"
               exit_code=$?
@@ -99,7 +99,7 @@ steps:
           done
       fi
     displayName: Wait for ECS Task Deployment
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/tests"
+    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
 
   - bash: |
       set -e
