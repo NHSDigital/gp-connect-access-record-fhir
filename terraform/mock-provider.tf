@@ -1,8 +1,8 @@
 module "mock-provider" {
     source            = "./mock-provider"
     region            = var.region
-    name_prefix       = local.name_prefix
-    short_name_prefix = local.short_name_prefix
+    prefix       = local.prefix
+    short_prefix = local.short_prefix
     cluster_id        = module.cluster.cluster_id
     container_port    = 9000
     subnet_ids        = local.mock_provider_subnet_ids
