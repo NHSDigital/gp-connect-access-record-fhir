@@ -1,7 +1,10 @@
+variable "project_name" {}
+variable "project_short_name" {}
+
 locals {
-    project_short_name  = "gcarf"
-    name_prefix = "${var.project_name}-${var.environment}"
-    short_name_prefix = "${local.project_short_name}-${var.environment}"
+    project_name = "${var.project_name}-infra"
+    prefix = "${local.project_name}-${var.environment}"
+    short_prefix = "${var.project_short_name}-${var.environment}"
     validation_ecr_name = "gpconnect-${var.service}-${var.environment}-token-validation-lambda"
 }
 

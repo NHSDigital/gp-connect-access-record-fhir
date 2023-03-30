@@ -8,7 +8,7 @@ module "api" {
   environment       = local.environment
   lb = {
     listener_arn = module.alb.alb_listener_arn
-    vpc_link_id  = local.vpc_link_id
+    vpc_link_id  = local.alb_vpc_link_id
   }
   validation_ecr_name = local.validation_ecr_name
   validation_ecr_url = local.validation_ecr_url

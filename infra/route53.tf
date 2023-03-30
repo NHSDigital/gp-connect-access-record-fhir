@@ -1,5 +1,5 @@
 locals {
-  zone_subdomain = local.project_short_name
+  zone_subdomain = var.project_short_name
 }
 
 data "aws_route53_zone" "root_zone" {
