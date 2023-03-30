@@ -8,11 +8,11 @@ aws_profile = apim-dev
 tf_cmd = AWS_PROFILE=$(aws_profile) terraform
 
 project_name = gp-connect-access-record-fhir
-short_name = gcarf
+project_short_name = gcarf
 state_bucket = $(project_name)-terraform-state
 tf_state= -backend-config="bucket=$(state_bucket)"
 
-tf_vars= -var="project_name=$(project_name)" -var="short_name=$(short_name)"
+tf_vars= -var="project_name=$(project_name)" -var="project_short_name=$(project_short_name)"
 
 workspace:
 	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
