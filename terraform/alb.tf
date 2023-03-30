@@ -1,8 +1,8 @@
 module "alb" {
   source = "./alb"
 
-  prefix          = local.prefix
-  short_prefix    = local.short_prefix
+  prefix               = local.prefix
+  short_prefix         = local.short_prefix
   container_port       = var.container_port
   infra_private_subnet = local.private_subnet_cidr
   listener_port        = 80

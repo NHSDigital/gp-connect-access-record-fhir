@@ -1,6 +1,6 @@
 locals {
-    mock_provider_path = "${path.cwd}/../PrismMockProvider"
-    specification_path = "${path.cwd}/../specification"
+  mock_provider_path = "${path.cwd}/../PrismMockProvider"
+  specification_path = "${path.cwd}/../specification"
 }
 data "archive_file" "specification_archive" {
   type        = "zip"
@@ -17,14 +17,14 @@ data "archive_file" "prism_archive" {
 data "aws_caller_identity" "current" {}
 
 data "aws_ecr_repository" "mock_provider_repository" {
-    name = var.registry_id
+  name = var.registry_id
 }
 
 resource "null_resource" "mock-provider_image_push" {
-  triggers   = {
-      always = uuid()
+  triggers = {
+    always            = uuid()
     specification_src = data.archive_file.specification_archive.output_sha
-    prism_src = data.archive_file.prism_archive.output_sha
+    prism_src         = data.archive_file.prism_archive.output_sha
   }
 
   provisioner "local-exec" {

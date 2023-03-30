@@ -3,7 +3,7 @@ variable "project_name" {
 }
 
 variable "project_short_name" {
-  
+
 }
 
 variable "service" {
@@ -16,8 +16,8 @@ locals {
 
 locals {
   environment         = terraform.workspace
-  prefix         = "${var.project_name}-${var.service}-${local.environment}"
-  short_prefix   = "${var.project_short_name}-${local.environment}"
+  prefix              = "${var.project_name}-${var.service}-${local.environment}"
+  short_prefix        = "${var.project_short_name}-${local.environment}"
   service_domain_name = "${local.environment}.${local.project_domain_name}"
 
   tags = {

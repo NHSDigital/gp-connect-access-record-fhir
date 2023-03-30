@@ -3,5 +3,5 @@ resource "aws_ecr_repository" "mock_provider_registry" {
 }
 
 resource "aws_ecr_repository" "token_validator_registry" {
-    name = "${local.prefix}-token-validator"
+  name = "${local.prefix}-token-validator"
 }

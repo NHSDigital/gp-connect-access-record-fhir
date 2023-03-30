@@ -1,4 +1,4 @@
-resource "aws_apigatewayv2_api"  "service_api"  {
+resource "aws_apigatewayv2_api" "service_api" {
   name                         = "${var.prefix}-api"
   description                  = "GP Connect PFS Acces Record mock-provider service backend api - ${var.environment}"
   protocol_type                = "HTTP"
