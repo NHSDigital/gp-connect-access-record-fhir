@@ -1,6 +1,8 @@
 parameters:
   - name: aws_dev
     default: aws --profile=apim-dev
+  - name: is_ptl
+    default: true
 
 steps:
   - ${{ if parameters.is_ptl }}:
