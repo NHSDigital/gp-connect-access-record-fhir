@@ -2,9 +2,10 @@ import requests
 import pytest
 from os import getenv
 
+
 @pytest.mark.clouddeploymenttest
 def test_ping_endpoint():
-    domain_name=getenv('CLOUD_DOMAIN_NAME')
+    domain_name = getenv('CLOUD_DOMAIN_NAME')
     url = domain_name
     response = requests.get(url)
     assert response.status_code == 200
