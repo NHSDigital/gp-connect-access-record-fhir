@@ -26,6 +26,6 @@ output "mock_provider_registry_id" {
     value = aws_ecr_repository.mock_provider_registry.id
 }
 
-output "validation_ecr_name" {
-    value = aws_ecr_repository.lambda_image_registry.name
+output "validation_ecr_id" {
+    value = aws_ecr_repository.lambda_image_registry.id
 }
