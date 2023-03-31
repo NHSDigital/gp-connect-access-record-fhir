@@ -1,11 +1,7 @@
-variable "project_name" {}
-variable "project_short_name" {}
-
 locals {
-    project_name = "${var.project_name}-infra"
-    prefix = "${local.project_name}-${var.environment}"
-    short_prefix = "${var.project_short_name}-${var.environment}"
-    validation_ecr_name = "gpconnect-${var.service}-${var.environment}-token-validation-lambda"
+    project_short_name  = "gcarf"
+    prefix = "${var.project_name}-${var.environment}"
+    short_prefix = "${local.project_short_name}-${var.environment}"
 }
 
 locals {
@@ -49,8 +45,13 @@ locals {
     ]
 }
 
+
 variable "region" {
     default = "eu-west-2"
+}
+
+variable "project_name" {
+
 }
 
 variable "root_domain_name" {
@@ -61,6 +62,7 @@ variable "environment" {
     default = "dev"
 }
 
+
 variable "service" {
     default = "infra"
 }
@@ -68,6 +70,7 @@ variable "service" {
 variable "registries" {
     default = ["mock-provider"]
 }
+
 
 variable "autoscaling_group_name" {
     default = "target-autoscaling-group"

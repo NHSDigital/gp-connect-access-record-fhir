@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb_security_group" {
-    name   = "${var.name_prefix}-alb"
+    name   = "${var.prefix}-alb"
     vpc_id = var.vpc_id
 
     egress {

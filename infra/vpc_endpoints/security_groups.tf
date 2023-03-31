@@ -4,7 +4,7 @@ data "aws_subnet" "subnets" {
 }
 
 resource "aws_security_group" "vpc_endpoint_sg" {
-  name   = "${var.name_prefix}-vpc_endpoint_sg"
+  name   = "${var.prefix}-vpc_endpoint_sg"
   vpc_id = var.vpc_id
 
   egress {

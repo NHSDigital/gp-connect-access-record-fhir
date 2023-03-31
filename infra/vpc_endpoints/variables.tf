@@ -1,4 +1,4 @@
-variable "name_prefix" {}
+variable "prefix" {}
 
 variable "region" {
   default = "eu-west-2"
