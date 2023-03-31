@@ -1,6 +1,6 @@
 #!/bin/bash
            
-domain_name=$(jq '.service_domain_zone.value' outputs.json)
+domain_name=$(make -s output name=service_domain_zone)
 #removing double quotes
 domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name` 
 protocol="https://"

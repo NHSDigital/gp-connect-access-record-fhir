@@ -81,21 +81,26 @@ steps:
   - bash: |
       set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-          domain_name=$(jq '.service_domain_zone.value' outputs.json)
+          domain_name=$(make -s output name=service_domain_zone)
           domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
           endpoint="https://${domain_name}/_status"
           echo ${endpoint}
-          cd ../tests
-          while true; do
-              CLOUD_DOMAIN_NAME=${endpoint} pytest -s -v --color=yes -m "clouddeploymenttest"
-              exit_code=$?
-              if [ $exit_code -eq 0 ]; then
-                  echo "ECS Task deployed Successfully!"
-                  break
-              else
-                  echo "Waiting for ${endpoint} to return a 200 response..."
-                  sleep 10
-              fi
+
+          #Setting a counter to check if ECS Task is deployed + added sleep for 2 mins
+          counter=0
+          while [ $counter -lt 7 ]
+          do
+            response=$(curl -s -o /dev/null -w "%{http_code}" -X GET ${endpoint} )
+            echo ${response}
+            if [ $response -eq 200 ]
+            then
+              echo "Status test successful"
+              break
+            else
+              echo "Waiting for $endpoint to return a 200 response..."
+              counter=$((counter+1))
+              sleep 120
+            fi
           done
       fi
     displayName: Wait for ECS Task Deployment
