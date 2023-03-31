@@ -3,5 +3,5 @@ resource "aws_ecr_repository" "mock_provider_registry" {
 }
 
 resource "aws_ecr_repository" "lambda_image_registry" {
-  name = local.validation_ecr_name
+  name = "${local.prefix}-token-validation-lambda"
 }
