@@ -2,7 +2,7 @@ resource "aws_route_table" "private_vpc_endpoint_rt" {
   vpc_id = var.vpc_id
 
   tags = {
-    Name = "${var.prefix}-fargate"
+    Name = "${var.name_prefix}-s3"
   }
 }
 

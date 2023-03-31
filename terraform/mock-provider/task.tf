@@ -1,5 +1,5 @@
 data "aws_ecr_repository" "mock_provider_registry" {
- name = "gpconnect-infra-dev"
+  name = var.registry_id
 }
 
 resource "aws_ecs_task_definition" "mock-provider" {

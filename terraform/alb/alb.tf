@@ -6,7 +6,7 @@ resource "aws_lb" "alb" {
   subnets         = var.private_subnet_ids
   security_groups = [aws_security_group.alb_security_group.id]
 
-access_logs {
+  access_logs {
     bucket  = aws_s3_bucket.lb_logs.bucket
     enabled = true
   }
