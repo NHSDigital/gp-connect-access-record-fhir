@@ -82,7 +82,7 @@ def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {"Interaction-ID": interaction_id}
     headers.update(nhsd_apim_auth_headers)
 
-    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
     assert resp.status_code == 401
 
 
@@ -98,5 +98,5 @@ def test_nhs_login_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {"Interaction-ID": interaction_id}
     headers.update(nhsd_apim_auth_headers)
 
-    resp = requests.get(f"{nhsd_apim_proxy_url}/", headers=nhsd_apim_auth_headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=nhsd_apim_auth_headers)
     assert resp.status_code == 200

@@ -14,7 +14,6 @@ from PrismMockProvider.auth.src.validate_access_token import validate_access_tok
 from .config import interaction_id
 
 
-# @pytest.mark.mock_provider
 @pytest.mark.nhsd_apim_authorization(
     {
         "access": "patient",
@@ -34,7 +33,6 @@ def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keyc
     )
 
 
-# @pytest.mark.mock_provider
 @pytest.mark.nhsd_apim_authorization(
     {
         "access": "patient",
@@ -77,7 +75,7 @@ def test_happy_path(
     }
     headers.update(nhsd_apim_auth_headers)
     resp = requests.get(
-        f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+        f"{nhsd_apim_proxy_url}/documents/Patient/9000000009",
         headers=headers
     )
 
