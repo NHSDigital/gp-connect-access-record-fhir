@@ -25,7 +25,7 @@
        </Step>
       <Step>
         <Name>KeyValueMapOperations.GetSecureVariables</Name>
-      </Step> 
+      </Step>
       <Step>
         <Name>GenerateJWT.GPCPFSLoginClientAssertion</Name>
       </Step>
@@ -35,9 +35,6 @@
       <Step>
         <Name>JavaScript.GetGPCAuthCode</Name>
       </Step>
-      <Step>
-        <Name>AssignMessage.AddAuthorizationHeader</Name>
-      </Step> 
       <Step>
         <Name>RaiseFault.404TargetNotFound</Name>
         <Condition>endpointNotFound == true</Condition>

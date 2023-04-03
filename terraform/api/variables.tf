@@ -9,3 +9,7 @@ variable "lb" {
     listener_arn    = string
   })
 }
+variable "token_validator_registry_id" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "keycloak_environment" {}

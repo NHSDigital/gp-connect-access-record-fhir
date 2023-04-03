@@ -12,7 +12,7 @@ project_short_name = gcarf
 state_bucket = $(project_name)-terraform-state
 tf_state= -backend-config="bucket=$(state_bucket)"
 
-tf_vars= -var="project_name=$(project_name)" -var="project_short_name=$(project_short_name)"
+tf_vars= -var="project_name=$(project_name)" -var="project_short_name=$(project_short_name)" -var="client_id=$(client_id)" -var="client_secret=$(client_secret)" -var="keycloak_environment=$(keycloak_environment)"
 
 workspace:
 	$(tf_cmd) workspace new $(environment) || $(tf_cmd) workspace select $(environment) && echo "Switched to workspace/environment: $(environment)"
@@ -63,3 +63,17 @@ lock-provider:
 	# Run this only when you install a new terraform provider. This will generate sha code in lock file for all platform
 	echo "This may take a while. Be patient!"
 	$(tf_cmd) providers lock -platform=darwin_arm64 -platform=darwin_amd64 -platform=linux_amd64 -platform=windows_amd64
+
+# Token Validation Lambda
+lambda_repository_name = $(project_name)-infra-dev-token-validator
+lambda_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(lambda_repository_name)
+build_version=$(environment)
+lambdaDockerImageName=$(lambda_repository_url):$(build_version)
+lambdaDockerFilePath=../PrismMockProvider/auth/Dockerfile
+lambdaDockerContext=../PrismMockProvider/auth
+
+docker-build-lambda:
+	docker build -t $(lambdaDockerImageName) -f $(lambdaDockerFilePath) $(lambdaDockerContext)
+
+docker-deploy-lambda: docker-build-lambda docker-login
+	docker push $(lambdaDockerImageName)
