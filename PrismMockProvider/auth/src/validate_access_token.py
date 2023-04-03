@@ -12,18 +12,13 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
     Get the introspection endpoint from the Keycloak realm's discovery document and validate an access token against it.
     """
     # Extract just the token value from the header
-    print(incoming_token)
     token = re.sub(r"Bearer\s|Basic\s", "", incoming_token)
-    print(token)
 
     # Get the introspection endpoint from the Keycloak discovery doc
     discovery_url = f"https://identity.ptl.api.platform.nhs.uk/" \
         f"auth/realms/gpconnect-pfs-mock-{keycloak_env}/.well-known/uma2-configuration"
-    print(discovery_url)
     discovery = requests.get(discovery_url).json()
-    print(discovery)
     introspection_endpoint = discovery.get('introspection_endpoint')
-    print(introspection_endpoint)
 
     # Get an Access Token for the realm using the client_id and client_secret
     validation_response = requests.post(
@@ -34,7 +29,6 @@ def validate_access_token(keycloak_env: str, client_id: str, client_secret: str,
             'token': token
         }
     ).json()
-    print(validation_response)
 
     return validation_response.get("active") or False
 
@@ -47,7 +41,6 @@ def handler(event, _context):
         os.getenv("client_secret"),
         access_token
     )
-    print(f"is_valid = {is_valid}")
 
     return {
         "isAuthorized": is_valid,
