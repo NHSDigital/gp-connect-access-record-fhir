@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "fargate-cluster" {
-  name = var.name_prefix
+  name = var.prefix
 }
 
 output "cluster_id" {

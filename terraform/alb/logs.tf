@@ -1,12 +1,12 @@
 resource "aws_s3_bucket" "lb_logs" {
-  bucket = "${var.short_name_prefix}-alb-logs"
+  bucket        = "${var.short_prefix}-alb-logs"
   force_destroy = true
 }
 
 data "aws_elb_service_account" "main" {}
 
 data "aws_iam_policy_document" "s3_lb_write" {
-  policy_id = "${var.name_prefix}-lb-logs-write"
+  policy_id = "${var.prefix}-lb-logs-write"
 
   statement {
     actions   = ["s3:PutObject"]
