@@ -64,7 +64,7 @@ def test_happy_path(
     nhsd_apim_proxy_url, nhsd_apim_auth_headers,
     _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
 ):
-    """"""
+    """Check that the authorizer lambda allows access to calls with a valid GPC token."""
     headers = {
         "accept": "application/fhir+json",
         "X-Correlation-ID": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
@@ -91,24 +91,27 @@ def test_happy_path(
         "login_form": {"username": "9912003071"},
     }
 )
-def test_401_invalid_token(
-    nhsd_apim_proxy_url, nhsd_apim_auth_headers,
+def test_403_invalid_token(
     _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
 ):
-    """"""
+    """Check that the authorizer lambda rejects calls with an invalid GPC token."""
+    # The GPC access token is not set in this initial request, it is set in the proxy - so for this test we call the
+    # endpoint directly with an invalid token to assert that the authorizer returns a 401 error.
+    endpoint = f"https://{interaction_id}.gcarf.dev.api.platform.nhs.uk"
     headers = {
+        # Generate a random string and try to pass it as the token
+        "Authorization": f"Bearer {uuid.uuid4()}",
         "Interaction-ID": interaction_id, "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
         "Ssp-TraceID": "09a01679-2564-0fb4-5129-aecc81ea2706", "Ssp-From": "200000000359",
         "Ssp-To": "918999198738",
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
     }
-    headers.update(nhsd_apim_auth_headers)
     resp = requests.get(
-      f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+      f"{endpoint}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
       headers=headers
     )
 
-    assert resp.status_code == 401
+    assert resp.status_code == 403
 
 
 def get_access_token(environment, client_credentials):
