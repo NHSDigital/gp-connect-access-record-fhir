@@ -276,13 +276,6 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
-          content: 
-            application/fhir+json:
-              schema: 
-                type: object
-              examples:
-                fullRecord:
-                  $ref: "#components/examples/FullRecord"
         4XX:
           description: |
             An error occured as follows:
@@ -578,16 +571,13 @@ paths:
             type: string
           examples:
             exact date:
-              value:
-                - eq2010-10-22
+              value: eq2010-10-22
               description: Exact match date
             greater than or equals:
-              value:
-                - g2022-01-15
+              value: g2022-01-15
               description: Greater than or equals which matches 2022-01-15 or 2022-01-16
             less than or equals:
-              value:
-                - le2022-01-15
+              value: le2022-01-15
               description: Less than or equals which matches 2022-01-15 or 2022-01-14
         - in: query
           name: author
