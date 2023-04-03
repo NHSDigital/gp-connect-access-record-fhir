@@ -52,3 +52,8 @@ resource "aws_iam_role_policy" "cloudwatch" {
 }
 EOF
 }
+
+resource "aws_cloudwatch_log_group" "lambda_logs" {
+  name = "/aws/lambda/${aws_lambda_function.validate-token-lambda-function.function_name}"
+  retention_in_days = 14
+}

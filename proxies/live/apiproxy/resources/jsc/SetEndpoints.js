@@ -21,6 +21,7 @@ if (endpoint) {
     url = url + queryString
   }
   context.setVariable("target.url", url)
+
 } else {
   context.setVariable("endpointNotFound", true)
 }

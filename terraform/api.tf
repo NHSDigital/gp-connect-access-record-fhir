@@ -10,4 +10,8 @@ module "api" {
     listener_arn    = module.alb.alb_listener_arn
     alb_vpc_link_id = local.alb_vpc_link_id
   }
+  token_validator_registry_id = local.token_validator_registry_id
+  client_id = var.client_id
+  client_secret = var.client_secret
+  keycloak_environment = var.keycloak_environment
 }
