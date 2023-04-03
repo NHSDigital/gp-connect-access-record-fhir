@@ -1,11 +1,11 @@
 output "alb_target_group_arn" {
-    value = aws_lb_target_group.http_mock_provider_tg.arn
+  value = aws_lb_target_group.http_mock_provider_tg.arn
 }
 
 output "alb_listener_arn" {
-    value = aws_lb_listener.api_http_80.arn
+  value = aws_lb_listener.api_http_80.arn
 }
 
 output "alb_arn" {
-    value = aws_lb.alb.arn
+  value = aws_lb.alb.arn
 }

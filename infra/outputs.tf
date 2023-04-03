@@ -7,7 +7,7 @@ output "vpc_id" {
 }
 
 output "mock_provider_subnet_ids" {
-    value = local.mock_provider_subnet_ids
+  value = local.mock_provider_subnet_ids
 }
 
 output "alb_vpc_link_id" {
@@ -15,9 +15,9 @@ output "alb_vpc_link_id" {
 }
 
 output "mock_provider_registry_id" {
-    value = aws_ecr_repository.mock_provider_registry.id
+  value = aws_ecr_repository.mock_provider_registry.id
 }
 
 output "token_validator_registry_id" {
-    value = aws_ecr_repository.token_validator_registry.id
+  value = aws_ecr_repository.token_validator_registry.id
 }

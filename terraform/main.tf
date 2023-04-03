@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     region = "eu-west-2"
-    key = "state"
+    key    = "state"
   }
 }
 
@@ -24,7 +24,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias  = "acm_provider"
-  region = "eu-west-2"
+  alias   = "acm_provider"
+  region  = "eu-west-2"
   profile = "apim-dev"
 }

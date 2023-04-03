@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    key = "state"
+    key    = "state"
     region = "eu-west-2"
   }
 }

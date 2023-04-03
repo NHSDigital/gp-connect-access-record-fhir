@@ -1,5 +1,5 @@
-resource "aws_apigatewayv2_api"  "service_api"  {
-  name                         = "${var.name_prefix}-api"
+resource "aws_apigatewayv2_api" "service_api" {
+  name                         = "${var.prefix}-api"
   description                  = "GP Connect PFS Acces Record mock-provider service backend api - ${var.environment}"
   protocol_type                = "HTTP"
   disable_execute_api_endpoint = true
@@ -15,7 +15,7 @@ resource "aws_apigatewayv2_domain_name" "service_api_domain_name" {
   }
 
   tags = {
-    Name = "${var.name_prefix}-api-domain-name"
+    Name = "${var.prefix}-api-domain-name"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_apigatewayv2_integration" "route_integration" {
   integration_type   = "HTTP_PROXY"
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
-  connection_id      = var.lb.vpc_link_id
+  connection_id      = var.lb.alb_vpc_link_id
 }
 
 resource "aws_apigatewayv2_route" "root_route" {
