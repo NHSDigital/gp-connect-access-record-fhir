@@ -68,8 +68,6 @@ steps:
           domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
           endpoint="https://${domain_name}/_status"
           echo ${endpoint}
-          #Adding delay of 3 minutes, sometimes ECS task some time to delete itself before making new task
-          sleep 180
           #Setting a counter to check if ECS Task is deployed + added sleep for 2 mins
           counter=0
           while [ $counter -lt 7 ]

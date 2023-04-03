@@ -35,7 +35,8 @@ ecr_url=${data.aws_ecr_repository.mock_provider_repository.repository_url}
 image_tag=$ecr_url:${var.image_version}
 docker build -t $image_tag -f ${local.mock_provider_path}/Dockerfile ${local.mock_provider_path}
 docker push -a $ecr_url
-aws ecs update-service --cluster ${var.prefix} --service ${var.prefix} --force-new-deployment --region eu-west-2 
+aws ecs update-service --cluster ${var.prefix} --service ${var.prefix} --force-new-deployment --region eu-west-2
+sleep 60
        EOF
   }
 }
