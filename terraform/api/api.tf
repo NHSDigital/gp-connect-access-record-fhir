@@ -84,7 +84,7 @@ resource "aws_apigatewayv2_authorizer" "token_validation" {
   name                              = "token-validation-authorizer"
   authorizer_uri                    = aws_lambda_function.validate-token-lambda-function.invoke_arn
   authorizer_payload_format_version = "2.0"
-  authorizer_credentials_arn        = aws_iam_role.apig_lambda_role.arn
+  authorizer_credentials_arn        = data.aws_iam_role.apig_lambda_role.arn
   enable_simple_responses           = true
   authorizer_result_ttl_in_seconds  = 1
 
