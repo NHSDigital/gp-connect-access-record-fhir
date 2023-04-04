@@ -46,17 +46,17 @@ data "aws_iam_policy_document" "apig_lambda_role_assume" {
   }
 }
 
-resource "aws_iam_role" "apig_lambda_role" {
+data "aws_iam_role" "apig_lambda_role" {
   name               = "apigateway-authorize-lambda-role"
   assume_role_policy = data.aws_iam_policy_document.apig_lambda_role_assume.json
 }
 
-resource "aws_iam_policy" "apig_lambda" {
+data "aws_iam_policy" "apig_lambda" {
   name   = "apig-lambda-policy"
   policy = data.aws_iam_policy_document.apig_lambda_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "apig_lambda_role_to_policy" {
-  role       = aws_iam_role.apig_lambda_role.name
-  policy_arn = aws_iam_policy.apig_lambda.arn
+  role       = data.aws_iam_role.apig_lambda_role.name
+  policy_arn = data.aws_iam_policy.apig_lambda.arn
 }
