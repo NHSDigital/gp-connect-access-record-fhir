@@ -1,12 +1,12 @@
 data aws_caller_identity current {}
 
-resource aws_ecr_repository "token_validation_ecr" {
+data aws_ecr_repository "token_validation_ecr" {
     name = var.token_validator_registry_id
 }
 
 locals {
     ecr_image_tag = var.environment
-    validation_ecr_url = aws_ecr_repository.token_validation_ecr.repository_url
+    validation_ecr_url = data.aws_ecr_repository.token_validation_ecr.repository_url
 }
 
 resource null_resource ecr_image {
@@ -30,7 +30,7 @@ data aws_ecr_image lambda_image {
   depends_on = [
     null_resource.ecr_image
   ]
-  repository_name = aws_ecr_repository.token_validation_ecr.name
+  repository_name = data.aws_ecr_repository.token_validation_ecr.name
   image_tag       = local.ecr_image_tag
 }
 
