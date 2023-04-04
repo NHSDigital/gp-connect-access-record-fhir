@@ -47,7 +47,10 @@ jobs:
 
           cd terraform
           make init
-          terraform workspace select $(WORKSPACE) && make init && terraform destroy -force && /
+          # tf_vars has the client id, secret, and keycloak env required by default so we pass null values here to
+          # prevent terraform from hanging waiting for an input for these values
+          terraform workspace select $(WORKSPACE) && make init && terraform destroy /
+          client_id="" client_secret="" keycloak_environment="" -force && /
           terraform workspace select default && terraform workspace delete $(WORKSPACE)
         displayName: Destroy terraform PR workspace and linked resources
 
