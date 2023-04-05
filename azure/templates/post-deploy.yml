@@ -99,9 +99,7 @@ steps:
 
   - bash: |
       # DEBUG - echo vars
-      for var in $(compgen -e); do
-        echo $var ${!var};
-      done
+      env | sort
     displayName: Echo pipeline vars for debug
 
   - bash: |
