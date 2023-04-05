@@ -47,12 +47,12 @@ data "aws_iam_policy_document" "apig_lambda_role_assume" {
 }
 
 resource "aws_iam_role" "apig_lambda_role" {
-  name               = "apigateway-authorize-lambda-role"
+  name               = "${var.short_prefix}-apig-authorize-lambda-role"
   assume_role_policy = data.aws_iam_policy_document.apig_lambda_role_assume.json
 }
 
 resource "aws_iam_policy" "apig_lambda" {
-  name   = "apig-lambda-policy"
+  name   = "${var.short_prefix}-apig-lambda-policy"
   policy = data.aws_iam_policy_document.apig_lambda_policy.json
 }
 
