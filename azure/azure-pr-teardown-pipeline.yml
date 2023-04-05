@@ -46,7 +46,6 @@ jobs:
           account_id="$(aws sts get-caller-identity --query Account --output text)"
 
           cd terraform
-          make init
           # tf_vars has the client id, secret, and keycloak env required by default so we pass null values here to
           # prevent terraform from hanging waiting for an input for these values
           terraform workspace select $(WORKSPACE) && make init && terraform destroy -auto-approve -force /
