@@ -45,11 +45,6 @@ jobs:
           export AWS_PROFILE=apim-dev
           account_id="$(aws sts get-caller-identity --query Account --output text)"
 
-          # DEBUG - echo vars
-          for var in $(compgen -e); do
-            echo $var ${!var};
-          done
-
           cd terraform
           # tf_vars has the client id, secret, and keycloak env required by default so we pass null values here to
           # prevent terraform from hanging waiting for an input for these values

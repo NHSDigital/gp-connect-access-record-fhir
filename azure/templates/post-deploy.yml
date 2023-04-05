@@ -98,6 +98,13 @@ steps:
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
 
   - bash: |
+      # DEBUG - echo vars
+      for var in $(compgen -e); do
+        echo $var ${!var};
+      done
+    displayName: Echo pipeline vars for debug
+
+  - bash: |
       set -e
       export RELEASE_RELEASEID=$(Build.BuildId)
       export SOURCE_COMMIT_ID=$(Build.SourceVersion)
