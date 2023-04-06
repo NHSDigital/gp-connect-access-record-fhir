@@ -41,7 +41,6 @@ def handler(event, _context):
         os.getenv("client_secret"),
         access_token
     )
-    print(f"is_valid = {is_valid}")
 
     return {
         "isAuthorized": is_valid,
