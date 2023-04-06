@@ -105,7 +105,7 @@ def test_403_invalid_token(
         "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
     }
     resp = requests.get(
-      f"{endpoint}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+      f"{endpoint}/FHIR/STU3/documents/Patient/9000000009",
       headers=headers
     )
 
