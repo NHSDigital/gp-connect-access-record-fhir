@@ -14,7 +14,7 @@ create_kvm () {
     else
       echo "The KVM does NOT exist."
       URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/$APIGEE_ENVIRONMENT/keyvaluemaps"
-      RESPONSE_CODE=$(curl -s -o response.txt -w "%{http_code}" -XPOST -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" -d '{"name":"gp-connect-access-record-endpoints-pr-'"${PR_NO}"'}' $URL)
+      RESPONSE_CODE=$(curl -s -o response.txt -w "%{http_code}" -XPOST -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" -d '{"name":"gp-connect-access-record-endpoints-pr-'"${PR_NO}"'"}' $URL)
 
       if [ $RESPONSE_CODE -eq "201" ]
       then
@@ -35,7 +35,9 @@ populate_kvm () {
     #ODS code for Identity service
       KEYNAME='REPC'
     # Reading whole json object
-      KEYVALUE=jq -c '.' ./endpoints/$APIGEE_ENVIRONMENT/endpoints.json
+      jsonObject=$(jq -c '.' ./endpoints/$APIGEE_ENVIRONMENT/endpoints.json)
+      #Replacing Double quotes with \"
+      KEYVALUE=$(echo $jsonObject | sed 's/"/\\"/g')
 
 
       # DELETE FIRST
