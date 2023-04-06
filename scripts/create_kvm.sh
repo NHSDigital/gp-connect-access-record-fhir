@@ -66,7 +66,7 @@ populate_kvm () {
         echo "Stopping..."
         exit 6
       fi
-    done
+    
 
 }
 
