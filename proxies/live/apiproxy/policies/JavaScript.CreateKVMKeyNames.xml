@@ -2,7 +2,7 @@
 <Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JavaScript.CreateKVMKeyNames">
     <DisplayName>JavaScript.CreateKVMKeyNames</DisplayName>
     <Properties>
-        <Property name="GPCAuthInteractionId">urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthroizationservice</Property>
+        <Property name="GPCAuthInteractionId">urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthorizationservice</Property>
     </Properties>
     <ResourceURL>jsc://CreateKVMKeyNames.js</ResourceURL>
 </Javascript>

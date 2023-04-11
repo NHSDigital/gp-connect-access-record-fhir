@@ -1,4 +1,4 @@
 {
-  "urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthroizationservice": "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token",
+  "urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthorizationservice": "https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-internal-dev/protocol/openid-connect/token",
   "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1": "ToBeUpdatedAtRunTime"
 }

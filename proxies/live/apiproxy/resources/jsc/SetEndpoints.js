@@ -1,6 +1,19 @@
 const queryString = context.getVariable("request.querystring")
 const pathSuffix = context.getVariable("proxy.pathsuffix")
-const endpoint = context.getVariable("endpoint")
+const endpoints = context.getVariable("endpoints")
+
+function json_tryparse(raw) {
+  try {
+      return JSON.parse(raw);
+  }
+  catch (e) {
+      return raw;
+  }
+}
+
+var endpointsContent=context.getVariable('endpoints');
+const endpointsObject=json_tryparse(endpointsContent);
+const endpoint=endpointsObject[context.getVariable("endpointInteractionKey")];
 
 //Parsing hostname and pathname from given url
 function parseURL(href) {
@@ -11,7 +24,7 @@ function parseURL(href) {
     }
 }
 
-var values=parseURL(context.getVariable("EndpointforGPCAuth"));
+var values=parseURL(endpointsObject[context.getVariable("GPCAuthKey")]);
 context.setVariable("GPCAuthHostname",values["hostname"])
 context.setVariable("GPCAuthHostpath",values["pathname"])
 
@@ -26,17 +39,6 @@ if (endpoint) {
   context.setVariable("endpointNotFound", true)
 }
 
-
-
-
-function json_tryparse(raw) {
-  try {
-      return JSON.parse(raw);
-  }
-  catch (e) {
-      return raw;
-  }
-}
 
 var endpointConfig=context.getVariable("private.config")
 const parsedEndpointConfig = json_tryparse(endpointConfig)
