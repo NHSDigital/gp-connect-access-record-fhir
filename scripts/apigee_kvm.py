@@ -4,7 +4,8 @@ create_kvm.py
 Usage:
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] create <name>
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] delete <name>
-  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] replace-entry <name> (--key=<key>) (--value=<value>)
+  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] replace-entry <name> (--key=<key>) \
+(--value=<value>)
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] remove-entry <name> (--key=<key>)
 
 Options:
