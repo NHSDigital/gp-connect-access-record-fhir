@@ -35,6 +35,7 @@ steps:
           workspace=$APIGEE_ENVIRONMENT
       else
           isItPR=1
+          echo "##vso[task.setvariable variable=PR_NO]${workspace}"
           workspace=pr-${workspace}
       fi
 
@@ -91,7 +92,7 @@ steps:
               cd ..
               export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
               export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-              make create-kvm
+              make create-kvm PR_NO=$(PR_NO)
           fi
       fi
     displayName: Update endpoints KVM

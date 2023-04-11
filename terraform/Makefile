@@ -1,8 +1,6 @@
 -include .env
 
 interactionId=$(environment)
-odsCode="REPC"
-key4KVM=$(odsCode)_$(interactionId)
 
 aws_profile = apim-dev
 tf_cmd = AWS_PROFILE=$(aws_profile) terraform
@@ -34,12 +32,13 @@ destroy: workspace
 	teraform workspace select default
 	terraform workspace delete $(environment)
 
-add-endpoint: outputs
+add-endpoint:
 	chmod +x ./AddEndpoints.sh
-	./AddEndpoints.sh $(key4KVM)
+	./AddEndpoints.sh 
 
-outputs:
-	$(tf_cmd) output -json > ./outputs.json
+
+output:
+	$(tf_cmd) output $(name)
 
 mock_provider_repository_name = gp-connect-access-record-fhir-infra-dev-mock-provider
 mock_provider_repository_url = $(aws_account_no).dkr.ecr.eu-west-2.amazonaws.com/$(mock_provider_repository_name)
