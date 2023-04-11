@@ -12790,7 +12790,7 @@ paths:
                         reference: Patient/f8ac400000000000
                       context:
                         reference: Encounter/4000000000000000_97c8590000000000
-                      occurrenceDate: '2020-09-18T13:50:20+01:00'
+                      occurrenceDateTime: '2020-09-18'
                       authoredOn: '2020-09-18'
                       requester:
                         agent:
