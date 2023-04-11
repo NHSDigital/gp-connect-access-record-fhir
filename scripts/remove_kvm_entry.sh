@@ -1,18 +1,33 @@
 #!/bin/bash
 
-# Check the KVM and entry exist
-KEYNAME="REPC_$TAG"
-URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints-PR/entries/$KEYNAME"
-RESPONSE_CODE=$(curl -X GET -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
-echo $RESPONSE_CODE
+delete_kvm () {
 
-if [ $RESPONSE_CODE -eq "200" ]
+ URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/$APIGEE_ENVIRONMENT/keyvaluemaps/gp-connect-access-record-endpoints-pr-$TAG"
+    
+ RESPONSE_CODE=$(curl -XGET -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
+
+ if [ $RESPONSE_CODE -eq "200" ]
+ then
+    URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/$APIGEE_ENVIRONMENT/keyvaluemaps/gp-connect-access-record-endpoints-pr-$TAG"
+        
+    RESPONSE_CODE=$(curl -XDELETE -s  -o response.txt -w "%{http_code}" -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
+
+    echo $RESPONSE_CODE
+
+    if [ $RESPONSE_CODE -eq "200" ]
     then
-      # Delete PR KVM Entry
-      URL="https://api.enterprise.apigee.com/v1/organizations/nhsd-nonprod/environments/internal-dev/keyvaluemaps/gp-connect-access-record-endpoints-PR/entries/$KEYNAME"
-      RESPONSE_CODE=$(curl -s -o response.txt -w "%{http_code}" -X DELETE -H "Content-Type: application/json" -H "Authorization: Bearer $APIGEE_ACCESS_TOKEN" $URL)
-      echo $RESPONSE_CODE
+            echo "Keyvaluemap 'gp-connect-access-record-endpoints-pr-$TAG' successfully deleted."
+        
     else
-      echo "The KVM or entry does not exist."
-      exit 1
-fi
+            echo "Something FAILED."
+            cat response.txt 
+            echo "Stopping..."
+            exit 6
+    fi
+ else
+    echo "Keyvaluemap 'gp-connect-access-record-endpoints-pr-$TAG' does NOT exist."
+ fi
+
+} 
+
+delete_kvm
