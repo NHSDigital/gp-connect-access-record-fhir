@@ -107,5 +107,5 @@ def test_nhs_login_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     }
     headers.update(nhsd_apim_auth_headers)
 
-    resp = requests.get(f"{nhsd_apim_proxy_url}/FHIR/STU3/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009", headers=headers)
     assert resp.status_code == 200
