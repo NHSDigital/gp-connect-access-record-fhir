@@ -18,5 +18,8 @@ def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_h
               "Ssp-To": "918999198738",
               "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1"}
     headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009", headers=headers)
+    resp = requests.get(
+        f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+        headers=headers
+    )
     assert resp.status_code == 200
