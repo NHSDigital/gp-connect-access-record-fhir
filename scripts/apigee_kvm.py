@@ -4,22 +4,37 @@ create_kvm.py
 Usage:
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] create <name>
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] delete <name>
+  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] populate-interaction-ids <name> --ods=<ods> \
+--provider-endpoint=<provider-endpoint> --oauth-endpoint=<oauth-endpoint>
+
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] replace-entry <name> (--key=<key>) \
 (--value=<value>)
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] remove-entry <name> (--key=<key>)
 
 Options:
-  -h --help                           Show this screen.
-  -t --access-token=<access-token>    Apigee access token
-  --env=<env>                         Apigee environment
-  --org=<org>                         Apigee organisation [default: nhsd-nonprod]
-  -k --key=<key>                      KVM key
-  -v --value=<value>                  KVM value
+  -h --help                                    Show this screen.
+  -t --access-token=<access-token>             Apigee access token
+  --env=<env>                                  Apigee environment
+  --org=<org>                                  Apigee organisation [default: nhsd-nonprod]
+  -k --key=<key>                               KVM key
+  -v --value=<value>                           KVM value
+  --ods=<ods>                                  ODS code of the provider
+  --provider-endpoint=<provider-endpoint>      Provider backend endpoint
+  --oauth-endpoint=<oauth-endpoint>            Authentication server endpoint for the provider
 """
 import json
 
 import requests
 from docopt import docopt
+
+
+def make_interaction_ids(provider_endpoint: str, oauth_endpoint: str) -> object:
+    return {
+        "urn:nhs:names:services:gpconnect:fhir:operation:gpc.providerauthorizationservice": oauth_endpoint,
+        "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1": provider_endpoint,
+        "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1": provider_endpoint,
+        "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1": provider_endpoint
+    }
 
 
 class ApigeeKvm:
@@ -98,6 +113,11 @@ class ApigeeKvm:
             print(f"Bad response from apigee: status code: {res.status_code} content: {res.content}")
             exit(1)
 
+    def populate_interaction_id(self, kvm_name: str, ods: str, provider_endpoint: str, oauth_endpoint: str):
+        interaction_ids = make_interaction_ids(provider_endpoint, oauth_endpoint)
+        self.create_kvm(kvm_name)
+        return self.replace_entry(kvm_name, ods, json.dumps(interaction_ids))
+
 
 def main():
     args = docopt(__doc__)
@@ -113,6 +133,9 @@ def main():
         res = apigee.replace_entry(kvm_name, args["--key"], args["--value"])
     elif args.get("remove-entry"):
         res = apigee.remove_entry(kvm_name, args["--key"])
+    elif args.get("populate-interaction-ids"):
+        res = apigee.populate_interaction_id(kvm_name, args["--ods"],
+                                             args["--provider-endpoint"], args["--oauth-endpoint"])
     else:
         print("Operation not supported")
         exit(1)
