@@ -46,6 +46,20 @@ resource "aws_apigatewayv2_route" "root_route" {
   authorizer_id        = aws_apigatewayv2_authorizer.token_validation.id
 }
 
+resource "aws_apigatewayv2_route" "ping_route" {
+  api_id               = aws_apigatewayv2_api.service_api.id
+  route_key            = "GET /ping"
+  target               = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
+  authorization_type   = "NONE"
+}
+
+resource "aws_apigatewayv2_route" "status_route" {
+  api_id               = aws_apigatewayv2_api.service_api.id
+  route_key            = "GET /_status"
+  target               = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
+  authorization_type   = "NONE"
+}
+
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
