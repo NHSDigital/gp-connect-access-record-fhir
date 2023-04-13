@@ -2,22 +2,16 @@
 """
 create_kvm.py
 Usage:
-  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] create <name>
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] delete <name>
+
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] populate-interaction-ids <name> --ods=<ods> \
 --provider-endpoint=<provider-endpoint> --oauth-endpoint=<oauth-endpoint>
-
-  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] replace-entry <name> (--key=<key>) \
-(--value=<value>)
-  apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] remove-entry <name> (--key=<key>)
 
 Options:
   -h --help                                    Show this screen.
   -t --access-token=<access-token>             Apigee access token
   --env=<env>                                  Apigee environment
   --org=<org>                                  Apigee organisation [default: nhsd-nonprod]
-  -k --key=<key>                               KVM key
-  -v --value=<value>                           KVM value
   --ods=<ods>                                  ODS code of the provider
   --provider-endpoint=<provider-endpoint>      Provider backend endpoint
   --oauth-endpoint=<oauth-endpoint>            Authentication server endpoint for the provider
@@ -125,14 +119,8 @@ def main():
 
     kvm_name = args["<name>"]
     res = b""
-    if args.get("create"):
-        res = apigee.create_kvm(kvm_name)
-    elif args.get("delete"):
+    if args.get("delete"):
         res = apigee.delete_kvm(kvm_name)
-    elif args.get("replace-entry"):
-        res = apigee.replace_entry(kvm_name, args["--key"], args["--value"])
-    elif args.get("remove-entry"):
-        res = apigee.remove_entry(kvm_name, args["--key"])
     elif args.get("populate-interaction-ids"):
         res = apigee.populate_interaction_id(kvm_name, args["--ods"],
                                              args["--provider-endpoint"], args["--oauth-endpoint"])
