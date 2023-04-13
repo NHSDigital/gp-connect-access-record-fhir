@@ -2,6 +2,7 @@ import pytest
 import requests
 from os import getenv
 
+
 @pytest.mark.smoketest
 @pytest.mark.auth
 @pytest.mark.debug
