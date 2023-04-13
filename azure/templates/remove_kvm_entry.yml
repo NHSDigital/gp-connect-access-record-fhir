@@ -26,10 +26,7 @@ steps:
       apigee_password: $(APIGEE_PASSWORD)
 
   - bash: |
-      export APIGEE_ENVIRONMENT="internal-dev"
-      export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-      export TAG=${{ parameters.workspace_tag }}
+      PR_NO=${{ parameters.workspace_tag }}
 
-      chmod +x scripts/remove_kvm_entry.sh
-      scripts/remove_kvm_entry.sh
+      python scripts/apigee_kvm.py --env internal-dev --access-token $(secret.AccessToken) delete gp-connect-access-record-endpoints-pr-$PR_NO
     displayName: Update endpoints KVM
