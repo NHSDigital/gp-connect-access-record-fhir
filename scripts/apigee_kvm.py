@@ -3,7 +3,6 @@
 create_kvm.py
 Usage:
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] delete <name>
-
   apigee_kvm (--env=<env>) (--access-token=<access-token>) [--org=<org>] populate-interaction-ids <name> --ods=<ods> \
 --provider-endpoint=<provider-endpoint> --oauth-endpoint=<oauth-endpoint>
 
