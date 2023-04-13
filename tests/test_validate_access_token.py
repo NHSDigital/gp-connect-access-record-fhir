@@ -84,7 +84,7 @@ def test_happy_path(
         "login_form": {"username": "9912003071"},
     }
 )
-def test_403_invalid_token(
+def test_401_invalid_token(
             nhsd_apim_proxy_url, _test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials
 ):
     """Check that the authorizer lambda rejects calls with an invalid GPC token."""
@@ -102,7 +102,7 @@ def test_403_invalid_token(
       headers=headers
     )
 
-    assert resp.status_code == 403
+    assert resp.status_code == 401
 
 
 def get_access_token(environment, client_credentials):
