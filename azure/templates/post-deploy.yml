@@ -3,6 +3,8 @@ parameters:
     default: aws --profile=apim-dev
   - name: is_ptl
     default: true
+  - name: proxy_base_path
+    default: FHIR/STU3
 
 steps:
   - ${{ if parameters.is_ptl }}:
@@ -35,6 +37,7 @@ steps:
           workspace=$APIGEE_ENVIRONMENT
       else
           isItPR=1
+          echo "##vso[task.setvariable variable=PR_NO]${workspace}"
           workspace=pr-${workspace}
       fi
 
@@ -91,11 +94,16 @@ steps:
               cd ..
               export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
               export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
-              make create-kvm
+              make create-kvm PR_NO=$(PR_NO)
           fi
       fi
     displayName: Update endpoints KVM
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
+
+  - bash: |
+      # DEBUG - echo vars
+      env | sort
+    displayName: Echo pipeline vars for debug
 
   - bash: |
       set -e
@@ -130,11 +138,11 @@ steps:
       export SERVICE_BASE_PATH="$(SERVICE_BASE_PATH)"
       export APIGEE_ACCESS_TOKEN="$(secret.AccessToken)"
       export PROXY_NAME="$(FULLY_QUALIFIED_SERVICE_NAME)"
+      export PROXY_BASE_PATH="${{ parameters.proxy_base_path }}"
       export STATUS_ENDPOINT_API_KEY="$(status-endpoint-api-key)"
       export JWT_PRIVATE_KEY_ABSOLUTE_PATH="$(Pipeline.Workspace)/secrets/$(JWT_TESTING_PRIVATE_KEY)"
       export client_id="$(INTROSPECTION_CLIENT_ID)"
       export client_secret="$(INTROSPECTION_CLIENT_SECRET)"
-
 
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then

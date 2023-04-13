@@ -39,7 +39,7 @@ build-proxy:
 #Runs create KVM script
 create-kvm:
 	chmod +x scripts/create_kvm.sh
-	scripts/create_kvm.sh
+	scripts/create_kvm.sh $(PR_NO)
 
 #Files to loop over in release
 _dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts endpoints terraform PrismMockProvider specification"

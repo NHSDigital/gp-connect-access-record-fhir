@@ -52,3 +52,4 @@ extends:
           - template: ./templates/post-deploy.yml
             parameters:
               is_ptl: true
+              proxy_base_path: ${{ variables.proxy_base_path }}
