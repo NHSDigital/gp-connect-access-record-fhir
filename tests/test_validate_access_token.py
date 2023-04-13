@@ -90,7 +90,7 @@ def test_403_invalid_token(
     """Check that the authorizer lambda rejects calls with an invalid GPC token."""
     # The GPC access token is not set in this initial request, it is set in the proxy - so for this test we call the
     # endpoint directly with an invalid token to assert that the authorizer returns a 401 error.
-    endpoint = f"{nhsd_apim_proxy_url}/documents/Patient/9000000009"
+    endpoint = f"{nhsd_apim_proxy_url}"
     headers = {
         # Generate a random string and try to pass it as the token
         "Authorization": f"Bearer {uuid.uuid4()}",
@@ -98,7 +98,7 @@ def test_403_invalid_token(
         "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068"
     }
     resp = requests.get(
-      f"{endpoint}/FHIR/STU3/documents/Patient/9000000009",
+      f"{endpoint}/documents/Patient/9000000009",
       headers=headers
     )
 
