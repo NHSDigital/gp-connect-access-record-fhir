@@ -29,7 +29,7 @@ resource "null_resource" "mock-provider_image_push" {
 
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
-    command = <<EOF
+    command=<<-EOF
 export AWS_PROFILE=apim-dev
 aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.eu-west-2.amazonaws.com
 ecr_url=${data.aws_ecr_repository.mock_provider_repository.repository_url}
@@ -56,6 +56,6 @@ do
       sleep 80
     fi
 done
-       EOF
+    EOF
   }
 }
