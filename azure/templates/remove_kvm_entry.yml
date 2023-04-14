@@ -3,6 +3,13 @@ parameters:
   type: string
 
 steps:
+  - bash: |
+      make install-python
+
+    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
+    displayName: Setup pytests
+    condition: always()
+
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
       role: "auto-ops"
