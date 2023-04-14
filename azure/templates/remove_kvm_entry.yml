@@ -5,9 +5,7 @@ parameters:
 steps:
   - bash: |
       make install-python
-
-    workingDirectory: $(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)
-    displayName: Setup pytests
+    displayName: Install python
     condition: always()
 
   - template: "azure/components/aws-assume-role.yml@common"
