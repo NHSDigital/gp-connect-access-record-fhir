@@ -27,6 +27,7 @@ APIGEE_ENVIRONMENTS:
     portal_visibility: false
   - name: int
     display_name: Integration Testing
+    has_mock_auth: true
 ---
 meta:
   api:
@@ -72,7 +73,6 @@ apigee:
           - {{ NAME }}
 {% if ENV.has_mock_auth | default(false) %}
           - identity-service-mock-{{ ENV.name }}
-{% else %}
           - identity-service-{{ ENV.name }}
 {% endif %}
         scopes:

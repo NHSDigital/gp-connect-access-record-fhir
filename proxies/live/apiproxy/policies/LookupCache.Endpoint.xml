@@ -3,6 +3,6 @@
   <AssignTo>endpoint</AssignTo>
   <Scope>Application</Scope>
   <CacheKey>
-    <KeyFragment ref="endpointKey"/>
+    <KeyFragment ref="endpointODSKey"/>
   </CacheKey>
 </LookupCache>

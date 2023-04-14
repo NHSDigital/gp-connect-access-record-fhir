@@ -3,7 +3,7 @@
   <Source>fetchedEndpoint</Source>
   <Scope>Application</Scope>
   <CacheKey>
-    <KeyFragment ref="endpointKey"/>
+    <KeyFragment ref="endpointODSKey"/>
   </CacheKey>
   <ExpirySettings>
     <TimeoutInSeconds>900</TimeoutInSeconds>

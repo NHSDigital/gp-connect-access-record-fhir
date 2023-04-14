@@ -9,8 +9,6 @@ from os import getenv
 import pytest
 import requests
 
-from .config import interaction_id
-
 
 @pytest.mark.smoketest
 def test_ping(nhsd_apim_proxy_url):
@@ -79,7 +77,7 @@ def test_wait_for_status(nhsd_apim_proxy_url, status_endpoint_auth_headers):
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "application", "level": "level0"})
 def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
-    headers = {"Interaction-ID": interaction_id}
+    headers = {"Interaction-ID": "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1"}
     headers.update(nhsd_apim_auth_headers)
 
     resp = requests.get(f"{nhsd_apim_proxy_url}/documents/Patient/9000000009", headers=headers)
@@ -96,19 +94,15 @@ def test_auth_level0(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
 )
 def test_nhs_login_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
     headers = {
-        "Interaction-ID": interaction_id,
+        "Interaction-ID": "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1",
         "accept": "application/fhir+json",
         "X-Correlation-ID": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
-        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
-        "Ssp-TraceID": "09a01679-2564-0fb4-5129-aecc81ea2706",
-        "Ssp-From": "200000000359",
-        "Ssp-To": "918999198738",
-        "Ssp-PatientInteration": "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1",
+        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068"
     }
     headers.update(nhsd_apim_auth_headers)
 
     resp = requests.get(
-        f"{nhsd_apim_proxy_url}/{getenv('PROXY_BASE_PATH')}/documents/Patient/9000000009",
+        f"{nhsd_apim_proxy_url}/documents/Patient/9000000009",
         headers=headers
     )
     assert resp.status_code == 200

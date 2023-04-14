@@ -3,7 +3,7 @@
     <DisplayName>KeyValueMapOperations.GetConfig</DisplayName>
     <Get assignTo="private.config">
         <Key>
-            <Parameter ref="endpointConfigKey"/>
+            <Parameter ref="endpointODSKey"/>
         </Key>
     </Get>
 </KeyValueMapOperations>

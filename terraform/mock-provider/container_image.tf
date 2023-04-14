@@ -36,11 +36,11 @@ image_tag=$ecr_url:${var.image_version}
 docker build -t $image_tag -f ${local.mock_provider_path}/Dockerfile ${local.mock_provider_path}
 docker push -a $ecr_url
 aws ecs update-service --cluster ${var.prefix} --service ${var.prefix} --force-new-deployment --region eu-west-2
-sleep 40
+sleep 10
 counter=0
 endpoint=https://$(make -s output name=service_domain_zone)/_status
 echo $endpoint
-while [ $counter -lt 10 ]
+while [ $counter -lt 2 ]
 do
     response=$(curl -s -o /dev/null -w "%%{http_code}" -X GET $endpoint )
     echo $response
@@ -50,8 +50,9 @@ do
       break
     else
       echo "Waiting for $endpoint to return a 200 response..."
-      counter=$((counter+1))
-      sleep 80
+      ((counter=counter+1))
+      echo $counter
+      sleep 10
     fi
 done
        EOF
