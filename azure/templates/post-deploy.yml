@@ -55,23 +55,6 @@ steps:
   - bash: |
       set -e
       if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-        export AWS_PROFILE=apim-dev
-        account_id="$(aws sts get-caller-identity --query Account --output text)"
-        aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.eu-west-2.amazonaws.com
-
-        mock_provider_repository_url=${account_id}.dkr.ecr.eu-west-2.amazonaws.com/gp-connect-access-record-fhir-infra-dev-mock-provider
-        image_tag=${mock_provider_repository_url}:$(WORKSPACE)
-
-        docker build -t ${image_tag} .
-        docker tag ${image_tag} ${mock_provider_repository_url}:$(Build.BuildId)
-        docker push -a ${mock_provider_repository_url}
-      fi
-    displayName: Build and push mock-receiver image
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/PrismMockProvider"
-
-  - bash: |
-      set -e
-      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
           export AWS_PROFILE=apim-dev
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
 
