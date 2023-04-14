@@ -107,31 +107,6 @@ steps:
 
   - bash: |
       set -e
-      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
-          domain_name=$(make -s output name=service_domain_zone)
-          domain_name=`sed -e 's/^"//' -e 's/"$//' <<< $domain_name`
-          endpoint="https://${domain_name}/_status"
-          echo ${endpoint}
-          #Setting a counter to check if ECS Task is deployed + added sleep for 2 mins
-          
-          response=$(curl -s -o /dev/null -w "%{http_code}" -X GET ${endpoint} )
-          echo ${response}
-          if [ $response -eq 200 ]
-          then
-            echo "Status test successful"
-            break
-          else
-            echo "Waiting for $endpoint to return a 200 response..."
-            sleep 120
-            exit 1
-          fi
-      fi
-    displayName: Wait for ECS Task Deployment
-    workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
-    retryCountOnTaskFailure: 7
-
-  - bash: |
-      set -e
       export RELEASE_RELEASEID=$(Build.BuildId)
       export SOURCE_COMMIT_ID=$(Build.SourceVersion)
       export APIGEE_ENVIRONMENT="$(ENVIRONMENT)"
