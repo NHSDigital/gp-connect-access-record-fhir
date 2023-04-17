@@ -45,8 +45,15 @@ while [ $counter -lt 10 ]
 do
     response=$(curl -s -o /dev/null -w "%%{http_code}" -X GET $endpoint )
     echo $response
-    ((counter=counter+1))
-    echo $counter
+    if [ $response -eq 200 ]
+    then
+      echo "Status test successful"
+      break
+    else
+      echo "Waiting for $endpoint to return a 200 response..."
+      ((counter=counter+1))
+      echo $counter
+      sleep 80
     fi
 done
     EOF
