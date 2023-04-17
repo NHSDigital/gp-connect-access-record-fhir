@@ -41,6 +41,14 @@ sleep 50
 counter=0
 endpoint=https://${var.service_domain_zone}/_status
 echo $endpoint
+while [ $counter -lt 10 ]
+do
+    response=$(curl -s -o /dev/null -w "%%{http_code}" -X GET $endpoint )
+    echo $response
+    ((counter=counter+1))
+    echo $counter
+    fi
+done
     EOF
   }
 }
