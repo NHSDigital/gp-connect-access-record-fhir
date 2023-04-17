@@ -40,11 +40,10 @@ aws ecs update-service --cluster ${var.prefix} --service ${var.prefix} --force-n
 sleep 50
 counter=0
 endpoint=https://$(make -s output name=service_domain_zone)/_status
-echo $endpoint
 while [ $counter -lt 10 ]
 do
-    ((counter=counter+1))
-      echo $counter
+    counter=$[$counter+1]
+    echo $counter
 done
     EOF
   }
