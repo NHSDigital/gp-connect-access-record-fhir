@@ -8,6 +8,8 @@ variable "image_version" {}
 
 variable "cluster_id" {}
 
+variable "service_domain_zone" {}
+
 variable "container_port" {
 }
 
