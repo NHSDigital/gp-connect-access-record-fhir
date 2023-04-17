@@ -31,7 +31,3 @@ data "aws_subnet" "mock_provider_subnets" {
 locals {
   private_subnet_cidr = data.aws_subnet.mock_provider_subnets.*.cidr_block
 }
-
-output "service_domain_zone" {
-  value = module.api.service_domain_zone
-}

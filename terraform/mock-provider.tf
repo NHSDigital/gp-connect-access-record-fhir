@@ -10,5 +10,5 @@ module "mock-provider" {
   vpc_id         = local.vpc_id
   registry_id    = local.mock_provider_registry_id
   image_version  = local.environment
-  service_domain_zone = module.api.service_domain_zone
+  service_domain_name = module.api.service_domain_name
 }

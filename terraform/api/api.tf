@@ -104,6 +104,6 @@ resource "aws_apigatewayv2_authorizer" "token_validation" {
 
 }
 
-output "service_domain_zone" {
+output "service_domain_name" {
   value = aws_apigatewayv2_api_mapping.api_mapping.domain_name
 }

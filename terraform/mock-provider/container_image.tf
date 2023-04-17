@@ -39,7 +39,7 @@ docker push -a $ecr_url
 aws ecs update-service --cluster ${var.prefix} --service ${var.prefix} --force-new-deployment --region eu-west-2
 sleep 50
 counter=0
-endpoint=https://${var.service_domain_zone}/_status
+endpoint=https://${var.service_domain_name}/_status
 echo $endpoint
 while [ $counter -lt 10 ]
 do

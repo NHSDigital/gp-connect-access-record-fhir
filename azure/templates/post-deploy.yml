@@ -72,7 +72,7 @@ steps:
           if [ $(IS_IT_PR) -eq 1 ]; then
               #if its not sandbox and it should be PR
               source ../.venv/bin/activate
-              domain_name=https://$(make -s output name=service_domain_zone)
+              domain_name=https://$(make -s output name=service_domain_name)
               oauth_endpoint="https://identity.ptl.api.platform.nhs.uk/auth/realms/gpconnect-pfs-mock-$APIGEE_ENVIRONMENT/protocol/openid-connect/token"
               python ../scripts/apigee_kvm.py --env $APIGEE_ENVIRONMENT --access-token $(secret.AccessToken) populate-interaction-ids gp-connect-access-record-endpoints-pr-$(PR_NO) --ods REPC --provider-endpoint $domain_name --oauth-endpoint $oauth_endpoint
           fi
