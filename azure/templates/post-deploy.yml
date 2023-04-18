@@ -5,12 +5,12 @@ parameters:
     default: true
 
 steps:
+  - ${{ if parameters.is_ptl }}:
     - template: "azure/components/aws-assume-role.yml@common"
       parameters:
           role: "auto-ops"
           profile: "apm_ptl"
 
-  - ${{ if parameters.is_ptl }}:
     - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
       parameters:
           secret_file_ids:
@@ -18,16 +18,9 @@ steps:
           secret_ids:
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
-
-  - ${{ if != parameters.is_ptl }}:
-    - template: "azure/components/get-aws-secrets-and-ssm-params.yml@common"
-      parameters:
-          secret_file_ids:
-              - ptl/app-credentials/jwt_testing/non-prod/JWT_TESTING_PRIVATE_KEY
-          secret_ids:
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID_INT
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET_INT
-
+              
   - bash: |
       make install-python
 
