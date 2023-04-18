@@ -3,6 +3,11 @@ parameters:
   type: string
 
 steps:
+  - bash: |
+      make install-python
+    displayName: Install python
+    condition: always()
+
   - template: "azure/components/aws-assume-role.yml@common"
     parameters:
       role: "auto-ops"
@@ -27,6 +32,6 @@ steps:
 
   - bash: |
       PR_NO=${{ parameters.workspace_tag }}
-
+      source .venv/bin/activate
       python scripts/apigee_kvm.py --env internal-dev --access-token $(secret.AccessToken) delete gp-connect-access-record-endpoints-pr-$PR_NO
     displayName: Update endpoints KVM
