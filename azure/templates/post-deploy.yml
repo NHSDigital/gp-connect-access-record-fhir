@@ -25,7 +25,8 @@ steps:
           secret_ids:
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID_INT
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET_INT
-
+    - ${{ end }}
+    
   - bash: |
       make install-python
 
@@ -82,9 +83,15 @@ steps:
 
           make init
           make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE) \
-            client_id=$(INTROSPECTION_CLIENT_ID) \
-            client_secret=$(INTROSPECTION_CLIENT_SECRET) \
-            keycloak_environment=$(APIGEE_ENVIRONMENT)
+          - ${{ if parameters.is_ptl }}:
+              client_id=$(INTROSPECTION_CLIENT_ID) \
+              client_secret=$(INTROSPECTION_CLIENT_SECRET) \
+              keycloak_environment=$(APIGEE_ENVIRONMENT)
+          - ${{ else }}:
+              client_id=$(INTROSPECTION_CLIENT_ID_INT) \
+              client_secret=$(INTROSPECTION_CLIENT_SECRET_INT) \
+              keycloak_environment=$(APIGEE_ENVIRONMENT)
+          - ${{ end }}
       fi
     displayName: Run Terraform
     workingDirectory: "$(Pipeline.Workspace)/s/$(SERVICE_NAME)/$(SERVICE_ARTIFACT_NAME)/terraform"
