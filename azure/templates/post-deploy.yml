@@ -18,7 +18,9 @@ steps:
           secret_ids:
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
-
+              - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID_INT
+              - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET_INT
+              
   - bash: |
       make install-python
 
@@ -52,7 +54,16 @@ steps:
 
   - bash: |
       set -e
-      if ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
+      if [[ $APIGEE_ENVIRONMENT = int ]]; then
+          export AWS_PROFILE=apim-dev
+          aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
+
+          make init
+          make apply aws_account_no=${aws_account_no} environment=$(WORKSPACE) \
+            client_id=$(INTROSPECTION_CLIENT_ID_INT) \
+            client_secret=$(INTROSPECTION_CLIENT_SECRET_INT) \
+            keycloak_environment=$(APIGEE_ENVIRONMENT)
+      elif ! [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]; then
           export AWS_PROFILE=apim-dev
           aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
 
