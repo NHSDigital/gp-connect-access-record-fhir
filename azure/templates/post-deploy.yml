@@ -45,10 +45,10 @@ steps:
         introspection_client_secret_int=$(INTROSPECTION_CLIENT_SECRET_INT)
         
         pr_no=$(echo $service_name | grep -oE '[0-9]+$')
-        if [ -z ${pr_no} ]; then
+        if [ -z $pr_no ]; then
           workspace=$APIGEE_ENVIRONMENT
         else
-          workspace=pr-${workspace}
+          workspace=pr-$pr_no
         fi
        
         echo Deploy mock provider with following parameters:
