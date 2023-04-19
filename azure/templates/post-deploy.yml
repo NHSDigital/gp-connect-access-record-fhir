@@ -114,7 +114,7 @@ steps:
       then
        poetry run pytest -v -m "not nhsd_apim_authorization" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
 
-      elif [[ $APIGEE_ENVIRONMENT == int ]]
+      elif [[ $APIGEE_ENVIRONMENT == "int" ]]
       then
        poetry run pytest -v --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME --apigee-app-id=$APIGEE_APP_ID --apigee-organization=nhsd-prod -o junit_logging=all --junitxml=test-report.xml
 
