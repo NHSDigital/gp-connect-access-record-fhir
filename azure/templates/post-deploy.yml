@@ -42,7 +42,7 @@ steps:
         export AWS_PROFILE=apim-dev
       
         chmod -x scripts/deploy_mock_provider.sh
-        scripts/deploy_mock_provider.sh
+        ./scripts/deploy_mock_provider.sh
       fi
 
     displayName: Deploy mock provider
