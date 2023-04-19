@@ -14,7 +14,7 @@ else
 fi
 
 
-echo Deploy mock provider with following parameters
+echo Deploy mock provider with following parameters:
 echo service_name: $service_name
 echo workspace: $workspace
 echo Apigee environment: $APIGEE_ENVIRONMENT
