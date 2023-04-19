@@ -6,14 +6,11 @@ service_name=$FULLY_QUALIFIED_SERVICE_NAME
 introspection_client_id_int=$INTROSPECTION_CLIENT_ID_INT
 introspection_client_secret_int=$INTROSPECTION_CLIENT_SECRET_INT
 
-workspace=$(echo $service_name | grep -oE '[0-9]+$')
-
-pr_no=""
-if [ -z ${workspace} ]; then
+pr_no=$(echo $service_name | grep -oE '[0-9]+$')
+if [ -z ${pr_no} ]; then
     workspace=$APIGEE_ENVIRONMENT
 else
     workspace=pr-${workspace}
-    pr_no=$workspace
 fi
 
 
