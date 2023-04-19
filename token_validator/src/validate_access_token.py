@@ -1,7 +1,8 @@
 import logging
-import requests
-import re
 import os
+import re
+
+import requests
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)

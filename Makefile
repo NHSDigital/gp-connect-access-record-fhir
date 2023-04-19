@@ -30,7 +30,7 @@ publish:
 	rm -rf build
 	mkdir -p build
 	npm run publish 2> /dev/null
-	cp build/gp-connect-access-record-fhir.json PrismMockProvider/
+	cp build/gp-connect-access-record-fhir.json mock_provider/
 
 #Runs build proxy script
 build-proxy:
@@ -42,7 +42,7 @@ create-kvm:
 	scripts/create_kvm.sh $(PR_NO)
 
 #Files to loop over in release
-_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts terraform specification PrismMockProvider"
+_dist_include="poetry.lock poetry.toml pyproject.toml Makefile build/. tests scripts terraform specification mock_provider"
 
 #Create /dist/ sub-directory and copy files into directory
 release: clean publish build-proxy
