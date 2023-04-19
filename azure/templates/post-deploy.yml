@@ -41,6 +41,7 @@ steps:
         export INTROSPECTION_CLIENT_SECRET_INT=$(INTROSPECTION_CLIENT_SECRET_INT)
         export AWS_PROFILE=apim-dev
       
+        chmod -x scripts/deploy_mock_provider.sh
         scripts/deploy_mock_provider.sh
       fi
 
