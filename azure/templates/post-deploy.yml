@@ -59,7 +59,7 @@ steps:
         
         cd terraform
         make init
-        make apply aws_account_no=${aws_account_no} environment=$workspace) \
+        make apply aws_account_no=${aws_account_no} environment=$workspace \
           client_id=$introspection_client_id \
           client_secret=$introspection_client_secret \
           keycloak_environment=$APIGEE_ENVIRONMENT
