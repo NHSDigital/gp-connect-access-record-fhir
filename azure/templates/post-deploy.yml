@@ -41,8 +41,13 @@ steps:
         aws_account_no="$(aws sts get-caller-identity --query Account --output text)"
       
         service_name=$(FULLY_QUALIFIED_SERVICE_NAME)
-        introspection_client_id_int=$(INTROSPECTION_CLIENT_ID_INT)
-        introspection_client_secret_int=$(INTROSPECTION_CLIENT_SECRET_INT)
+      
+        introspection_client_id=$(INTROSPECTION_CLIENT_ID)
+        introspection_client_secret=$(INTROSPECTION_CLIENT_SECRET)
+        if [[ $APIGEE_ENVIRONMENT = int ]]; then
+          introspection_client_id=$(INTROSPECTION_CLIENT_ID_INT)
+          introspection_client_secret=$(INTROSPECTION_CLIENT_SECRET_INT)
+        fi
         
         pr_no=$(echo $service_name | grep -oE '[0-9]+$')
         if [ -z $pr_no ]; then
@@ -56,6 +61,7 @@ steps:
         echo workspace: $workspace
         echo Apigee environment: $APIGEE_ENVIRONMENT
         echo pr_no: $pr_no
+        echo introspection client id: $introspection_client_id
         
         cd terraform
         make init
