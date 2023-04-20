@@ -116,7 +116,7 @@ steps:
 
       elif [[ $APIGEE_ENVIRONMENT == "int" ]]
       then
-       make run-int -o junit_logging=all --junitxml=test-report.xml
+       make run-int
 
       else
        poetry run pytest -v --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
