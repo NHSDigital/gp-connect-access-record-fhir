@@ -8,9 +8,13 @@ PYTEST_CMD_PROD = APIGEE_ACCESS_TOKEN=$(APIGEE_ACCESS_TOKEN) INTERACTION_ID=$(IN
 run:
 	$(PYTEST_CMD)
 
-#  run tests with certain marker e.g. make run-sandbox runs tests marked with sandbox
 run-int:
 	$(PYTEST_CMD_PROD)
+
+#  run tests with certain marker e.g. make run-sandbox runs tests marked with sandbox
+run-%:
+	$(PYTEST_CMD) -m "$*"
+
 
 
 
