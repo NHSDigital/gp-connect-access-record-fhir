@@ -221,39 +221,43 @@ paths:
               type: object
               description: >
                 Request all information that has been recorded for the patient in the last three months. Information on how the parameters resource is populated can be found [here.](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Retrieve-a-patient-s-structured-record.page.md?version=current)
-            example:
-              resourceType: Parameters
-              parameter:
-                - name: patientNHSNumber
-                  valueIdentifier:
-                    system: https://fhir.nhs.uk/Id/nhs-number
-                    value: '9000000009'
-                - name: includeAllergies
-                  part:
-                    - name: includeResolvedAllergies
-                      valueBoolean: true
-                - name: includeConsultations
-                  part:
-                    - name: consultationSearchPeriod
-                      valuePeriod:
-                        start: '2019-12-21'
-                        end: '2020-02-21'
-                - name: includeProblems
-                  part:
-                    - name: filterStatus
-                      valueCode: active
-                    - name: filterSignificance
-                      valueCode: major
-                - name: includeImmunizations
-                  part:
-                    - name: includeNotGiven
-                      valueBoolean: true
-                    - name: includeStatus
-                      valueBoolean: true
-                - name: includeUncategorisedData
-                - name: includeInvestigations
-                - name: includeReferrals
-                - name: includeMedication
+            examples:
+              external:
+                $ref: "components/examples/full_record.yaml"
+              inline:
+                value:
+                  resourceType: Parameters
+                  parameter:
+                    - name: patientNHSNumber
+                      valueIdentifier:
+                        system: https://fhir.nhs.uk/Id/nhs-number
+                        value: '9000000009'
+                    - name: includeAllergies
+                      part:
+                        - name: includeResolvedAllergies
+                          valueBoolean: true
+                    - name: includeConsultations
+                      part:
+                        - name: consultationSearchPeriod
+                          valuePeriod:
+                            start: '2019-12-21'
+                            end: '2020-02-21'
+                    - name: includeProblems
+                      part:
+                        - name: filterStatus
+                          valueCode: active
+                        - name: filterSignificance
+                          valueCode: major
+                    - name: includeImmunizations
+                      part:
+                        - name: includeNotGiven
+                          valueBoolean: true
+                        - name: includeStatus
+                          valueBoolean: true
+                    - name: includeUncategorisedData
+                    - name: includeInvestigations
+                    - name: includeReferrals
+                    - name: includeMedication
       responses:
         '200':
           description: >
@@ -276,9 +280,9 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
-          content: 
+          content:
             application/fhir+json:
-              schema: 
+              schema:
                 type: object
               example:
                 resourceType: Bundle
