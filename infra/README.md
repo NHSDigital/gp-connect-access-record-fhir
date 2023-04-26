@@ -48,11 +48,11 @@ This may ask you for confirmation before execution.
 ```
 $ make docker-build
 ```
-This will build PrismMockProvider docker
+This will build mock_provider docker
 ```
 $ make docker-deploy
 ```
-This will deploy PrismMock provider docker image to ECR repo from your local machine.
+This will deploy mock_provider docker image to ECR repo from your local machine.
 This step is also integrated with azure pipeline; with each new build, mock provider will be tagged with build number and pushed on ECR
 
 ## Implementation

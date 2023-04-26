@@ -1,16 +1,16 @@
 import uuid
-from time import time
 from os import getenv
+from time import time
 
-import pytest
 import jwt
+import pytest
+import requests
 from pytest_nhsd_apim.identity_service import (
     KeycloakUserConfig,
     KeycloakUserAuthenticator
 )
-import requests
 
-from PrismMockProvider.auth.src.validate_access_token import validate_access_token
+from token_validator.src.validate_access_token import validate_access_token
 
 
 @pytest.mark.nhsd_apim_authorization(
