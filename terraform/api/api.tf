@@ -1,6 +1,6 @@
 resource "aws_apigatewayv2_api" "service_api" {
   name                         = "${var.prefix}-api"
-  description                  = "GP Connect PFS Acces Record mock-provider service backend api - ${var.environment}"
+  description                  = "GP Connect PFS mock-provider service backend api - ${var.environment}"
   protocol_type                = "HTTP"
   disable_execute_api_endpoint = true
 }
@@ -44,13 +44,6 @@ resource "aws_apigatewayv2_route" "root_route" {
   target               = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
   authorization_type   = "CUSTOM"
   authorizer_id        = aws_apigatewayv2_authorizer.token_validation.id
-}
-
-resource "aws_apigatewayv2_route" "ping_route" {
-  api_id               = aws_apigatewayv2_api.service_api.id
-  route_key            = "GET /ping"
-  target               = "integrations/${aws_apigatewayv2_integration.route_integration.id}"
-  authorization_type   = "NONE"
 }
 
 resource "aws_apigatewayv2_route" "status_route" {
