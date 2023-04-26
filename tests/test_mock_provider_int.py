@@ -1,55 +1,44 @@
+import os
 from urllib.parse import parse_qs, urlparse
 
 import pytest
 import requests
 from lxml import html
 
-
-@pytest.mark.smoketest
-@pytest.mark.auth
-@pytest.mark.integration
-@pytest.mark.user_restricted_separate_nhs_login
-@pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9", "login_form": {"username": "9912003071"}})
-def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
-    headers = {
-        "Interaction-ID": "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1",
-        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
-    }
-    headers.update(nhsd_apim_auth_headers)
-    resp = requests.get(
-        f"{nhsd_apim_proxy_url}/documents/Patient/9000000009",
-        headers=headers
-    )
-    assert resp.status_code == 200
+"""
+This test is for int environment targeting OUR mock-provider
+"""
 
 
-@pytest.mark.debug
-def test_token(nhsd_apim_proxy_url):
-    headers = {
-        "Interaction-ID": "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1",
-        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
-    }
+@pytest.fixture()
+def nhs_login_mock_token():
+    apigee_env = os.getenv("APIGEE_ENVIRONMENT")
+    client_id = os.getenv("DEFAULT_CLIENT_ID")
+    client_secret = os.getenv("DEFAULT_CLIENT_SECRET")
+    if not client_id or not client_secret:
+        raise RuntimeError("Both DEFAULT_CLIENT_ID and DEFAULT_CLIENT_SECRET environment variables has to be present")
+    callback_url = os.getenv("DEFAULT_CALLBACK_URL", "https://oauth.pstmn.io/v1/callback")
+    username = os.getenv("DEFAULT_USERNAME", "testuser")
+
     auth_data = {
-        "username": "testuser",
-        "callback_url": "https://oauth.pstmn.io/v1/callback",
+        "username": username,
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "callback_url": callback_url,
         "scope": "nhs-login"
     }
-    auth = IntNhsLoginMockAuth(auth_data)
-    print(auth.get_token())
-    # resp = requests.get(
-    #     f"{nhsd_apim_proxy_url}/documents/Patient/9000000009",
-    #     headers=headers
-    # )
-    print("my tesssst")
+    auth = IntNhsLoginMockAuth(apigee_env, auth_data)
+
+    return auth.get_token()
 
 
 class IntNhsLoginMockAuth:
-    base_url = "https://int.api.service.nhs.uk/oauth2-mock"
-    auth_url = f"{base_url}/authorize"
-    token_url = f"{base_url}/token"
 
-    def __init__(self, auth_data: dict) -> None:
+    def __init__(self, apigee_env, auth_data: dict) -> None:
         self.auth_data = auth_data
+        base_url = f"https://{apigee_env}.api.service.nhs.uk/oauth2-mock"
+        self.auth_url = f"{base_url}/authorize"
+        self.token_url = f"{base_url}/token"
 
     @staticmethod
     def extract_code(response) -> str:
@@ -113,3 +102,19 @@ class IntNhsLoginMockAuth:
         )
 
         return token_resp.json()["access_token"]
+
+
+@pytest.mark.mock_provider_int
+def test_mock_provider_int_happy_path(nhs_login_mock_token):
+    headers = {
+        "Authorization": f"Bearer {nhs_login_mock_token}",
+        "Interaction-ID": "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1",
+        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
+    }
+    base_path = os.getenv("SERVICE_BASE_PATH")
+    apigee_env = os.getenv("APIGEE_ENVIRONMENT")
+
+    url = f"https://{apigee_env}.api.service.nhs.uk/{base_path}"
+    resp = requests.get(f"{url}/documents/Patient/9000000009", headers=headers)
+
+    assert resp.status_code == 200

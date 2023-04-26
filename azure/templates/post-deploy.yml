@@ -20,6 +20,8 @@ steps:
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_ID_INT
               - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INTROSPECTION_CLIENT_SECRET_INT
+              - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INT_CLIENT_ID
+              - ptl/app-credentials/gp-connect-record-access-testing-app/non-prod/INT_CLIENT_SECRET
 
   - bash: |
       make install-python
@@ -116,7 +118,9 @@ steps:
 
       elif [[ $APIGEE_ENVIRONMENT == "int" ]]
       then
-       make run-int
+       export DEFAULT_CLIENT_ID=INT_CLIENT_ID
+       export DEFAULT_CLIENT_SECRET=INT_CLIENT_SECRET
+       poetry run pytest -v -m "not nhsd_apim_authorization" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
 
       else
        poetry run pytest -v --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
