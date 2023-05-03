@@ -1,5 +1,6 @@
 import pytest
 import requests
+import os
 
 
 @pytest.mark.smoketest
@@ -19,4 +20,14 @@ def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_h
         f"{nhsd_apim_proxy_url}/documents/Patient/9000000009",
         headers=headers
     )
+    assert resp.status_code == 200
+    
+@pytest.mark.mock_provider_sandbox
+def test_mock_provider_sandbox_happy_path(nhs_login_mock_token):
+    base_path = os.getenv("SERVICE_BASE_PATH")
+    apigee_env = "sandbox"
+
+    url = f"https://{apigee_env}.api.service.nhs.uk/{base_path}"
+    resp = requests.get(f"{url}/documents/Patient/9000000009")
+
     assert resp.status_code == 200
