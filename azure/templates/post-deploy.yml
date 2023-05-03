@@ -101,7 +101,7 @@ steps:
 
       if [[ $APIGEE_ENVIRONMENT =~ .*-*sandbox ]]
       then
-       poetry run pytest -v -m "mock_provider_sandbox and not nhsd_apim_authorization and not mock_provider_int" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
+       poetry run pytest -v -m "not nhsd_apim_authorization and not mock_provider_int" --api-name=gp-connect-access-record-fhir --proxy-name=$PROXY_NAME -o junit_logging=all --junitxml=test-report.xml
 
       elif [[ $APIGEE_ENVIRONMENT == "int" ]]
       then
