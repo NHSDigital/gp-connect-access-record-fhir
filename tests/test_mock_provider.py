@@ -21,6 +21,7 @@ def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_h
         headers=headers
     )
     assert resp.status_code == 200
+
     
 @pytest.mark.mock_provider_sandbox
 def test_mock_provider_sandbox_happy_path(nhs_login_mock_token):
