@@ -1,6 +1,7 @@
 import pytest
 import requests
 import os
+import json
 
 
 @pytest.mark.smoketest
@@ -25,10 +26,20 @@ def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_h
 
 @pytest.mark.mock_provider_sandbox
 def test_mock_provider_sandbox_happy_path():
+    
+    with open("./200_find_patient.json") as f:
+            example_response = json.load(f)
+        
+    headers = {
+        "accept": "application/fhir+json",
+        "X-Correlation-ID": "11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA",
+        "X-Request-ID": "60E0B220-8136-4CA5-AE46-1D97EF59D068",
+    }
     base_path = os.getenv("SERVICE_BASE_PATH")
-    apigee_env = "sandbox"
+    apigee_env = os.getenv("APIGEE_ENVIRONMENT")
 
     url = f"https://{apigee_env}.api.service.nhs.uk/{base_path}"
-    resp = requests.get(f"{url}/documents/Patient/9000000009")
+    resp = requests.get(f"{url}/documents/Patient/9000000009", headers=headers)
 
     assert resp.status_code == 200
+    assert json.loads(resp.text) == example_response
