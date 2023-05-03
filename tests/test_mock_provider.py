@@ -24,7 +24,7 @@ def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_h
 
 
 @pytest.mark.mock_provider_sandbox
-def test_mock_provider_sandbox_happy_path(nhs_login_mock_token):
+def test_mock_provider_sandbox_happy_path():
     base_path = os.getenv("SERVICE_BASE_PATH")
     apigee_env = "sandbox"
 
