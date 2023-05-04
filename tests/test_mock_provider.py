@@ -5,6 +5,7 @@ import requests
 @pytest.mark.smoketest
 @pytest.mark.auth
 @pytest.mark.integration
+@pytest.mark.debug
 @pytest.mark.user_restricted_separate_nhs_login
 @pytest.mark.nhsd_apim_authorization({"access": "patient", "level": "P9", "login_form": {"username": "9912003071"}})
 def test_mock_receiver_patient_record_path(nhsd_apim_proxy_url, nhsd_apim_auth_headers):

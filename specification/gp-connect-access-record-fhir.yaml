@@ -195,6 +195,24 @@ servers:
   - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Production environment.
 paths:
+  /test:
+    get:
+      operationId: test-external-files
+      responses:
+        '200':
+          description: this is test
+          content:
+            application/fhir+json:
+              schema:
+                type: object
+                description: The respnse
+              examples:
+                test:
+                  value:
+                    $ref: "components/examples/full_record.yaml"
+
+
+
   /Patient/$gpc.getstructuredrecord:
     post:
       operationId: get-structured-record
@@ -276,9 +294,9 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
-          content: 
+          content:
             application/fhir+json:
-              schema: 
+              schema:
                 type: object
               example:
                 resourceType: Bundle
