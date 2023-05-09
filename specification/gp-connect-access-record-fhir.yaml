@@ -195,24 +195,6 @@ servers:
   - url: 'https://api.service.nhs.uk/gp-connect-access-record-fhir/FHIR/STU3/'
     description: Production environment.
 paths:
-  /test:
-    get:
-      operationId: test-external-files
-      responses:
-        '200':
-          description: this is test
-          content:
-            application/fhir+json:
-              schema:
-                type: object
-                description: The respnse
-              examples:
-                test:
-                  value:
-                    $ref: "components/examples/full_record.yaml"
-
-
-
   /Patient/$gpc.getstructuredrecord:
     post:
       operationId: get-structured-record
