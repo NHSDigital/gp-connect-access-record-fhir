@@ -28,6 +28,8 @@ info:
     
     Providers of this API must ensure that Consultations with draft status are not returned.
 
+    The level of detail returned is in accordance with the patient's permission level that is set at their GP practice.
+
     ## Who can use this API
 
     This API can be used by developers of patient facing systems that support patients gaining access to their GP practice medical record.
