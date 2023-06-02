@@ -26,7 +26,7 @@ info:
 
     - write back to the GP record
     
-    Providers of this API must ensure that Consultations with draft status are not returned.
+    Providers of this API must ensure that consultations with draft status, diary entries and unfiled test results are **NOT** returned.
 
     The level of detail returned is in accordance with the patient's permission level that is set at their GP practice.
 
