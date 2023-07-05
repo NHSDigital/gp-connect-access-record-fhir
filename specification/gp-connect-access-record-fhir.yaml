@@ -19,7 +19,8 @@ info:
     - consultations
     - problems
     - investigations
-    - attachments
+    - referrals
+    - attachments/documents
     - uncategorised data (other clinically coded items that are present in the record)
 
     You cannot currently use this API to:
@@ -313,6 +314,8 @@ paths:
             * [Referrals FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Referrals?version=current)
 
             * [Combined FHIR examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Multiple-combined?version=current)
+
+            * [Problems examples](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Examples/Problems?version=current)
           content:
             application/fhir+json:
               schema:
@@ -14592,65 +14595,69 @@ paths:
                 type: object
                 description: The response will be a populated Patient resource.
               example:
-                resource:
-                  resourceType: Patient
-                  id: '2'
-                  meta:
-                    versionId: '1469448000000'
-                    profile:
-                      - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1
-                  extension:
-                    - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1
+                resourceType: Bundle
+                type: searchset
+                entry:
+                  - resource:
+                      resourceType: Patient
+                      id: '2'
+                      meta:
+                        versionId: '1469448000000'
+                        profile:
+                          - https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1
                       extension:
-                        - url: preferredBranchSurgery
-                          valueReference:
-                            reference: Location/785b4ff5-aced-4bdf-b7ed-34f92131ce97
-                    - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1
-                      extension:
-                        - url: language
-                          valueCodeableConcept:
-                            coding:
-                              - system: https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1
-                                code: bn
-                                display: Bengali
-                        - url: interpreterRequired
-                          valueBoolean: false
-                  identifier:
-                    - extension:
-                        - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1
-                          valueCodeableConcept:
-                            coding:
-                              - system: https://fhir.nhs.uk/CareConnect-NHSNumberVerificationStatus-1
-                                code: '01'
-                                display: Number present and verified
-                      system: https://fhir.nhs.uk/Id/nhs-number
-                      value: '900000009'
-                  active: true
-                  name:
-                    - use: official
-                      text: JACKSON Jane (Miss)
-                      family: Jackson
-                      given:
-                        - Jane
-                      prefix:
-                        - Miss
-                  telecom:
-                    - system: phone
-                      value: '01454587554'
-                      use: home
-                  gender: female
-                  birthDate: '1952-05-31'
-                  address:
-                    - use: home
-                      type: physical
-                      line:
-                        - Trevelyan Square
-                        - Boar Ln
-                      city: Leeds
-                      district: West Yorkshire
-                      postalCode: LS1 6AE
-                  managingOrganization:
-                    reference: Organization/14
+                        - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1
+                          extension:
+                            - url: preferredBranchSurgery
+                              valueReference:
+                                reference: Location/785b4ff5-aced-4bdf-b7ed-34f92131ce97
+                        - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1
+                          extension:
+                            - url: language
+                              valueCodeableConcept:
+                                coding:
+                                  - system: https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1
+                                    code: bn
+                                    display: Bengali
+                            - url: interpreterRequired
+                              valueBoolean: false
+                      identifier:
+                        - extension:
+                            - url: https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1
+                              valueCodeableConcept:
+                                coding:
+                                  - system: https://fhir.nhs.uk/CareConnect-NHSNumberVerificationStatus-1
+                                    code: '01'
+                                    display: Number present and verified
+                          system: https://fhir.nhs.uk/Id/nhs-number
+                          value: '9476719931'
+                      active: true
+                      name:
+                        - use: official
+                          text: JACKSON Jane (Miss)
+                          family: Jackson
+                          given:
+                            - Jane
+                          prefix:
+                            - Miss
+                      telecom:
+                        - system: phone
+                          value: '01454587554'
+                          use: home
+                      gender: female
+                      birthDate: '1952-05-31'
+                      address:
+                        - use: home
+                          type: physical
+                          line:
+                            - Trevelyan Square
+                            - Boar Ln
+                          city: Leeds
+                          district: West Yorkshire
+                          postalCode: LS1 6AE
+                      managingOrganization:
+                        reference: Organization/14
+
         4XX:
           description: |
             An error occured as follows:
