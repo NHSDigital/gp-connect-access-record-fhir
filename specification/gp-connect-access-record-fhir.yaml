@@ -14573,6 +14573,9 @@ paths:
         Use this endpoint to find a Patient.
 
 
+        If searching for a Patient's document this endpoint must be used to obtain the correct patient id from the provider system.
+
+
         No request body is required for this endpoint.
       parameters:
         - $ref: "#/components/parameters/BearerAuthorization"
@@ -14759,7 +14762,11 @@ paths:
       summary: Search for a patients documents
       description: >
         Use this endpoint to search for a patients documents from a GP Practice.
+        
+     
+        Use the patient id obtained from the  /documents/Patient/{id} endpoint (NOT NHS Number).
 
+        
         Details on the included parameters can be found below. These parameters must be used to reduce the number of API calls.
       parameters:
         - $ref: "#/components/parameters/BearerAuthorization"
@@ -14767,10 +14774,10 @@ paths:
         - $ref: "#/components/parameters/RequestID"
         - in: path
           name: id
-          description: The NHS Number of the patient you are searching for.
+          description: The id of the patient obtained by using the /documents/Patient/{id} endpoint using their NHS Number. This can vary depending on GP provider system.
           schema:
             type: string
-            example: 9000000009
+            example: 9d43831b-b2c7-4f8f-b5b5-1d9429acf5fb
           required: true
         - in: query
           name: _include
