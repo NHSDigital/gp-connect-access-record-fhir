@@ -9,6 +9,7 @@ function json_tryparse(raw) {
 
 var respContent=context.getVariable('PDSResponse.content');
 const respObject=json_tryparse(respContent);
+var ods = respObject["generalPractitioner"][0]["identifier"]["value"]
 
 var interactionId = context.getVariable("request.header.Interaction-ID")
 var endpointConfigEncryptedKey= ods + "_private_key"
