@@ -19,9 +19,15 @@
       </Step>
       <Step>
          <Name>JavaScript.SetPDSConfig</Name>
-       </Step>
+      </Step>
+      <Step>
+          <Name>GenerateJWT.PDSClientAssertion</Name>
+      </Step>
       <Step>
         <Name>ServiceCallout.AuthenticateForPDS</Name>
+      </Step>
+      <Step>
+        <Name>JavaScript.GetPDSAccessToken</Name>
       </Step>
       <Step>
         <Name>ServiceCallout.GetODSCode</Name>

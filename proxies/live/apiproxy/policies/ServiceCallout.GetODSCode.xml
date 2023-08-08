@@ -8,7 +8,7 @@
             <Verb>GET</Verb>
             <Headers>
                 <Header name="accept">application/fhir+json</Header>
-                <Header name="authorization">Bearer {auth_token}</Header>
+                <Header name="authorization">Bearer {PDSAccessToken}</Header>
             </Headers>
             <Path>/Patient/{nhs_number}</Path>
         </Set>

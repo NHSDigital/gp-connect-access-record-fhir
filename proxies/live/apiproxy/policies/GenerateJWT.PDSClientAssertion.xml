@@ -9,6 +9,6 @@
     <Subject ref="pds_client_id_config"/>
     <Issuer ref="pds_client_id_config"/>
     <Audience ref="pds_audience_config"/>
-    <ExpiresIn>1h</ExpiresIn>
+    <ExpiresIn>5m</ExpiresIn>
     <OutputVariable>pds_client_assertion</OutputVariable>
 </GenerateJWT>
