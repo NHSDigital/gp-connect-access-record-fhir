@@ -14,7 +14,7 @@ var ods = respObject["generalPractitioner"][0]["identifier"]["value"]
 var interactionId = context.getVariable("request.header.Interaction-ID")
 var endpointConfigEncryptedKey= ods + "_private_key"
 
-context.setVariable("endpointODSKey", respObject["generalPractitioner"][0]["identifier"]["value"]);
+context.setVariable("endpointODSKey", ods);
 context.setVariable("endpointInteractionKey", interactionId)
 context.setVariable("endpointConfigEncryptedKey", endpointConfigEncryptedKey)
 
