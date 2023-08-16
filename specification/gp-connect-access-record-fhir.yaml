@@ -29,7 +29,7 @@ info:
     
     Providers of this API must ensure that consultations with draft status, diary entries and unfiled test results are **NOT** returned.
 
-    The level of detail returned is in accordance with the patient's permission level that is set at their GP practice.
+    The level of detail returned is in accordance with the patient's permission level that is set at their GP practice, further detail surrounding this can be found [here](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Permission-Levels?version=current).
 
     ## Who can use this API
 
@@ -15069,6 +15069,8 @@ components:
       description: |
         A globally unique identifier (GUID) for the request, which we use to de-duplicate repeated requests and to trace the request if you contact our helpdesk.
         Must be a universally unique identifier (UUID) (ideally version 4).
+
+        In the use case of accessing a patient's record, this UUID must be used as the id of the bundle returned.
 
         Mirrored back in a response header.
 
