@@ -1,5 +1,5 @@
 variables:
   service_name: gp-connect-access-record-fhir
   short_service_name: gcarf
-  service_base_path: gp-connect/access-record-fhir/FHIR/STU3
+  service_base_path: gp-connect/patient-facing/access-record-fhir/FHIR/STU3
   pr_number: ${{ split(variables['Build.SourceBranch'], '/')[2] }}
