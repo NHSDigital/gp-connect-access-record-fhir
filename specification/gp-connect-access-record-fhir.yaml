@@ -20,14 +20,14 @@ info:
     - problems
     - investigations
     - referrals
-    - attachments/documents
+    - reviewed attachments/documents
     - uncategorised data (other clinically coded items that are present in the record)
 
     You cannot currently use this API to:
 
     - write back to the GP record
     
-    Providers of this API must ensure that consultations with draft status, diary entries and unfiled test results are **NOT** returned.
+    Providers of this API must ensure that consultations with draft status, diary entries, unfiled test results and unreviewed documents are **NOT** returned.
 
     The level of detail returned is in accordance with the patient's permission level that is set at their GP practice, further detail surrounding this can be found [here](https://simplifier.net/guide/GP-Connect-Patient-Facing-Access-Record/Home/Build/Permission-Levels?version=current).
 
@@ -44,7 +44,7 @@ info:
     * can only be used where there is a legal basis to do so
 
     Make sure you have a valid use case before you go too far with development. To do this, contact us.
-
+ 
     You must do this before you can go live (see Onboarding below).
 
     ### Prerequisites
