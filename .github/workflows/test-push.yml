@@ -10,3 +10,11 @@ jobs:
         id: get-access-token
         run: |
           echo "ACCESS_TOKEN"=$(curl 'https://app.vssps.visualstudio.com/oauth2/token' --data "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=${{ secrets.AZURE_DEVOPS_CLIENT_SECRET }}&grant_type=refresh_token&assertion=${{ secrets.AZURE_DEVOPS_REFRESH_TOKEN }}&redirect_uri=https://localhost:1337/callback" | jq -r '.access_token') >> $GITHUB_OUTPUT
+          echo $ACCESS_TOKEN
+
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1.2
+        with:
+          azure-devops-project-url: 'https://dev.azure.com/NHSD-APIM/API%20Platform'
+          azure-pipeline-name: 'gp-connect-access-record-fhir-pr-teardown'
+          azure-devops-token: ${{ steps.get-access-token.outputs.ACCESS_TOKEN }}
