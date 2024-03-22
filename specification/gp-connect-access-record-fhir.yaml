@@ -14771,7 +14771,7 @@ paths:
         Use this endpoint to search for a patients documents from a GP Practice.
         
      
-        Use the patient id obtained from the  /documents/Patient/{id} endpoint (NOT NHS Number).   The NHS number of the patient is also required as a query string paramter.
+        Use the patient id obtained from the  /documents/Patient/{id} endpoint (NOT NHS Number).   The NHS number of the patient is also required as a query string parameter.
 
         
         Details on the included parameters can be found below. These parameters must be used to reduce the number of API calls.
