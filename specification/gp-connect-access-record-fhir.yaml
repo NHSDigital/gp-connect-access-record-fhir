@@ -14698,9 +14698,7 @@ paths:
       operationId: get-document
       summary: Get a specific document from a GP practice
       description: >
-        Use this endpoint to retrieve a specific document using the id.
-
-
+        Use this endpoint to retrieve a specific document using the id.  The NHS number of the patient is also required as a query string parameter.
         No request body is required for this endpoint.
       parameters:
         - $ref: "#/components/parameters/BearerAuthorization"
@@ -14713,6 +14711,13 @@ paths:
             type: string
             example: 07a6483f-732b-461e-86b6-edb665c45510
           required: true
+        - in: query
+          name: patientNHSNumber
+          description: The NHS number of the patient to whom the document belongs.
+          required: true
+          schema:
+            type: string
+            example: '9000000009'
       responses:
         '200':
           description: >
@@ -14732,10 +14737,12 @@ paths:
             An error occured as follows:
 
 
-            | HTTP Status | Spine error code  | Description                                                                 |
-            | ----------- | ----------------  | -----------                                                                 |
-            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided                 |
-            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit |
+            | HTTP Status | Spine error code  | Description                                                                              |
+            | ----------- | ----------------  | -----------                                                                              |
+            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests    |
+            | 404         | NO_RECORD_FOUND   | A document could not be found with the document id provided                              |
+            | 404         | NO_RECORD_FOUND   | The document could not be retrieved due to it exceeding the file size limit              |
+            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided                                          |
           content:
             application/fhir+json:
               schema:
@@ -14764,7 +14771,7 @@ paths:
         Use this endpoint to search for a patients documents from a GP Practice.
         
      
-        Use the patient id obtained from the  /documents/Patient/{id} endpoint (NOT NHS Number).
+        Use the patient id obtained from the  /documents/Patient/{id} endpoint (NOT NHS Number).   The NHS number of the patient is also required as a query string parameter.
 
         
         Details on the included parameters can be found below. These parameters must be used to reduce the number of API calls.
@@ -14779,6 +14786,13 @@ paths:
             type: string
             example: 9d43831b-b2c7-4f8f-b5b5-1d9429acf5fb
           required: true
+        - in: query
+          name: patientNHSNumber
+          description: The NHS number of the patient for whom documents are being searched.
+          required: true
+          schema:
+            type: string
+            example: '9000000009'
         - in: query
           name: _include
           description: |
@@ -15012,13 +15026,15 @@ paths:
 
             | HTTP Status | Spine error code  | Description                                                                                                                                 |
             | ----------- | ----------------  | -----------                                                                                                                                 |
+            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code                                                                    |
+            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters                                                                              |
+            | 400         | INVALID_NHS_NUMBER | The NHS number provided is invalid, for example it fails format or check digit tests                                                       |
             | 404         | PATIENT_NOT_FOUND | A patient could not be found with the patient id provided                                                                                   |
             | 404         | PATIENT_NOT_FOUND | The request is for the record of an inactive or deceased patient                                                                            |
             | 404         | PATIENT_NOT_FOUND | The request is for the record of a non-Regular/GMS patient (i.e. the patient's registered practice is somewhere else)                       |
             | 404         | PATIENT_NOT_FOUND | The patient's NHS number in the provider system is not associated with a NHS number status indicator code of 'Number present and verified'  |
             | 404         | PATIENT_NOT_FOUND | The request is for a sensitive Patient                                                                                                      |
-            | 400         | INVALID_PARAMETER | The author query parameter contains an identifier other than an ODS code                                                                    |
-            | 400         | INVALID_PARAMETER | The request does not contain the mandatory _include parameters                                                                              |
+            | 422         | INVALID_PARAMETER  | The patientNHSNumber parameter is not provided                                                                                             |
           content:
             application/fhir+json:
               schema:
