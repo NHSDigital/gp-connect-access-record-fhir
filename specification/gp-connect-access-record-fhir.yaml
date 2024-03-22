@@ -14698,7 +14698,7 @@ paths:
       operationId: get-document
       summary: Get a specific document from a GP practice
       description: >
-        Use this endpoint to retrieve a specific document using the id.  The NHS number of the patient is also required as a query string paramter.
+        Use this endpoint to retrieve a specific document using the id.  The NHS number of the patient is also required as a query string parameter.
         No request body is required for this endpoint.
       parameters:
         - $ref: "#/components/parameters/BearerAuthorization"
