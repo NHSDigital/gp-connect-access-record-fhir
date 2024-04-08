@@ -26,8 +26,7 @@ APIGEE_ENVIRONMENTS:
     display_name: Sandbox
     portal_visibility: false
   - name: int
-    display_name: Integration Testing
-    has_mock_auth: true
+    display_name: Integration Testing    
   - name: prod
     approval_type: manual
     display_name: Production
