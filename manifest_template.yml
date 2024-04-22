@@ -26,8 +26,7 @@ APIGEE_ENVIRONMENTS:
     display_name: Sandbox
     portal_visibility: false
   - name: int
-    display_name: Integration Testing
-    has_mock_auth: true
+    display_name: Integration Testing    
   - name: prod
     approval_type: manual
     display_name: Production
@@ -77,9 +76,10 @@ apigee:
         proxies:
           - {{ NAME }}
 {% if ENV.has_mock_auth | default(false) %}
-          - identity-service-mock-{{ ENV.name }}
+          - identity-service-mock-{{ ENV.name }}        
 {% else %}
           - identity-service-{{ ENV.name }}
+          - identity-service-mock-{{ ENV.name }}
 {% endif %}
         scopes:
           - 'urn:nhsd:apim:user-nhs-login:P9:{{ SERVICE_NAME }}'
