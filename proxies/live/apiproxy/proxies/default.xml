@@ -50,7 +50,7 @@
           <Name>AssignMessage.AddInteractionID</Name>
         </Step>
       </Request>
-      <Condition>((proxy.pathsuffix MatchesPath "/documents/Patient/*") and (request.verb = "GET"))</Condition>
+       <Condition>((proxy.pathsuffix MatchesPath "/documents/Patient/*") and (request.verb = "GET")) or ((proxy.pathsuffix MatchesPath "/access-record/Patient/*") and (request.verb = "POST"))</Condition>
     </Flow>
   </Flows>
   <PostClientFlow name="PostClientFlow">
@@ -72,6 +72,10 @@
   </RouteRule>
   <RouteRule name="NoRouteStatus">
     <Condition>(proxy.pathsuffix MatchesPath "/_status") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
+  </RouteRule>
+  <RouteRule name="gp-connect-access-record-fhir-internal-dev-target">
+    <TargetEndpoint>gp-connect-access-record-fhir-internal-dev-target</TargetEndpoint>
+    <Condition>(request.header.host = "internal-dev.api.service.nhs.uk")</Condition>
   </RouteRule>
   <RouteRule name="gp-connect-access-record-fhir-target">
     <TargetEndpoint>gp-connect-access-record-fhir-target</TargetEndpoint>
