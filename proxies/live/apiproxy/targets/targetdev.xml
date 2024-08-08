@@ -87,6 +87,12 @@
             </Step>
             <Condition>GPCPFSAuthResponse.status.code=="500"</Condition>
         </FaultRule>
+        <FaultRule name="gpc_target_not_found">
+            <Step>
+                <Name>AssignMessage.Errors.CatchAllMessage</Name>
+            </Step>
+            <Condition>endpointNotFound == true</Condition>
+        </FaultRule>
     </FaultRules>
     <!--
   To point to a named target server as this is how it SHOULD be implemented:
