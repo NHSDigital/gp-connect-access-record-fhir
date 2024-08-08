@@ -3,7 +3,7 @@
     <Set>
       <Payload contentType="text/plain"/>
       <StatusCode>404</StatusCode>
-      <ReasonPhrase>Not Found</ReasonPhrase>
+      <ReasonPhrase>Target Endpoint Not Found</ReasonPhrase>
     </Set>
   </FaultResponse>
   <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
