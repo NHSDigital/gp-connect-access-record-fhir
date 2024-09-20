@@ -48,7 +48,7 @@ extends:
       #     - template: ./templates/post-deploy.yml
       - environment: sandbox
         depends_on:
-          - internal-dev
+          - internal_dev
         proxy_path: sandbox
         jinja_templates:
           GP_CONNECT_ENDPOINTS: just-dummy-value-for-successful-build
