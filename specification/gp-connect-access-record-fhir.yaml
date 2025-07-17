@@ -156,7 +156,9 @@ info:
 
     ## Onboarding
 
-    This API is not yet available for onboarding.
+    The GP Connect Patient Facing APIs are currently only available for New Market Entrant suppliers as data providers, and are in use with the NHS App as the consumer.
+ 
+    At the time of writing (July 2025), we are not onboarding any additional consumer suppliers to use these APIs.
 
     ### Hazard log
 
