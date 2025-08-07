@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- 1. Escape the raw error content for JSON safety -->
+<Escape name="Escape.ErrorContent">
+    <Source>%error.content#</Source>
+    <Pattern>json</Pattern>
+    <VariablePrefix>error</VariablePrefix>
+    <VariableSuffix>json</VariableSuffix>
+</Escape>
+
+<!-- 2. Assign the safe, escaped content into the JSON output -->
 <AssignMessage async="false" continueOnError="false" enabled="true" name="AssignMessage.Errors.CatchAllMessage">
   <Set>
     <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
@@ -6,17 +15,17 @@
         "resourceType": "OperationOutcome",
         "issue": [
             {
-            "severity": "error",
-            "code": "%error.status.code#",
-            "details": {
-                "coding": [
-                {
-                    "code": "%error.status.code#",
-                    "display": "%error.reason.phrase#"
-                }
-                ]
-            },
-            "diagnostics": "%error.content#"
+                "severity": "error",
+                "code": "%error.status.code#",
+                "details": {
+                    "coding": [
+                        {
+                            "code": "%error.status.code#",
+                            "display": "%error.reason.phrase#"
+                        }
+                    ]
+                },
+                "diagnostics": "%error.contentjson#"
             }
         ]
     }
