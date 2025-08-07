@@ -82,6 +82,9 @@
   </RouteRule>
   <DefaultFaultRule>
     <Step>
+      <Name>JavaScript.EscapeErrorContent</Name>
+    </Step>
+    <Step>
       <Name>AssignMessage.Errors.CatchAllMessage</Name>
     </Step>
   </DefaultFaultRule>

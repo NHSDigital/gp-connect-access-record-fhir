@@ -6,17 +6,17 @@
         "resourceType": "OperationOutcome",
         "issue": [
             {
-            "severity": "error",
-            "code": "%error.status.code#",
-            "details": {
-                "coding": [
-                {
-                    "code": "%error.status.code#",
-                    "display": "%error.reason.phrase#"
-                }
-                ]
-            },
-            "diagnostics": "%error.content#"
+                "severity": "error",
+                "code": "%error.status.code#",
+                "details": {
+                    "coding": [
+                        {
+                            "code": "%error.status.code#",
+                            "display": "%error.reason.phrase#"
+                        }
+                    ]
+                },
+                "diagnostics": "%error.content.escaped#"
             }
         ]
     }

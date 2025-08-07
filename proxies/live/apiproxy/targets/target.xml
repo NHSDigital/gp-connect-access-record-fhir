@@ -73,42 +73,50 @@
   </PreFlow>
   <FaultRules>
     <FaultRule name="access_token_expired">
-      <Step>
-        <Name>ExtractVariables.OAuthErrorFaultString</Name>
-      </Step>
-      <Step>
-        <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
-      </Step>
-      <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
+        <Step>
+            <Name>ExtractVariables.OAuthErrorFaultString</Name>
+        </Step>
+        <Step>
+            <Name>AssignMessage.OAuthPolicyErrorResponse</Name>
+        </Step>
+        <Condition>oauthV2.OauthV2.VerifyAccessToken.failed</Condition>
     </FaultRule>
     <FaultRule name="gpc_access_token_expired">
-     <Step>
-         <Name>AssignMessage.GPCAuthErrorResponse</Name>
-      </Step>
-      <Condition>GPCPFSAuthResponse.status.code=="500"</Condition>
+        <Step>
+            <Name>AssignMessage.GPCAuthErrorResponse</Name>
+        </Step>
+        <Condition>GPCPFSAuthResponse.status.code=="500"</Condition>
     </FaultRule>
     <FaultRule name="gpc_target_not_found">
-     <Step>
-         <Name>AssignMessage.Errors.CatchAllMessage</Name>
-      </Step>
-      <Condition>endpointNotFound == true</Condition>
+        <Step>
+            <Name>JavaScript.EscapeErrorContent</Name>
+        </Step>
+        <Step>
+            <Name>AssignMessage.Errors.CatchAllMessage</Name>
+        </Step>
+        <Condition>endpointNotFound == true</Condition>
     </FaultRule>
     <FaultRule name="pds_error">
-      <Step>
-          <Name>AssignMessage.PDSErrorResponse</Name>
-      </Step>
-      <Condition>PDSResponse.status.code!=200</Condition>
+        <Step>
+            <Name>AssignMessage.PDSErrorResponse</Name>
+        </Step>
+        <Condition>PDSResponse.status.code!=200</Condition>
     </FaultRule>
-  </FaultRules>
-  <DefaultFaultRule>
+</FaultRules>
+<DefaultFaultRule>
     <Step>
-      <Name>ExtractVariables.ResponseVariables</Name>
+        <Name>ExtractVariables.ResponseVariables</Name>
+    </Step>
+    <Step>
+        <Name>JavaScript.EscapeErrorContent</Name>
+        <Condition>(extractvariables.ExtractVariables.ResponseVariables.failed == true)</Condition>
     </Step>
     <Step>      
-      <Name>AssignMessage.Errors.CatchAllMessage</Name>
-      <Condition>(extractvariables.ExtractVariables.ResponseVariables.failed == true)</Condition>
+        <Name>AssignMessage.Errors.CatchAllMessage</Name>
+        <Condition>(extractvariables.ExtractVariables.ResponseVariables.failed == true)</Condition>
     </Step>
-  </DefaultFaultRule>
+</DefaultFaultRule>
+
   
   <!--
   To point to a named target server as this is how it SHOULD be implemented:
