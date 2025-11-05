@@ -23,7 +23,7 @@ from token_validator.src.validate_access_token import validate_access_token
 def test_valid_token(_test_app_credentials, apigee_environment, _jwt_keys, _keycloak_client_credentials):
     """Check that the token validation returns True to signify the access token is valid when we pass a valid token."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
-
+    print(f"REMOVE Access token obtained: {access_token}")
     assert validate_access_token(
         apigee_environment,
         getenv("client_id"),
@@ -45,8 +45,8 @@ def test_invalid_token(
     """Check that the token validation returns False to signify the access token is invalid when we try to validate
     a token that has been revoked."""
     access_token = get_access_token(apigee_environment, _keycloak_client_credentials)
+    print(f"REMOVE Access token obtained: {access_token}")
     invalidate_token(access_token, apigee_environment)
-
     assert not validate_access_token(apigee_environment, getenv("client_id"), getenv("client_secret"), access_token)
 
 
