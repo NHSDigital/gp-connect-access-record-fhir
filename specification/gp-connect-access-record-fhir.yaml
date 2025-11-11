@@ -7,6 +7,7 @@ info:
   description: |
     ## Overview
 
+
     ![GP Connect Patient Facing Access Record FHIR Overview](https://raw.githubusercontent.com/NHSDigital/gp-connect-access-record-fhir/master/specification/images/overview_diagram.svg)
 
     Use this API to access structured and coded information from a patient's GP practice record to consume in a patient facing service. The API accesses GP principal supplier systems and provides a consistent interface and data model.
