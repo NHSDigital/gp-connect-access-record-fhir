@@ -1,5 +1,5 @@
 [tool.poetry]
-package-mode = false
+package-mode = true
 name = "gp-connect-access-record-fhir"
 version = "0.0.1-alpha"
 description = "TODO"
