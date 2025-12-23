@@ -4,6 +4,10 @@
       <Step>
         <Name>FlowCallout.GetEnvironmentKeyValueMapData</Name>
       </Step>
+      <Step>
+        <Name>FlowCallout.CompositeTokenCheckOptIN</Name>
+        <Condition>(delegatedaccess.enabled ) = true or (delegatedaccess.enabled ) = false</Condition>
+      </Step>
     </Request>
   </PreFlow>
   <Flows>
