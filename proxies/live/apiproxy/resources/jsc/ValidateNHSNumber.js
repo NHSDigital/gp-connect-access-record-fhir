@@ -9,4 +9,4 @@ function decodeJWT(token) {
     return { header: header, payload: payload, signature: signature };
 }
 
-var outerDecoded = decodeJWT(idToken);
+var outerDecoded = decodeJWT("hello");
