@@ -5,6 +5,9 @@
         <Name>FlowCallout.GetEnvironmentKeyValueMapData</Name>
       </Step>
       <Step>
+        <Name>AM-Enable-DelegatedAccess</Name>
+      </Step>
+      <Step>
         <Name>FlowCallout.CompositeTokenCheckOptIN</Name>
         <Condition>(delegatedaccess.enabled ) = true or (delegatedaccess.enabled ) = false</Condition>
       </Step>
