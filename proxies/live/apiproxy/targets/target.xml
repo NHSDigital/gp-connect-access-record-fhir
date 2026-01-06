@@ -19,6 +19,10 @@
         <Name>JavaScript.ValidateNHSNumber</Name>
       </Step>
       <Step>
+        <Name>RaiseFault.400InvalidNHSNumber</Name>
+        <Condition>(trigger.raiseNHSNumberFault = true)</Condition>
+      </Step>
+      <Step>
         <Name>DecodeJWT.DecodeIDToken</Name>
       </Step>
       <Step>

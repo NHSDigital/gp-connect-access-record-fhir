@@ -2,21 +2,35 @@ print("nhsd.actor.nhs_number NUM   : " + context.getVariable("nhsd.actor.nhs_num
 print("nhsd.subject.nhs_number NUM   : " + context.getVariable("nhsd.subject.nhs_number"));
 
 var httpverb = context.getVariable("request.verb");
-var actorNHS = context.getVariable("nhsd.actor.nhs_number");
+var subNHS = context.getVariable("nhsd.subject.nhs_number");
 if (httpverb == 'GET') {
     var queryNHSNumber = context.getVariable("request.queryparam.patientNHSNumber");
     print("queryNHSNumber :" +queryNHSNumber);
     if (queryNHSNumber) {
-        if (queryNHSNumber !== actorNHS) {
+        if (queryNHSNumber !== subNHS) {
             print("NHS Number is not valid");
+            context.setVariable('trigger.raiseNHSNumberFault', true);
+            var errorObject = { error: 'NHSNumber missmatch', errorDescription: "NHSNumber missmatch in composite ID token and queryparameter", statusCode: 400, reasonPhrase: "Bad Request" };
+            print(errorObject);
+            context.setVariable('validation.errorMessage', errorObject.error);
+            context.setVariable('validation.errorDescription', errorObject.errorDescription);
+            context.setVariable('validation.statusCode', errorObject.statusCode);
+            context.setVariable('validation.reasonPhrase', errorObject.reasonPhrase);
         }
     }
     else {
         var routeParamArray = context.getVariable("proxy.pathsuffix").split('/');
         var routeNHSNumber = routeParamArray[routeParamArray.length - 1];
         print("routeNHSNumber :" +routeNHSNumber);
-        if (routeNHSNumber && routeNHSNumber !== actorNHS){
+        if (routeNHSNumber && routeNHSNumber !== subNHS){
             print("NHS Number is not valid");
+            context.setVariable('trigger.raiseNHSNumberFault', true);
+            var errorObject = { error: 'NHSNumber missmatch', errorDescription: "NHSNumber missmatch in composite ID token and in the path", statusCode: 400, reasonPhrase: "Bad Request" };
+            print(errorObject);
+            context.setVariable('validation.errorMessage', errorObject.error);
+            context.setVariable('validation.errorDescription', errorObject.errorDescription);
+            context.setVariable('validation.statusCode', errorObject.statusCode);
+            context.setVariable('validation.reasonPhrase', errorObject.reasonPhrase);
         }    
     }
 }
@@ -33,8 +47,15 @@ else {
             }
         }
         print("postNHSnumber :" +postNHSnumber);
-        if (postNHSnumber && postNHSnumber !== actorNHS){
+        if (postNHSnumber && postNHSnumber !== subNHS){
             print("NHS Number is not valid");
+            context.setVariable('trigger.raiseNHSNumberFault', true);
+            var errorObject = { error: 'NHSNumber missmatch', errorDescription: "NHSNumber missmatch in composite ID token and in the request content", statusCode: 400, reasonPhrase: "Bad Request" };
+            print(errorObject);
+            context.setVariable('validation.errorMessage', errorObject.error);
+            context.setVariable('validation.errorDescription', errorObject.errorDescription);
+            context.setVariable('validation.statusCode', errorObject.statusCode);
+            context.setVariable('validation.reasonPhrase', errorObject.reasonPhrase);
         }
     }
 }
