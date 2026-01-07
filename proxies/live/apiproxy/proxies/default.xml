@@ -9,13 +9,12 @@
       </Step>
       <Step>
         <Name>FlowCallout.CompositeTokenCheckOptIN</Name>
-        <Condition>(delegatedaccess.enabled ) = true or (delegatedaccess.enabled ) = false</Condition>
       </Step>
       <Step>
         <Name>JavaScript.ValidateNHSNumber</Name>
       </Step>
       <Step>
-        <Name>RaiseFault.400InvalidNHSNumber</Name>
+        <Name>RaiseFault.401InvalidNHSNumber</Name>
         <Condition>(trigger.raiseNHSNumberFault = true)</Condition>
       </Step>
     </Request>

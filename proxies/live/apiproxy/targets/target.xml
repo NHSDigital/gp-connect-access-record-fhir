@@ -13,7 +13,6 @@
       </Step>
       <Step>
         <Name>FlowCallout.CompositeTokenCheckOptIN</Name>
-        <Condition>(delegatedaccess.enabled ) = true or (delegatedaccess.enabled ) = false</Condition>
       </Step>
       <Step>
         <Name>JavaScript.ValidateNHSNumber</Name>
