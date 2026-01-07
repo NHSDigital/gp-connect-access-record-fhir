@@ -18,7 +18,7 @@
         <Name>JavaScript.ValidateNHSNumber</Name>
       </Step>
       <Step>
-        <Name>RaiseFault.400InvalidNHSNumber</Name>
+        <Name>RaiseFault.401InvalidNHSNumber</Name>
         <Condition>(trigger.raiseNHSNumberFault = true)</Condition>
       </Step>
       <Step>
