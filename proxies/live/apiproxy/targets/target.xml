@@ -13,6 +13,7 @@
       </Step>
       <Step>
         <Name>FlowCallout.CompositeTokenCheckOptIN</Name>
+        <Condition>not (proxy.pathsuffix MatchesPath "/_ping")</Condition>
       </Step>
       <Step>
         <Name>JavaScript.ValidateNHSNumber</Name>
