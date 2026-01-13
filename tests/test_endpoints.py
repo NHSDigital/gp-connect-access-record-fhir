@@ -112,3 +112,4 @@ def test_nhs_login_p9(nhsd_apim_proxy_url, nhsd_apim_auth_headers):
         headers=headers
     )
     assert resp.status_code == 500
+    
