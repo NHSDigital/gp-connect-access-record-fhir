@@ -2,7 +2,7 @@
 //print("nhsd.subject.nhs_number : " + context.getVariable("nhsd.subject.nhs_number"));
 
 var subNHS = context.getVariable("nhsd.subject.nhs_number");
-subNHS = String(subNHS).trim();
+
 if (subNHS) {
     var httpverb = String(context.getVariable("request.verb")).toLowerCase();
     var requestNHS = null;
