@@ -2,9 +2,10 @@ const subNHS = context.getVariable("nhsd.subject.nhs_number");
 
 if (subNHS) {
     const httpverb = String(context.getVariable("request.verb")).toLowerCase();
+    const errorObject = { error: 'invalid_token', errorDescription: "NHS ID could not be validated", statusCode: 401, reasonPhrase: "Unauthorized" };
     var requestNHS = null;
     if (httpverb === 'get') {
-        var queryParams = context.getVariable("request.querystring");
+        const queryParams = context.getVariable("request.querystring");
         var normalizedParams = {};
 
         if (queryParams) {
@@ -16,12 +17,12 @@ if (subNHS) {
                 }
             });
         }
-        var queryNHSNumber = normalizedParams["patientnhsnumber"];
+        const queryNHSNumber = normalizedParams["patientnhsnumber"];
         if (queryNHSNumber) {
             requestNHS = String(queryNHSNumber).trim();
         }
         else {
-            var pathSuffix = context.getVariable("proxy.pathsuffix");
+            const pathSuffix = context.getVariable("proxy.pathsuffix");
             if (pathSuffix) {
                 var parts = pathSuffix.split('/').filter(Boolean);
                 requestNHS = parts.length ? parts[parts.length - 1] : null;
@@ -29,12 +30,11 @@ if (subNHS) {
         }
     }
     else if (httpverb === 'post') {
-        var reqContent = context.getVariable("request.content");
+        const reqContent = context.getVariable("request.content");
         var validJSON = 'true';
         if (!reqContent) {
             validJSON = 'false';
             context.setVariable('trigger.raiseNHSNumberFault', true);
-            var errorObject = { error: 'invalid_token', errorDescription: "NHS ID could not be validated", statusCode: 401, reasonPhrase: "Unauthorized" };
             context.setVariable('validation.errorMessage', errorObject.error);
             context.setVariable('validation.errorDescription', errorObject.errorDescription);
             context.setVariable('validation.statusCode', errorObject.statusCode);
@@ -46,7 +46,6 @@ if (subNHS) {
         } catch (e) {
             validJSON = 'false';
             context.setVariable('trigger.raiseNHSNumberFault', true);
-            var errorObject = { error: 'invalid_token', errorDescription: "NHS ID could not be validated", statusCode: 401, reasonPhrase: "Unauthorized" };
             context.setVariable('validation.errorMessage', errorObject.error);
             context.setVariable('validation.errorDescription', errorObject.errorDescription);
             context.setVariable('validation.statusCode', errorObject.statusCode);
@@ -55,7 +54,6 @@ if (subNHS) {
         if (!jsonContent.parameter || !Array.isArray(jsonContent.parameter)) {
             validJSON = 'false';
             context.setVariable('trigger.raiseNHSNumberFault', true);
-            var errorObject = { error: 'invalid_token', errorDescription: "NHS ID could not be validated", statusCode: 401, reasonPhrase: "Unauthorized" };
             context.setVariable('validation.errorMessage', errorObject.error);
             context.setVariable('validation.errorDescription', errorObject.errorDescription);
             context.setVariable('validation.statusCode', errorObject.statusCode);
@@ -74,7 +72,6 @@ if (subNHS) {
     requestNHS = requestNHS.trim();
     if(requestNHS !== subNHS) {
         context.setVariable('trigger.raiseNHSNumberFault', true);
-        var errorObject = { error: 'invalid_token', errorDescription: "NHS ID could not be validated", statusCode: 401, reasonPhrase: "Unauthorized" };
         context.setVariable('validation.errorMessage', errorObject.error);
         context.setVariable('validation.errorDescription', errorObject.errorDescription);
         context.setVariable('validation.statusCode', errorObject.statusCode);
