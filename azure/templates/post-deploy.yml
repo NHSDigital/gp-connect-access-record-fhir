@@ -46,7 +46,7 @@ steps:
 
   #      introspection_client_id=$(INTROSPECTION_CLIENT_ID)
   #      introspection_client_secret=$(INTROSPECTION_CLIENT_SECRET)
-  #     if [[ $APIGEE_ENVIRONMENT = int ]]; then
+  #      if [[ $APIGEE_ENVIRONMENT = int ]]; then
   #        introspection_client_id=$(INTROSPECTION_CLIENT_ID_INT)
   #        introspection_client_secret=$(INTROSPECTION_CLIENT_SECRET_INT)
   #      fi
