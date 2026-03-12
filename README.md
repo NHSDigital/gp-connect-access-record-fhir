@@ -114,7 +114,7 @@ The `project.yml` file needs to be populated with your service names to make the
 
 #### `/proxies`:
 
-This folder contains files relating to your Apigee API proxy.
+This folder contains files relating to your Apigee API proxy. 
 
 There are 2 folders `/live` and `/sandbox` allowing you to define a different proxy for sandbox use. By default, this sandbox proxy is implemented to route to the sandbox target server (code for this sandbox is found under /sandbox of this template repo)
 

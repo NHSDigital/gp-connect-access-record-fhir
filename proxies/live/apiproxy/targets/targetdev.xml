@@ -98,13 +98,7 @@
                 <Name>AssignMessage.PDSErrorResponse</Name>
             </Step>
             <Condition>PDSResponse.status.code!=200</Condition>
-        </FaultRule>
-        <FaultRule name="body_buffer_overflow">
-            <Step>
-                <Name>AssignMessage.TooBigErrorResponse</Name>
-            </Step>
-            <Condition>fault.errorcode = "protocol.http.TooBigBody"</Condition>
-        </FaultRule>
+        </FaultRule>        
     </FaultRules>
     <DefaultFaultRule>
     <Step>
