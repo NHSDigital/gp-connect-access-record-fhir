@@ -32,6 +32,8 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
+        enable_monitoring: false
+        enable_status_monitoring: false
         jinja_templates:
           GP_CONNECT_ENDPOINTS: gp-connect-access-record-endpoints
           GP_CONNECT_CONFIG: gp-connect-access-record-config
