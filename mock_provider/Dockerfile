@@ -19,4 +19,4 @@ COPY --from=0  /specification  /usr/src/prism/packages/cli/gp-connect-access-rec
 COPY --from=0  /updated-spec.json  /usr/src/prism/packages/cli/gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.json
 
 #Running command of mock with OAS file
-CMD ["mock" , "-h", "0.0.0.0", "-p" ,"9000" ,"gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.json"]
+CMD ["mock" , "-h", "0.0.0.0", "-p" ,"9000" , "--multiprocess=false", "gp-connect-access-record-fhir/specification/gp-connect-access-record-fhir.json"]
